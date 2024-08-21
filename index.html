@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>ProxyMar Data Base</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/> <!-- link para css--> 
+        <link rel="icon" type="image/x-icon" href="assets/mac.ico" />
+   
+   
+        <link href="css/submit.css" rel="stylesheet"/>
+        <link href="css/styles.css" rel="stylesheet" />
+
+
+        <script src="js/add-script.js"></script>
+        <script src="js/scripts.js"></script>
+        
+    </head>
+
+
+    <body id="page1">
+
+        
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                
+                <div class="search1">
+                    
+                    <input style="left: 0%;" id="search1" type="text" name="search" placeholder="Search..">
+                    <button style="left: 0%;"><i class="bi bi-search"></i></button>
+                </div>
+
+                <!--<a class="navbar-brand" href="#page-top">Start Bootstrap</a>-->
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" id="navbarToggleBtn"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item"><a class="nav-link" href="#mapageral" onclick=closeNavbar()>Mapa</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about" onclick=closeNavbar()>Sobre</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#last-issues" onclick=closeNavbar()>Últimos Artigos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact" onclick=closeNavbar()>Contatos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="HTML/consulta.php" onclick=closeNavbar()>Consulta</a></li>
+                        <li class="nav-item"><a class="nav-link" href="HTML/submit.html">Submissão de dados</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick= "openLoginDialog(); closeNavbar()" >Login</a></li> <!-- deixar o login como caixa de diálogo-->
+                        <li class="nav-item"><a class="nav-link" href="HTML/novo-user.html" onclick=closeNavbar()>Sing in </a></li> <!-- registro mais informações além disso pode ser em uma pagina nova-->
+                    </ul>
+                </div>
+                
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-primary bg-gradient text-white">
+            <div class="container px-4 text-center">
+                <h1 class="fw-bolder"> ProxyMar Data Base</h1>
+                <p class="lead"> . . . </p>
+                <a class="btn btn-lg btn-light" href="#about">Start scrolling!</a>
+            </div>
+        </header>
+
+
+
+
+
+                      <!-- LOGIN POR CAIXA DE DIALOGO-->                     
+                      <div id="loginDialogOverlay">
+
+                        <div id="loginDialog">
+                            
+                            <img src="assets/avatar.jpeg" alt="Avatar" class="avatar">
+                        </br>
+                    </br>
+                            <h2>Login</h2></br>
+                            <form action="PHP/login.php" method="post">
+                                
+                                <label for="username">Nome:</label></br>
+                                <input type="text" id="nome" name="nome" required autofocus>
+                            </br>
+                                <label for="password">Senha:</label></br>
+                                <input type="password" id="senha" name="senha" required></br>
+                    
+                               <button class="lgbttn" type="submit">Login</button></br>
+                                                            
+                    </form>
+                                
+                <button class="lgbttn" onclick="closeLoginDialog()">Fechar</button>
+                  
+            </div>
+                    </div> 
+
+
+
+
+
+
+                    
+        <!-- About section-->
+        <section id="about">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center"> 
+                    <div class="col-lg-8">
+                        <h2>Sobre nós</h2>
+                        <p class="lead"> <b>O Laboratório de Proxies Marinhos para o Futuro do Oceano - ProxyMar </b> se dedica a contribuir com o avanço da compreensão da dinâmica do oceano no passado, presente e futuro por meio do uso de proxies.</p>
+                        <p class="lead">Reconhecendo a complexidade dos sistemas costeiros e marinhos, a equipe do ProxyMar busca propor e executar projetos de pesquisa em colaboração interdisciplinar com especialistas da Oceanografia, Ecologia, Geologia e Química para garantir uma abordagem holística na investigação e compressão de processos oceanográficos no passado, presente e futuro.</p>
+                        <p class="lead"> Com isso nós da equipe do ProxyMar elaboramos esse bando de dados, afim compilar os trabalhos realiados no Atlântico Sul com foco em Paleoceanografia</p>
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services section-->
+        <section class="bg-light" id="last-issues">
+            <div class="container px-4">
+
+                <!-- <div class="row gx-4 justify-content-center"> deixar no centro -->
+                    
+                    <div class="col-lg-8">
+                        <h2>Últimos Artigos</h2>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div id="pag-consult" class="table-responsive">
+                                        <!-- Os resultados da consulta serão exibidos aqui -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<!-- Mapa para atribuir pontos -->
+
+
+     <section id="mapageral" class="mapa-section">
+       <div id="mapa-geral" class="mapa-nome">
+
+        <h2> Mapa de localização</h2> </br>
+        <p> Aqui você encontra a localização das amostras inseridas no banco</p></br>
+    </div>
+    
+        <div id="mapa-geral" class="mapa-geral">
+            
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d65352652.085742734!2d-31.498041349999994!3d-1.2885860499999955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x65a81cae36eb8ff%3A0xa6342257f310534f!2sOceano%20Atl%C3%A2ntico!5e0!3m2!1spt-BR!2sbr!4v1719601779675!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
+    
+</div>
+
+     </section>
+
+        
+        <!-- Footer-->
+
+
+        <footer id="contact" class="py-5 bg-dark" style="position: relative;">
+
+            <div class="social">
+            <p class="text-white">Copyright &copy; Italo Paladino 2024</p>
+        </br>
+        </br>    
+            <a href="https://www.instagram.com/proxymar_iousp/" target="_blank" class="bi bi-instagram"></a>
+            <a href="https://sites.usp.br/proxymar/sobre//" target="_blank" class="bi bi-globe2"> </a>
+            <a href="mailto:italopaladino22@gmail.com" target="_blank" class="bi bi-envelope"> </a>      
+        
+        
+        </div>
+        </footer>
+
+
+
+        <!-- Bootstrap core JS-->
+        
+    </body>
+
+    
+    <!-- MOSTRAR OS ULTIMOS ARTIGOS INSERIDOS -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $.ajax({
+        url: "PHP/consulta-art.php", // O arquivo PHP que faz a consulta ao banco de dados
+        type: "GET",
+        success: function(response){
+            $("#pag-consult").html(response); // Atualiza a div com os resultados da consulta
+        }
+    });
+});
+</script>
+</script>
+</html>

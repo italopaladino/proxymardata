@@ -1,0 +1,234 @@
+
+
+
+
+#principal1 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-top: 40px;
+    margin-bottom: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+   
+    
+    height: 90px;
+    background-color: rgb(215, 224, 221);
+    text-align: center;
+font-size: large;
+}
+
+
+a.voltar {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 5px;
+  text-align: center;
+  
+}
+
+
+
+.voltar {
+  background-color: #f1f1f1;
+  color: black;
+
+  
+}
+
+  
+#principal2 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin-top: 50px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 79%;
+  height: auto;
+}
+
+.linha {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 7;
+}
+
+#coluna-esq-dir #colun-esq {
+  flex: 1;
+  text-align: right;
+  background-color: rgba(0, 0, 0, 0.308);
+  border: none;
+}
+
+#coluna-esq-dir #colun-med {
+  
+  flex: 3;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+
+#coluna-esq-dir #colun-dir {
+  flex: 3;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+
+.coluna {
+  border: 1px solid #000; /* Apenas para visualização */
+  padding: 10px;
+  margin: 1px;
+  background-color: #f0f0f0;
+}
+
+.mapa {
+  width: 100%;
+  display: flex; /* Garantir que a div do mapa seja um bloco separado */
+  margin-top: 20px; /* Adiciona espaço entre o mapa e os outros elementos */
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .linha {
+    flex-direction: column;
+  }
+}
+
+
+
+  .label { 
+    color: black; 
+  }
+  .id-value { 
+    color: rgb(212, 14, 14); text-decoration: underline; 
+  }
+  .latitude-value { 
+    color: rgb(212, 14, 14); text-decoration: underline; 
+  }
+  .longitude-value {
+    color: rgb(212, 14, 14); text-decoration: underline; 
+    }
+  .profundidade-value { 
+    color: rgb(212, 14, 14); text-decoration: underline; 
+   }
+  .recuperacao-value {
+    color: rgb(212, 14, 14); text-decoration: underline; 
+    }
+  .data-value { 
+    color: rgb(212, 14, 14); text-decoration: underline; 
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CSS para pagina de consulta */
+.flex-wrapper {
+    width: auto;
+    height: auto;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.filter-forms-result {
+    width: auto;
+    height: auto; /* Ajustar para auto se o conteúdo interno variar em altura */
+    margin: 2px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.filter-top-forms-result {
+    margin-bottom: 20px;
+    padding: 10px; 
+    
+}
+
+#filter-forms-label {
+    font-weight: bold;
+}
+
+
+
+.results-consult-result {
+    width: 80%;
+    height: auto; /* Ajustar para auto se o conteúdo interno variar em altura */
+    margin: 2px;
+    
+}
+
+
+.result-consult-forms {
+    margin-bottom: 10px;
+    padding: 10px;
+    
+}
+
+#result-fomrs {
+    font-weight: bold;
+}
+
+
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.correspondente,
+.titulo-trab,
+.periodico-trab,
+.doi-trab,
+.data-trab,
+.keyword-trab,
+.coord-ponto,
+.proxy-trab,
+.equip-trab,
+.desc-met,
+.tabela-trab{
+    text-align: right;
+    font-weight: bold;
+    font-size: large;
+       
+}
+
+.correspondente-dir,
+.titulo-trab-dir,
+.periodico-trab-dir,
+.doi-trab-dir,
+.data-trab-dir,
+.keyword-trab-dir,
+.coord-ponto-dir,
+.proxy-trab-dir,
+.equip-trab-dir,
+.desc-met-dir,
+.tabela-trab-dir{
+    text-align: left;
+    font-weight: bold;
+    font-size: large;
+       
+}

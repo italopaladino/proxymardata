@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles-lg.css">
+    <link rel="icon" type="../image/x-icon" href="../assets/mac.ico" /> 
+    <title>Página de Registro </title>
+    <script src="../js/add-script.js"></script>
+   </head>
+<body>
+    <div class="login-container">
+       <form id="formRegistro" action="../PHP/register.php" method="post">
+            <label for="newUsername">Novo Usuário:</label>
+            <input type="text" name="newUsername" required>
+            <label for="newPassword">Nova Senha:</label>
+            <input type="password" name="newPassword" required>
+
+
+  
+            
+            
+            
+            <!-- definindo nivel de acesso na hora do registro -->
+            <div class="d-block mx-auto">
+            <input type="radio" name="role" value="user" required>
+            <label for="role" > Usuário</label>
+            </br>
+            <input type="radio" name="role" value="admin" required>
+            <label for="role" > Administrador</label>
+            </div>
+
+
+            
+            <button type="submit">Registrar</button>
+       </br>
+            <button onclick="inicio()">Inicio</button>
+       </div>
+        </form>
+    </div>
+</body>
+</html>
