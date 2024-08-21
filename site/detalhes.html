@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Registro</title>
+    <style>
+        .info-detalhes {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+        }
+        .info-detalhes h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div id="ultimosartigos" class="table-responsive">
+                    
+                    <?php
+                    require_once 'config.php';
+
+                    if (isset($_GET['id'])) {
+                        $id = $_GET['id'];
+
+                        try {
+                            // Conexão ao banco de dados
+                            $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+                            // Valida o ID para evitar SQL Injection
+                            $sql = "SELECT * FROM infogeral WHERE geralid = :id";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                            $stmt->execute();
+                            $infogera = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                            if ($infogera) {
+                                // Exibe os detalhes da linha
+                                echo "<div class='info-detalhes'>";
+                                echo "<h2>Detalhes do Registro</h2>";
+                                echo "<p>Autor: " . htmlspecialchars($infogera['correspondente']) . "</p>";
+                                echo "<p>Título: " . htmlspecialchars($infogera['titulo']) . "</p>";
+                                echo "<p>DOI: " . htmlspecialchars($infogera['doi']) . "</p>";
+                                echo "<p>Data de Publicação: " . htmlspecialchars($infogera['data1']) . "</p>";
+                                echo "</div>";
+                                // Adicione outros campos conforme necessário
+                            } else {
+                                echo "<div class='info-detalhes'>Registro não encontrado.</div>";
+                            }
+
+                        } catch (PDOException $e) {
+                            echo "<div class='info-detalhes'>Erro: " . $e->getMessage() . "</div>";
+                        } finally {
+                            if ($pdo) {
+                                $pdo = null;
+                            }
+                        }
+                    } else {
+                        echo "<div class='info-detalhes'>ID não especificado.</div>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
