@@ -2,9 +2,11 @@
 
 require_once 'config.php';
 
-function testarConexaoPostgreSQL($dsn, $user, $pass) {
+function testarConexaoPostgreSQL($host, $port, $dbname, $user, $pass) {
+    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$pass";
+    
     try {
-        $pdo = new PDO($dsn, $user, $pass);
+        $pdo = new PDO($dsn);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         echo "<script>alert('Conexão bem-sucedida!');</script>";
@@ -14,9 +16,7 @@ function testarConexaoPostgreSQL($dsn, $user, $pass) {
 }
 
 // Teste da conexão
-testarConexaoPostgreSQL($dsn, $user, $pass);
-
-
+testarConexaoPostgreSQL($host, $port, $dbname, $user, $pass);
 
 echo "<script>";
 echo "setTimeout(function() {";

@@ -131,12 +131,12 @@
 <div class="termo">
    
     <input type="checkbox" id="termo" name="termo" value="term">
-    <label for="termo"> Li e concordo com os termos sobre o uso dos dados</PDF><a href="javascript:abrirPDF()"> Clique aqui para ler</a></label>
+    <label for="termo"> Li e concordo com os termos sobre o uso dos dados <a href="javascript:abrirPDF()"> Clique aqui para ler</a></label>
      
 </div></br>
 
 
-<label  for="titulo"></label> *Título/ Title:</label></br>
+<label  for="titulo">*Título/ Title:</label></br>
 <input id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português" >
 </br>
 </br>
@@ -397,7 +397,7 @@
         var inputValue = inputField.value.trim();
         var inputId = inputField.id;
 
-        if (inputValue.length < 3) {
+        if (inputValue.length < 1) {
             return;
         }
 
