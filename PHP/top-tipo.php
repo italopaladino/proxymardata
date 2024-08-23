@@ -14,7 +14,7 @@ try {
     foreach ($tipostrabalho as $tipotrabalho) {
         $tipo = htmlspecialchars($tipotrabalho['tipo']);
         $quantidade = htmlspecialchars($tipotrabalho['quantidade']);
-        $filtroHTMLTIPO .= "<li><a href='#' data-tipo-trabalho='" . $tipo . "'>" . $tipo . " (" . $quantidade . ")</a></li>";
+        $filtroHTMLTIPO .= "<li><a title='filtrar pelo tipo de trabalho' class='top-filtro' href='#' data-tipo-trabalho='" . $tipo . "'>" . $tipo . " (" . $quantidade . ")</a></li>";
     }
     $filtroHTMLTIPO .= "</ul>";
 

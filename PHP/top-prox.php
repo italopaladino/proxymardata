@@ -59,7 +59,7 @@ try {
         $quantidade = htmlspecialchars($resultado['quantidade']);
         if ($quantidade > 0) {
             $nome = isset($nomesColunas[$coluna]) ? htmlspecialchars($nomesColunas[$coluna]) : htmlspecialchars($coluna);
-            $filtroHTML .= "<li><a href='detalhe.php?prox=" .$nome. "'>" . $nome . "($quantidade)</a></li>";
+            $filtroHTML .= "<li><a title='filtrar pelo proxie escolhido' class='top-filtro' href='detalhe.php?prox=" .$nome. "'>" . $nome . "($quantidade)</a></li>";
         }
     }
     $filtroHTML .= "</ul>";

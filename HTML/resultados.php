@@ -8,6 +8,7 @@
     <title>ProxyMar Data Base</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="../assets/mac.ico" />
     <link href="../css/submit.css" rel="stylesheet"/>
     <link href="../css/styles.css" rel="stylesheet" />
@@ -16,6 +17,29 @@
 
     <script src="../js/add-script.js"></script>
     <script src="../js/script.js"></script>
+
+    <style>
+    /* Estilos do preloader */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #preloader.hidden {
+      display: none;
+    }
+
+    /* Adicione estilos adicionais para o preloader aqui */
+  </style>
+
 </head>
 
    <!-- Navigation -->
@@ -72,11 +96,14 @@
         // Inclui o arquivo de configuração do banco de dados
         require_once '../PHP/config.php';
 
+       
+        require_once '../PHP/config.php';
+
         try {
             // Conexão ao banco de dados usando PDO
             $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-        
-            // Prepara e executa a consulta SQL com o ID fornecido
+    
+           // Prepara e executa a consulta SQL com o ID fornecido
             $sql = "
            WITH autores_agregados AS (
     SELECT
@@ -338,12 +365,16 @@ ORDER BY infogeral.geralID";
                 // Ensure $row['nome_arquivo'] is a string before using htmlspecialchars
                 $nome_arquivo = is_string($row['nome_arquivo']) ? htmlspecialchars($row['nome_arquivo']) : '';
         
-                echo "<div class='coluna' id='colun-dir'>" . $nome_arquivo . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id='download' href='../PHP/download.php?id=". htmlspecialchars($id) . "'> Download </a></div>"; 
+                echo "<div class='coluna' id='colun-dir'>" . $nome_arquivo . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id='btn'  class='fa fa-download' id='download' href='../PHP/download.php?id=". htmlspecialchars($id) . "'> Download </a>
+                
+                <a id='btn-visu' class='fa fa-eye' href='#' onclick='n(); return false;'>EM BREVE:</br> Visualizador</a></div>"; 
                 echo "</div>"; // arquivo 
         
                 
-                echo "<a href='consulta.php' id='voltar' class='voltar'> &laquo; Voltar</a>";
-        
+                echo "<a href='consulta.php' id='voltar' class='voltar'> &laquo; Voltar</a> ";
+
+               
+
                 echo "</div>"; // DIV SECUNDÁRIA
             }
     
@@ -366,7 +397,12 @@ ORDER BY infogeral.geralID";
     ?>
                            
             
-
+  <script>
+    // Remove o preloader após o carregamento da página
+    window.addEventListener('load', () => {
+      document.getElementById('preloader').classList.add('hidden');
+    });
+  </script>
 
 
     <!-- Footer -->

@@ -19,17 +19,17 @@ try {
     echo "<tbody>";
 
     // Itera sobre as linhas, começando do final
-    for ($i = count($infogeral) - 1; $i >= 0; $i--) {
-        $infogera = $infogeral[$i]; // Obtém a linha atual
+   for ($i = count($infogeral) - 1; $i >= 0; $i--) {
+    $infogera = $infogeral[$i]; // Obtém a linha atual
+    
+    // Cria a frase com os dados do autor, título sublinhado, DOI e data
+    $frase = "<div class='citation' >
+                <a class='link-pesq' href='../HTML/resultados.php?id=" . htmlspecialchars($infogera['geralid']) . "'>" . htmlspecialchars($infogera['referencia']) . "</a>
+              </div></br></br>";
 
-        // Cria a frase com os dados do autor, título sublinhado, DOI e data
-        $frase = "<div class='citation'>
-                    <a class='link-pesq' href='../HTML/resultados.php?id=" . htmlspecialchars($infogera['geralid']) . "'>" . htmlspecialchars($infogera['referencia']) . "</a>
-                  </div></br>";
-        
-        // Exibe a frase dentro de uma célula da tabela
-        echo "<tr><td>" . $frase . "</td></tr>";
-    }
+    // Exibe a frase dentro de uma célula da tabela
+    echo "<tr><td>" . $frase . "</td></tr>";
+}
 
     // Fecha a tabela
     echo "</tbody></table>";

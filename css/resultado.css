@@ -13,7 +13,7 @@
    
     
     height: 90px;
-    background-color: rgb(215, 224, 221);
+    background-color:cadetblue;
     text-align: center;
 font-size: large;
 }
@@ -60,7 +60,7 @@ a.voltar {
 #coluna-esq-dir #colun-esq {
   flex: 1;
   text-align: right;
-  background-color: rgba(0, 0, 0, 0.308);
+  background-color:aliceblue;
   border: none;
 }
 
@@ -123,9 +123,30 @@ a.voltar {
 
 
 
-
-
-
+  #btn, #btn-visu {
+    background-color: coral;
+    color: black;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
+    border-radius: 2%;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center; /* Centraliza o texto horizontalmente */
+    width: 160px; /* Defina uma largura fixa para ambos */
+    height: 70px; /* Defina uma altura fixa para ambos */
+    box-sizing: border-box; /* Inclui o padding e border na largura e altura */
+  }
+  
+  #btn-visu {
+    background-color: brown; /* Cor específica para este botão */
+  }
+  
+  #btn:hover, #btn-visu:hover {
+    background-color: RoyalBlue;
+  }
 
 
 

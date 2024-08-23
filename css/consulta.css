@@ -125,3 +125,12 @@ a.link-pesq:hover{
 .form-tip{
     font-size: 25px;
 }
+
+.tabela-result{
+    background-color: pink;
+}
+
+.top-filtro{
+    color: #000;
+    text-decoration: none;
+}

@@ -18,10 +18,11 @@ try {
         $infogera = $infogeral[$i]; // Obtém a linha atual
     
         // Cria a frase com os dados do autor, título sublinhado, DOI e data
-        $frase = "<a class='link-pesq' href='../HTML/resultados.php?id=" . htmlspecialchars($infogera['geralid']) . "'>" . htmlspecialchars($infogera['referencia']) ."";
-    
+        $frase = "<div class='citation' >
+        <a class='link-pesq' href='HTML/resultados.php?id=" . htmlspecialchars($infogera['geralid']) . "'>" . htmlspecialchars($infogera['referencia']) . "</a>
+      </div></br></br>";
         // Exibe a frase e adiciona duas quebras de linha
-        echo $frase . "<br><br>";
+        echo $frase;
     
         // Incrementa o contador
         $contador++;

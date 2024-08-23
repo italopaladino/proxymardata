@@ -15,14 +15,59 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/add-script.js"></script>
     <script src="../js/script.js"></script>
+
+    <style>
+    /* Estilo do preloader */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:white;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo {
+      width: 300px; /* Ajuste o tamanho da logo conforme necessário */
+      animation: fadeInOut 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* Conteúdo da página */
+    #content {
+      display: none; /* Esconde o conteúdo até que o carregamento seja concluído */
+    }
+    
+  </style>
+
+
 </head>
 <body id="page1">
+    
+<!-- Preloader com a logo -->
+<div id="preloader">
+    <img src="../assets/avatar.jpeg" alt="Logo" class="logo"> <!-- Substitua 'logo.png' pelo caminho da sua logo -->
+  </div>
+
    <!-- Navigation -->
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <div class="container px-4">
             <div class="search1">
-                <input style="left: 0%;" id="search1" type="text" name="search" placeholder="Search..">
-                <button style="left: 0%;"><i class="bi bi-search"></i></button>
+                <input style="left: 0%;" id="search1" type="text" name="search" placeholder="Search.." onclick="n()">
+                <button style="left: 0%;"><i class="bi bi-search" onclick="n()"></i></button>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" id="navbarToggleBtn">
                 <span class="navbar-toggler-icon"></span>
@@ -34,8 +79,8 @@
                     <li class="nav-item"><a class="nav-link" href="../index.html#contact" onclick=closeNavbar()>Contatos</a></li>
                     <li class="nav-item"><a class="nav-link" href="consulta.php" onclick=closeNavbar()>Consulta</a></li>
                     <li class="nav-item"><a class="nav-link" href="submit.html">Submissão de dados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="openLoginDialog(); closeNavbar()">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="novo-user.html" onclick=closeNavbar()>Sing in</a></li>
+                    <!--<li class="nav-item"><a class="nav-link" href="#" onclick="openLoginDialog(); closeNavbar()">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="novo-user.html" onclick=closeNavbar()>Sing in</a></li>-->
                 </ul>
             </div>
         </div>
@@ -60,13 +105,13 @@
 
     <!-- Pagina de consulta dos dados -->
     <div class="flex-wrapper">
-        <div class="filter-forms" style="background-color:bisque;">
-            <div class="filter-top-forms" style="background-color: cadetblue;">
+        <div class="filter-forms" style="background-color:aliceblue;">
+            <div class="filter-top-forms" style="background-color:cadetblue;">
                 <span id="filter-forms-label">Filtros:</span>
             </div>
 
     <div class="search3">
-    <input id="filtro-geral" class="search3">
+    <input id="filtro-geral" class="search3"placeholder="Ta aqui pra ficar bonito, mas não ta liberado ainda" onclick="n()">
 </div>
     
         
@@ -78,20 +123,20 @@
             <h1 class="form-tip">Filtros ativo:</h1>
 
             <div id="filtro-ativo"></div>
-                <h1 class="form-tip">Tipo de trabalho</h1>
+                <h1 class="form-tip">Tipo de trabalho:</h1>
                 <div class="top-tipo" id="top-tipo">
                     <!-- deixar fixado -->
                 </div>
-                <h1 class="form-tip">Ano de Publicação</h1>
+                <h1 class="form-tip">Ano de Publicação:</h1>
                 <div id="top-ano-pub"></div>
                 <!-- Lista de anos de publicação será carregada aqui -->
-                <h1 class="top-tip">Ano de Coleta</h1>
+                <h1 class="form-tip">Ano de Coleta:</h1>
                 <!-- linkar com os anos que tem no banco deixar últimos 5 -->
-                <div id="top-ano-coleta"></div>
-                <h1 class="top-tip">Proxies Utilizados</h1>
-                <div class="top-proxies" id="top-prox"></div>
-                <h1 class="top-tip">Tipos de instrumentos</h1>
-                <div id="top-equi" class="top-equi"></div>
+                <div id="top-ano-coleta">    </div>
+                <h1 class="form-tip">Proxies Utilizados:</h1>
+                <div class="top-proxies" id="top-prox">    </div>
+                <h1 class="form-tip">Tipos de instrumentos:</h1>
+                <div id="top-equi" class="top-equi">   </div>
                 
             </form>
 
@@ -103,7 +148,7 @@
         </div>
         
 
-        <div class="results-consult" style="background-color:antiquewhite">
+        <div class="results-consult" style="background-color:aliceblue">
             <div class="result-consult-forms" style="background-color: cadetblue;">
                 <span id="result-fomrs">RESULTADOS DAS BUSCAS</span>
             </div>
@@ -113,8 +158,7 @@
                         <div id="ultimosartigos" class="table-responsive">
                             <!-- Os resultados da consulta serão exibidos aqui -->
                         </div>
-                        <div id="loading" style="display:none;">Carregando...</div>
-                        
+                                               
                     </div>
                 </div>
             </div>
@@ -306,6 +350,16 @@ if (tipo) {
 
 });
 
+    // Tempo fixo para o preloader
+    const PRELOADER_TIMEOUT = 2500; // 3000ms = 3 segundos
+
+    // Remove o preloader e exibe o conteúdo após o tempo fixo
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+      }, PRELOADER_TIMEOUT);
+    });
 
     </script>   
 </body>

@@ -71,11 +71,20 @@ window.onclick = function(event) {
 
 
 // alerta para não funcionar 
-function n(){
-    window.alert('nao mexe aqui')
+let clickCount = 0;
+
+function n() {
+    clickCount++;
+    
+    if (clickCount === 1) {
+        window.alert('Não é pra mexer aqui!');
+    } else if (clickCount === 2) {
+        window.alert('Eu avisei para não mexer!!');
+    } else {
+        window.alert('Agora você mexeu demais!!!');
+        clickCount = 0; // Reinicia o contador para começar de novo
+    }
 }
-
-
 
 
 
