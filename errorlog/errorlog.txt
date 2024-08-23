@@ -1,3 +1,4 @@
 Erro ao inserir na tabela infogeralERROR:  relation "infogeral" does not exist
 LINE 1: INSERT INTO infogeral (correspondente, email, tipoTrabalho, ...
-                    ^erro ao inserir na tabela de pontosArquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.
+                    ^erro ao inserir na tabela de pontosArquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Erro ao inserir na tabela infogeralERROR:  invalid input syntax for type date: ""
+CONTEXT:  unnamed portal parameter $10 = ''

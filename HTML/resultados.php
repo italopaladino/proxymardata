@@ -16,7 +16,8 @@
     <link href="../css/resultado.css" rel="stylesheet" />
 
     <script src="../js/add-script.js"></script>
-    <script src="../js/script.js"></script>
+
+    <script src= "../js/scripts.js"></script>
 
     <style>
     /* Estilos do preloader */

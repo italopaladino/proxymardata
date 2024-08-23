@@ -19,7 +19,8 @@ try {
     foreach ($anoColetas as $anoColeta) {
         $ano = htmlspecialchars($anoColeta['ano']);
         $quantidade = htmlspecialchars($anoColeta['quantidade']);
-        $filtroHTML .= "<li><a title='Filtrar pelo ano de Coleta' class='top-filtro' href='detalhes.php?ano=".$ano."'>" .$ano. " ($quantidade)</a></li>"; // adicionar link para pesquisa dos anos
+        $filtroHTML .= "<li><a title='Filtrar pelo ano de Coleta' class='top-filtro' href='#' onclick='showAlert(); return false;'>" . $ano . " ($quantidade)</a></li>";
+ // adicionar link para pesquisa dos anos
     }
     $filtroHTML .= "</ul>";
 

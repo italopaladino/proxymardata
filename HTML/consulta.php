@@ -13,8 +13,9 @@
     <link href="../css/styles.css" rel="stylesheet" />
     <link href="../css/consulta.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <script src="../js/add-script.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="../js/scripts.js"></script>
 
     <style>
     /* Estilo do preloader */
@@ -357,7 +358,7 @@ if (tipo) {
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('preloader').style.display = 'none';
-        document.getElementById('content').style.display = 'block';
+        document.getElementById('page1').style.display = 'block';
       }, PRELOADER_TIMEOUT);
     });
 

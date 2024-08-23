@@ -1,8 +1,16 @@
-function abrirPDF() {
-    var url = "../assets/termo.pdf";
+function abrirTermo() {
+    var url = "../assets/termo-confia.pdf";
     window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=600,height=600");
 }
 
+function abrirPonto() {
+    var url = "../assets/ponto.pdf";
+    window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=600,height=600");
+}
+function abrirCSV() {
+    var url = "../assets/CSV.pdf";
+    window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=600,height=600");
+}
         
 document.addEventListener('keydown',handleKeyPress);
 
@@ -87,7 +95,9 @@ function n() {
 }
 
 
-
+function showAlert() {
+    window.alert('Não deu tempo de fazer, desculpaaaa. Mas obrigado por tentar testar, na proxima vai estar funcionando');
+}
 
 
 // SCRIPT PARA PAGINA DE INDEX - LOGIN - TECLA ESC

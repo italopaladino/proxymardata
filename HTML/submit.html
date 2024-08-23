@@ -117,10 +117,14 @@
                 <h1 class="fw-bolder"> ProxyMar Data Base</h1>
                 <p class="lead"> Antes de submeter os dados por favor certifique-se: </p>
                 <ul id="info"> Lista de informaçãoes pré-submissão</ul>
-                <li> .. </li>
-                <li> .. </li>
+                <li> Leia todos os passos antes de fazer</li>
+                <li style="background-color: red;"> QUALQUER ERRO QUE APARECER, POR FAVOR ANOTE E TRAGA NA REUNIÃO </li>
                 <li> Garanta que seus dados possam ser interpretado por outra pessoa </li>
-                <li> Arquivos aceitos: XLS, PDF? </li> 
+                <li> Arquivos aceitos: apenas .CSV </li>
+                <li> a Regra é simples, tenta usar do seu modo. Se não for intuitivo, avise. A ideia é tornar intuitivo com os teste.</li>
+                <li> Lembrete: As Cores não são definitivas (não é nosso maior foco agora). Mas sugestões são bem vindas também.!</li></br>
+                <li class="bi bi-heart-fill" style="background-color: chocolate; font-size: 20px; width: 180px; border-radius: 10%;"> Obrigado</li>
+
 </div>
         </header></br>
 
@@ -172,7 +176,7 @@
 <div class="termo">
    
     <input type="checkbox" id="termo" name="termo" value="term">
-    <label for="termo"> Li e concordo com os termos sobre o uso dos dados <a href="javascript:abrirPDF()"> Clique aqui para ler</a></label>
+    <label for="termo"> Li e concordo com os termos sobre o uso dos dados <a href="javascript:abrirTermo()"> Clique aqui para ler</a></label>
      
 </div></br>
 
@@ -225,7 +229,7 @@
 </div>   
 <div>
     <label for="referencia" > Referência conforme a ABNT:</label></br>
-    <textarea type="text" id="referencia" name="referencia"  maxlength="1500" rows="5" cols="10" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
+    <textarea type="text" id="referencia" name="referencia" required maxlength="1500" rows="5" cols="10" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
 </div>
     
     <div>
@@ -249,7 +253,7 @@
         <h1 style="text-align: center;"> Informação dos dados a serem submetidos: </h1></br>
    
 <div id="coord">
-    <h3 for="lat-long"> Adicione as Coordenadas de CADA ponto de coleta:<a title="VER MODELO" href="javascript:abrirPDF()"  style="color: red;" class="bi bi-question-square-fill"></a></h3>
+    <h3 for="lat-long"> Adicione as Coordenadas de CADA ponto de coleta:<a title="VER MODELO" href="javascript:abrirPonto()"  style="color: red;" class="bi bi-question-square-fill"></a></h3>
         
     <div id="coordenadas" >
       <!-- os pontos de coletas serão inseridos aqui -->
@@ -358,7 +362,7 @@
 
 
 <h2> Adicione o arquivo CSV (separado por virgula): </h2>
-<a title="VER MODELO" href="javascript:abrirPDF()"  style="color: green; margin-right: 2%; font-size: 45px;" class="bi bi-filetype-csv"></a>
+<a title="VER MODELO" href="javascript:abrirCSV()"  style="color: green; margin-right: 2%; font-size: 45px;" class="bi bi-filetype-csv"></a>
 <input id="refef" type="file" name="tabelaDado" style="width: 30%;" unique><br><br><br>
     
     </br></br></br>           
