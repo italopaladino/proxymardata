@@ -8,7 +8,7 @@ function abrirPonto() {
     window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=600,height=600");
 }
 function abrirCSV() {
-    var url = "../assets/CSV.pdf";
+    var url = "../assets/csv.pdf";
     window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=600,height=600");
 }
         

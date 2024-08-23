@@ -229,7 +229,7 @@
 </div>   
 <div>
     <label for="referencia" > Referência conforme a ABNT:</label></br>
-    <textarea type="text" id="referencia" name="referencia" required maxlength="1500" rows="5" cols="10" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
+    <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
 </div>
     
     <div>
@@ -413,12 +413,12 @@
 
 
 
-<form action="../PHP/teste-conexao-postgre.php" method="post">
+<!--<form action="../PHP/teste-conexao-postgre.php" method="post">
 
     <button class="button" type="submit"> CONSULTAR CONEXÂO COM BANCO</button>
 </form>
 </br>
-</br>
+</br>-->
 <!-- rodapé da página-->
 
 
@@ -567,7 +567,7 @@
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('preloader').style.display = 'none';
-    document.getElementById('content').style.display = 'block';
+    document.getElementById('page1').style.display = 'block';
   }, PRELOADER_TIMEOUT);
 });
 
