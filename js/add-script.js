@@ -268,7 +268,7 @@ function adicionarCoordenadas() {
     novolatitude.className = "latitude";
     novolatitude.id = "latitude" + coordenadas;
     novolatitude.name = "latitude[]";
-    novolatitude.placeholder = "Latitude: -XX.XXXXX";
+    novolatitude.placeholder = "Latitude: -YY.YYYYY";
     novolatitude.style.width="20%"   
     novolatitude.maxLength = 10;
     novolatitude.style.autocomplete="off";
@@ -278,7 +278,7 @@ function adicionarCoordenadas() {
     novolongitude.className = "longitude";
     novolongitude.id = "longitude" + coordenadas;
     novolongitude.name = "longitude[]";
-    novolongitude.placeholder = "Longitude: -YY.YYYYY";
+    novolongitude.placeholder = "Longitude: -XX.XXXXX";
     novolongitude.style.width="20%";
     novolongitude.maxLength = 10;
     novolongitude.style.autocomplete ="off";
@@ -294,12 +294,13 @@ function adicionarCoordenadas() {
     novoProf.style.autocomplete="off";
 
     var novoRecSed = document.createElement("input");
-    novoRecSed.type = "number";
+    novoRecSed.type = "text";
     novoRecSed.className = "recuperacao";
     novoRecSed.id = "recuperacao" + coordenadas;
     novoRecSed.name = "recuperacao[]"; // Use an array to collect multiple values
-    novoRecSed.placeholder = "Recuperação sedimentar (metros)";
-    novoRecSed.style.width ="20%"
+    novoRecSed.placeholder = "Recuperação(m)";
+    novoRecSed.title="Coloque a recupeção sedimentar do testemunho. Caso seja superficial considere profundidade 0"
+    novoRecSed.style.width ="10%"
     novoRecSed.maxLength = 10;
     novoRecSed.style.autocomplete="off";
 
@@ -309,7 +310,7 @@ function adicionarCoordenadas() {
     novoAnoCol.id = "data2" + coordenadas;
     novoAnoCol.name = "data[]"; // Use an array to collect multiple values
     novoAnoCol.placeholder = "Data da coleta";
-    novoAnoCol.style.width="10%";
+    novoAnoCol.style.width="12%";
     novoAnoCol.maxLength = 10;
     
      
