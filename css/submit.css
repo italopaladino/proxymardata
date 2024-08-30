@@ -157,7 +157,7 @@ a.link-pesq:hover{
   display: inline-block;
   width: 49%;
   vertical-align: top;
-  margin-right: 4.8px;
+  margin-right: 2px;
 }
 
 .autor-campo {
@@ -170,6 +170,13 @@ a.link-pesq:hover{
   display: inline-block;
   width: 49%;
   vertical-align: top;
+}
+
+.colunaaut2 {
+  display: inline-block;
+  width: 49%;
+  vertical-align: top;
+  margin-right: 6px;
 }
 
 
