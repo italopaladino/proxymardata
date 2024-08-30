@@ -445,7 +445,10 @@ function exibirResumo() {
     resumo += "<p" + (armazenamentoSel ? '' : ' class="texto-vermelho"') + "><strong>Como deseja armazenar os dados? </strong>" + armazenamentoSel + "</p>";
 
     var titulo = document.getElementById("titulo").value;
-    resumo += "<p" + (titulo ? '' : ' class="texto-vermelho"') + "><strong>Título:</strong> " + titulo + "</p>";
+    resumo += "<p" + (titulo ? '' : ' class="texto-vermelho"') + "><strong>Título do Trabalho:</strong> " + titulo + "</p>";
+
+    var titulo_dado = document.getElementById("titulo_dado").value;
+    resumo += "<p" + (titulo_dado ? '' : ' class="texto-vermelho"') + "><strong>Título para os dados que será inserido:</strong> " + titulo_dado + "</p>";
 
     // Adicionar mais coordenadas
     for (var i = 0; i < contadorAutores; i++) {
@@ -458,10 +461,10 @@ function exibirResumo() {
     resumo += "<p" + (periodico ? '' : ' class="texto-vermelho"') + "><strong>Nome do Periódico:</strong> " + periodico + "</p>";
 
     var linkart = document.getElementById("linkart").value;
-    resumo += "<p" + (linkart ? '' : ' class="texto-vermelho"') + "><strong>Link para o Artigo:</strong> " + linkart + "</p>";
+    resumo += "<p" + (linkart ? '' : ' class="texto-vermelho"') + "><strong>Link para o Artigo OU DOI:</strong> " + linkart + "</p>";
 
-    var doi1 = document.getElementById("doi").value;
-    resumo += "<p" + (doi1 ? '' : ' class="texto-vermelho"') + "><strong>DOI:</strong> " + doi1 + "</p>";
+    var doi1 = document.getElementById("funding").value;
+    resumo += "<p" + (doi1 ? '' : ' class="texto-vermelho"') + "><strong>Funding/Financiamento:</strong> " + doi1 + "</p>";
 
     var datap = document.getElementById("data1").value;
     resumo += "<p" + (datap ? '' : ' class="texto-vermelho"') + "><strong>Data da publicação:</strong> " + datap + "</p>";
@@ -481,7 +484,10 @@ function exibirResumo() {
 function exibirDADOS() {
     var summary2 = document.getElementById("summary-2");
     var resumo = "";
-    
+
+    var area_est = document.getElementById("area_est").value;
+    resumo += "<p" + (area_est ? '' : ' class="texto-vermelho"') + "><strong>Descrição da Área de estudo:</strong> " + area_est + "</p>";
+
         var coordenadasCampos = document.getElementsByClassName("coordenadas-campo");
         for (var i = 0; i < coordenadasCampos.length; i++) {
                 var ID_amst = document.getElementById("ID_amst" + i).value;
@@ -504,8 +510,8 @@ function exibirDADOS() {
 
     // Verifica proxies selecionados e adiciona ao resumo
     var proxySummary = "";
-    if (document.getElementById("TSM").checked) {
-        proxySummary += "TSM (Temperatura da Superfície do Mar), ";
+    if (document.getElementById("isot").checked) {
+        proxySummary += "Isótopos, ";
     }
     if (document.getElementById("PP").checked) {
         proxySummary += "Produtividade Primária, ";
@@ -545,13 +551,14 @@ function exibirDADOS() {
     if (proxySummary.slice(-2) === ', ') {
         proxySummary = proxySummary.slice(0, -2);
     }
-
-    resumo += "<p" + (proxySummary ? '' : ' class="texto-vermelho"') + "><strong>Proxie(s) Selecionado(s):</strong> " + proxySummary + "</p>";
-
+    if (proxySummary){
+    resumo += "<p> <strong>Ferramentas Selecionado(s):</strong> " + proxySummary + "</p>";
+    }
     // Adiciona outro proxy inserido
     var outroprox = document.getElementById("outroProx").value;
-    resumo += "<p" + (outroprox ? '' : ' class="texto-vermelho"') + "><strong> Outro proxy:</strong> " + outroprox + "</p>";
-
+    if(outroprox){
+    resumo += "<p><strong>Outras ferramentas:</strong> " + outroprox + "</p>";
+    }
     // Adiciona equipamentos selecionados
     var coleta = "";
     if (document.getElementById("multcorer").checked) {
@@ -584,12 +591,14 @@ function exibirDADOS() {
         coleta = coleta.slice(0, -2);
     }
 
-    resumo += "<p" + (coleta ? '' : ' class="texto-vermelho"') + "><strong>Equipamento(s) Selecionado(s):</strong> " + coleta + "</p>";
-
+    if(coleta){
+    resumo += "<p><strong>Equipamento(s) Selecionado(s):</strong> " + coleta + "</p>";
+    }
     // Adiciona outro equipamento inserido
     var outroequip = document.getElementById("outroEqui").value;
-    resumo += "<p" + (outroequip ? '' : ' class="texto-vermelho"') + "><strong> Outro equipamento:</strong> " + outroequip + "</p>";
-
+    if(outroequip){
+    resumo += "<p> <strong> Outro equipamento:</strong> " + outroequip + "</p>";
+    }
     // Adiciona arquivo de referência inserido
     var refef1 = document.getElementById("refef").value;
     resumo += "<p" + (refef1 ? '' : ' class="texto-vermelho"') + "><strong>Arquivo:</strong> " + refef1 + "</p>";

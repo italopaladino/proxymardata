@@ -6,7 +6,7 @@ try {
 
     // Seleciona as colunas booleanas e conta quantos registros existem para cada coluna onde o valor é TRUE
     $sql = "
-        SELECT 'TSM' AS coluna, COUNT(*) AS quantidade FROM proxys WHERE TSM = TRUE
+        SELECT 'TSM' AS coluna, COUNT(*) AS quantidade FROM proxys WHERE isot = TRUE
         UNION ALL
         SELECT 'PP' AS coluna, COUNT(*) AS quantidade FROM proxys WHERE PP = TRUE
         UNION ALL
@@ -37,7 +37,7 @@ try {
 
     // Mapeia os nomes das colunas para os nomes desejados
     $nomesColunas = [
-        'TSM' => 'Temperatura da Superfície do Mar',
+        'isot' => 'Isótopos',
         'PP' => 'Produção Primária',
         'circulacao' => 'Circulação',
         'org' => 'Orgânico',

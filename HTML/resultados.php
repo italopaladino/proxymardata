@@ -122,16 +122,18 @@ SELECT
     infogeral.armazenamento,
     infogeral.termo,
     infogeral.titulo,
+    infogeral.titulo_dado,
     infogeral.periodico,
     infogeral.linkart,
-    infogeral.doi,
+    infogeral.funding,
     infogeral.data1,
     infogeral.keywords,
     caractDado.caract,
     caractDado.metut,
+    caractDado.area_est,
     arquivos.nome_arquivo,
     arquivos.uploaded_at,
-    proxys.TSM,
+    proxys.isot,
     proxys.PP,
     proxys.circulacao,
     proxys.org,
@@ -176,16 +178,18 @@ GROUP BY infogeral.geralID,
          infogeral.armazenamento,
          infogeral.termo,
          infogeral.titulo,
+         infogeral.titulo_dado,
          infogeral.periodico,
          infogeral.linkart,
-         infogeral.doi,
+         infogeral.funding,
          infogeral.data1,
          infogeral.keywords,
          caractDado.caract,
          caractDado.metut,
+         caractDado.area_est,
          arquivos.nome_arquivo,
          arquivos.uploaded_at,
-         proxys.TSM,
+         proxys.isot,
          proxys.PP,
          proxys.circulacao,
          proxys.org,
@@ -232,9 +236,14 @@ ORDER BY infogeral.geralID";
                 echo "</div>"; // div corr
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // div tit
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Título:</span></div>";
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Título do trabalho:</span></div>";
                 echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['titulo']) . "</div>";
                 echo "</div>"; // div tit
+
+                echo "<div class='linha' id='coluna-esq-dir'>"; // div tit
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Título atribuido para os Dados:</span></div>";
+                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['titulo_dado']) . "</div>";
+                echo "</div>";
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // autores
                 echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Autores:</span></div>";
@@ -252,15 +261,14 @@ ORDER BY infogeral.geralID";
                 echo "</div>"; // periódico
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // doi
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> DOI:</span></div>";
-                echo "<div class='coluna' id='colun-med'> <a href='https://doi.org/" . htmlspecialchars($row['doi']) . "'>" . htmlspecialchars($row['doi']) . "</a></div>";
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Funding/Financiamento:</span></div>";
+                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['funding']) . "</div>";
                 echo "</div>"; // doi
-        
-                
+                        
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // data
                 echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Data da publicação: </span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['data1']) . "</div>";
+                echo "<div class='coluna' id='colun-dir'>" . date_format(date_create($row['data1']), 'd F Y') . "</div>";
                 echo "</div>"; // data
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // keywords
@@ -279,7 +287,7 @@ ORDER BY infogeral.geralID";
                 echo "</div>"; // método
         
                 $proxys = [];
-                if ($row['tsm']) $proxys[] = "Temperatura da Superfície do Mar";
+                if ($row['isot']) $proxys[] = "Isótopos";
                 if ($row['pp']) $proxys[] = "Produção Primária";
                 if ($row['circulacao']) $proxys[] = "Circulação";
                 if ($row['org']) $proxys[] = "Orgânico";
@@ -313,9 +321,15 @@ ORDER BY infogeral.geralID";
                 echo "<div class='coluna' id='colun-dir'>" . implode(", ", $equipcoleta) . "</div>"; // Exibe os proxies em uma linha
                 echo "</div>"; // equi
         
+                echo "<div class='linha' id='coluna-esq-dir'>"; // método
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Descrição da Área de Estudo:</span></div>";
+                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['area_est']) . "</div>";
+                echo "</div>";
+
                 echo "<div class='linha' id='coluna-esq-dir'>"; // pontos
                 echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Pontos de Coleta:</span></div>";
                 echo "<div class='coluna' id='colun-dir'>";
+                
         
                 $pontos_coleta = explode(' | ', $row['pontos_coleta']);
                 foreach ($pontos_coleta as $ponto) {
@@ -398,12 +412,7 @@ ORDER BY infogeral.geralID";
     ?>
                            
             
-  <script>
-    // Remove o preloader após o carregamento da página
-    window.addEventListener('load', () => {
-      document.getElementById('preloader').classList.add('hidden');
-    });
-  </script>
+ 
 
 
     <!-- Footer -->

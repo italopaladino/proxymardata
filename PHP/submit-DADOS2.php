@@ -31,21 +31,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $armazenamento = $_POST['armazenamento'];
             $termo = isset($_POST['termo']) ? 'TRUE' : 'FALSE';
             $titulo = $_POST['titulo'];
+            $titulo_dado = $_POST['titulo_dado'];
+
             $periodico = $_POST['periodico'];
             $linkart = $_POST['linkart'];
-            $doi = trim($_POST['doi']);
+            $funding = trim($_POST['funding']);
             $data1 = $_POST['data1'];
             $keywords = trim($_POST['keywords']);
             $referencia = trim($_POST['referencia']);
 
             // Preparando e executando a consulta SQL para inserir na tabela infogeral
-            $sql1 = "INSERT INTO infogeral (correspondente, email, tipoTrabalho, armazenamento, termo, titulo, periodico, linkart, doi, data1, keywords,referencia) 
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12)
+            $sql1 = "INSERT INTO infogeral (correspondente, email, tipoTrabalho, armazenamento, termo, titulo, titulo_dado, periodico, linkart, funding, data1, keywords,referencia) 
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12,$13)
                      RETURNING geralID";
             
-            $result1 = pg_query_params($conn, $sql1, [
-                $corr, $email, $tipoTrabalho, $armazenamento, $termo, $titulo, $periodico, $linkart, $doi, $data1, $keywords, $referencia
-            ]);
+            $result1 = pg_query_params($conn, $sql1, [$corr, $email, $tipoTrabalho, $armazenamento, $termo, $titulo,$titulo_dado, $periodico, $linkart, $funding, $data1, $keywords, $referencia]);
 
             // Verifica se a consulta foi bem-sucedida e obtém o ID do trabalho inserido
             if ($result1) {
@@ -53,10 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $trabalhoID = $row['geralid'];
 
             } else {
+                echo "<script> window.alert('Erro ao inserir a primeira Página do Formulário'); </script>";
                 error_log("Erro ao inserir na tabela infogeral". pg_last_error($conn), 3, "../errorlog/errorlog.txt");
                 throw new Exception("Erro ao inserir na tabela infogeral: " . pg_last_error($conn));
             }
         } else {
+            echo "<script> window.alert('erro: secaoAtual1 não definido'); </script>";
             error_log("erro: secaoAtual1 não definido", 3, "../errorlog/errorlog.txt");
             throw new Exception("Erro: secaoAtual1 não definido.");
         }
@@ -105,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Verifica se as inserções foram bem-sucedidas
             if (!$result_trabalhos_autores) {
+                echo "<script> window.alert('Erro ao inserir associação na tabela trabalho_autores_filiacao $key'); </script>";
                 error_log("Erro ao inserir associação na tabela trabalho_autores_filiacao",3, "../errorlog/errorlog.txt");
                 throw new Exception("Erro ao inserir associação na tabela trabalhos_autores_filiacao.");
             }
@@ -146,20 +149,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $result_ponto = pg_query_params($conn, $sql_pontos, [$ID_amst, $latitudes, $longitudes, $prof, $recuperacao, $anoColeta, $trabalhoID]);
     
                     if (!$result_ponto) {
+                        echo "<script> window.alert('erro ao inserir na tabela de pontos $key'); </script>";
                         error_log("erro ao inserir na tabela de pontos", 3, "../errorlog/errorlog.txt");
                         throw new Exception("Erro ao inserir na tabela pontos");
                     }
                 } else {
+                     echo "<script> window.alert('Dados imcompletos para o índice $key'); </script>";
                     error_log("Dados imcompletos para o índice $key", 3 , "../errorlog/errorlog.txt");
                     throw new Exception("Dados incompletos para o índice $key");
                 }
             }
         } else {
+            echo "<script> window.alert('Campos de entradas ausentes'); </script>";
             error_log("Campos de entradas ausentes", 3,"../errorlog/errorlog.txt");
             throw new Exception("Campos de entrada ausentes");
         }
     }
-    $TSM = isset($_POST['TSM']) ? 1 : 0;
+    $isot = isset($_POST['isot']) ? 1 : 0;
     $PP = isset($_POST['PP']) ? 1 : 0;
     $circ = isset($_POST['circulacao']) ? 1 : 0;
     $org = isset($_POST['org']) ? 1 : 0;
@@ -173,11 +179,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stratg = isset($_POST['stratg']) ? 1 : 0;
     $outroProx = trim($_POST['outroProx']);
 
-    $sql_prox = "INSERT INTO proxys (TSM, PP, circulacao, org, inorg, foramplan,forambent, sealev, co2atm, cobveg, rainfall, stratg, outroprox, trabalhoid)
+    $sql_prox = "INSERT INTO proxys (isot, PP, circulacao, org, inorg, foramplan,forambent, sealev, co2atm, cobveg, rainfall, stratg, outroprox, trabalhoid)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12,NULLIF($13, ''), $14)";
-    $result_prox = pg_query_params($conn, $sql_prox,[$TSM, $PP,$circ, $org, $inorg, $foramplan, $forambent, $sealev, $co2atm, $cobveg, $rainfall, $stratg, $outroProx, $trabalhoID]);
+    $result_prox = pg_query_params($conn, $sql_prox,[$isot, $PP,$circ, $org, $inorg, $foramplan, $forambent, $sealev, $co2atm, $cobveg, $rainfall, $stratg, $outroProx, $trabalhoID]);
 
     if (!$result_prox){
+        echo "<script> window.alert(' Erro ao inserir na coluna ferramentas'); </script>";
         error_log("erro ao inserir na tabela proxys", 3, "../errorlog/errorlog.txt");
         throw new Exception("Erro ao inserir na tabela proxys");
     }
@@ -197,6 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result_equi = pg_query_params($conn, $sql_equipamentos,[$multcorer,$piston, $gravcorer,$drilli, $gboxcorer, $compcorer,$boxcorer, $corer, $outroEqui, $trabalhoID]);
 
     if (!$result_equi){
+        echo "<script> window.alert('Erro ao inserir na tabela equipamentos'); </script>";
         error_log("Erro ao inserir na tabela equipamentos",3,"../errorlog/errorlog.txt");
         throw new Exception("erro ao inserir na tabela equipamentos");
 
@@ -204,9 +212,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $carct = $_POST['caract'];
 $metut = $_POST['metut'];
+$area_est = $_POST['area_est'];
 
-$sql_caract = "INSERT INTO caractDado (caract, metut, trabalhoid) VALUES ($1, $2, $3)";
-$result_caract = pg_query_params($conn, $sql_caract,[$carct,$metut, $trabalhoID]);
+$sql_caract = "INSERT INTO caractDado (caract, metut, area_est, trabalhoid) VALUES ($1, $2, $3,$4)";
+$result_caract = pg_query_params($conn, $sql_caract,[$carct, $metut, $area_est, $trabalhoID]);
 
 
 
@@ -230,9 +239,11 @@ if (isset($_FILES['tabelaDado']) && $_FILES['tabelaDado']['error'] === UPLOAD_ER
     if ($result) {
         error_log("Arquivo CSV carregado e inserido na tabela arquivos com sucesso.", 3, "../errorlog/errorlog.txt");
     } else {
+        echo "<script> window.alert('erro no arquivoo); </script>";
         error_log("Erro ao inserir arquivo na tabela arquivos: " . pg_last_error($conn), 3, "../errorlog/errorlog.txt");
     }
 } else {
+    echo "<script> window.alert('erro no arquivoo); </script>";
     error_log("Erro no envio do arquivo CSV.", 3, "../errorlog/errorlog.txt");
 }
 

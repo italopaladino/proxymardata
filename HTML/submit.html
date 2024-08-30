@@ -181,8 +181,11 @@
 </div></br>
 
 
-<label  for="titulo">*Título/ Title:</label></br>
-<input id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português" >
+<label  for="titulo">*Título do Trabalho:</label></br>
+<input id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português" title="Aqui você irá inserir o Título do Trabalho.">
+</br></br>
+<label  for="titulo_dado">*Título para os dados que será inserido:</label></br>
+<input id="titulo_dado" type="text" name="titulo_dado" style="width: 100%;" placeholder="Título em Inglês OU Português" title="Aqui você dará um título para o seus dados. Que não seja o título do trabalho">
 </br>
 </br>
 
@@ -207,15 +210,15 @@
         <input type="text" id="periodico" name="periodico" style="width: 35%;"  placeholder="Nome do periódico onde o trabalho está publicado">
     </div>
 </br>    
-    <label for="linkart"  > Link para o Artigo:</label></br>
+    <label for="linkart"  > Link para o Artigo <b>OU</b> DOI:</label></br>
         <input type="text" id="linkart" name="linkart" style="width: 35%;"  placeholder="endereço URL para artigo/revista">
     </div>
 
 </br>
         
     <div>    
-    <label for="doi"> DOI:</label>/<br>
-    <input id="doi" name="doi" type="text" style="width: 35%; display: flex;" placeholder="XXXX/XX">    
+    <label for="funding"> Funding/Financiamento:</label></br>
+    <input id="funding" name="funding" type="text" style="width: 60%; display: flex;" placeholder="XXXX/XX">    
     </div>
 </br>
 
@@ -225,7 +228,7 @@
 </div></br>
 <div>
     <label for="keywords" > Palavras-Chave/Keywords:</label></br>
-    <input type="text" id="keywords" name="keywords" style="width: 85%;"  placeholder="3 a 5 palavras-chave"></br></br>
+    <input type="text" id="keywords" name="keywords" style="width: 85%;"  placeholder="3 a 5 palavras-chave separadas por espaço."></br></br>
 </div>   
 <div>
     <label for="referencia" > Referência conforme a ABNT:</label></br>
@@ -251,7 +254,10 @@
 
 
         <h1 style="text-align: center;"> Informação dos dados a serem submetidos: </h1></br>
-   
+
+        <label  form="area_est"> Descrição da Área de estudo: </label></br>
+        <textarea type="text" id="area_est" name="area_est"  maxlength="250" rows="3" cols="100" placeholder="Adicionar uma breve descrição da Área de Estudo (máx. 250 caracteres)"></textarea>
+    </br></br>   
 <div id="coord">
     <h3 for="lat-long"> Adicione as Coordenadas de CADA ponto de coleta:<a title="VER MODELO" href="javascript:abrirPonto()"  style="color: red;" class="bi bi-question-square-fill"></a></h3>
         
@@ -269,7 +275,7 @@
 </br></br>
 </br></br>
 <div id="proxys">
-    <h2> Proxies utilizados:</h2>
+    <h3> Ferramenta utilizada:</h3>
     <!-- depois deixar de 2 em 2 alinhado -->
 <input type="checkbox" id="isot" name="isot" value="Isótopos">
 <label for="isot" style="margin-right: 2%; ">Isótopos</label>
@@ -315,7 +321,7 @@
 </br>
 
 <div id="equip-coleata">
-    <h2> Equipamentos de Coleta:</h2>
+    <h3> Equipamentos de Coleta:</h3>
 
 <input type="checkbox" id="multcorer" name="multcorer" value="multcorer">
 <label for="multcorer" style="margin-right: 2%; ">MultiCorer</label>
@@ -349,19 +355,19 @@
 </br>
 </br>
 
-        <h2> Descrição dos dados e Métodos: </h2></br>
-        <label  form="caract"> Caracteristicas dos dados inseridos: </label></br>
+        <h3> Dados e Métodos: </h3></br>
+        <label  for="caract"> Descrição dos Dados inseridos: </label></br>
         <textarea type="text" id="caract" name="caract"  maxlength="1500" rows="10" cols="150" placeholder="Conte um pouco como sobre as caracteriscas do seu dado. Ex: Tabela com granulometria, grau de seleção etc (max 1500 caracteres)"></textarea>
     </br></br>
 
 
-    <label  form="metut"> Métodos Utilizados: </label></br>
+    <label  for="metut"> Descrição dos Métodos Utilizados: </label></br>
     <textarea type="text" id="metut" name="metut"  maxlength="1500" rows="10" cols="150" placeholder=" Conte brevemente como foi feito, e os equipamentos Utilizados"></textarea>
 </br></br>
 
 
 
-<h2> Adicione o arquivo CSV (separado por virgula): </h2>
+<h3> Adicione o arquivo CSV (separado por virgula): </h3>
 <a title="VER MODELO" href="javascript:abrirCSV()"  style="color: green; margin-right: 2%; font-size: 45px;" class="bi bi-filetype-csv"></a>
 <input id="refef" type="file" name="tabelaDado" style="width: 30%;" unique><br><br><br>
     
