@@ -193,10 +193,19 @@
 <!-- coAutores -->
 <h3 id="coAutores"> Adicionar Autores e Co-Atores:</h3></br>      
 <div id="autoresContainer">
+    <div class="autor" id="autorContainer0">
+        <div class="colunaaut">
+            <input type="text" class="autor" name="autor[]" id="autor0" placeholder="Nome Completo" autocomplete="off" style="width: 100%;">
+        </div>
+        <div class="colunafili">
+            <input type="text" class="filiacao" name="filiacao[]" id="filiacao0" placeholder="Filiação" autocomplete="off" style="width: 100%;">
+        </div>
+    </div></br>
     <!-- Aqui serão adicionados os campos de coautores dinamicamente -->
 </div>
 <br>
 <div id="autor-button">
+    
     <button style="left: 1%; position: absolute;" class="button" type="button" onclick="adicionarAutor()">Adicionar Autor</button>
     <button type="button" style="position:absolute; left: 50%; transform: translateX(-50%);" class="button" onclick="deletarAutor()">Remover último Co-autor</button>
     <button type="button" style="right: 2%; position:absolute;" class="button" onclick="removerTODOSAutores()">Remover todas as linhas </button>
@@ -375,7 +384,7 @@
     
      
         <button class="button" type="button" style="position: absolute; left: 1%; bottom: 1%;" onclick="paginaAnterior()">Anterior</button>
-        <button class="button" type="button" style="position: absolute; right: 1%; bottom: 1%;" onclick="proximaPagina();exibirResumo()">Avançar</button>
+        <button class="button" type="button" style="position: absolute; right: 1%; bottom: 1%;" onclick="proximaPagina2()">Avançar</button>
 
 </div>
 </br></br>

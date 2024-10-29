@@ -133,7 +133,7 @@ function performLogin() {
 
 
                   
-var contadorAutores = 0;
+var contadorAutores = 1;
 function adicionarAutor() {
     // Container onde os campos de autor serão adicionados
     var container = document.getElementById("autoresContainer");
@@ -145,16 +145,16 @@ function adicionarAutor() {
     
     // Criar coluna para o nome completo
     var colunaNome = document.createElement("div");
-    colunaNome.className = "colunaaut";
-    
-    // Criar novo campo de input para o nome
+    colunaNome.className = "colunaaut2";
+      // Criar novo campo de input para o nome
     var novoCampoNome = document.createElement("input");
     novoCampoNome.type = "text";
     novoCampoNome.className = "autor";
     novoCampoNome.name = "autor[]";
     novoCampoNome.id = "autor" + contadorAutores; // Use um array para coletar vários valores
     novoCampoNome.placeholder = "Nome Completo";
-   novoCampoNome.style.width = "100%";    
+   novoCampoNome.style.width = "100%";
+   novoCampoNome.style.right= "2px";    
    novoCampoNome.autocomplete="off";
     novoCampoNome.addEventListener("input", function() {
         autocomplete(this, "../PHP/busca_autor.php");
@@ -383,7 +383,23 @@ function removerTODAScoordenadas() {
 
             function proximaPagina() {
               // Validação ou lógica adicional pode ser adicionada aqui
-        
+              const correspondente = document.getElementById('correspondente').value;
+              const email =document.getElementById('email').value;
+              const autor = document.getElementById('autor0').value;
+              const data = document.getElementById('data1').value;
+              const ref = document.getElementById('referencia').value;
+             
+              if(correspondente ==''){
+                window.alert('Indique o nome do correspondente!');
+              } else if(data ==''){
+                window.alert('Indique a data!');
+              }else if (ref ==''){
+                window.alert('Indique a Referência do trabalho!');
+              }else if (email ==''){
+                window.alert ('Indique o email do correspondente');  
+              }else if (autor ==''){
+                window.alert('Indique ao menos um Autor e sua filiação');
+            }else{
               // Oculta a seção atual
               document.getElementById(`section${currentPage}`).classList.remove('active');
         
@@ -393,7 +409,8 @@ function removerTODAScoordenadas() {
               // Exibe a próxima seção
               document.getElementById(`section${currentPage}`).classList.add('active');
             }
-        
+            }
+
             function paginaAnterior() {
               // Validação ou lógica adicional pode ser adicionada aqui
         
@@ -426,6 +443,28 @@ function removerTODAScoordenadas() {
 
 // resumo da pagina no final SUBMIT--
 
+function proximaPagina2(){
+    const area = document.getElementById('area_est').value;
+    const desc_dados = document.getElementById('caract').value;
+    const metut = document.getElementById('metut').value;
+    const arquivo = document.getElementById ('refef').value;
+if(area ==''){
+    window.alert ('Adicione a descrição da área de estudo');
+    return false;
+}else if (desc_dados ==''){
+    window.alert ('Adicione uma descrição ao seus dados');
+    return false;
+} else if (metut ==''){
+    window.alert ('Adicione os métodos utilizados para a aquisição desses dados');
+    return false;
+}else if (arquivo =='') {
+    window.alert(' Adicione a sua tabela de dados. Não esqueça que o formato é .CSV (separado por virgula)');
+}else{
+proximaPagina();
+exibirResumo();
+}
+}
+
 
 function exibirResumo() {
     var summary1 = document.getElementById("summary-1");
@@ -450,8 +489,13 @@ function exibirResumo() {
     var titulo_dado = document.getElementById("titulo_dado").value;
     resumo += "<p" + (titulo_dado ? '' : ' class="texto-vermelho"') + "><strong>Título para os dados que será inserido:</strong> " + titulo_dado + "</p>";
 
+    var AutorNome0 = document.getElementById("autor0").value;
+var AutorFiliacao0 = document.getElementById("filiacao0").value;
+resumo += "<p><strong>1º Autor:</strong> " + AutorNome0 + " (" + AutorFiliacao0 + ")</p>";
+
+
     // Adicionar mais coordenadas
-    for (var i = 0; i < contadorAutores; i++) {
+    for (var i = 1; i < contadorAutores; i++) {
         var AutorNome = document.getElementsByClassName("autor")[i].value;
         var AutorFiliacao = document.getElementsByClassName("filiacao")[i].value;
         resumo += "<p><strong>"+ (i + 1) + "º Autor:</strong> " + AutorNome + " (" + AutorFiliacao + ")</p>";
@@ -478,7 +522,6 @@ function exibirResumo() {
     // Exibir o resumo no elemento summary1
     summary1.innerHTML = resumo;
 }
-
 
 
 function exibirDADOS() {
