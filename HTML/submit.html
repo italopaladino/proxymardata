@@ -141,10 +141,19 @@
     <div id="section1" class="form-section active">
         <h1 style="text-align: center;"> Formulário para Submissão: </h1></br>
 
-        <label id="autor" for="autor"> *Identificação do Correspondente:</label></br>
-        <input type="text" id="correspondente" name="correspondente" style="width: 49%;" placeholder="Nome Completo">
-        <input type="email" id="email" name="email" style="width: 49%;" placeholder="E-mail do correspondente (ex: xxxxx@mail.com)" maxlength="255">
+        <label id="autor" for="autor"> <a style="color: red;" title="Elemento obrigatório">*</a>Identificação do responsável pelo dado:</label></br>
+        <input type="text" id="correspondente" name="correspondente" style="width: 49%;" placeholder="Nome Completo"> <!-- REVISAR NOME DOS CAMPOS --  COM OS DO BANCO--> 
+        <input type="email" id="email" name="email" style="width: 49%;" placeholder="E-mail do responsável (ex: xxxxx@mail.com)" maxlength="255">
     </br>
+</br>
+
+<label  for="titulo"><a style="color: red;" title="Elemento obrigatório">*</a>Título do projeto principal:</label><a style="color: orange; font-size: 18px;" class="bi bi-info-circle-fill" title="Se os dados estiverem relacionados a um projeto de pesquisa, adicione o título e a sigla do projeto principal em que o dado foi gerado. 
+Se você não tiver essa informação pergunte a seu/sua orientador/a." data-placement="top"></a></br>
+<input id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português" title="Aqui você irá inserir o Título do Trabalho.">
+</br></br>
+<label  for="titulo_dado">*Título para os dados que será inserido:</label></br>
+<input id="titulo_dado" type="text" name="titulo_dado" style="width: 100%;" placeholder="Título em Inglês OU Português" title="Aqui você dará um título para o seus dados. Que não seja o título do trabalho">
+</br>
 </br>
 
 <div id="tipoTrabalho" class="clearfix">
@@ -181,13 +190,7 @@
 </div></br>
 
 
-<label  for="titulo">*Título do Trabalho:</label></br>
-<input id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português" title="Aqui você irá inserir o Título do Trabalho.">
-</br></br>
-<label  for="titulo_dado">*Título para os dados que será inserido:</label></br>
-<input id="titulo_dado" type="text" name="titulo_dado" style="width: 100%;" placeholder="Título em Inglês OU Português" title="Aqui você dará um título para o seus dados. Que não seja o título do trabalho">
-</br>
-</br>
+
 
 
 <!-- coAutores -->

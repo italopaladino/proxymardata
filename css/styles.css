@@ -91,7 +91,22 @@
     scroll-behavior: smooth;
   }
 }
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  color: white;
+}
 
+.footer-column {
+  flex: 1;
+}
+
+.social a {
+  margin: 0 10px;
+  color: white;
+  font-size: 1.5rem;
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
