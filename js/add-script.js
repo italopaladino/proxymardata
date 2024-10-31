@@ -25,6 +25,10 @@ function handleKeyPress(event1, dialogAberto) {
 }
 
 
+
+
+
+
 document.addEventListener('keydown', keysub);
     // Verificar se estamos na página "submit.html"
     function keysub(event){
@@ -41,6 +45,19 @@ document.addEventListener('keydown', keysub);
         }
     }
 }
+
+
+function mostrarDivInfo() {
+    document.getElementById("info-adicional").style.display = "block";
+    
+}
+
+function ocultarDivInfo() {
+    document.getElementById("info-adicional").style.display = "none";
+}
+
+
+
 
 // Função para verificar se a página atual é "submit.html"
 function verifPag() {
