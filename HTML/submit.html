@@ -115,16 +115,12 @@
         <header class="bg-primary bg-gradient text-white">
             <div class="container px-4 text-center">
                 <h1 class="fw-bolder"> ProxyMar Data Base</h1>
-                <p class="lead"> Antes de submeter os dados por favor certifique-se: </p>
-                <ul id="info"> Lista de informaçãoes pré-submissão</ul>
-                <li> Leia todos os passos antes de fazer</li>
-                <li style="background-color: red;"> QUALQUER ERRO QUE APARECER, POR FAVOR ANOTE E TRAGA NA REUNIÃO </li>
-                <li> Garanta que seus dados possam ser interpretado por outra pessoa </li>
-                <li> Arquivos aceitos: apenas .CSV </li>
-                <li> a Regra é simples, tenta usar do seu modo. Se não for intuitivo, avise. A ideia é tornar intuitivo com os teste.</li>
-                <li> Lembrete: As Cores não são definitivas (não é nosso maior foco agora). Mas sugestões são bem vindas também.!</li></br>
-                <li class="bi bi-heart-fill" style="background-color: chocolate; font-size: 20px; width: 180px; border-radius: 10%;"> Obrigado</li>
+                <li> Antes de iniciar o processo de submissão, verifique as diretrizes e toda a documentação
+                    necessária - Manuais e modelos de planilhas para submissão podem ser encontrados <a class="aqui-sub" href="#">aqui</a>. </li></br>
 
+            <li> Se você encontrou algum erro ou gostaria de fazer alguma sugestão como tornar o processo mais intuitivo, por favor, envie um e-mail e o print da tela para 
+                <a class="aqui-sub" href="mailto:proxymar@usp.br" target="_blank">proxymar@usp.br</a></li>
+                
 </div>
         </header></br>
 
@@ -147,8 +143,15 @@
     </br>
 </br>
 
-<label  for="titulo"><a style="color: red;" title="Elemento obrigatório">*</a>Título do projeto principal:</label><a style="color: orange; font-size: 18px;" class="bi bi-info-circle-fill" title="Se os dados estiverem relacionados a um projeto de pesquisa, adicione o título e a sigla do projeto principal em que o dado foi gerado. 
-Se você não tiver essa informação pergunte a seu/sua orientador/a." data-placement="top"></a></br>
+<label  for="titulo"><a style="color: red;" title="Elemento obrigatório">*</a>Título do projeto principal:</label>
+<div class="tooltip-container">
+    <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+    <div class="tooltip">Se os dados estiverem relacionados a um projeto de pesquisa, adicione o título e a sigla do projeto principal em que o dado foi gerado. 
+        Se você não tiver essa informação pergunte a seu/sua orientador/a.</div>
+  </div>
+
+
+  
 <input id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português" title="Aqui você irá inserir o Título do Trabalho.">
 </br></br>
 <label  for="titulo_dado">*Título para os dados que será inserido:</label></br>
