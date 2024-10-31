@@ -149,32 +149,65 @@
     <div class="tooltip">Se os dados estiverem relacionados a um projeto de pesquisa, adicione o título e a sigla do projeto principal em que o dado foi gerado. 
         Se você não tiver essa informação pergunte a seu/sua orientador/a.</div>
   </div>
-
-
-  
-<input id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português" title="Aqui você irá inserir o Título do Trabalho.">
+ 
+<input id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português">
 </br></br>
-<label  for="titulo_dado">*Título para os dados que será inserido:</label></br>
-<input id="titulo_dado" type="text" name="titulo_dado" style="width: 100%;" placeholder="Título em Inglês OU Português" title="Aqui você dará um título para o seus dados. Que não seja o título do trabalho">
+
+
+
+<label  for="titulo_dado"><a style="color: red;">*</a> Título para os dados inserido:</label>
+
+<div class="tooltip-container">
+<i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+<div class="tooltip">Insira um título que descreva de forma clara e objetiva do que se trata o conjunto de dados a serem submetidos. 
+    Ele não deve ser igual ao título da publicação relacionada, mas deve refletir o que foi medido, onde e quando .</div>
+</div>
+</br>
+<input id="titulo_dado" type="text" name="titulo_dado" style="width: 100%;" placeholder="Título em Inglês OU Português">
 </br>
 </br>
 
-<div id="tipoTrabalho" class="clearfix">
-    <div class="coluna">
-        <label for="tipoTrabalho"> Tipo de trabalho:</label><br>
-        <select id="tipoTrabalhoSelecao" name="tipoTrabalho">
-            <option value=""> --- </option>
-            <option value="Artigo"> Artigo </option>
-            <option value="Tese de Doutorado"> Tese de Doutorado </option>
-            <option value="Dissertação de Mestrado"> Dissertação de Mestrado </option>
-            <option value="Relatório"> Relatórios </option>
-            <option value="Resumo"> Resumo </option>
-            <option value="Outro"> Outro </option>
-        </select><br><br>
+
+<div id="trab-asso">
+    <label for="trab"> <span style="color: red;">*</span> Existe algum trabalho associado a este conjunto de dados</label><br>
+
+    <p>
+        <input type="radio" id="trab-sim" name="trab_associado" value="sim" onclick="mostrarDivInfo()">
+        <label for="trab-sim">Sim</label>
+
+        <input type="radio" id="trab-nao" name="trab_associado" value="nao" onclick="ocultarDivInfo()">
+        <label for="trab-nao">Não</label>
+    </p>
+
+    <!-- Div com mais informações -->
+    <div id="info-adicional" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
+        <div id="tipoTrabalho" class="clearfix">
+            <div class="coluna">
+                <label for="tipoTrabalho"> Tipo de trabalho:</label><br>
+                <select id="tipoTrabalhoSelecao" name="tipoTrabalho">
+                    <option value=""> --- </option>
+                    <option value="Artigo"> Artigo </option>
+                    <option value="Tese de Doutorado"> Tese de Doutorado </option>
+                    <option value="Dissertação de Mestrado"> Dissertação de Mestrado </option>
+                    <option value="Relatório"> Relatórios </option>
+                    <option value="Resumo"> Resumo </option>
+                    <option value="TCC"> Trabalho de conclusão de curso </option> <!-- att no SQL-->
+                    <option value="IC"> Iniciação científica </option> <!-- att no SQL-->
+                </select><br><br>
+            </div>
     </div>
+<div class="coluna">
+    <div class="coluna" id="titulo-trab">
+        <label for="tit-trab" id="tit-trab" style="width: 49%;"> Título do Trabalho:</label></br>
+        <input id="tit-trab">
+    </div>
+</div>
 
+</div>
 
-    <div id="armazenamento" class="coluna">
+   
+
+<div id="armazenamento" class="coluna">
         <label for='armazenamento'> Como deseja armazenar os dados?</label><br>
         <select id="armazenamentoSelecao" name="armazenamento">
             <option value="">---</option>

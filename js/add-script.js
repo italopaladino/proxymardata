@@ -45,20 +45,6 @@ document.addEventListener('keydown', keysub);
         }
     }
 }
-
-
-function mostrarDivInfo() {
-    document.getElementById("info-adicional").style.display = "block";
-    
-}
-
-function ocultarDivInfo() {
-    document.getElementById("info-adicional").style.display = "none";
-}
-
-
-
-
 // Função para verificar se a página atual é "submit.html"
 function verifPag() {
     var paginaAtual = window.location.href;
@@ -75,7 +61,14 @@ function closeNavbar() {
         }
     }
 
-
+    function mostrarDivInfo() {
+        const div = document.getElementById("info-adicional");
+        div.style.maxHeight = div.scrollHeight + "px"; // Define a altura máxima para exibir a <div> com transição
+    }
+    
+    function ocultarDivInfo() {
+        document.getElementById("info-adicional").style.maxHeight = "0"; // Oculta a <div> com transição
+    }
 
 
 
