@@ -181,10 +181,10 @@
 
     <!-- Div com mais informações -->
     <div id="info-adicional" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
-        <div id="tipoTrabalho" class="clearfix">
-            <div class="coluna">
+        <div id="tipoTrabalho" class="coluna">
+            <div>
                 <label for="tipoTrabalho"> Tipo de trabalho:</label><br>
-                <select id="tipoTrabalhoSelecao" name="tipoTrabalho">
+                <select id="tipoTrabalhoSelecao" name="tipoTrabalho"  style="height: 30px;">
                     <option value=""> --- </option>
                     <option value="Artigo"> Artigo </option>
                     <option value="Tese de Doutorado"> Tese de Doutorado </option>
@@ -197,40 +197,23 @@
             </div>
     </div>
 <div class="coluna">
-    <div class="coluna" id="titulo-trab">
-        <label for="tit-trab" id="tit-trab" style="width: 49%;"> Título do Trabalho:</label></br>
-        <input id="tit-trab">
+    <div id="titulo-trab">
+        <label for="tit-trab" id="tit-trab"> Título do Trabalho:</label></br>
+        <textarea style="width: 100%; resize:vertical;" type="text" id="tit-trab" maxlength="1500" rows="3" ></textarea> <!-- att no SQL -->
     </div>
 </div>
 
+
 </div>
 
-   
 
-<div id="armazenamento" class="coluna">
-        <label for='armazenamento'> Como deseja armazenar os dados?</label><br>
-        <select id="armazenamentoSelecao" name="armazenamento">
-            <option value="">---</option>
-            <option value="Público"> Público</option>
-            <option value="Privado"> Privado </option>
-        </select></br><br>
-    </div></div>
-
-
-
-<div class="termo">
-   
-    <input type="checkbox" id="termo" name="termo" value="term">
-    <label for="termo"> Li e concordo com os termos sobre o uso dos dados <a href="javascript:abrirTermo()"> Clique aqui para ler</a></label>
-     
-</div></br>
 
 
 
 
 
 <!-- coAutores -->
-<h3 id="coAutores"> Adicionar Autores e Co-Atores:</h3></br>      
+<h3 id="coAutores"> Adicionar Autores e Coatores:</h3></br>      
 <div id="autoresContainer">
     <div class="autor" id="autorContainer0">
         <div class="colunaaut">
@@ -251,33 +234,9 @@
 </div>
 </br>
 </br>
-        
-    <div>
-        <div>
-          <label for="periodico" >Nome do Periódico:</label></br>
-        <input type="text" id="periodico" name="periodico" style="width: 35%;"  placeholder="Nome do periódico onde o trabalho está publicado">
-    </div>
-</br>    
-    <label for="linkart"  > Link para o Artigo <b>OU</b> DOI:</label></br>
-        <input type="text" id="linkart" name="linkart" style="width: 35%;"  placeholder="endereço URL para artigo/revista">
-    </div>
 
 </br>
-        
-    <div>    
-    <label for="funding"> Funding/Financiamento:</label></br>
-    <input id="funding" name="funding" type="text" style="width: 60%; display: flex;" placeholder="XXXX/XX">    
-    </div>
-</br>
-
-<div>
-        <label  for="data1"> Data da publicação:</label></br>
-        <input id="data1" type="date" name="data1" style="width: 150px;">
-</div></br>
-<div>
-    <label for="keywords" > Palavras-Chave/Keywords:</label></br>
-    <input type="text" id="keywords" name="keywords" style="width: 85%;"  placeholder="3 a 5 palavras-chave separadas por espaço."></br></br>
-</div>   
+ 
 <div>
     <label for="referencia" > Referência conforme a ABNT:</label></br>
     <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
@@ -303,8 +262,14 @@
 
         <h1 style="text-align: center;"> Informação dos dados a serem submetidos: </h1></br>
 
-        <label  form="area_est"> Descrição da Área de estudo: </label></br>
-        <textarea type="text" id="area_est" name="area_est"  maxlength="250" rows="3" cols="100" placeholder="Adicionar uma breve descrição da Área de Estudo (máx. 250 caracteres)"></textarea>
+        <label  form="area_est"> <a style="color: red;">*</a>Resumo dos dados </label>
+        <div class="tooltip-container">
+            <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+            <div class="tooltip">O resumo de cada conjunto de dados fornece uma descrição concisa e focada no método utilizado na aquisição do dado, ou 
+                seja, o que, quando, onde, por que e como os dados foram coletados. O resumo deve consistir em texto corrido significativo, no mesmo formato dos resumos de artigos. Qualquer abreviação 
+                deve ser explicada. Confira a aba de Diretrizes & Manuais</div>
+          </div></br>
+        <textarea type="text" id="res_dado" name="res_dado"  maxlength="2500" rows="3" cols="1000" style="width: 100%;"></textarea>
     </br></br>   
 <div id="coord">
     <h3 for="lat-long"> Adicione as Coordenadas de CADA ponto de coleta:<a title="VER MODELO" href="javascript:abrirPonto()"  style="color: red;" class="bi bi-question-square-fill"></a></h3>
@@ -419,13 +384,28 @@
 <a title="VER MODELO" href="javascript:abrirCSV()"  style="color: green; margin-right: 2%; font-size: 45px;" class="bi bi-filetype-csv"></a>
 <input id="refef" type="file" name="tabelaDado" style="width: 30%;" unique><br><br><br>
     
-    </br></br></br>           
+  <div id="armazenamento" class="colun">
+    <label for='armazenamento'> Como deseja armazenar os dados?</label><br>
+    <select id="armazenamentoSelecao" name="armazenamento">
+        <option value="">---</option>
+        <option value="Público"> Público</option>
+        <option value="Privado"> Privado </option>
+    </select></br><br>
+</div>
+<div class="termo">
+
+<input type="checkbox" id="termo" name="termo" value="term">
+<label for="termo"> Li e concordo com os termos sobre o uso dos dados <a href="javascript:abrirTermo()"> Clique aqui para ler</a></label>
+ 
+</div>         
     
      
         <button class="button" type="button" style="position: absolute; left: 1%; bottom: 1%;" onclick="paginaAnterior()">Anterior</button>
         <button class="button" type="button" style="position: absolute; right: 1%; bottom: 1%;" onclick="proximaPagina2()">Avançar</button>
 
 </div>
+
+
 </br></br>
 <!-- terceira PAGINA -->
 <div id="section3" class="form-section">

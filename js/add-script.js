@@ -61,17 +61,16 @@ function closeNavbar() {
         }
     }
 
+    //ABRIR NOVOS CAMPOS e modelar automático o tamanho da caixa de texto
+
     function mostrarDivInfo() {
         const div = document.getElementById("info-adicional");
-        div.style.maxHeight = div.scrollHeight + "px"; // Define a altura máxima para exibir a <div> com transição
+        div.style.maxHeight = "500px"; // Define a altura máxima para exibir a <div> com transição
     }
     
     function ocultarDivInfo() {
         document.getElementById("info-adicional").style.maxHeight = "0"; // Oculta a <div> com transição
     }
-
-
-
 
 //GET THE MODAL (W3-SCHOOL)
 
@@ -393,7 +392,7 @@ function removerTODAScoordenadas() {
 
             function proximaPagina() {
               // Validação ou lógica adicional pode ser adicionada aqui
-              const correspondente = document.getElementById('correspondente').value;
+              /*const correspondente = document.getElementById('correspondente').value;
               const email =document.getElementById('email').value;
               const autor = document.getElementById('autor0').value;
               const data = document.getElementById('data1').value;
@@ -409,7 +408,7 @@ function removerTODAScoordenadas() {
                 window.alert ('Indique o email do correspondente');  
               }else if (autor ==''){
                 window.alert('Indique ao menos um Autor e sua filiação');
-            }else{
+            }else{*/
               // Oculta a seção atual
               document.getElementById(`section${currentPage}`).classList.remove('active');
         
@@ -419,7 +418,7 @@ function removerTODAScoordenadas() {
               // Exibe a próxima seção
               document.getElementById(`section${currentPage}`).classList.add('active');
             }
-            }
+            
 
             function paginaAnterior() {
               // Validação ou lógica adicional pode ser adicionada aqui

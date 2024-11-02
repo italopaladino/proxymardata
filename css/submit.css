@@ -265,8 +265,8 @@ a.link-pesq:hover{
 
 .coluna {
   float: left;
-  width: 33.33%; /* Define o tamanho de cada coluna */
-  padding: 0 15px; /* Adiciona algum espaço entre as colunas */
+  width: 49%; /* Define o tamanho de cada coluna */
+   /* Adiciona algum espaço entre as colunas */
 }
 
 /* Limpa os floats após as colunas para evitar problemas de layout */
@@ -275,6 +275,7 @@ a.link-pesq:hover{
   clear: both;
   display: table;
 }
+
 
 
 /* Estilo padrão do botão e input dentro da div .search1 */
@@ -11296,7 +11297,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.3s ease;
+  transition: opacity 2s ease;
   pointer-events: none;
   font-size: 16px;
   font-weight: 600;
