@@ -137,31 +137,40 @@
     <div id="section1" class="form-section active">
         <h1 style="text-align: center;"> Formulário para Submissão: </h1></br>
 
-        <label id="autor" for="autor"> <a style="color: red;" title="Elemento obrigatório">*</a>Identificação do responsável pelo dado:</label></br>
+        <h4><label id="autor" for="autor"> <a style="color: red;" title="Elemento obrigatório">*</a>Identificação do responsável pelo dado:</label></h4>
+    </br>
+
         <input type="text" id="correspondente" name="correspondente" style="width: 49%;" placeholder="Nome Completo"> <!-- REVISAR NOME DOS CAMPOS --  COM OS DO BANCO--> 
         <input type="email" id="email" name="email" style="width: 49%;" placeholder="E-mail do responsável (ex: xxxxx@mail.com)" maxlength="255">
     </br>
 </br>
 
-<label  for="titulo"><a style="color: red;" title="Elemento obrigatório">*</a>Título do projeto principal:</label>
+<div for="tit">
+<div style="display: flex; align-items: center; width: 100%;">
+<h4 for="titulo" style="width: auto; margin: 0;"><a style="color: red;" title="Elemento obrigatório">*</a>Título do projeto principal:
+</h4>
+
 <div class="tooltip-container">
     <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
-    <div class="tooltip">Se os dados estiverem relacionados a um projeto de pesquisa, adicione o título e a sigla do projeto principal em que o dado foi gerado. 
-        Se você não tiver essa informação pergunte a seu/sua orientador/a.</div>
+    <div class="tooltip">Se os dados estiverem relacionados a um projeto de pesquisa, adicione o <span class="bold">título</span> e a <span class="bold">sigla</span> do projeto principal em que o dado foi gerado. Se você não tiver essa informação pergunte a seu/sua orientador/a.</div>
   </div>
- 
-<input id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português">
+</div>
+</div>
+<input  id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português">
 </br></br>
 
 
-
-<label  for="titulo_dado"><a style="color: red;">*</a> Título para os dados inserido:</label>
-
-<div class="tooltip-container">
-<i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
-<div class="tooltip">Insira um título que descreva de forma clara e objetiva do que se trata o conjunto de dados a serem submetidos. 
-    Ele não deve ser igual ao título da publicação relacionada, mas deve refletir o que foi medido, onde e quando .</div>
+<div for="tit-dd">
+    <div style="display: flex; align-items: center; width: 100%;">
+        <h4 for="tit-dd" style="width: auto; margin: 0;"><a style="color: red;" title="Elemento obrigatório">*</a>Título para os dados inserido:</h4>
+        <div class="tooltip-container">
+            <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+            <div class="tooltip">Insira um título que descreva de forma clara e objetiva do que se trata o conjunto de dados a serem submetidos. 
+                Ele não deve ser igual ao título da publicação relacionada, mas deve refletir o que foi <span class="bold">medido, onde e quando</span>.</div>
+            </div>
+    </div>
 </div>
+
 </br>
 <input id="titulo_dado" type="text" name="titulo_dado" style="width: 100%;" placeholder="Título em Inglês OU Português">
 </br>
@@ -169,15 +178,15 @@
 
 
 <div id="trab-asso">
-    <label for="trab"> <span style="color: red;">*</span> Existe algum trabalho associado a este conjunto de dados</label><br>
+    <h4><a style="color: red;" title="Elemento obrigatório">*</a>Existe algum trabalho associado a este conjunto de dados</h4>
 
-    <p>
+    <h5>
         <input type="radio" id="trab-sim" name="trab_associado" value="sim" onclick="mostrarDivInfo()">
         <label for="trab-sim">Sim</label>
 
         <input type="radio" id="trab-nao" name="trab_associado" value="nao" onclick="ocultarDivInfo()">
         <label for="trab-nao">Não</label>
-    </p>
+    </h5> </br>
 
     <!-- Div com mais informações -->
     <div id="info-adicional" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
@@ -193,27 +202,22 @@
                     <option value="Resumo"> Resumo </option>
                     <option value="TCC"> Trabalho de conclusão de curso </option> <!-- att no SQL-->
                     <option value="IC"> Iniciação científica </option> <!-- att no SQL-->
-                </select><br><br>
+                </select>
             </div>
     </div>
 <div class="coluna">
     <div id="titulo-trab">
-        <label for="tit-trab" id="tit-trab"> Título do Trabalho:</label></br>
+        <label for="tit-trab" id="tit-trab">Título do Trabalho:</label></br>
         <textarea style="width: 100%; resize:vertical;" type="text" id="tit-trab" maxlength="1500" rows="3" ></textarea> <!-- att no SQL -->
     </div>
 </div>
-
-
 </div>
-
-
-
-
-
+</br>
+</br>
 
 
 <!-- coAutores -->
-<h3 id="coAutores"> Adicionar Autores e Coatores:</h3></br>      
+<h4 id="coAutores">Adicionar Autores e Coatores:</h4></br>      
 <div id="autoresContainer">
     <div class="autor" id="autorContainer0">
         <div class="colunaaut">
@@ -238,7 +242,7 @@
 </br>
  
 <div>
-    <label for="referencia" > Referência conforme a ABNT:</label></br>
+    <h4 for="referencia" ><a style="color: red;" title="Elemento obrigatório">*</a>Referência conforme a ABNT:</h4></br>
     <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
 </div>
     
@@ -260,19 +264,43 @@
     <input type="hidden" id="secaoAtual2" name="secaoAtual2" value="2">
 
 
-        <h1 style="text-align: center;"> Informação dos dados a serem submetidos: </h1></br>
+        <h1 style="text-align: center;">Informação dos dados a serem submetidos:</h1></br>
 
-        <label  form="area_est"> <a style="color: red;">*</a>Resumo dos dados </label>
+    <div id="resumo">
+        <div style="display: flex; align-items: center; width: 100%;">
+
+        
+        <h4 style="width: auto; margin: 0;">
+            <a style="color: red;" title="Elemento obrigatório">*</a>Resumo dos dados</h4>
+
         <div class="tooltip-container">
             <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
             <div class="tooltip">O resumo de cada conjunto de dados fornece uma descrição concisa e focada no método utilizado na aquisição do dado, ou 
-                seja, o que, quando, onde, por que e como os dados foram coletados. O resumo deve consistir em texto corrido significativo, no mesmo formato dos resumos de artigos. Qualquer abreviação 
-                deve ser explicada. Confira a aba de Diretrizes & Manuais</div>
-          </div></br>
-        <textarea type="text" id="res_dado" name="res_dado"  maxlength="2500" rows="3" cols="1000" style="width: 100%;"></textarea>
-    </br></br>   
-<div id="coord">
-    <h3 for="lat-long"> Adicione as Coordenadas de CADA ponto de coleta:<a title="VER MODELO" href="javascript:abrirPonto()"  style="color: red;" class="bi bi-question-square-fill"></a></h3>
+                seja, <span class="bold">o que, quando, onde, por que e como os dados foram coletados.</span> O resumo deve consistir em texto corrido significativo, no mesmo formato dos resumos de artigos. Qualquer abreviação 
+                deve ser explicada. </br> Precisa de mais informações veja essa <a target="_blank" rel="noopener noreferrer" href="https://wiki.pangaea.de/wiki/Abstract">página.</a></div>
+          </div>
+        </div>
+    </div>
+        </br>
+        <textarea type="text" id="res_dado" name="res_dado"  maxlength="2500" rows="4" cols="1000" style="width: 100%;"></textarea>
+       
+
+</br></br>
+    <div id="coord">
+        <div style="display: flex; align-items: center; width: 100%;">
+            <h4 for="lat-long" style="width:auto; margin: 0;">
+                <a style="color: red;" title="Elemento obrigatório">*</a> Identificação do(s) ponto(s) de coleta do(s) dados
+            </h4>
+            
+            <div class="tooltip-container" style="margin-left: 8px;">
+                <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+                <div class="tooltip">
+                    Para cada amostra, é preciso adicionar a <span class="bold">identificação da estação oceanográfica</span> e a(s) coordenada(s) <span class="bold">(latitude/longitude</span> em graus decimais, WGS84).   
+                    </br> FUTURO: Trabalhos com muitos pontos de coleta (p.e., amostras de sedimento superficial) poderão inserir uma tabela com estes dados.
+                </div>
+            </div>
+        </div>
+   
         
     <div id="coordenadas" >
       <!-- os pontos de coletas serão inseridos aqui -->
@@ -287,6 +315,8 @@
 </div>
 </br></br>
 </br></br>
+
+<div id="amostras"> </div>
 <div id="proxys">
     <h3> Ferramenta utilizada:</h3>
     <!-- depois deixar de 2 em 2 alinhado -->
@@ -368,30 +398,33 @@
 </br>
 </br>
 
-        <h3> Dados e Métodos: </h3></br>
-        <label  for="caract"> Descrição dos Dados inseridos: </label></br>
-        <textarea type="text" id="caract" name="caract"  maxlength="1500" rows="10" cols="150" placeholder="Conte um pouco como sobre as caracteriscas do seu dado. Ex: Tabela com granulometria, grau de seleção etc (max 1500 caracteres)"></textarea>
-    </br></br>
-
-
-    <label  for="metut"> Descrição dos Métodos Utilizados: </label></br>
-    <textarea type="text" id="metut" name="metut"  maxlength="1500" rows="10" cols="150" placeholder=" Conte brevemente como foi feito, e os equipamentos Utilizados"></textarea>
-</br></br>
-
-
-
-<h3> Adicione o arquivo CSV (separado por virgula): </h3>
+<h4> Adicione o arquivo CSV (separado por virgula): </h4>
 <a title="VER MODELO" href="javascript:abrirCSV()"  style="color: green; margin-right: 2%; font-size: 45px;" class="bi bi-filetype-csv"></a>
 <input id="refef" type="file" name="tabelaDado" style="width: 30%;" unique><br><br><br>
     
-  <div id="armazenamento" class="colun">
-    <label for='armazenamento'> Como deseja armazenar os dados?</label><br>
-    <select id="armazenamentoSelecao" name="armazenamento">
+  <div id="armazenamento">
+    <div style="display: flex; align-items: center; width: 100%;">
+
+    <h4 style="width:auto; margin: 0;" for='armazenamento'> Como deseja armazenar os dados?</h4>
+    <div class="tooltip-container" style="margin-left: 8px;">
+        <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+        <div class="tooltip">
+            <span style="text-decoration: underline;" class="bold">Público:</span> qualquer pessoa que acessar o Banco de dados poderá visualizar e baixar os dados disponibilizados aqui.</br>
+            <span style="text-decoration: underline;" class="bold">Privado:</span> qualquer pessoa que acessar o Banco de dados poderá visualizar os metadados disponibilizados aqui, mas somente pessoas autorizadas (membros do grupo de pesquisa previamente cadastrados) terão acesso integral aos dados
+disponibilizados aqui.</div>
+    </div>
+
+</div></br>
+
+    <select id="armazenamentoSelecao" name="armazenamento" style="width: 25%;">
         <option value="">---</option>
         <option value="Público"> Público</option>
         <option value="Privado"> Privado </option>
     </select></br><br>
+
 </div>
+
+
 <div class="termo">
 
 <input type="checkbox" id="termo" name="termo" value="term">

@@ -11287,23 +11287,22 @@ section {
 .tooltip-container .tooltip {
   position: absolute;
   top: -70px; /* Ajuste de posição vertical */
-  left: 500%;
+  left: 700%;
   transform: translateX(-50%);
   opacity: 0;
   background: #f2f2f2;
-  padding: 8px 12px;
-  border: 1px solid rgb(206, 204, 204);
+  padding: 8px 14px;
+  border: 1px solid rgb(255, 165, 0);
   border-radius: 5px;
-  display: flex;
+  display: inline-block;
   align-items: center;
   justify-content: center;
-  transition: opacity 2s ease;
-  pointer-events: none;
+  transition: opacity 0.3s ease;
   font-size: 16px;
   font-weight: 600;
   color: #202020;
   text-align: justify;
-  width: 300px; /* Largura máxima para ajustar a caixa */
+  width: 500px; /* Largura máxima para ajustar a caixa */
   height: auto;
   white-space: normal; /* Permite que o texto quebre em várias linhas */
 }
@@ -11311,7 +11310,13 @@ section {
 .tooltip-container:hover 
 .tooltip {
   top: -70px;
-  left: 500%;
+  left: 700%;
   opacity: 1;
-  transition-duration: 0.3s;
+  transition-duration: 0.1s;
+  pointer-events: auto;
+}
+
+.bold{
+font-weight: bold;
+text-decoration: underline;
 }
