@@ -196,6 +196,57 @@ a.link-pesq:hover{
   margin-right: 6px;
 }
 
+/* Camo para dividir entre 3 colunas nos tipos de amostra*/
+/* COLUNA PARA CAMPO AUTORES*/
+
+#amostras {
+  display: inline-block;
+  width: 30%;
+  vertical-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+ }
+
+#proxys-container {
+  display: inline-block;
+  width: 65%;
+  vertical-align: top;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+#proxys, #proxys2{
+  display: inline-block;
+  width: 48%;
+  vertical-align: top;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+
+
+/* equipamentos container*/
+#equipamentos-container {
+  display: inline-block;
+  width: 70%;
+  vertical-align: top;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+#equip1, #equip2, #equip3 {
+  display: inline-block;
+  width: 23.3%;
+  vertical-align: top;
+  padding: 5px;
+  box-sizing: border-box;
+ 
+}
+
+
+
 
 
 /* centralizar mapa*/

@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../css/submit.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>       
         <script src="../js/add-script.js"></script>
         
@@ -116,7 +118,7 @@
             <div class="container px-4 text-center">
                 <h1 class="fw-bolder"> ProxyMar Data Base</h1>
                 <li> Antes de iniciar o processo de submissão, verifique as diretrizes e toda a documentação
-                    necessária - Manuais e modelos de planilhas para submissão podem ser encontrados <a class="aqui-sub" href="#">aqui</a>. </li></br>
+                    necessária - Manuais e modelos de planilhas para submissão podem ser encontrados <a target="_blank" rel="noopener noreferrer" class="aqui-sub" href="https://wiki.pangaea.de/wiki/Best_practice_manuals_and_templates">aqui</a>. </li></br>
 
             <li> Se você encontrou algum erro ou gostaria de fazer alguma sugestão como tornar o processo mais intuitivo, por favor, envie um e-mail e o print da tela para 
                 <a class="aqui-sub" href="mailto:proxymar@usp.br" target="_blank">proxymar@usp.br</a></li>
@@ -126,7 +128,7 @@
 
 <!-- PRIMEIRA PAGINA -->
 
-<form id="forms" method="post" action="../PHP/submit-DADOS2.php" enctype="multipart/form-data" style="position: relative">
+<form id="forms" method="post" action="../PHP/submit-DADOS2.php" enctype="multipart/form-data" style="position: relative; margin-bottom: 20px;">
    
    
     <!-- campo invisivel para recuperar os valores finais -->
@@ -156,7 +158,7 @@
   </div>
 </div>
 </div>
-<input  id="titulo" type="text" name="titulo" style="width: 100%;" placeholder="Título do trabalho em Inglês OU Português">
+<input  id="titulo" type="text" name="titulo" style="width: 98.4%;" placeholder="Título do trabalho em Inglês OU Português">
 </br></br>
 
 
@@ -172,7 +174,7 @@
 </div>
 
 </br>
-<input id="titulo_dado" type="text" name="titulo_dado" style="width: 100%;" placeholder="Título em Inglês OU Português">
+<input id="titulo_dado" type="text" name="titulo_dado" style="width: 98.4%;" placeholder="Título em Inglês OU Português">
 </br>
 </br>
 
@@ -242,8 +244,8 @@
 </br>
  
 <div>
-    <h4 for="referencia" ><a style="color: red;" title="Elemento obrigatório">*</a>Referência conforme a ABNT:</h4></br>
-    <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
+    <h4 for="referencia" ><a style="color: red;" title="Elemento obrigatório">*</a>Referência:</h4></br>
+    <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" style="width: 98.4%;" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
 </div>
     
     <div>
@@ -316,85 +318,168 @@
 </br></br>
 </br></br>
 
-<div id="amostras"> </div>
-<div id="proxys">
-    <h3> Ferramenta utilizada:</h3>
-    <!-- depois deixar de 2 em 2 alinhado -->
-<input type="checkbox" id="isot" name="isot" value="Isótopos">
-<label for="isot" style="margin-right: 2%; ">Isótopos</label>
+<div id="tipFerr">
+<div id="amostras" class="tipAmostra">
+    <h4>Tipo de Amostra</h4>
+    <select id="tipAmst" name="tipAmst" style="height: 30px; width: 70%;">
+        <option value=""> --- </option>
+        <option value="Água">Água</option>
+        <option value="Sedimento">Sedimento</option>
+        <option value="Organismos">Organismos</option>
+        <option value="MPS">MPS</option>
+        <option value="Modelagem">Modelagem</option>
+        <option value="Medição">Medição</option>
+        <option value="outrTip">Outro</option>
+    </select>
+</div>
 
-<input type="checkbox" id="PP" name="PP" value="PP">
-<label for="PP" style="margin-right: 2%;">Produtividade</label>
+<div id="proxys-container">
+    <div style="display: flex;">
+        <h4 style="width: auto; margin: 0;">Ferramenta utilizada:</h4>
 
-<input type="checkbox" id="circulacao" name="circulacao" value="circulacao">
-<label for="circulacao" style="margin-right: 2%;">Circulação Oceânica</label>
+        <div class="tooltip-container">
+            <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+            <div class="tooltip">Indique quantas forem necessárias</div>
+        </div>
+    </div>
 
-<input type="checkbox" id="org" name="org" value="org">
-<label for="org" style="margin-right: 2%;">Marcadores Orgânicos</label>
+    <div id="checkbox-columns" style="display: flex; width: 100%; justify-content: space-between;">
+        <div id="proxys" class="tipAmostra2">
+            <input type="checkbox" id="associ" name="associ" value="Associação">
+            <label for="associ">Associação</label><br>
 
-<input type="checkbox" id="inorg" name="inorg" value="inorg">
-<label for="inorg" style="margin-right: 2%;">Marcadores Inorgânicos</label>
+            <input type="checkbox" id="batmet" name="batmet" value="Batimetria">
+            <label for="batmet">Batimetria</label><br>
 
-<input type="checkbox" id="foramplan" name="foramplan" value="foramplan">
-<label for="foramplan" style="margin-right: 2%;">Foraminíferos Planctônicos</label>
+            <input  type="checkbox" id="bioOrg" name="bioOrg" value="Biormacadores Orgânicos">
+            <label for="bioOrg" style="white-space: normal;">Biormacadores Orgânicos</label><br>
 
-<input type="checkbox" id="forambent" name="forambent" value="forambent">
-<label for="forambent" style="margin-right: 2%;">Foraminíferos Bentônicos</label>
+            <input type="checkbox" id="cocolit" name="cocolit" value="Cocolitoforísdeos">
+            <label for="cocolit">Cocolitoforísdeos</label><br>
 
-<input type="checkbox" id="sealev" name="sealev" value="sealev">
-<label for="sealev" style="margin-right: 2%;">Nível do Mar</label>
+            <input type="checkbox" id="estrat" name="estrat" value="Estratigrafia">
+            <label for="estrat">Estratigrafia</label><br>
 
-<input type="checkbox" id="co2atm" name="co2atm" value="co2atm">
-<label for="co2atm" style="margin-right: 2%;">CO<sub>2</sub> Atmosférico</label>
+            <input type="checkbox" id="foramplan" name="foramplan" value="foramplan">
+            <label style="white-space: normal;" for="foramplan">Foraminíferos Planctônicos</label><br>
 
-<input type="checkbox" id="cobveg" name="cobveg" value="cobveg">
-<label for="cobveg" style="margin-right: 2%;">Cobertura Vegetal</label>
+            <input type="checkbox" id="forambent" name="forambent" value="forambent">
+            <label for="forambent">Foraminíferos Bentônicos</label><br>
 
-<input type="checkbox" id="rainfall" name="rainfall" value="rainfall">
-<label for="rainfall" style="margin-right: 2%;">Precipitação</label>
+            <input type="checkbox" id="granl" name="granl" value="Granulometria">
+            <label for="granl">Granulometria</label><br>
 
-<input type="checkbox" id="stratg" name="stratg" value="stratg">
-<label for="stratg" style="margin-right: 2%;">Estratigrafia</label></br></br>
+            <input type="checkbox" id="hidrod" name="hidrod" value="Hidrodinâmica">
+            <label for="hidrod">Hidrodinâmica</label><br>
+
+            <input type="checkbox" id="hidrog" name="hidrog" value="Hidrografia">
+            <label for="hidrog">Hidrografia</label><br>
+                      
+        </div>
+
+        <div id="proxys2" class="tipAmostra3">
+            <input type="checkbox" id="matorg" name="matorg" value="Matéria Orgânica">
+            <label for="matorg">Matéria Orgânica</label><br>
+
+            <input type="checkbox" id="metais" name="metais" value="Metais">
+            <label for="metais">Metais e Semi-metais</label><br>
+
+            <input type="checkbox" id="microps" name="microps" value="Microplásticos">
+            <label for="microps">Microplásticos</label><br>
+
+            <input type="checkbox" id="ageMod" name="ageMod" value="Modelos de idade">
+            <label for="ageMod">Modelos de idade</label><br>
+
+            <input type="checkbox" id="proFisi" name="proFisi" value="Propriedades físicas">
+            <label for="proFisi">Propriedades físicas</label><br>
+            
+            <input type="checkbox" id="radioist" name="radioist" value="Radioisótopos">
+            <label for="radioist">Radioisótopos</label><br>
+            
+            <input type="checkbox" id="razIsot" name="razIsot" value="Razões Isotópicas">
+            <label for="razIsot">Razões Isotópicas</label><br>
+            
+            <input type="checkbox" id="modNum" name="modNum" value="Saída de modelo numérico">
+            <label for="modNum">Saída de modelo numérico</label><br>
+
+            <input type="checkbox" id="teorAg" name="teorAg" value="Teor de Água">
+            <label for="teorAg">Teor de Água</label><br>
 
 
-<input  type="text" id="outroProx" name="outroProx" placeholder="Outro" style="width: 30%;">
-</br>
+            <input type="text" id="outroProx" name="outroProx" placeholder="Outro" style="width: 90%;">
+        </div>
+    </div>
+</div>
 </div>
 </br>
 </br>
 
-<div id="equip-coleata">
-    <h3> Equipamentos de Coleta:</h3>
-
-<input type="checkbox" id="multcorer" name="multcorer" value="multcorer">
-<label for="multcorer" style="margin-right: 2%; ">MultiCorer</label>
-
-<input type="checkbox" id="piston" name="piston" value="piston">
-<label for="PP" style="margin-right: 2%;">Piston Corer</label>
-
-<input type="checkbox" id="gravcorer" name="gravcorer" value="gravcorer">
-<label for="gravcorer" style="margin-right: 2%;">Gravity Corer</label>
-
-<input type="checkbox" id="drilli" name="drilli" value="drilli">
-<label for="drilli" style="margin-right: 2%;">Drilling</label>
-
-<input type="checkbox" id="gboxcorer" name="gboxcorer" value="gboxcorer">
-<label for="gboxcorer" style="margin-right: 2%;"> Giant box corer</label>
-
-<input type="checkbox" id="compcorer" name="compcorer" value="compcorer">
-<label for="compcorer" style="margin-right: 2%;">Composite Corer</label>
-
-<input type="checkbox" id="boxcorer" name="boxcorer" value="boxcorer">
-<label for="boxcorer" style="margin-right: 2%;">Box Corer</label>
-
-<input type="checkbox" id="corer" name="corer" value="corer">
-<label for="corer" style="margin-right: 2%;">Corer</label></br></br>
-
-<input type="text" id="outroEqui" name="outroEqui" placeholder="Outro" style="width: 30%;">
-
-
-</br>
+<div id="equipamentos-container">
+    <div style="display: flex;">
+        <h4 style="width: auto; margin: 0;">Equipamento de Coleta:</h4>
 </div>
+</br>
+    <div id="checkbox-columns" style="display: flex; width: 100%; justify-content: space-between;">
+        <div id="equip1" class="equipColet1">
+            <input type="checkbox" id="pstCor" name="pstCor" value="Piston Corer">
+            <label for="pstCor">Piston Corer</label><br>
+
+            <input type="checkbox" id="gravt" name="gravt" value="Gravity Corer">
+            <label for="gravt">Gravity Corer</label><br>
+
+            <input  type="checkbox" id="drill" name="drill" value="Drilling device">
+            <label for="drill">Drilling device</label><br>
+
+            <input type="checkbox" id="gbox" name="gbox" value="Giant box corer">
+            <label for="gbox">Giant box corer</label><br>
+
+            <input type="checkbox" id="boxcr" name="boxcr" value="Box Corer">
+            <label for="boxcr">Box Corer</label><br>
+
+            <input type="checkbox" id="ADCP" name="ADCP" value="ADCP">
+            <label for="ADCP">ADCP</label><br>
+        </div>
+
+        <div id="equip2" class="equipColet2">
+            <input type="checkbox" id="corrt" name="corrt" value="Correntômetro">
+            <label for="corrt">Correntômetro</label><br>
+
+            <input type="checkbox" id="CTD" name="CTD" value="CTD">
+            <label for="CTD">CTD</label><br>
+
+            <input type="checkbox" id="modNum" name="modNum" value="Modelo numérico">
+            <label for="modNum">Modelo numérico</label><br>
+
+            <input type="checkbox" id="multb" name="multb" value="Multibean">
+            <label for="multb">Multibean</label><br>
+                      
+          
+            <input type="checkbox" id="multCor" name="multCor" value="Multiple Corer">
+            <label for="multCor">Multiple Corer</label><br>
+
+            <input type="checkbox" id="pistCor" name="pistCor" value="Piston Corer">
+            <label for="pistCor">Piston Corer</label><br>
+            
+        </div>
+        <div id="equip3" class="equipColet3">
+            <input type="checkbox" id="satl" name="satl" value="Satélite">
+            <label for="satl">Satélite</label><br>
+
+            <input type="checkbox" id="sensBio" name="sensBio" value="Sensores bio-ópticos">
+            <label for="sensBio">Sensores bio-ópticos</label><br>
+
+            <input type="checkbox" id="sidSc" name="sidSc" value="Side-sacn sonar">
+            <label for="sidSc">Side-sacn sonar</label><br>
+            
+            <input type="checkbox" id="vanv" name="vanv" value="Van-veen">
+            <label for="vanv">Van-veen</label><br>
+            
+            <input type="text" id="outroEqui" name="outroEqui" placeholder="Outro" style="width:100%;">
+        </div>
+    </div>
+
+</div>
+
 </br>
 </br>
 
@@ -409,8 +494,8 @@
     <div class="tooltip-container" style="margin-left: 8px;">
         <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
         <div class="tooltip">
-            <span style="text-decoration: underline;" class="bold">Público:</span> qualquer pessoa que acessar o Banco de dados poderá visualizar e baixar os dados disponibilizados aqui.</br>
-            <span style="text-decoration: underline;" class="bold">Privado:</span> qualquer pessoa que acessar o Banco de dados poderá visualizar os metadados disponibilizados aqui, mas somente pessoas autorizadas (membros do grupo de pesquisa previamente cadastrados) terão acesso integral aos dados
+            <span class="bold">Público:</span> qualquer pessoa que acessar o Banco de dados poderá visualizar e baixar os dados disponibilizados aqui.</br>
+            <span class="bold">Privado:</span> qualquer pessoa que acessar o Banco de dados poderá visualizar os metadados disponibilizados aqui, mas somente pessoas autorizadas (membros do grupo de pesquisa previamente cadastrados) terão acesso integral aos dados
 disponibilizados aqui.</div>
     </div>
 
@@ -428,7 +513,7 @@ disponibilizados aqui.</div>
 <div class="termo">
 
 <input type="checkbox" id="termo" name="termo" value="term">
-<label for="termo"> Li e concordo com os termos sobre o uso dos dados <a href="javascript:abrirTermo()"> Clique aqui para ler</a></label>
+<label><h5 for="termo"> Li e concordo com os termos sobre o uso dos dados <a href="javascript:abrirTermo()"> Clique aqui para ler</a></h5></label>
  
 </div>         
     
@@ -489,20 +574,37 @@ disponibilizados aqui.</div>
 <!-- rodapé da página-->
 
 
-<footer class="py-5 bg-dark" style="position: relative;">
+<footer id="contact" class="py-5 bg-dark" style="position: relative;">
+    <div class="footer-container">
+        <div class="column1">
+            <p style="text-align: justify;" class="text-white">Este banco de dados é produto do projeto “Um banco de dados de registros proxy do Atlântico Sudoeste nos últimos 2 mil anos para projeções climáticas mais robustas no passado e futuro (2023 - atual)” CNPq processo n° - Chamada CNPq/MCTI/FNDCT Nº 59/2022 (Linha 5).</p>
+        </div>
 
-    <div class="social">
-    <p class="text-white">Copyright &copy; Italo Paladino 2024</p>
-</br>
-</br>    
-    <a href="https://www.instagram.com/proxymar_iousp/" target="_blank" class="bi bi-instagram"></a>
-    <a href="https://sites.usp.br/proxymar/sobre//" target="_blank" class="bi bi-globe2"> </a>
-    <a href="mailto:italopaladino22@gmail.com" target="_blank" class="bi bi-envelope"> </a>      
-   </div>
-    
- 
-      
-</footer>
+        <div class="column2">
+            <p class="text-white">Copyright &copy; ProxyMar 2024</p>
+            <a href="https://www.instagram.com/proxymar_iousp/" target="_blank" class="bi bi-instagram"></a>
+            <a href="https://sites.usp.br/proxymar/sobre/" target="_blank" class="bi bi-globe2"></a>
+            <a href="mailto:proxymar@usp.br" target="_blank" class="bi bi-envelope"></a>
+        </div>
+        
+        <div class="column3">
+            <div>
+                <p> Execução:</p>
+                <a href="https://www5.usp.br"><img style="background-color: white;" src="https://imagens.usp.br/wp-content/uploads/usp-logo-transp-600x253.png" width="120"></a>
+                <a href="https://www.io.usp.br"><img  src="https://www.io.usp.br/templates/base/img/logo.png" width="120"></a>
+                <a href="https://sites.usp.br/proxymar/"><img style="background-color: white;" src="../assets/ProxyMar-logo.png" width="120"></a>
+            </div>
+            <div>
+                <p> Financiamento:</p>
+                <a href="https://www.gov.br/cnpq/pt-br"><img src="../assets/CNPq-logo.png" width="120"></a>
+                <a href="https://www.gov.br/mcti/pt-br"><img src="../assets/MCTI.png" width="120"></a>
+                <a href="https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/fndct"><img src="../assets/fndct.png" width="120"></a>
+
+            </div>
+        </div>
+    </footer>
+
+
 <script>
     // Função genérica para autocomplete
     function autocomplete(inputField, phpScript) {

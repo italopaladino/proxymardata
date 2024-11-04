@@ -168,12 +168,32 @@
 
     <!-- Footer -->
     <footer id="contact" class="py-5 bg-dark" style="position: relative;">
-        <div class="social">
-            <p class="text-white">Copyright &copy; Italo Paladino 2024</p>
-            <br><br>
+    <div class="footer-container">
+        <div class="column1">
+            <p style="text-align: justify;" class="text-white">Este banco de dados é produto do projeto “Um banco de dados de registros proxy do Atlântico Sudoeste nos últimos 2 mil anos para projeções climáticas mais robustas no passado e futuro (2023 - atual)” CNPq processo n° - Chamada CNPq/MCTI/FNDCT Nº 59/2022 (Linha 5).</p>
+        </div>
+
+        <div class="column2">
+            <p class="text-white">Copyright &copy; ProxyMar 2024</p>
             <a href="https://www.instagram.com/proxymar_iousp/" target="_blank" class="bi bi-instagram"></a>
-            <a href="https://sites.usp.br/proxymar/sobre//" target="_blank" class="bi bi-globe2"></a>
-            <a href="mailto:italopaladino22@gmail.com" target="_blank" class="bi bi-envelope"></a>
+            <a href="https://sites.usp.br/proxymar/sobre/" target="_blank" class="bi bi-globe2"></a>
+            <a href="mailto:proxymar@usp.br" target="_blank" class="bi bi-envelope"></a>
+        </div>
+        
+        <div class="column3">
+            <div>
+                <p> Execução:</p>
+                <a href="https://www5.usp.br"><img style="background-color: white;" src="https://imagens.usp.br/wp-content/uploads/usp-logo-transp-600x253.png" width="120"></a>
+                <a href="https://www.io.usp.br"><img  src="https://www.io.usp.br/templates/base/img/logo.png" width="120"></a>
+                <a href="https://sites.usp.br/proxymar/"><img style="background-color: white;" src="../assets/ProxyMar-logo.png" width="120"></a>
+            </div>
+            <div>
+                <p> Financiamento:</p>
+                <a href="https://www.gov.br/cnpq/pt-br"><img src="../assets/CNPq-logo.png" width="120"></a>
+                <a href="https://www.gov.br/mcti/pt-br"><img src="../assets/MCTI.png" width="120"></a>
+                <a href="https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/fndct"><img src="../assets/fndct.png" width="120"></a>
+
+            </div>
         </div>
     </footer>
 
