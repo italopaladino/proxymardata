@@ -3272,7 +3272,7 @@ textarea.form-control-lg {
   --bs-dropdown-item-padding-y: 0.25rem;
   --bs-dropdown-header-color: #6c757d;
   --bs-dropdown-header-padding-x: 1rem;
-  --bs-dropdown-header-padding-y: 0.5rem;
+  --bs-dropdown-header-padding-y: 0.1rem;
   position: absolute;
   z-index: var(--bs-dropdown-zindex);
   display: none;
