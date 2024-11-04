@@ -267,7 +267,7 @@ function adicionarCoordenadas() {
     novoID.id = "ID_amst" + coordenadas;
     novoID.name = "ID_amst[]"; // Use an array to collect multiple values
     novoID.placeholder = "ID";
-    novoID.style.width ="10%";
+    novoID.style.width ="20%";
     novoID.style.autocomplete ="off";   
     
     novoID.maxLength = 10;
@@ -278,7 +278,7 @@ function adicionarCoordenadas() {
     novolatitude.id = "latitude" + coordenadas;
     novolatitude.name = "latitude[]";
     novolatitude.placeholder = "Latitude: -YY.YYYYY";
-    novolatitude.style.width="20%"   
+    novolatitude.style.width="25%"   
     novolatitude.maxLength = 10;
     novolatitude.style.autocomplete="off";
 
@@ -288,30 +288,9 @@ function adicionarCoordenadas() {
     novolongitude.id = "longitude" + coordenadas;
     novolongitude.name = "longitude[]";
     novolongitude.placeholder = "Longitude: -XX.XXXXX";
-    novolongitude.style.width="20%";
+    novolongitude.style.width="25%";
     novolongitude.maxLength = 10;
     novolongitude.style.autocomplete ="off";
-
-    var novoProf = document.createElement("input");
-    novoProf.type = "text";
-    novoProf.className = "prof";
-    novoProf.id = "prof" + coordenadas;
-    novoProf.name = "prof[]"; // Use an array to collect multiple values
-    novoProf.placeholder = "Profundidade";
-    novoProf.style.width ="8%"  
-    novoProf.maxLength = 10;
-    novoProf.style.autocomplete="off";
-
-    var novoRecSed = document.createElement("input");
-    novoRecSed.type = "text";
-    novoRecSed.className = "recuperacao";
-    novoRecSed.id = "recuperacao" + coordenadas;
-    novoRecSed.name = "recuperacao[]"; // Use an array to collect multiple values
-    novoRecSed.placeholder = "Recuperação(m)";
-    novoRecSed.title="Coloque a recupeção sedimentar do testemunho. Caso seja superficial considere profundidade 0"
-    novoRecSed.style.width ="10%"
-    novoRecSed.maxLength = 10;
-    novoRecSed.style.autocomplete="off";
 
     var novoAnoCol = document.createElement("input");
     novoAnoCol.type = "date";
@@ -319,7 +298,7 @@ function adicionarCoordenadas() {
     novoAnoCol.id = "data2" + coordenadas;
     novoAnoCol.name = "data[]"; // Use an array to collect multiple values
     novoAnoCol.placeholder = "Data da coleta";
-    novoAnoCol.style.width="12%";
+    novoAnoCol.style.width="20%";
     novoAnoCol.maxLength = 10;
     
      
@@ -327,8 +306,6 @@ function adicionarCoordenadas() {
     novoCoordenadas.appendChild(novoID);
     novoCoordenadas.appendChild(novolatitude);
     novoCoordenadas.appendChild(novolongitude);
-    novoCoordenadas.appendChild(novoProf);
-    novoCoordenadas.appendChild(novoRecSed);
     novoCoordenadas.appendChild(novoAnoCol);
    
     container.appendChild(novoCoordenadas);
