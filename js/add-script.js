@@ -430,7 +430,8 @@ function removerTODAScoordenadas() {
 // resumo da pagina no final SUBMIT--
 
 function proximaPagina2(){
-    const area = document.getElementById('area_est').value;
+
+   /* const area = document.getElementById('area_est').value;
     const desc_dados = document.getElementById('caract').value;
     const metut = document.getElementById('metut').value;
     const arquivo = document.getElementById ('refef').value;
@@ -445,10 +446,10 @@ if(area ==''){
     return false;
 }else if (arquivo =='') {
     window.alert(' Adicione a sua tabela de dados. Não esqueça que o formato é .CSV (separado por virgula)');
-}else{
+}else{*/
+
 proximaPagina();
 exibirResumo();
-}
 }
 
 
@@ -458,23 +459,75 @@ function exibirResumo() {
 
     // Recuperar os valores dos campos do formulário
     var autorCorrValue = document.getElementById("correspondente").value;
-    resumo += "<p" + (autorCorrValue ? '' : ' class="texto-vermelho"') + "><strong>Correspondente:</strong> " + autorCorrValue + "</p>";
-
     var emailCorr = document.getElementById("email").value;
-    resumo += "<p" + (emailCorr ? '' : ' class="texto-vermelho"') + "><strong>E-mail:</strong> " + emailCorr + "</p>";
+    var tituloPrin = document.getElementById("tituloPrinc").value;
+    var tituloDad = document.getElementById("tituloDado").value;
 
-    var tipoTrabalho = document.getElementById("tipoTrabalhoSelecao").value;
-    resumo += "<p" + (tipoTrabalho ? '' : ' class="texto-vermelho"') + "><strong>Tipo de trabalho escolhido:</strong> " + tipoTrabalho + "</p>";
+    var tipoTrabalhoSelecao = document.getElementById("tipoTrabalhoSelecao").value;
+    var tituloTrabalho = document.getElementById("titTrab").value;
+    var trabAssociado = document.querySelector('input[name="trab_associado"]:checked').value
 
-    var armazenamentoSel = document.getElementById("armazenamentoSelecao").value;
-    resumo += "<p" + (armazenamentoSel ? '' : ' class="texto-vermelho"') + "><strong>Como deseja armazenar os dados? </strong>" + armazenamentoSel + "</p>";
 
-    var titulo = document.getElementById("titulo").value;
-    resumo += "<p" + (titulo ? '' : ' class="texto-vermelho"') + "><strong>Título do Trabalho:</strong> " + titulo + "</p>";
+    var resumo = "<form id='formsRes' style='position: relative; margin-bottom:20px'>"
+    + "<div>"
+    + "<h4><label id='autor' for='autor'> <a style='color: red;' title='Elemento obrigatório'>*</a> Identificação do responsável pelo dado:</label></h4>"
+    + "<br>" 
+    + "<input type='text' value='" + autorCorrValue + "' readonly style='width: 49%; margin-right:4px;'>"
+    + "<input type='text' value='" + emailCorr + "' readonly style='width: 49%;'>"
+    + "<br><br>"
+    + "<div>"
+    + "<h4 style='width:auto; margin:0;'><a style='color:red;'>*</a> Título do projeto principal:</h4>"
+    + "<input type='text' value='" + tituloPrin + "' readonly style='width:98.4%;'>"
+    + "</div>"
+    + "<br><br>"
+    + "<div>"
+    + "<h4 style='width:auto; margin:0'><a style='color:red;'>*</a> Título para os Dados inseridos</h4>"
+    + "<input type='text' value='" + tituloDad + "' readonly style='width:98.4%'>"
+    + "<br><br>"
+    + "<div>"
+    + "<h4><a style='color:red;'>*</a> Existe algum trabalho associado a esse conjunto de dados</h4>";
 
-    var titulo_dado = document.getElementById("titulo_dado").value;
-    resumo += "<p" + (titulo_dado ? '' : ' class="texto-vermelho"') + "><strong>Título para os dados que será inserido:</strong> " + titulo_dado + "</p>";
 
+if (trabAssociado === 'sim') {
+    resumo +="<br>"
+            +"<div id='geral'>"
+           + "<div class='coluna'>"
+          
+           + "<label>Tipo de Trabalho:</label>"
+           + "<br>"
+           + "<select style='height: 30px; width: 50%;'>"
+           + "<option selected value='" + tipoTrabalhoSelecao + "'>" + tipoTrabalhoSelecao + "</option>"
+           + "</select>"
+           + "</div>"
+           
+           + "<div class='coluna'>"
+          
+           + "<label>Título do Trabalho:</label>"
+           + "<br>"
+           + "<textarea style='width: 100%; resize: vertical;' rows='3'>" + tituloTrabalho + "</textarea>"
+           + "</div>"
+           
+           + "</div>"
+           + "</br>"
+           +"</br>";
+} else {
+    resumo +="<br>"
+           +"<div>"
+           + "<input type='radio' value='nao' checked disabled>"
+           + "<label>Não</label>"
+           + "</div>";
+}
+
+resumo += "</div></div></div></form>";
+
+    
+    /*
+     
+    
+
+   
+
+    
     var AutorNome0 = document.getElementById("autor0").value;
 var AutorFiliacao0 = document.getElementById("filiacao0").value;
 resumo += "<p><strong>1º Autor:</strong> " + AutorNome0 + " (" + AutorFiliacao0 + ")</p>";
@@ -504,6 +557,7 @@ resumo += "<p><strong>1º Autor:</strong> " + AutorNome0 + " (" + AutorFiliacao0
 
     var referencia = document.getElementById("referencia").value;
     resumo += "<p" + (referencia ? '' : ' class="texto-vermelho"') + "><strong>Referência <i>(ABNT)<i>:</strong> " + referencia + "</p>";
+*/
 
     // Exibir o resumo no elemento summary1
     summary1.innerHTML = resumo;
