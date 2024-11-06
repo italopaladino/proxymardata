@@ -158,7 +158,7 @@ function adicionarAutor() {
       // Criar novo campo de input para o nome
     var novoCampoNome = document.createElement("input");
     novoCampoNome.type = "text";
-    novoCampoNome.className = "autor";
+    novoCampoNome.className = "autor" + contadorAutores;
     novoCampoNome.name = "autor[]";
     novoCampoNome.id = "autor" + contadorAutores; // Use um array para coletar vários valores
     novoCampoNome.placeholder = "Nome Completo";
@@ -483,6 +483,7 @@ function exibirResumo() {
     + "<div>"
     + "<h4 style='width:auto; margin:0'><a style='color:red;'>*</a> Título para os Dados inseridos</h4>"
     + "<input type='text' value='" + tituloDad + "' readonly style='width:98.4%'>"
+    + "</div>"
     + "<br><br>"
     + "<div>"
     + "<h4><a style='color:red;'>*</a> Existe algum trabalho associado a esse conjunto de dados</h4>";
@@ -508,81 +509,123 @@ if (trabAssociado === 'sim') {
            + "</div>"
            
            + "</div>"
+           + "</div>"
            + "</br>"
-           +"</br>";
+           + "</br>"
+           + "</br>"
+           + "</br>";
+
 } else {
     resumo +="<br>"
            +"<div>"
            + "<input type='radio' value='nao' checked disabled>"
            + "<label>Não</label>"
+           + "</div>"
            + "</div>";
 }
-
-resumo += "</div></div></div></form>";
-
     
-    /*
-     
-    
-
-   
-
-    
-    var AutorNome0 = document.getElementById("autor0").value;
+var AutorNome0 = document.getElementById("autor0").value;
 var AutorFiliacao0 = document.getElementById("filiacao0").value;
-resumo += "<p><strong>1º Autor:</strong> " + AutorNome0 + " (" + AutorFiliacao0 + ")</p>";
+
+resumo +="</br>"
++"<div>" 
++"<p> 1º Autor:" +
+          "<input readonly style='width:45%;' type='text' value='" + AutorNome0 + "'> " +
+          "<input readonly style='width:45%; margin-left:4px;' type='text' value='" + AutorFiliacao0 + "'> </p> "
+          + "</div>";
 
 
-    // Adicionar mais coordenadas
+   // Adicionar mais autores
     for (var i = 1; i < contadorAutores; i++) {
-        var AutorNome = document.getElementsByClassName("autor")[i].value;
-        var AutorFiliacao = document.getElementsByClassName("filiacao")[i].value;
-        resumo += "<p><strong>"+ (i + 1) + "º Autor:</strong> " + AutorNome + " (" + AutorFiliacao + ")</p>";
+        var AutorNome = document.getElementById("autor" +i).value;
+        var AutorFiliacao = document.getElementById("filiacao" +i).value;
+
+        resumo +="<div>"+
+         "<p>" + (i + 1) + "º Autor:" +
+          "<input style='width:45%;' readonly type='text' value='" + AutorNome + "'> " +
+          "<input readonly style='width:45%; margin-left:4px;' type='text' value='" + AutorFiliacao + "'></p>"
+          +"</div>";
     }
+    var refef = document.getElementById("referencia").value;
+    resumo +="</br>"
+    +"</br>"
+    +"<div>" +
+              "<h4><a style='color:red;'>*</a>Referência</h4>" +
+              "<br>" +
+              "<textarea readonly rows='4' style='width:98.4%;' value='" + refef + "'></textarea>"
+              +"</div>";
 
-    var periodico = document.getElementById("periodico").value;
-    resumo += "<p" + (periodico ? '' : ' class="texto-vermelho"') + "><strong>Nome do Periódico:</strong> " + periodico + "</p>";
+ 
+resumo += "</div>";
+resumo +="</form>"; 
 
-    var linkart = document.getElementById("linkart").value;
-    resumo += "<p" + (linkart ? '' : ' class="texto-vermelho"') + "><strong>Link para o Artigo OU DOI:</strong> " + linkart + "</p>";
+summary1.innerHTML = resumo;
 
-    var doi1 = document.getElementById("funding").value;
-    resumo += "<p" + (doi1 ? '' : ' class="texto-vermelho"') + "><strong>Funding/Financiamento:</strong> " + doi1 + "</p>";
-
-    var datap = document.getElementById("data1").value;
-    resumo += "<p" + (datap ? '' : ' class="texto-vermelho"') + "><strong>Data da publicação:</strong> " + datap + "</p>";
-
-    var keywords1 = document.getElementById("keywords").value;
-    resumo += "<p" + (keywords1 ? '' : ' class="texto-vermelho"') + "><strong>Palavras-Chave:</strong> " + keywords1 + "</p>";
-
-    var referencia = document.getElementById("referencia").value;
-    resumo += "<p" + (referencia ? '' : ' class="texto-vermelho"') + "><strong>Referência <i>(ABNT)<i>:</strong> " + referencia + "</p>";
-*/
-
-    // Exibir o resumo no elemento summary1
-    summary1.innerHTML = resumo;
 }
+
+
 
 
 function exibirDADOS() {
+
     var summary2 = document.getElementById("summary-2");
+    var resumo = "";
+
+
+var resDad = document.getElementById("res_dado").value;
+
+    resumo += "<form id='formsRes' style='position: relative; margin-bottom:20px'>"
+    +"</br>"  
+    +"<div>"
+    +"<div>"
+    +"<h4><a style='color:red;'>*</a> Resumo dos dados</h4>"
+    + "<textarea readonly style='width:98.4%; height: auto;' rows='4'>" + resDad + "</textarea>"
+    +"</div>";
+            
+       for (var i = 0; i < coordenadas; i++) {
+        var ID_amst = document.getElementById("ID_amst" + i).value;
+        var latitude = document.getElementById("latitude" + i).value;
+        var longitude = document.getElementById("longitude" + i).value;
+        var data2 = document.getElementById("data2" + i).value;
+    
+        resumo += "</br>"+
+        "<div class='coordenadas-campo' style='display:flex; flex-wrap:wrap; width:100%; gap:4.8px;'>" +
+                  
+        "<p><strong>Ponto " + (i + 1) + ":</strong></p>" +
+                  "<input type='text' style='width:20%;' readonly value='" + ID_amst + "'> " +
+                  "<input type='text' style='width:25%;' readonly value='" + latitude + "'> " +
+                  "<input type='text' style='width:25%;' readonly value='" + longitude + "'> " +
+                  "<input type='date' style='width:20%;' readonly value='" + data2 + "'>" +
+                  "</div>";
+    }
+
+
+    var tipoAmostra = document.getElementById("tipAmst").value;
+    var tituloTrabalho = document.getElementById("titTrab").value;
+
+    resumo +="<br>"
+           + "<div id='amostras' class='tipAmostras'>"
+           +"<h4> Tipo de Amostra</h4>"         
+           + "<br>"
+           + "<select style='height: 30px; width: 50%;'>"
+           + "<option readonly selected value='" + tipoAmostra + "'>" + tipoAmostra + "</option>"
+           + "</select>"
+           + "</div>"
+           
+    
+    resumo+="</div>"
+            +"</fomr>";
+
+    summary2.innerHTML = resumo;
+}
+
+   /*var summary2 = document.getElementById("summary-2");
     var resumo = "";
 
     var area_est = document.getElementById("area_est").value;
     resumo += "<p" + (area_est ? '' : ' class="texto-vermelho"') + "><strong>Descrição da Área de estudo:</strong> " + area_est + "</p>";
 
-        var coordenadasCampos = document.getElementsByClassName("coordenadas-campo");
-        for (var i = 0; i < coordenadasCampos.length; i++) {
-                var ID_amst = document.getElementById("ID_amst" + i).value;
-                var latitude = document.getElementById("latitude" + i).value;
-                var longitude = document.getElementById("longitude" + i).value;
-                var prof = document.getElementById("prof" + i).value;
-                var recuperacao = document.getElementById("recuperacao" + i).value;
-                var data2 = document.getElementById("data2" + i).value;
         
-                resumo += "<p><strong> Ponto " + (i + 1) + ":</strong> ID: " + ID_amst + "| Latitude: " + latitude + "| Longitude: " + longitude + "| Profundidade: " + prof + "| Recuperação: " + recuperacao + "| Data da Coleta: " + data2 + "</p>";
-            }
-
     // Adiciona as características inseridas
     var caract = document.getElementById("caract").value;
     resumo += "<p" + (caract ? '' : ' class="texto-vermelho"') + "><strong>Características inseridas:</strong> " + caract + "</p>";
@@ -686,6 +729,6 @@ function exibirDADOS() {
     var refef1 = document.getElementById("refef").value;
     resumo += "<p" + (refef1 ? '' : ' class="texto-vermelho"') + "><strong>Arquivo:</strong> " + refef1 + "</p>";
 
-    // Exibe o resumo no elemento summary2
-    summary2.innerHTML = resumo;
-}
+    // Exibe o resumo no elemento summary2 */
+
+

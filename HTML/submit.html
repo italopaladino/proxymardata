@@ -130,11 +130,7 @@
 
 <form id="forms" method="post" action="../PHP/submit-DADOS2.php" enctype="multipart/form-data" style="position: relative; margin-bottom: 20px;">
    
-   
-    <!-- campo invisivel para recuperar os valores finais -->
-    <input type="hidden" id="secaoAtual1" name="secaoAtual1" value="1">
-
-    
+       
     <div id="section1" class="form-section active">
         <h1 style="text-align: center;"> Formulário para Submissão: </h1></br>
 
@@ -261,11 +257,7 @@
     <!-- SEGUNDA PAGINA-->
 <div id="section2" class="form-section">
 
-    <!-- campo invisivel para recuperar os valores finais -->
-    <input type="hidden" id="secaoAtual2" name="secaoAtual2" value="2">
-
-
-        <h1 style="text-align: center;">Informação dos dados a serem submetidos:</h1></br>
+          <h1 style="text-align: center;">Informação dos dados a serem submetidos:</h1></br>
 
     <div id="resumo">
         <div style="display: flex; align-items: center; width: 100%;">
@@ -519,7 +511,7 @@ disponibilizados aqui.</div>
     
      
         <button class="button" type="button" style="position: absolute; left: 1%; bottom: 1%;" onclick="paginaAnterior()">Anterior</button>
-        <button class="button" type="button" style="position: absolute; right: 1%; bottom: 1%;" onclick="proximaPagina2()">Avançar</button>
+        <button class="button" type="button" style="position: absolute; right: 1%; bottom: 1%;" onclick="proximaPagina(); exibirResumo(); exibirDADOS()">Avançar</button>
 
 </div>
 
@@ -532,6 +524,10 @@ disponibilizados aqui.</div>
        
     </div>
 
+    <div id="summary-2">
+       
+    </div>
+
 </br>
 </br>
 <div id="botoes">    
@@ -540,25 +536,6 @@ disponibilizados aqui.</div>
 </div>
 
 
-</div>
-
-
-
-
-<!-- quarta página - PONTOS INSERIDOS-->
-
-<div id="section4" class="form-section">
-    <h1>  Confirme os pontos inseridos: </h1>
-    <div id="summary-2">
-       
-    </div>
-
-     
-    <button class="button" type="button" style="position: absolute; left: 1%; bottom: 1%;" onclick="paginaAnterior()">Anterior</button> 
-    <button class="button" type="submit" style="position: absolute; right: 1%; bottom: 1%;"> Submeter</button>
-
-</br>
-</br>
 </div>
 
 </form>
