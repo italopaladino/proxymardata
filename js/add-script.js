@@ -601,20 +601,174 @@ var resDad = document.getElementById("res_dado").value;
 
 
     var tipoAmostra = document.getElementById("tipAmst").value;
-    var tituloTrabalho = document.getElementById("titTrab").value;
-
+   
     resumo +="<br>"
-           + "<div id='amostras' class='tipAmostras'>"
-           +"<h4> Tipo de Amostra</h4>"         
+           + "<div id='tipFerr'"
+           + "<div id='amostras' class='coluna'>"
+           +"<h4>Tipo de Amostra</h4>"         
            + "<br>"
            + "<select style='height: 30px; width: 50%;'>"
            + "<option readonly selected value='" + tipoAmostra + "'>" + tipoAmostra + "</option>"
            + "</select>"
            + "</div>"
+
+           var ferramentasUt = "";
+           if (document.getElementById("associ").checked) {
+               ferramentasUt += "Associação, ";
+           }
+           if (document.getElementById("batmet").checked) {
+               ferramentasUt += "Batimetria, ";
+           }
+           if (document.getElementById("bioOrg").checked) {
+               ferramentasUt += "Biomarcadores Orgânicos, ";
+           }
+           if (document.getElementById("cocolit").checked) {
+               ferramentasUt += "Cocolitoforídeos, ";
+           }
+           if (document.getElementById("estrat").checked) {
+               ferramentasUt += "Estratigrafia, ";
+           }
+           if (document.getElementById("foramplan").checked) {
+               ferramentasUt += "Foraminíferos Planctônicos, ";
+           }
+           if (document.getElementById("forambent").checked) {
+               ferramentasUt += "Foraminíferos Bentônicos, ";
+           }
+           if (document.getElementById("granl").checked) {
+               ferramentasUt += "Granulometria, ";
+           }
+           if (document.getElementById("hidrod").checked) {
+               ferramentasUt += "Hidrodinâmica, ";
+           }
+           if (document.getElementById("hidrog").checked) {
+               ferramentasUt += "Hidrografia, ";
+           }
+           if (document.getElementById("matorg").checked) {
+               ferramentasUt+= "Matéria Orgânica, ";
+           }
+           if (document.getElementById("metais").checked) {
+               ferramentasUt += "Metais e semi-metais, ";
+           }
+           if (document.getElementById("microps").checked){
+            ferramentasUt +="Microplásticos, ";
+           }
+           if (document.getElementById("ageMod").checked){
+            ferramentasUt += "Modelos de idade, ";
+           }
+           if (document.getElementById("proFisi").checked){
+            ferramentasUt += "Propriedades Físicas: ";
+           }
+           if (document.getElementById("radioist").checked){
+            ferramentasUt += "Radioisótopos, ";
+           }
+           if (document.getElementById("razIsot").checked){
+            ferramentasUt += "Razões Isotópicas";
+           }
+           if (document.getElementById("SmodNum").checked){
+            ferramentasUt += "Saída de modelo numérico";
+            }
+            if (document.getElementById("teorAg").checked){
+                ferramentasUt += "Teor de Água, "
+            }
+
+
+           // Remove a vírgula extra no final, se houver
+           if (ferramentasUt.slice(-2) === ', ') {
+               ferramentasUt = ferramentasUt.slice(0, -2);
+           }
+           if (ferramentasUt){
+           resumo += "<div class='Coluna' style='display: flex; justify-content:space-between;'>"
+           +"<p><h4>Ferramentas Selecionado(s):</h4> " + ferramentasUt + "</p>"
            
-    
+           +"</div>"
+           +"</div>";
+           }
+           // Adiciona outro proxy inserido
+           var outroFe = document.getElementById("outroFerr").value;
+           if(outroFe){
+           resumo += "<div>"
+           +"<p><strong>Outras ferramentas:</strong> " + outroFe + "</p>"
+                     
+           +"</div>"
+           +"</div>";
+           }    
+
+          
+           resumo +="</br>"
+                  + "<div id=equipamentos-container'"
+                        
+                  var equipCole = "";
+                  if (document.getElementById("pstCor").checked) {
+                    equipCole += "Piston Corer, ";
+                  }
+                  if (document.getElementById("gravt").checked) {
+                    equipCole += "Gravity Corer, ";
+                  }
+                  if (document.getElementById("drill").checked) {
+                    equipCole += "Drilling device, ";
+                  }
+                  if (document.getElementById("gbox").checked) {
+                    equipCole += "Giant box corer, ";
+                  }
+                  if (document.getElementById("boxcr").checked) {
+                    equipCole += "Box Corer, ";
+                  }
+                  if (document.getElementById("ADCP").checked) {
+                    equipCole += "ADCP, ";
+                  }
+                  if (document.getElementById("corrt").checked) {
+                    equipCole += "Correntômetro, ";
+                  }
+                  if (document.getElementById("CTD").checked) {
+                    equipCole += "CTD, ";
+                  }
+                  if (document.getElementById("modNum").checked) {
+                    equipCole += "Modelo Numérico, ";
+                  }
+                  if (document.getElementById("multb").checked) {
+                      equipCole += "Multibean, ";
+                  }
+                  if (document.getElementById("multCor").checked) {
+                      equipCole += "Multiple Corer, ";
+                  }
+                  if (document.getElementById("satl").checked) {
+                    equipCole += "Satélite, ";
+                  }
+                  if (document.getElementById("sensBio").checked){
+                   equipCole +="Sensores bio-ópticos, ";
+                  }
+                  if (document.getElementById("sidSc").checked){
+                   equipCole += "Side-scan sonar, ";
+                  }
+                  if (document.getElementById("vanv").checked){
+                   equipCole += "Van-veen, ";
+
+                  }
+                                   // Remove a vírgula extra no final, se houver
+                  if (equipCole.slice(-2) === ', ') {
+                      equipCole = equipCole.slice(0, -2);
+                  }
+                  if (equipCole){
+                  resumo +="</br>" 
+                  +"<div>"
+                  +"<p><h4>Equipamento(s) de coleta:</h4> " + equipCole + "</p>"
+                  
+                  
+                  +"</div>";
+                  }
+                  // Adiciona outro proxy inserido
+                  var outroFe = document.getElementById("outroEqui").value;
+                  if(outroFe){
+                  resumo += "<div>"
+                  +"<p><strong>Outras ferramentas:</strong> " + equipCole + "</p>"
+                            
+                  +"</div>";
+                  }
+
     resumo+="</div>"
-            +"</fomr>";
+           +"</br>"
+           +"</br>"
+            +"</form>";
 
     summary2.innerHTML = resumo;
 }
