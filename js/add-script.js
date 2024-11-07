@@ -72,6 +72,29 @@ function closeNavbar() {
         document.getElementById("info-adicional").style.maxHeight = "0"; // Oculta a <div> com transição
     }
 
+
+
+    /// campos ponto ou area
+    function mostrarDiv1() {
+        document.getElementById("area").style.maxHeight = "0";
+        const div = document.getElementById("divEBotoes");
+        div.style.maxHeight = "500px"; // Define a altura máxima para exibir a <div> com transição
+    }
+    
+    function mostrarDiv2(){
+        document.getElementById("divEBotoes").style.maxHeight = "0";
+        const div = document.getElementById("area");
+        div.style.maxHeight = "500px"; // Define a altura máxima para exibir a <div> com transição
+    } 
+    
+    
+    /*{
+        document.getElementById("divEBotoes").style.maxHeight = "0";
+         // Oculta a <div> com transição
+    }*/
+
+
+
 //GET THE MODAL (W3-SCHOOL)
 
 var modal = document.getElementById('lg3');
@@ -365,51 +388,77 @@ function removerTODAScoordenadas() {
 
 
 // SCRIPT PARA PASSAR AS PAFINAS DO FORMULÁRIO SUBMIT.HTML
- let currentPage = 1;
+let currentSection = 1; // Variável para controlar a seção atual
 
-            function proximaPagina() {
-              // Validação ou lógica adicional pode ser adicionada aqui
-              /*const correspondente = document.getElementById('correspondente').value;
-              const email =document.getElementById('email').value;
-              const autor = document.getElementById('autor0').value;
-              const data = document.getElementById('data1').value;
-              const ref = document.getElementById('referencia').value;
-             
-              if(correspondente ==''){
-                window.alert('Indique o nome do correspondente!');
-              } else if(data ==''){
-                window.alert('Indique a data!');
-              }else if (ref ==''){
-                window.alert('Indique a Referência do trabalho!');
-              }else if (email ==''){
-                window.alert ('Indique o email do correspondente');  
-              }else if (autor ==''){
-                window.alert('Indique ao menos um Autor e sua filiação');
-            }else{*/
-              // Oculta a seção atual
-              document.getElementById(`section${currentPage}`).classList.remove('active');
-        
-              // Atualiza a página atual
-              currentPage++;
-        
-              // Exibe a próxima seção
-              document.getElementById(`section${currentPage}`).classList.add('active');
-            }
-            
+function proximaPagina() {
+    if (currentSection === 1) {
+        // Verificações específicas para a primeira seção
+        const correspondente = document.getElementById('correspondente').value;
+        const email = document.getElementById('email').value;
+        const tituloPrc = document.getElementById('tituloPrinc').value;
+        const titDad = document.getElementById('tituloDado').value;
+        const trabAssSim = document.getElementById('trab-sim').checked;
+        const trabAssNao = document.getElementById('trab-nao').checked;
+        const autor0 = document.getElementById('autor0').value;
+        const refer = document.getElementById('referencia').value;
+
+        if (correspondente === '') {
+            window.alert('Indique o nome do correspondente!');
+            document.getElementById('correspondente').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (email === '') {
+            window.alert('Indique o email do correspondente');
+            document.getElementById('email').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (tituloPrc === '') {
+            window.alert('Indique o Título do Projeto Principal');
+            document.getElementById('tituloPrinc').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (titDad === '') {
+            window.alert('Indique um Título para os dados inseridos');
+            document.getElementById('tituloDado').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (!trabAssSim && !trabAssNao) {
+            window.alert('Indique se existe algum trabalho associado ao conjunto de dados ou Não.');
+        } else if (autor0 === '') {
+            window.alert('Indique ao menos um Autor');
+            document.getElementById('autor0').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (refer === '') {
+            window.alert('Indique a referência');
+            document.getElementById('referencia').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            // Passa para a próxima "seção"
+            document.getElementById('section1').style.display = 'none';
+            document.getElementById('section2').style.display = 'block';
+            currentSection = 2; // Atualiza para a próxima seção
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    } else if (currentSection === 2) {
+        // Verificações específicas para a segunda seção
+        const resumoD = document.getElementById('res_dado').value; // Exemplo de campo específico para a Section2
+
+        if (resumoD === '') {
+            window.alert('Adicione um resumo para os dados.');
+            document.getElementById('res_dado').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            document.getElementById('section2').style.display = 'none';
+            document.getElementById('section3').style.display = 'block';
+            currentSection = 3; // Atualiza para a próxima seção
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+}
 
             function paginaAnterior() {
               // Validação ou lógica adicional pode ser adicionada aqui
-        
+        if(currentSection >1){
               // Oculta a seção atual
-              document.getElementById(`section${currentPage}`).classList.remove('active');
+              document.getElementById(`section${currentSection}`).style.display='none';
         
               // Atualiza a página atual
-              currentPage--;
+              currentSection--;
+              window.scrollTo({ top: 0, behavior: 'smooth' });
         
               // Exibe a seção anterior
-              document.getElementById(`section${currentPage}`).classList.add('active');
+              document.getElementById(`section${currentSection}`).style.display='block';
             }
-        
+            }
  
             
 
@@ -428,29 +477,6 @@ function removerTODAScoordenadas() {
 
 
 // resumo da pagina no final SUBMIT--
-
-function proximaPagina2(){
-
-   /* const area = document.getElementById('area_est').value;
-    const desc_dados = document.getElementById('caract').value;
-    const metut = document.getElementById('metut').value;
-    const arquivo = document.getElementById ('refef').value;
-if(area ==''){
-    window.alert ('Adicione a descrição da área de estudo');
-    return false;
-}else if (desc_dados ==''){
-    window.alert ('Adicione uma descrição ao seus dados');
-    return false;
-} else if (metut ==''){
-    window.alert ('Adicione os métodos utilizados para a aquisição desses dados');
-    return false;
-}else if (arquivo =='') {
-    window.alert(' Adicione a sua tabela de dados. Não esqueça que o formato é .CSV (separado por virgula)');
-}else{*/
-
-proximaPagina();
-exibirResumo();
-}
 
 
 function exibirResumo() {
@@ -552,7 +578,7 @@ resumo +="</br>"
     +"<div>" +
               "<h4><a style='color:red;'>*</a>Referência</h4>" +
               "<br>" +
-              "<textarea readonly rows='4' style='width:98.4%;' value='" + refef + "'></textarea>"
+              "<textarea readonly rows='4' style='width:98.4%;'>"+ refef+"</textarea>"
               +"</div>";
 
  
@@ -565,57 +591,103 @@ summary1.innerHTML = resumo;
 
 
 
-
 function exibirDADOS() {
-
     var summary2 = document.getElementById("summary-2");
     var resumo = "";
-
-
-var resDad = document.getElementById("res_dado").value;
+    var resDad = document.getElementById("res_dado").value;
 
     resumo += "<form id='formsRes' style='position: relative; margin-bottom:20px'>"
-    +"</br>"  
-    +"<div>"
-    +"<div>"
-    +"<h4><a style='color:red;'>*</a> Resumo dos dados</h4>"
-    + "<textarea readonly style='width:98.4%; height: auto;' rows='4'>" + resDad + "</textarea>"
-    +"</div>";
-            
-       for (var i = 0; i < coordenadas; i++) {
+        + "</br>"  
+        + "<div>"
+        + "<h4><a style='color:red;'>*</a> Resumo dos dados</h4>"
+        + "<textarea readonly style='width:98.4%; height: auto;' rows='4'>" + resDad + "</textarea>"
+        + "</div>";
+
+    for (var i = 0; i < coordenadas; i++) {
         var ID_amst = document.getElementById("ID_amst" + i).value;
         var latitude = document.getElementById("latitude" + i).value;
         var longitude = document.getElementById("longitude" + i).value;
         var data2 = document.getElementById("data2" + i).value;
     
-        resumo += "</br>"+
-        "<div class='coordenadas-campo' style='display:flex; flex-wrap:wrap; width:100%; gap:4.8px;'>" +
-                  
-        "<p><strong>Ponto " + (i + 1) + ":</strong></p>" +
-                  "<input type='text' style='width:20%;' readonly value='" + ID_amst + "'> " +
-                  "<input type='text' style='width:25%;' readonly value='" + latitude + "'> " +
-                  "<input type='text' style='width:25%;' readonly value='" + longitude + "'> " +
-                  "<input type='date' style='width:20%;' readonly value='" + data2 + "'>" +
-                  "</div>";
+        resumo += "</br>"
+            + "<div class='coordenadas-campo' style='display:flex; flex-wrap:wrap; width:100%; gap:4.8px;'>"
+            + "<p><strong>Ponto " + (i + 1) + ":</strong></p>"
+            + "<input type='text' style='width:20%;' readonly value='" + ID_amst + "'> "
+            + "<input type='text' style='width:25%;' readonly value='" + latitude + "'> "
+            + "<input type='text' style='width:25%;' readonly value='" + longitude + "'> "
+            + "<input type='date' style='width:20%;' readonly value='" + data2 + "'>"
+            + "</div>";
     }
+    var idArea1 = document.getElementById("ID_amstAREA1").value;
+    var latArea1 = document.getElementById("latitudeAREA1").value;
+    var longArea1 = document.getElementById("longitudeAREA1").value;
+    var dat31 = document.getElementById("dataAREA1").value;
+    var idArea2 = document.getElementById("ID_amstAREA2").value;
+    var latArea2 = document.getElementById("latitudeAREA2").value;
+    var longArea2 = document.getElementById("longitudeAREA2").value;
+    var dat32 = document.getElementById("dataAREA2").value;
+    var idArea3 = document.getElementById("ID_amstAREA3").value;
+    var latArea3 = document.getElementById("latitudeAREA3").value;
+    var longArea3 = document.getElementById("longitudeAREA3").value;
+    var dat33 = document.getElementById("dataAREA3").value;
+    var idArea4 = document.getElementById("ID_amstAREA4").value;
+    var latArea4 = document.getElementById("latitudeAREA4").value;
+    var longArea4 = document.getElementById("longitudeAREA4").value;
+    var dat34 = document.getElementById("dataAREA4").value;
+if (
+    idArea1 && latArea1 && longArea1 && dat31 &&
+    idArea2 && latArea2 && longArea2 && dat32 &&
+    idArea3 && latArea3 && longArea3 && dat33 &&
+    idArea4 && latArea4 && longArea4 && dat34
+){
+    resumo+="<br>"
+    +"<div style='display:flex; flex-wrap; width: 100%; gap: 4.8px;'>"
+    +"<input type='text' style='width:20%' value='" + idArea1 + "'>"
+    +"<input type='text' style='width:25%' value='" + latArea1 + "'>"
+    +"<input type='text' style='width:25%' value='" + longArea1 + "'>"
+    +"<input type='date' style='width:20%' value='" + dat31 + "'>"
+    +"</div>"
+    +"</br>"
+    +"<div style='display:flex; flex-wrap; width: 100%; gap: 4.8px;'>"
+    +"<input type='text' style='width:20%' value='" + idArea2 + "'>"
+    +"<input type='text' style='width:25%' value='" + latArea2 + "'>"
+    +"<input type='text' style='width:25%' value='" + longArea2 + "'>"
+    +"<input type='date' style='width:20%' value='" + dat32 + "'>"
+    +"</div>"
+    +"</br>"
+    +"<div style='display:flex; flex-wrap; width: 100%; gap: 4.8px;'>"
+    +"<input type='text' style='width:20%' value='" + idArea3 + "'>"
+    +"<input type='text' style='width:25%' value='" + latArea3 + "'>"
+    +"<input type='text' style='width:25%' value='" + longArea3 + "'>"
+    +"<input type='date' style='width:20%' value='" + dat33 + "'>"
+    +"</div>"
+    +"</br>"
+    +"<div style='display:flex; flex-wrap; width: 100%; gap: 4.8px;'>"
+    +"<input type='text' style='width:20%' value='" + idArea4 + "'>"
+    +"<input type='text' style='width:25%' value='" + latArea4 + "'>"
+    +"<input type='text' style='width:25%' value='" + longArea4 + "'>"
+    +"<input type='date' style='width:20%' value='" + dat34 + "'>"
+    +"</div>"
+    +"</br>"
+}else{
 
+}
 
     var tipoAmostra = document.getElementById("tipAmst").value;
-   
-    resumo +="<br>"
-           + "<div id='tipFerr'"
-           + "<div id='amostras' class='coluna'>"
-           +"<h4>Tipo de Amostra</h4>"         
-           + "<br>"
-           + "<select style='height: 30px; width: 50%;'>"
-           + "<option readonly selected value='" + tipoAmostra + "'>" + tipoAmostra + "</option>"
-           + "</select>"
-           + "</div>"
 
-           var ferramentasUt = "";
-           if (document.getElementById("associ").checked) {
-               ferramentasUt += "Associação, ";
-           }
+    resumo += "<br>"
+        + "<div id='tipFerr'>"
+        + "<div id='amostras' class='coluna'>"
+        + "<h4>Tipo de Amostra</h4>"
+        + "<select style='height: 30px; width: 50%;'>"
+        + "<option readonly selected value='" + tipoAmostra + "'>" + tipoAmostra + "</option>"
+        + "</select>"
+        + "</div>"  // Fechamento do div "amostras"
+
+    var ferramentasUt = "";
+    if (document.getElementById("associ").checked) {
+        ferramentasUt += "Associação, ";
+    }
            if (document.getElementById("batmet").checked) {
                ferramentasUt += "Batimetria, ";
            }
@@ -669,6 +741,8 @@ var resDad = document.getElementById("res_dado").value;
             }
             if (document.getElementById("teorAg").checked){
                 ferramentasUt += "Teor de Água, "
+            }if(ferramentasUt==''){
+                ferramentasUt+=' Nennhuma ferramenta selecionada.';
             }
 
 
@@ -676,31 +750,35 @@ var resDad = document.getElementById("res_dado").value;
            if (ferramentasUt.slice(-2) === ', ') {
                ferramentasUt = ferramentasUt.slice(0, -2);
            }
-           if (ferramentasUt){
-           resumo += "<div class='Coluna' style='display: flex; justify-content:space-between;'>"
-           +"<p><h4>Ferramentas Selecionado(s):</h4> " + ferramentasUt + "</p>"
-           
-           +"</div>"
-           +"</div>";
-           }
-           // Adiciona outro proxy inserido
-           var outroFe = document.getElementById("outroFerr").value;
-           if(outroFe){
-           resumo += "<div>"
-           +"<p><strong>Outras ferramentas:</strong> " + outroFe + "</p>"
-                     
-           +"</div>"
-           +"</div>";
-           }    
+           if (ferramentasUt) {
+            resumo += "<div class='Coluna'>"
+                +"<p style='display: inline-block;'>"
+                + "<h4 style='display: inline;'>Ferramentas Selecionado(s):</h4> "
+                + "<span style='display: inline; font-size: 20px; margin-left: 5px; text-decoration: underline red;'>"+ ferramentasUt + "</span>"
+                + "</p>"
+                + "</div>";
+        }
 
+
+           // Adiciona outra ferramenta inserida
+           var outroFe = document.getElementById("outroFerr").value;
+           if (outroFe) {
+               resumo += "<div>"
+                +"<p style='display: inline-block;'>"
+                + "<h4 style='display: inline;'> Outra ferramenta:</h4>"
+                + "<span style='display:inline; font-size:20px; margin-left: 5px; text-decoration: underline red;'>" + outroFe +"</span>"
+                +"</p>"
+                + "</div>";
+           }
           
-           resumo +="</br>"
-                  + "<div id=equipamentos-container'"
-                        
-                  var equipCole = "";
-                  if (document.getElementById("pstCor").checked) {
-                    equipCole += "Piston Corer, ";
-                  }
+              // Equipamentos de coleta
+    resumo += "</br>"
+    + "<div id='equipamentos-container'>";
+
+var equipCole = "";
+if (document.getElementById("pstCor").checked) {
+    equipCole += "Piston Corer, ";
+}
                   if (document.getElementById("gravt").checked) {
                     equipCole += "Gravity Corer, ";
                   }
@@ -743,146 +821,61 @@ var resDad = document.getElementById("res_dado").value;
                   if (document.getElementById("vanv").checked){
                    equipCole += "Van-veen, ";
 
-                  }
-                                   // Remove a vírgula extra no final, se houver
-                  if (equipCole.slice(-2) === ', ') {
-                      equipCole = equipCole.slice(0, -2);
-                  }
-                  if (equipCole){
-                  resumo +="</br>" 
-                  +"<div>"
-                  +"<p><h4>Equipamento(s) de coleta:</h4> " + equipCole + "</p>"
-                  
-                  
-                  +"</div>";
-                  }
-                  // Adiciona outro proxy inserido
-                  var outroFe = document.getElementById("outroEqui").value;
-                  if(outroFe){
-                  resumo += "<div>"
-                  +"<p><strong>Outras ferramentas:</strong> " + equipCole + "</p>"
-                            
-                  +"</div>";
+                  } if (equipCole==''){
+                    equipCole +="Nenhum equipamento selecionado.";
                   }
 
-    resumo+="</div>"
-           +"</br>"
-           +"</br>"
-            +"</form>";
 
+                 // Remove vírgula extra se houver
+    if (equipCole.slice(-2) === ', ') {
+        equipCole = equipCole.slice(0, -2);
+    }
+    if (equipCole) {
+        resumo += "<div>"
+            + "</br>"
+            + "<p style='display: inline-block;'>"
+            + "<h4 style='display: inline;'>Equipamento(s) de coleta:</h4>"
+            + "<span style='display: inline; font-size: 20px; margin-left: 5px; text-decoration: underline red;'>" + equipCole + "</span>"
+            + "</p>"
+            + "</div>";
+    }
+    
+
+    var outroFeEquip = document.getElementById("outroEqui").value;
+    if (outroFeEquip) {
+        resumo += "<div>"
+                +"<p style='display: inline-block;'>"
+                + "<h4 style='display: inline;'> Outro Equipamento:</h4>"
+                + "<span style='display:inline; font-size:20px; margin-left: 5px; text-decoration: underline red;'>" + outroFeEquip +"</span>"
+                +"</p>"
+                + "</div>";
+    }
+
+    var refef1 = document.getElementById("refef").value;
+    var armze = document.getElementById("armazenamentoSelecao").value;
+
+    resumo += "<div>"
+     + "</br>"
+      + "</br>"
+      +"<p style='display: inline-block;'>"
+        + "<h4 style='display:inline;'>Arquivo inserido:</h4>"
+        + "<span style='display: inline; font-size: 20px; margin-left: 5px; text-decoration: underline red;'>" + refef1 + "</span>"
+        + "</p>"
+        + "</div>";
+
+    resumo += "<div>"
+     + "</br>"
+        + "<h4>Como os dados serão armazenados:</h4>"
+        + "<select style='height: 30px; width: 30%;'>"
+        + "<option readonly selected value='" + armze + "'>" + armze + "</option>"
+        + "</select>"
+        + "</div>";
+
+    resumo += "</form>";
     summary2.innerHTML = resumo;
 }
 
-   /*var summary2 = document.getElementById("summary-2");
-    var resumo = "";
+   
 
-    var area_est = document.getElementById("area_est").value;
-    resumo += "<p" + (area_est ? '' : ' class="texto-vermelho"') + "><strong>Descrição da Área de estudo:</strong> " + area_est + "</p>";
-
-        
-    // Adiciona as características inseridas
-    var caract = document.getElementById("caract").value;
-    resumo += "<p" + (caract ? '' : ' class="texto-vermelho"') + "><strong>Características inseridas:</strong> " + caract + "</p>";
-
-    // Adiciona os métodos utilizados
-    var mett1 = document.getElementById("metut").value;
-    resumo += "<p" + (mett1 ? '' : ' class="texto-vermelho"') + "><strong>Métodos Utilizados:</strong> " + mett1 + "</p>";
-
-    // Verifica proxies selecionados e adiciona ao resumo
-    var proxySummary = "";
-    if (document.getElementById("isot").checked) {
-        proxySummary += "Isótopos, ";
-    }
-    if (document.getElementById("PP").checked) {
-        proxySummary += "Produtividade Primária, ";
-    }
-    if (document.getElementById("circulacao").checked) {
-        proxySummary += "Circulação Oceânica, ";
-    }
-    if (document.getElementById("org").checked) {
-        proxySummary += "Marcadores Orgânicos, ";
-    }
-    if (document.getElementById("inorg").checked) {
-        proxySummary += "Marcadores Inorgânicos, ";
-    }
-    if (document.getElementById("foramplan").checked) {
-        proxySummary += "Foraminíferos Planctônicos, ";
-    }
-    if (document.getElementById("forambent").checked) {
-        proxySummary += "Foraminíferos Bentônicos, ";
-    }
-    if (document.getElementById("sealev").checked) {
-        proxySummary += "Nível do Mar, ";
-    }
-    if (document.getElementById("co2atm").checked) {
-        proxySummary += "CO<sub>2</sub> Atmosférico, ";
-    }
-    if (document.getElementById("cobveg").checked) {
-        proxySummary += "Cobertura Vegetal, ";
-    }
-    if (document.getElementById("rainfall").checked) {
-        proxySummary += "Precipitação, ";
-    }
-    if (document.getElementById("stratg").checked) {
-        proxySummary += "Estratigrafia, ";
-    }
-    
-    // Remove a vírgula extra no final, se houver
-    if (proxySummary.slice(-2) === ', ') {
-        proxySummary = proxySummary.slice(0, -2);
-    }
-    if (proxySummary){
-    resumo += "<p> <strong>Ferramentas Selecionado(s):</strong> " + proxySummary + "</p>";
-    }
-    // Adiciona outro proxy inserido
-    var outroprox = document.getElementById("outroProx").value;
-    if(outroprox){
-    resumo += "<p><strong>Outras ferramentas:</strong> " + outroprox + "</p>";
-    }
-    // Adiciona equipamentos selecionados
-    var coleta = "";
-    if (document.getElementById("multcorer").checked) {
-        coleta += "MultiCorer, ";
-    }
-    if (document.getElementById("piston").checked) {
-        coleta += "Piston Corer, ";
-    }
-    if (document.getElementById("gravcorer").checked) {
-        coleta += "Gravity Corer, ";
-    }
-    if (document.getElementById("drilli").checked) {
-        coleta += "Drilling, ";
-    }
-    if (document.getElementById("gboxcorer").checked) {
-        coleta += "Giant box corer, ";
-    }
-    if (document.getElementById("compcorer").checked) {
-        coleta += "Composite Corer, ";
-    }
-    if (document.getElementById("boxcorer").checked) {
-        coleta += "Box Corer, ";
-    }
-    if (document.getElementById("corer").checked) {
-        coleta += "Corer, ";
-    }
-    
-    // Remove a vírgula extra no final, se houver
-    if (coleta.slice(-2) === ', ') {
-        coleta = coleta.slice(0, -2);
-    }
-
-    if(coleta){
-    resumo += "<p><strong>Equipamento(s) Selecionado(s):</strong> " + coleta + "</p>";
-    }
-    // Adiciona outro equipamento inserido
-    var outroequip = document.getElementById("outroEqui").value;
-    if(outroequip){
-    resumo += "<p> <strong> Outro equipamento:</strong> " + outroequip + "</p>";
-    }
-    // Adiciona arquivo de referência inserido
-    var refef1 = document.getElementById("refef").value;
-    resumo += "<p" + (refef1 ? '' : ' class="texto-vermelho"') + "><strong>Arquivo:</strong> " + refef1 + "</p>";
-
-    // Exibe o resumo no elemento summary2 */
 
 

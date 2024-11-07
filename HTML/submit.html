@@ -128,16 +128,19 @@
 
 <!-- PRIMEIRA PAGINA -->
 
-<form id="forms" method="post" action="../PHP/submit-DADOS2.php" enctype="multipart/form-data" style="position: relative; margin-bottom: 20px;">
-   
-       
+<form id="forms" method="post" action="../PHP/submit-DADOS2.php" enctype="multipart/form-data" style="position: relative; margin-bottom: 10px;">
+    <div id="topo" style="position: absolute; top: 0;"></div>
+      
+        
+        
     <div id="section1" class="form-section active">
+        
         <h1 style="text-align: center;"> Formulário para Submissão: </h1></br>
-
+        <div id="borda1" class="bordaPg">
         <h4><label id="autor" for="autor"> <a style="color: red;" title="Elemento obrigatório">*</a>Identificação do responsável pelo dado:</label></h4>
     </br>
 
-        <input type="text" id="correspondente" name="correspondente" style="width: 49%;" placeholder="Nome Completo"> <!-- REVISAR NOME DOS CAMPOS --  COM OS DO BANCO--> 
+        <input autofocus type="text" id="correspondente" name="correspondente" style="width: 49%;" placeholder="Nome Completo"> <!-- REVISAR NOME DOS CAMPOS --  COM OS DO BANCO--> 
         <input type="email" id="email" name="email" style="width: 49%;" placeholder="E-mail do responsável (ex: xxxxx@mail.com)" maxlength="255">
     </br>
 </br>
@@ -167,8 +170,6 @@
             </div>
     </div>
 </div>
-
-</br>
 <input id="tituloDado" type="text" name="tituloDado" style="width: 98.4%;">
 </br>
 </br>
@@ -209,11 +210,14 @@
     </div>
 </div>
 </div>
+</div> 
+</div> <!-- borda 1-->
 </br>
 </br>
 
 
 <!-- coAutores -->
+ <div id="borda2" class="bordaPg">
 <h4 id="coAutores">Adicionar Autores e Coatores:</h4></br>      
 <div id="autoresContainer">
     <div class="autor" id="autorContainer0">
@@ -227,25 +231,29 @@
     <!-- Aqui serão adicionados os campos de coautores dinamicamente -->
 </div>
 <br>
-<div id="autor-button">
+<div id="autor-button" style="display: flex; justify-content: space-between; gap: 10px;">
     
-    <button style="left: 1%; position: absolute;" class="button" type="button" onclick="adicionarAutor()">Adicionar Autor</button>
-    <button type="button" style="position:absolute; left: 50%; transform: translateX(-50%);" class="button" onclick="deletarAutor()">Remover último Co-autor</button>
-    <button type="button" style="right: 2%; position:absolute;" class="button" onclick="removerTODOSAutores()">Remover todas as linhas </button>
+    <button class="button" type="button" onclick="adicionarAutor()">Adicionar Autor</button>
+    <button type="button" class="button" onclick="deletarAutor()">Remover último Co-autor</button>
+    <button type="button"  class="button" onclick="removerTODOSAutores()">Remover todas as linhas </button>
+</div>
 </div>
 </br>
 </br>
 
-</br>
- 
+
+<div id="borda3" class="bordaPg">
 <div>
     <h4 for="referencia" ><a style="color: red;" title="Elemento obrigatório">*</a>Referência:</h4></br>
     <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" style="width: 98.4%;" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
 </div>
-    
-    <div>
-        <button class="button" type="button" style="right: 1%;position:absolute; bottom:1%;" onclick="proximaPagina()"> Avançar </button></div>
-    </div>
+
+</div>
+
+
+<div style="display: flex; justify-content: flex-end; align-items: flex-end; height: 100px;">
+    <button class="button" type="button" onclick="proximaPagina()"> Avançar </button>
+</div>
 
 
 </div>
@@ -258,7 +266,7 @@
 <div id="section2" class="form-section">
 
           <h1 style="text-align: center;">Informação dos dados a serem submetidos:</h1></br>
-
+<div id="borda4" class="bordaPg">
     <div id="resumo">
         <div style="display: flex; align-items: center; width: 100%;">
 
@@ -275,10 +283,11 @@
         </div>
     </div>
         </br>
-        <textarea type="text" id="res_dado" name="res_dado"  maxlength="2500" rows="4" cols="1000" style="width: 98.4%;"></textarea>
-       
+        <textarea autofocus type="text" id="res_dado" name="res_dado"  maxlength="2500" rows="4" cols="1000" style="width: 98.4%;"></textarea>
+    </div>    
 
 </br></br>
+<div id="borda5" class="bordaPg">
     <div id="coord">
         <div style="display: flex; align-items: center; width: 100%;">
             <h4 for="lat-long" style="width:auto; margin: 0;">
@@ -293,23 +302,67 @@
                 </div>
             </div>
         </div>
-    </br>
-</br>
-        
+   
+<div id="trab-asso">
+    <h5>
+        <input type="radio" id="pontoPon" name="ponto" value="pontoPon" onclick="mostrarDiv1()">
+        <label for="pontoPron">Ponto a Ponto </label>
+
+        <input type="radio" id="areaP" name="ponto" value="areaP" onclick="mostrarDiv2()">
+        <label for="areaP">Área<a style="font-size: 15px;"> (Utilize apenas para modelos)</a></label>
+
+    </h5> </br>  
+    
+<div id="divEBotoes" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">    
     <div id="coordenadas" >
       <!-- os pontos de coletas serão inseridos aqui -->
         
     </div>
-    <div id="coord-bttn"></br>
-        <button style="left: 1%; position: absolute;" class="button" type="button" onclick="adicionarCoordenadas() ">Adicionar Ponto</button>
-        <button type="button" style="position:absolute; left: 50%; transform: translateX(-50%);" class="button" onclick="deletarCoordenadas() ">Remover Ponto</button>
-        <button type="button" style="right: 2%; position:absolute;" class="button" onclick="removerTODAScoordenadas()">Remover todos os Pontos</button>
+    <div id="coord-bttn" style="display: flex; justify-content: space-between; gap: 10px;">
+
+        <button  class="button" type="button" onclick="adicionarCoordenadas() ">Adicionar Ponto</button>
+        <button type="button"  class="button" onclick="deletarCoordenadas() ">Remover Ponto</button>
+        <button type="button"  class="button" onclick="removerTODAScoordenadas()">Remover todos os Pontos</button>
     
     </div>
 </div>
-</br></br>
-</br></br>
-
+<div id="area"style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
+    <h5>Adicione 4 pontos:</h5>
+    <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
+        <input type="text" class="ID_amst" id="ID_amstAREA1" name="ID_amst" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
+    <input type="text" class="latitude" id="latitudeAREA1" name="latitude" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
+    <input type="text" class="longitude" id="longitudeAREA1" name="longitude" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+    <input type="date" class="dat" id="dataAREA1" name="data" style="width: 20%;" maxlength="10" autocomplete="off">
+    </div>
+</br>
+    <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
+        <input type="text" class="ID_amst" id="ID_amstAREA2" name="ID_amst" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
+    <input type="text" class="latitude" id="latitudeAREA2" name="latitude" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
+    <input type="text" class="longitude" id="longitudeAREA2" name="longitude" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+    <input type="date" class="dat" id="dataAREA2" name="data" style="width: 20%;" maxlength="10" autocomplete="off">
+    </div>
+</br>
+    <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
+        <input type="text" class="ID_amst" id="ID_amstAREA3" name="ID_amst" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
+    <input type="text" class="latitude" id="latitudeAREA3" name="latitude" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
+    <input type="text" class="longitude" id="longitudeAREA3" name="longitude" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+    <input type="date" class="dat" id="dataAREA3" name="data" style="width: 20%;" maxlength="10" autocomplete="off">
+    </div>
+</br>
+    <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
+        <input type="text" class="ID_amst" id="ID_amstAREA4" name="ID_amst" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
+    <input type="text" class="latitude" id="latitudeAREA4" name="latitude" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
+    <input type="text" class="longitude" id="longitudeAREA4" name="longitude" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+    <input type="date" class="dat" id="dataAREA4" name="data" style="width: 20%;" maxlength="10" autocomplete="off">
+    </div>
+</br>
+</div>
+</div>
+</div> <!-- id para sumir ou não -->
+</div>
+</br>
+</br>
+<div id="borda6" class="bordaPg">
 <div id="tipFerr">
 <div id="amostras" class="tipAmostra">
     <h4>Tipo de Amostra</h4>
@@ -403,15 +456,17 @@
     </div>
 </div>
 </div>
+</div>
 </br>
 </br>
 
+<div id="borda7" class="bordaPg">
 <div id="equipamentos-container">
     <div style="display: flex;">
         <h4 style="width: auto; margin: 0;">Equipamento de Coleta:</h4>
 </div>
 </br>
-    <div id="checkbox-columns" style="display: flex; width: 100%; justify-content: space-between;">
+    <div id="checkbox-columns" style="display: inline-flex; width: 100%;">
         <div id="equip1" class="equipColet1">
             <input type="checkbox" id="pstCor" name="pstCor" value="Piston Corer">
             <label for="pstCor">Piston Corer</label><br>
@@ -469,10 +524,11 @@
     </div>
 
 </div>
+</div>
 
 </br>
 </br>
-
+<div id="borda8" class="bordaPg">
 <h4> Adicione o arquivo CSV (separado por virgula): </h4>
 <a title="VER MODELO" href="javascript:abrirCSV()"  style="color: green; margin-right: 2%; font-size: 45px;" class="bi bi-filetype-csv"></a>
 <input id="refef" type="file" name="tabelaDado" style="width: 30%;" unique><br><br><br>
@@ -489,7 +545,9 @@
 disponibilizados aqui.</div>
     </div>
 
-</div></br>
+</div>
+
+</br>
 
     <select id="armazenamentoSelecao" name="armazenamento" style="width: 25%;">
         <option value="">---</option>
@@ -498,21 +556,20 @@ disponibilizados aqui.</div>
     </select></br><br>
 
 </div>
-
-
+</div>
 <div class="termo">
 
 <input type="checkbox" id="termo" name="termo" value="term">
 <label><h5 for="termo"> Li e concordo com os termos sobre o uso dos dados <a href="javascript:abrirTermo()"> Clique aqui para ler</a></h5></label>
- 
-</div>         
+
+</div> 
+       
     
-     
-        <button class="button" type="button" style="position: absolute; left: 1%; bottom: 1%;" onclick="paginaAnterior()">Anterior</button>
-        <button class="button" type="button" style="position: absolute; right: 1%; bottom: 1%;" onclick="proximaPagina(); exibirResumo(); exibirDADOS()">Avançar</button>
-
+<div id="bttn" style="display: flex; justify-content: space-between; align-items: flex-end;height: 100px;">
+    <button class="button" type="button" onclick="paginaAnterior()">Anterior</button>
+    <button class="button" type="button" onclick="proximaPagina(); exibirResumo(); exibirDADOS()">Avançar</button>
 </div>
-
+</div>
 
 </br></br>
 <!-- terceira PAGINA -->
@@ -528,9 +585,9 @@ disponibilizados aqui.</div>
 
 </br>
 </br>
-<div id="botoes">    
-    <button class="button" type="button" style="position: absolute; left: 1%; bottom: 1%;" onclick="paginaAnterior()">Anterior</button>
-    <button class="button" type="submit" style="position: absolute; right: 1%; bottom: 1%;"> Submeter</button>
+<div id="bttn" style="display: flex; justify-content: space-between; align-items: flex-end;height: 100px;">   
+    <button class="button" type="button"  onclick="paginaAnterior()">Anterior</button>
+    <button class="button" type="submit" > Submeter</button>
 </div>
 
 

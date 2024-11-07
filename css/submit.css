@@ -95,6 +95,21 @@
 
 
 
+/* PARA A BORDA ENTRE AS CAIXAS*/
+.bordaPg{
+  border: 1px solid;
+  border-color:#00000067;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 2px;
+
+}
+
+
+
+
+
+
 .coordenadas-campo input {
   margin-right: 4.8px;
   box-sizing: border-box;
@@ -222,6 +237,7 @@ a.link-pesq:hover{
   vertical-align: top;
   padding: 5px;
   box-sizing: border-box;
+  white-space: nowrap;
 }
 
 
@@ -229,7 +245,7 @@ a.link-pesq:hover{
 /* equipamentos container*/
 #equipamentos-container {
   display: inline-block;
-  width: 70%;
+  width: 90%;
   vertical-align: top;
   padding: 10px;
   box-sizing: border-box;
@@ -238,10 +254,11 @@ a.link-pesq:hover{
 
 #equip1, #equip2, #equip3 {
   display: inline-block;
-  width: 23.3%;
+  width: 30%;
   vertical-align: top;
   padding: 5px;
   box-sizing: border-box;
+  white-space: nowrap;
  
 }
 
