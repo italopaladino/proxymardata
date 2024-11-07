@@ -432,11 +432,17 @@ function proximaPagina() {
     } else if (currentSection === 2) {
         // Verificações específicas para a segunda seção
         const resumoD = document.getElementById('res_dado').value; // Exemplo de campo específico para a Section2
+        const termo = document.getElementById('termo').checked;
 
         if (resumoD === '') {
             window.alert('Adicione um resumo para os dados.');
             document.getElementById('res_dado').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
+
+        }else if (!termo) {
+            window.alert('Aceite os termos antes de Submeter os dados.');
+            document.getElementById('termo').scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+
+        }else {
             document.getElementById('section2').style.display = 'none';
             document.getElementById('section3').style.display = 'block';
             currentSection = 3; // Atualiza para a próxima seção
@@ -869,7 +875,15 @@ if (document.getElementById("pstCor").checked) {
         + "<select style='height: 30px; width: 30%;'>"
         + "<option readonly selected value='" + armze + "'>" + armze + "</option>"
         + "</select>"
-        + "</div>";
+        + "</div>"
+        +"</br>"
+        +"</br>"
+
+        +"<div class='termo'>"
++"<input type='checkbox' id='termo' name='termo'checked disabled>"
++"<label><h5 for='termo'> Li e concordo com os termos sobre o uso dos dados <a href='javascript:abrirTermo()'> Clique aqui para ler</a></h5></label>"
++"</div>";
+
 
     resumo += "</form>";
     summary2.innerHTML = resumo;
