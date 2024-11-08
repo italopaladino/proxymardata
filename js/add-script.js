@@ -600,7 +600,7 @@ summary1.innerHTML = resumo;
 function exibirDADOS() {
     var summary2 = document.getElementById("summary-2");
     var resumo = "";
-    var resDad = document.getElementById("res_dado").value;
+    var resDad = document.getElementById("resDado").value;
 
     resumo += "<form id='formsRes' style='position: relative; margin-bottom:20px'>"
         + "</br>"  
