@@ -130,7 +130,7 @@
 
 <form id="forms" method="post" action="../PHP/submit-DADOS2.php" enctype="multipart/form-data" style="position: relative; margin-bottom: 10px;">
     <div id="topo" style="position: absolute; top: 0;"></div>
-      
+    <input type="hidden" name="secaoAtual1" value="default_value1">
         
         
     <div id="section1" class="form-section active">
@@ -206,7 +206,7 @@
 <div class="coluna">
     <div id="titulo-trab">
         <label for="tit-trab" id="tit-trab">Título do Trabalho:</label></br>
-        <textarea style="width: 100%; resize:vertical;" type="text" id="titTrab" maxlength="1500" rows="3" ></textarea> <!-- att no SQL -->
+        <textarea style="width: 100%; resize:vertical;" type="text" id="titTrab" name="titTrab" maxlength="1500" rows="3" ></textarea> <!-- att no SQL -->
     </div>
 </div>
 </div>
@@ -264,7 +264,7 @@
 
     <!-- SEGUNDA PAGINA-->
 <div id="section2" class="form-section">
-
+    <input type="hidden" name="secaoAtual2" value="default_value2">
           <h1 style="text-align: center;">Informação dos dados a serem submetidos:</h1></br>
 <div id="borda4" class="bordaPg">
     <div id="resumo">
@@ -329,31 +329,31 @@
 <div id="area"style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
     <h5>Adicione 4 pontos:</h5>
     <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
-        <input type="text" class="ID_amst" id="ID_amstAREA1" name="ID_amst" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
-    <input type="text" class="latitude" id="latitudeAREA1" name="latitude" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
-    <input type="text" class="longitude" id="longitudeAREA1" name="longitude" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
-    <input type="date" class="dat" id="dataAREA1" name="data" style="width: 20%;" maxlength="10" autocomplete="off">
+        <input type="text" class="ID_amst" id="ID_amstAREA1" name="ID_amstAREA1" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
+    <input type="text" class="latitude" id="latitudeAREA1" name="latitudeAREA1" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
+    <input type="text" class="longitude" id="longitudeAREA1" name="longitudeAREA1" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+    <input type="date" class="dat" id="dataAREA1" name="dataAREA1" style="width: 20%;" maxlength="10" autocomplete="off">
     </div>
 </br>
     <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
-        <input type="text" class="ID_amst" id="ID_amstAREA2" name="ID_amst" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
-    <input type="text" class="latitude" id="latitudeAREA2" name="latitude" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
-    <input type="text" class="longitude" id="longitudeAREA2" name="longitude" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
-    <input type="date" class="dat" id="dataAREA2" name="data" style="width: 20%;" maxlength="10" autocomplete="off">
+        <input type="text" class="ID_amst" id="ID_amstAREA2" name="ID_amstAREA2" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
+    <input type="text" class="latitude" id="latitudeAREA2" name="latitudeAREA2" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
+    <input type="text" class="longitude" id="longitudeAREA2" name="longitudeAREA2" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+    <input type="date" class="dat" id="dataAREA2" name="dataAREA2" style="width: 20%;" maxlength="10" autocomplete="off">
     </div>
 </br>
     <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
-        <input type="text" class="ID_amst" id="ID_amstAREA3" name="ID_amst" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
-    <input type="text" class="latitude" id="latitudeAREA3" name="latitude" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
-    <input type="text" class="longitude" id="longitudeAREA3" name="longitude" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
-    <input type="date" class="dat" id="dataAREA3" name="data" style="width: 20%;" maxlength="10" autocomplete="off">
+        <input type="text" class="ID_amst" id="ID_amstAREA3" name="ID_amstAREA3" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
+    <input type="text" class="latitude" id="latitudeAREA3" name="latitudeAREA3" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
+    <input type="text" class="longitude" id="longitudeAREA3" name="longitudeAREA3" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+    <input type="date" class="dat" id="dataAREA3" name="dataAREA3" style="width: 20%;" maxlength="10" autocomplete="off">
     </div>
 </br>
     <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
-        <input type="text" class="ID_amst" id="ID_amstAREA4" name="ID_amst" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
-    <input type="text" class="latitude" id="latitudeAREA4" name="latitude" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
-    <input type="text" class="longitude" id="longitudeAREA4" name="longitude" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
-    <input type="date" class="dat" id="dataAREA4" name="data" style="width: 20%;" maxlength="10" autocomplete="off">
+        <input type="text" class="ID_amst" id="ID_amstAREA4" name="ID_amstAREA4" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
+    <input type="text" class="latitude" id="latitudeAREA4" name="latitudeAREA4" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
+    <input type="text" class="longitude" id="longitudeAREA4" name="longitudeAREA4" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+    <input type="date" class="dat" id="dataAREA4" name="dataAREA4" style="width: 20%;" maxlength="10" autocomplete="off">
     </div>
 </br>
 </div>

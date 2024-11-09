@@ -400,7 +400,7 @@ function proximaPagina() {
         const trabAssSim = document.getElementById('trab-sim').checked;
         const trabAssNao = document.getElementById('trab-nao').checked;
         const autor0 = document.getElementById('autor0').value;
-        const refer = document.getElementById('referencia').value;
+        
 
         if (correspondente === '') {
             window.alert('Indique o nome do correspondente!');
@@ -419,10 +419,7 @@ function proximaPagina() {
         } else if (autor0 === '') {
             window.alert('Indique ao menos um Autor');
             document.getElementById('autor0').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else if (refer === '') {
-            window.alert('Indique a referência');
-            document.getElementById('referencia').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
+        }  else {
             // Passa para a próxima "seção"
             document.getElementById('section1').style.display = 'none';
             document.getElementById('section2').style.display = 'block';
@@ -431,12 +428,12 @@ function proximaPagina() {
         }
     } else if (currentSection === 2) {
         // Verificações específicas para a segunda seção
-        const resumoD = document.getElementById('res_dado').value; // Exemplo de campo específico para a Section2
+        const resumoD = document.getElementById('resDado').value; // Exemplo de campo específico para a Section2
         const termo = document.getElementById('termo').checked;
 
         if (resumoD === '') {
             window.alert('Adicione um resumo para os dados.');
-            document.getElementById('res_dado').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('resDado').scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         }else if (!termo) {
             window.alert('Aceite os termos antes de Submeter os dados.');
@@ -648,31 +645,31 @@ if (
 ){
     resumo+="<br>"
     +"<div style='display:flex; flex-wrap; width: 100%; gap: 4.8px;'>"
-    +"<input type='text' style='width:20%' value='" + idArea1 + "'>"
-    +"<input type='text' style='width:25%' value='" + latArea1 + "'>"
-    +"<input type='text' style='width:25%' value='" + longArea1 + "'>"
-    +"<input type='date' style='width:20%' value='" + dat31 + "'>"
+    +"<input readonly type='text' style='width:20%' value='" + idArea1 + "'>"
+    +"<input readonly type='text' style='width:25%' value='" + latArea1 + "'>"
+    +"<input readonly type='text' style='width:25%' value='" + longArea1 + "'>"
+    +"<input readonly type='date' style='width:20%' value='" + dat31 + "'>"
     +"</div>"
     +"</br>"
     +"<div style='display:flex; flex-wrap; width: 100%; gap: 4.8px;'>"
-    +"<input type='text' style='width:20%' value='" + idArea2 + "'>"
-    +"<input type='text' style='width:25%' value='" + latArea2 + "'>"
-    +"<input type='text' style='width:25%' value='" + longArea2 + "'>"
-    +"<input type='date' style='width:20%' value='" + dat32 + "'>"
+    +"<input readonly type='text' style='width:20%' value='" + idArea2 + "'>"
+    +"<input readonly type='text' style='width:25%' value='" + latArea2 + "'>"
+    +"<input readonly type='text' style='width:25%' value='" + longArea2 + "'>"
+    +"<input readonly type='date' style='width:20%' value='" + dat32 + "'>"
     +"</div>"
     +"</br>"
     +"<div style='display:flex; flex-wrap; width: 100%; gap: 4.8px;'>"
-    +"<input type='text' style='width:20%' value='" + idArea3 + "'>"
-    +"<input type='text' style='width:25%' value='" + latArea3 + "'>"
-    +"<input type='text' style='width:25%' value='" + longArea3 + "'>"
-    +"<input type='date' style='width:20%' value='" + dat33 + "'>"
+    +"<input readonly type='text' style='width:20%' value='" + idArea3 + "'>"
+    +"<input readonly type='text' style='width:25%' value='" + latArea3 + "'>"
+    +"<input readonly type='text' style='width:25%' value='" + longArea3 + "'>"
+    +"<input readonly type='date' style='width:20%' value='" + dat33 + "'>"
     +"</div>"
     +"</br>"
     +"<div style='display:flex; flex-wrap; width: 100%; gap: 4.8px;'>"
-    +"<input type='text' style='width:20%' value='" + idArea4 + "'>"
-    +"<input type='text' style='width:25%' value='" + latArea4 + "'>"
-    +"<input type='text' style='width:25%' value='" + longArea4 + "'>"
-    +"<input type='date' style='width:20%' value='" + dat34 + "'>"
+    +"<input readonly type='text' style='width:20%' value='" + idArea4 + "'>"
+    +"<input readonly type='text' style='width:25%' value='" + latArea4 + "'>"
+    +"<input readonly type='text' style='width:25%' value='" + longArea4 + "'>"
+    +"<input readonly type='date' style='width:20%' value='" + dat34 + "'>"
     +"</div>"
     +"</br>"
 }else{

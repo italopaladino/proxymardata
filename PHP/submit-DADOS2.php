@@ -27,25 +27,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Obtém os dados do formulário
             $corr = $_POST['correspondente'];
             $email = $_POST['email'];
-            $tipoTrabalho = $_POST['tipoTrabalho'];
-            $armazenamento = $_POST['armazenamento'];
-            $termo = isset($_POST['termo']) ? 'TRUE' : 'FALSE';
-            $titulo = $_POST['titulo'];
-            $titulo_dado = $_POST['titulo_dado'];
-
-            $periodico = $_POST['periodico'];
-            $linkart = $_POST['linkart'];
-            $funding = trim($_POST['funding']);
-            $data1 = $_POST['data1'];
-            $keywords = trim($_POST['keywords']);
+            $tituloPrinc = $_POST['tituloPrinc'];
+            $tituloDado = $_POST['tituloDado'];
+            $trabAssoc = $_POST['trab_associado'];
+            $tipotrabalho = $_POST['tipoTrabalho'];
+            $tituloTrabalho = $_POST['titTrab'];
             $referencia = trim($_POST['referencia']);
+           
+           
+            $armazenamento = $_POST['armazenamento'];
+
+            $termo = isset($_POST['termo']) ? 'TRUE' : 'FALSE';
+            
+            
+           
 
             // Preparando e executando a consulta SQL para inserir na tabela infogeral
-            $sql1 = "INSERT INTO infogeral (correspondente, email, tipoTrabalho, armazenamento, termo, titulo, titulo_dado, periodico, linkart, funding, data1, keywords,referencia) 
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12,$13)
+            $sql1 = "INSERT INTO infogeral (correspondente, email, tituloPrinc, tituloDado, trabAssoc, tipoTrabalho, tituloTrabalho, referencia, armazenamento, termo) 
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
                      RETURNING geralID";
             
-            $result1 = pg_query_params($conn, $sql1, [$corr, $email, $tipoTrabalho, $armazenamento, $termo, $titulo,$titulo_dado, $periodico, $linkart, $funding, $data1, $keywords, $referencia]);
+            $result1 = pg_query_params($conn, $sql1, [$corr, $email, $tituloPrinc, $tituloDado, $trabAssoc ,$tipotrabalho,$tipotrabalho,$referencia,$armazenamento,$termo]);
 
             // Verifica se a consulta foi bem-sucedida e obtém o ID do trabalho inserido
             if ($result1) {
@@ -113,109 +115,157 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
      }
 
-     if ($secaoAtual2) {
-        if (
-            isset($_POST['ID_amst']) &&
-            isset($_POST['latitude']) &&
-            isset($_POST['longitude']) &&
-            isset($_POST['prof']) &&
-            isset($_POST['recuperacao']) &&
-            isset($_POST['data'])
-        ) {
-            foreach ($_POST['ID_amst'] as $key => $ID_amst) {
-                // Verifica se todos os campos necessários estão presentes
-                if (
-                    isset($_POST['latitude'][$key]) &&
-                    isset($_POST['longitude'][$key]) &&
-                    isset($_POST['prof'][$key]) &&
-                    isset($_POST['recuperacao'][$key]) &&
-                    isset($_POST['data'][$key])
-                ) {
-                    // Limpa os valores dos campos
-                    $ID_amst = trim($ID_amst);
+// Verifica se os campos de ID_amst existem antes de proceder
+if ($secaoAtual2 && isset($_POST['ID_amst'])) {
+    foreach ($_POST['ID_amst'] as $key => $ID_amst) {
+        // Limpa e atribui os valores, ou define como null se não existirem
+        $ID_amst = isset($_POST['ID_amst'][$key]) ? trim($_POST['ID_amst'][$key]) : null;
+        $latitude = isset($_POST['latitude'][$key]) ? trim(str_replace(",", ".", $_POST['latitude'][$key])) : null;
+        $longitude = isset($_POST['longitude'][$key]) ? trim(str_replace(",", ".", $_POST['longitude'][$key])) : null;
+        $anoColeta = isset($_POST['data'][$key]) ? trim($_POST['data'][$key]) : null;
 
-                    $latitude = trim($_POST['latitude'][$key]);
-                    $latitudes = str_replace(",",".", $latitude);
+        // Insere apenas se pelo menos um campo tiver valor
+        if ($ID_amst || $latitude || $longitude || $anoColeta) {
+            $sql_pontos = "INSERT INTO pontos_coleta (ID_amst, latitude, longitude, data2, trabalhoid) VALUES ($1, $2, $3, $4, $5)";
+            $result_ponto = pg_query_params($conn, $sql_pontos, [$ID_amst, $latitude, $longitude, $anoColeta, $trabalhoID]);
 
-                    $longitude = trim($_POST['longitude'][$key]);
-                    $longitudes = str_replace(",",".",$longitude);
-
-                    $prof = trim($_POST['prof'][$key]);
-                    $recuperacao = trim($_POST['recuperacao'][$key]);
-                    $anoColeta = trim($_POST['data'][$key]);
-    
-                    // Prepara a consulta SQL
-                    $sql_pontos = "INSERT INTO pontos_coleta (ID_amst, latitude, longitude, prof, recuperacao, data2, trabalhoid) VALUES ($1, $2, $3, $4, $5, $6,$7)";
-                    $result_ponto = pg_query_params($conn, $sql_pontos, [$ID_amst, $latitudes, $longitudes, $prof, $recuperacao, $anoColeta, $trabalhoID]);
-    
-                    if (!$result_ponto) {
-                        echo "<script> window.alert('erro ao inserir na tabela de pontos $key'); </script>";
-                        error_log("erro ao inserir na tabela de pontos", 3, "../errorlog/errorlog.txt");
-                        throw new Exception("Erro ao inserir na tabela pontos");
-                    }
-                } else {
-                     echo "<script> window.alert('Dados imcompletos para o índice $key'); </script>";
-                    error_log("Dados imcompletos para o índice $key", 3 , "../errorlog/errorlog.txt");
-                    throw new Exception("Dados incompletos para o índice $key");
-                }
+            if (!$result_ponto) {
+                $pg_error = pg_last_error($conn);
+                echo "<script> window.alert('Erro ao inserir na tabela de pontos $key: $pg_error'); </script>";
+                error_log("Erro ao inserir na tabela de pontos $key: $pg_error", 3, "../errorlog/errorlog.txt");
+                throw new Exception("Erro ao inserir na tabela de pontos: $pg_error");
             }
-        } else {
-            echo "<script> window.alert('Campos de entradas ausentes'); </script>";
-            error_log("Campos de entradas ausentes", 3,"../errorlog/errorlog.txt");
-            throw new Exception("Campos de entrada ausentes");
         }
     }
-    $isot = isset($_POST['isot']) ? 1 : 0;
-    $PP = isset($_POST['PP']) ? 1 : 0;
-    $circ = isset($_POST['circulacao']) ? 1 : 0;
-    $org = isset($_POST['org']) ? 1 : 0;
-    $inorg = isset($_POST['inorg']) ? 1 : 0;
-    $foramplan = isset($_POST['foramplan']) ? 1 : 0;
-    $forambent = isset($_POST['forambent']) ? 1 : 0;
-    $sealev = isset($_POST['sealev']) ? 1 : 0;
-    $co2atm = isset($_POST['co2atm']) ? 1 : 0;
-    $cobveg = isset($_POST['cobveg']) ? 1 : 0;
-    $rainfall = isset($_POST['rainfall']) ? 1 : 0;
-    $stratg = isset($_POST['stratg']) ? 1 : 0;
-    $outroProx = trim($_POST['outroProx']);
-
-    $sql_prox = "INSERT INTO proxys (isot, PP, circulacao, org, inorg, foramplan,forambent, sealev, co2atm, cobveg, rainfall, stratg, outroprox, trabalhoid)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12,NULLIF($13, ''), $14)";
-    $result_prox = pg_query_params($conn, $sql_prox,[$isot, $PP,$circ, $org, $inorg, $foramplan, $forambent, $sealev, $co2atm, $cobveg, $rainfall, $stratg, $outroProx, $trabalhoID]);
-
-    if (!$result_prox){
-        echo "<script> window.alert(' Erro ao inserir na coluna ferramentas'); </script>";
-        error_log("erro ao inserir na tabela proxys", 3, "../errorlog/errorlog.txt");
-        throw new Exception("Erro ao inserir na tabela proxys");
-    }
-
-    $multcorer = isset($_POST['multcorer']) ? 1 : 0;
-    $piston = isset($_POST['piston']) ? 1 : 0;
-    $gravcorer = isset($_POST['gravcorer']) ? 1 : 0;
-    $drilli = isset($_POST['drilli']) ? 1 : 0;
-    $gboxcorer = isset($_POST['gboxcorer']) ? 1 : 0;
-    $compcorer = isset($_POST['compcorer']) ? 1 : 0;
-    $boxcorer = isset($_POST['boxcorer']) ? 1 : 0;
-    $corer = isset($_POST['corer']) ? 1 : 0;
-    $outroEqui = trim($_POST['outroEqui']);
-
-    $sql_equipamentos = "INSERT INTO equipcoleta (multcorer, piston, gravcorer,drilli, gboxcorer,compcorer, boxcorer, corer, outroEQui, trabalhoid)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8,  NULLIF($9, ''), $10)";
-    $result_equi = pg_query_params($conn, $sql_equipamentos,[$multcorer,$piston, $gravcorer,$drilli, $gboxcorer, $compcorer,$boxcorer, $corer, $outroEqui, $trabalhoID]);
-
-    if (!$result_equi){
-        echo "<script> window.alert('Erro ao inserir na tabela equipamentos'); </script>";
-        error_log("Erro ao inserir na tabela equipamentos",3,"../errorlog/errorlog.txt");
-        throw new Exception("erro ao inserir na tabela equipamentos");
-
 }
 
-$carct = $_POST['caract'];
-$metut = $_POST['metut'];
-$area_est = $_POST['area_est'];
+// Arrays contendo os valores das áreas, verificando se cada índice existe antes de criar os arrays
+// Definindo os valores das áreas apenas se os campos existirem
+$ID_amstAREA = [
+    $_POST['ID_amstAREA1'] ?? null, 
+    $_POST['ID_amstAREA2'] ?? null, 
+    $_POST['ID_amstAREA3'] ?? null, 
+    $_POST['ID_amstAREA4'] ?? null
+];
+$latitudeAREA = [
+    $_POST['latitudeAREA1'] ?? null, 
+    $_POST['latitudeAREA2'] ?? null, 
+    $_POST['latitudeAREA3'] ?? null, 
+    $_POST['latitudeAREA4'] ?? null
+];
+$longitudeAREA = [
+    $_POST['longitudeAREA1'] ?? null, 
+    $_POST['longitudeAREA2'] ?? null, 
+    $_POST['longitudeAREA3'] ?? null, 
+    $_POST['longitudeAREA4'] ?? null
+];
+$dataAREA = [
+    $_POST['dataAREA1'] ?? null, 
+    $_POST['dataAREA2'] ?? null, 
+    $_POST['dataAREA3'] ?? null, 
+    $_POST['dataAREA4'] ?? null
+];
 
-$sql_caract = "INSERT INTO caractDado (caract, metut, area_est, trabalhoid) VALUES ($1, $2, $3,$4)";
-$result_caract = pg_query_params($conn, $sql_caract,[$carct, $metut, $area_est, $trabalhoID]);
+$sql_areaP = "INSERT INTO areaP (ID_amstAREA, latitudeAREA, longitudeAREA, dataAREA, trabalhoID) VALUES ($1, $2, $3, $4, $5)";
+
+// Insere cada conjunto de valores na tabela areaP, apenas se algum valor estiver preenchido
+for ($i = 1; $i <= count($ID_amstAREA); $i++) {
+    if ($ID_amstAREA[$i - 1] || $latitudeAREA[$i - 1] || $longitudeAREA[$i - 1] || $dataAREA[$i - 1]) {
+        $params = [
+            $ID_amstAREA[$i - 1],
+            $latitudeAREA[$i - 1],
+            $longitudeAREA[$i - 1],
+            $dataAREA[$i - 1],
+            $trabalhoID
+        ];
+
+        // Depuração: exibir os dados que estão sendo passados
+        error_log("Tentativa de inserir na tabela areaP com valores: " . print_r($params, true), 3, "../errorlog/errorlog.txt");
+
+        $result_prox = pg_query_params($conn, $sql_areaP, $params);
+
+        if (!$result_prox) {
+            // Exibir erro específico do PostgreSQL
+            $pg_error = pg_last_error($conn);
+            echo "<script> window.alert('Erro ao inserir na tabela areaP: $pg_error'); </script>";
+            error_log("Erro ao inserir na tabela areaP: $pg_error", 3, "../errorlog/errorlog.txt");
+            throw new Exception("Erro ao inserir na tabela areaP: $pg_error");
+        }
+    }
+
+
+
+
+    $tipAmst = $_POST['tipAmst'];
+    $associ = isset($_POST['associ']) ? 1 : 0;
+    $batmet = isset($_POST['batmet']) ? 1 : 0;
+    $bioOrg = isset($_POST['bioOrg']) ? 1 : 0;
+    $cocolit = isset($_POST['cocolit']) ? 1 : 0;
+    $strat = isset($_POST['estrat']) ? 1 : 0;
+    $foramplan = isset($_POST['foramplan']) ? 1 : 0;
+    $forambent = isset($_POST['forambent']) ? 1 : 0;
+    $granl = isset($_POST['granl']) ? 1 : 0;
+    $hidrod = isset($_POST['hidrod']) ? 1 : 0;
+    $hidrog = isset($_POST['hidrog']) ? 1 : 0;
+    $matorg = isset($_POST['matorg']) ? 1 : 0;
+    $metais = isset($_POST['metais']) ? 1 : 0;
+    $microps = isset($_POST['microps']) ? 1 : 0;
+    $ageMod = isset($_POST['ageMod']) ? 1 : 0;
+    $proFisi = isset($_POST['proFisi']) ? 1 : 0;
+    $radioist = isset($_POST['radioist']) ? 1 : 0;
+    $razIsot = isset($_POST['razIsot']) ? 1 : 0;
+    $smodnum = isset($_POST['SmodNum']) ? 1 : 0;
+    $teorAg = isset($_POST['teorAg']) ? 1 : 0;
+
+    $outroFerr = trim($_POST['outroFerr']);
+
+    $sql_ferram = "INSERT INTO ferramentas (tipoAmst, assos, batmet, bioOrg, cocolit, estrat, foramplan,forambent, granl, hidrod, hidrog, matorg, metais, microps, ageMod, proFisi, radioist, razIsot,smodNum, teorAg, outroFerr, trabalhoid)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12,$13,$14,$15,$16,$17,$18,$19,$20,NULLIF($21, ''), $22)";
+    $result_prox = pg_query_params($conn, $sql_ferram,[$tipAmst,$associ,$batmet,$bioOrg,$cocolit,$strat,$foramplan,$forambent,$granl,$hidrod,$hidrog,$matorg,$metais,$microps,$ageMod,$proFisi,$radioist,$razIsot,$smodnum,$teorAg,$outroFerr,$trabalhoID]);
+
+    if (!$result_prox){
+        $pg_error =pg_last_error($conn);
+        echo "<script> window.alert(' Erro ao inserir na tabela ferramentas : $pg_error''); </script>";
+        error_log("erro ao inserir na tabela ferramenta: $pg_error ", 3, "../errorlog/errorlog.txt");
+        throw new Exception("Erro ao inserir na tabela ferramenta");
+    }
+
+    
+    $piston = isset($_POST['pstCor']) ? 1 : 0;
+    $gravcorer = isset($_POST['gravt']) ? 1 : 0;
+    $drilli = isset($_POST['drill']) ? 1 : 0;
+    $gboxcorer = isset($_POST['gbox']) ? 1 : 0;
+    $boxcr = isset($_POST['boxcr']) ? 1 : 0;
+    $ADCP = isset($_POST['ADCP']) ? 1 : 0;
+    $corrt = isset($_POST['corrt']) ? 1 : 0;
+    $CTD = isset($_POST['CTD']) ? 1 : 0;
+    $modNum = isset($_POST['modNum']) ? 1 : 0;
+    $multb = isset($_POST['multb']) ? 1 : 0;
+    $multCorr = isset($_POST['multCorr']) ? 1 : 0;
+    $satl = isset($_POST['satl']) ? 1 : 0;
+    $sensBio = isset($_POST['sensBio']) ? 1 : 0;
+    $sidSc = isset($_POST['sidSc']) ? 1 : 0;
+    $vanv = isset($_POST['vanv']) ? 1 : 0;
+    $outroEqui = trim($_POST['outroEqui']);
+
+    $sql_equipamentos = "INSERT INTO equipcoleta (piston,gravcorer,drilli,gboxcorer,boxcorer,ADCP,corrt,CTD, modNum, multcor,stl,senscbio,sisSc,sidSc,vanv, outroEQui, trabalhoid)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9,$10,$11,$12,$13,$14,$15,NULLIF($16, ''), $17)";
+
+    $result_equi = pg_query_params($conn, $sql_equipamentos,[$piston,$gravcorer,$drilli,$gboxcorer,$boxcr,$ADCP,$corrt,$CTD,$modNum,$multb,$multCorr,$satl,$sensBio,$sidSc,$vanv,$outroEqui,$trabalhoID]);
+
+
+    if (!$result_equi) {
+        $pg_error = pg_last_error($conn);
+        echo "<script> window.alert('Erro ao inserir na tabela equipamentos: $pg_error'); </script>";
+        error_log("Erro ao inserir na tabela equipamentos: $pg_error", 3, "../errorlog/errorlog.txt");
+        throw new Exception("Erro ao inserir na tabela equipamentos: $pg_error");
+    }
+
+
+$resDad = $_POST['res_dado'];
+
+$sql_caract = "INSERT INTO caractDado (red_dado, trabalhoid) VALUES ($1, $2)";
+$result_caract = pg_query_params($conn, $sql_caract,[$resDad, $trabalhoID]);
 
 
 
@@ -239,15 +289,15 @@ if (isset($_FILES['tabelaDado']) && $_FILES['tabelaDado']['error'] === UPLOAD_ER
     if ($result) {
         error_log("Arquivo CSV carregado e inserido na tabela arquivos com sucesso.", 3, "../errorlog/errorlog.txt");
     } else {
-        echo "<script> window.alert('erro no arquivoo); </script>";
+        echo "<script> window.alert('erro no arquivo'); </script>";
         error_log("Erro ao inserir arquivo na tabela arquivos: " . pg_last_error($conn), 3, "../errorlog/errorlog.txt");
     }
 } else {
-    echo "<script> window.alert('erro no arquivoo); </script>";
+    echo "<script> window.alert('erro no arquivo'); </script>";
     error_log("Erro no envio do arquivo CSV.", 3, "../errorlog/errorlog.txt");
 }
 
-
+     }
 
         // Commit da transação
         pg_query($conn, 'COMMIT');
@@ -268,3 +318,4 @@ if (isset($_FILES['tabelaDado']) && $_FILES['tabelaDado']['error'] === UPLOAD_ER
     // Fechar a conexão
     pg_close($conn);
     ?>
+
