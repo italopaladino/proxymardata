@@ -248,7 +248,7 @@ for ($i = 1; $i <= count($ID_amstAREA); $i++) {
     $vanv = isset($_POST['vanv']) ? 1 : 0;
     $outroEqui = trim($_POST['outroEqui']);
 
-    $sql_equipamentos = "INSERT INTO equipcoleta (piston,gravcorer,drilli,gboxcorer,boxcorer,ADCP,corrt,CTD, modNum, multcor,stl,senscbio,sisSc,sidSc,vanv, outroEQui, trabalhoid)
+    $sql_equipamentos = "INSERT INTO equipcoleta (piston,gravcorer,drilli,gboxcorer,boxcorer,ADCP,corrt,CTD, modNum, multb, multcor,stl,senscbio,sidSc,vanv, outroEQui, trabalhoid)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9,$10,$11,$12,$13,$14,$15,NULLIF($16, ''), $17)";
 
     $result_equi = pg_query_params($conn, $sql_equipamentos,[$piston,$gravcorer,$drilli,$gboxcorer,$boxcr,$ADCP,$corrt,$CTD,$modNum,$multb,$multCorr,$satl,$sensBio,$sidSc,$vanv,$outroEqui,$trabalhoID]);

@@ -105,58 +105,85 @@
     </div>
 
     <!-- Pagina de consulta dos dados -->
-    <div class="flex-wrapper">
-        <div class="filter-forms" style="background-color:aliceblue;">
-            <div class="filter-top-forms" style="background-color:cadetblue;">
-                <span id="filter-forms-label">Filtros:</span>
-            </div>
 
-    <div class="search3">
-    <input id="filtro-geral" class="search3"placeholder="Ta aqui pra ficar bonito, mas não ta liberado ainda" onclick="n()">
+    <div class="flex-wrapper" style="border:none;">
+
+
+     <div id="primeiraPart" class="filter-forms" >   
+
+    <div class="filter-top-forms bordaPag bg-primary" >
+                <h4><span id="filter-forms-label">Busca Avançada:</span></h4>
+                <div class="search3">
+    <input id="filtro-geral" class="search3"placeholder="Filtragem (em construção...)" readonly>
 </div>
-    
-        
+</div>  
 
-    
 
-            <br>
-            <form class="form-filter">
+            
+            <!--<form class="form-filter">
+            <div id="filtroAtv>
             <h1 class="form-tip">Filtros ativo:</h1>
 
-            <div id="filtro-ativo"></div>
-                <h1 class="form-tip">Tipo de trabalho:</h1>
+            <div id="filtro-ativo">
+
+            </div>
+</div>        -->
+
+      <div id="segundaPart" class="bordaPag" style="background-color:ghostwhite;">
+
+        <div id="todos os filtros" class="bordaDentro">
+                <h2 class="form-tip">Tipo de trabalho:</h2>
                 <div class="top-tipo" id="top-tipo">
                     <!-- deixar fixado -->
                 </div>
-                <h1 class="form-tip">Ano de Publicação:</h1>
-                <div id="top-ano-pub"></div>
-                <!-- Lista de anos de publicação será carregada aqui -->
-                <h1 class="form-tip">Ano de Coleta:</h1>
-                <!-- linkar com os anos que tem no banco deixar últimos 5 -->
-                <div id="top-ano-coleta">    </div>
-                <h1 class="form-tip">Proxies Utilizados:</h1>
-                <div class="top-proxies" id="top-prox">    </div>
-                <h1 class="form-tip">Tipos de instrumentos:</h1>
-                <div id="top-equi" class="top-equi">   </div>
-                
-            </form>
 
-            
+                <!-- Lista de anos de publicação será carregada aqui -->
+                <h2 class="form-tip">Ano de Coleta:</h2>
+                <!-- linkar com os anos que tem no banco deixar últimos 5 -->
+                <div id="top-ano-coleta">    
+                </div>
+
+                <!--<h2 class="form-tip">Autores:</h2>
+                <div class="top-autores" id="top-autores">
+                </div>-->
+
+                <h2 class="form-tip">Tipo de amostra:</h2>
+                <div class="top-tipAmost" id="top-tipAmost">
+                </div>
+
+                <h2 class="form-tip">Ferramenta(s) utilizada(s):</h2>
+                <div class="top-ferra" id="top-ferra">
+                </div>
+
+                <h2 class="form-tip">Equipamento(s) utilizado(s):</h2>
+                <div id="top-equi" class="top-equi">
+                </div>
+
+                <h2 class="form-tip">Armazenamento:</h1>
+                <div id="top-armaz" class="top-armaz">
+                </div>
+
+            </div>
+      
+
+
     <!-- Links de Resultados -->
     <div class="resultados">
         <!-- Os links serão preenchidos aqui -->
     </div>
-        </div>
-        
+    </div>
+     </div> 
+     
+     
 
-        <div class="results-consult" style="background-color:aliceblue">
-            <div class="result-consult-forms" style="background-color: cadetblue;">
-                <span id="result-fomrs">RESULTADOS DAS BUSCAS</span>
+        <div class="results-consult" >
+            <div class="filter-top-forms bordaPag bg-primary">
+                <h4><span id="result-fomrs">Disponíveis no banco de dados:</span></h4>
             </div>
-            <div class="container">
-                <div class="row">
+            <div class="bordaPag" style="background-color:ghostwhite;">
+                <div>
                     <div class="col">
-                        <div id="ultimosartigos" class="table-responsive">
+                        <div id="ultimosartigos" class="table-responsive bordaDentro">
                             <!-- Os resultados da consulta serão exibidos aqui -->
                         </div>
                                                
@@ -240,25 +267,7 @@ $(document).ready(function() {
         });
 
 
-        $.ajax({
-            url: "../PHP/top-ano-pub.php",
-            type: "GET",
-            success: function(response) {
-                $("#top-ano-pub").html(response);
-
-                // Adicionar evento de clique aos botões de ano
-                $(".ano-button").click(function() {
-                    var ano = $(this).data("ano");
-                    console.log("Ano selecionado:", ano);  // Adicione esta linha
-                    carregarResultadosano(ano);
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error("Erro ao consultar ano de publicação:", status, error);
-            }
-        });
-
-        $.ajax({
+         $.ajax({
             url: "../PHP/top-ano-coleta.php",
             type: "GET",
             success: function(response) {
@@ -270,15 +279,29 @@ $(document).ready(function() {
         });
 
         $.ajax({
-            url: "../PHP/top-prox.php",
+            url: "../PHP/top-ferra.php",
             type: "GET",
             success: function(response) {
-                $("#top-prox").html(response);
+                $("#top-ferra").html(response);
             },
             error: function(xhr, status, error) {
                 console.error("Erro ao consultar proxies:", status, error);
             }
         });
+
+
+        $.ajax({
+            url: "../PHP/top-tipAmost.php",
+            type: "GET",
+            success: function(response) {
+                $("#top-tipAmost").html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar proxies:", status, error);
+            }
+        });
+
+
 
         $.ajax({
             url: "../PHP/top-equi.php",
@@ -292,8 +315,18 @@ $(document).ready(function() {
         });
     }
 
+ $.ajax({
+            url: "../PHP/top-armaz.php",
+            type: "GET",
+            success: function(response) {
+                $("#top-armaz").html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar proxies:", status, error);
+            }
+        });
 
-
+        
 
 // Filtro para ano de publicação
 function carregarResultadosano(ano) {

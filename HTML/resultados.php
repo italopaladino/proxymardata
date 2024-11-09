@@ -60,13 +60,16 @@
                     <li class="nav-item"><a class="nav-link" href="../index.html#contact" onclick=closeNavbar()>Contatos</a></li>
                     <li class="nav-item"><a class="nav-link" href="consulta.php" onclick=closeNavbar()>Consulta</a></li>
                     <li class="nav-item"><a class="nav-link" href="submit.html">Submissão de dados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="openLoginDialog(); closeNavbar()">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="novo-user.html" onclick=closeNavbar()>Sing in</a></li>
+                   <!-- <li class="nav-item"><a class="nav-link" href="#" onclick="openLoginDialog(); closeNavbar()">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="novo-user.html" onclick=closeNavbar()>Sing in</a></li> -->
                 </ul>
             </div>
         </div>
     </nav>
-    
+
+    <head>
+
+    </head>
     <!-- LOGIN POR CAIXA DE DIALOGO -->
     <div id="loginDialogOverlay">
         <div id="loginDialog">
@@ -105,114 +108,163 @@
             $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     
            // Prepara e executa a consulta SQL com o ID fornecido
-            $sql = "
-           WITH autores_agregados AS (
-    SELECT
-        infogeral.geralID,
-        STRING_AGG(a.autor, ', ' ORDER BY taf.ordem) AS autores
-    FROM infogeral
-    LEFT JOIN trabalhos_autores_filiacao taf ON infogeral.geralID = taf.trabalhoID
-    LEFT JOIN autores a ON taf.autorID = a.autID
-    GROUP BY infogeral.geralID
-)
-SELECT 
+            $sql = "SELECT 
     infogeral.correspondente,
     infogeral.email,
-    infogeral.tipotrabalho,
+    infogeral.tituloPrinc,
+    infogeral.tituloDado,
+    infogeral.tipoTrabalho,
+    infogeral.tituloTrabalho,
+    infogeral.referencia,
     infogeral.armazenamento,
     infogeral.termo,
-    infogeral.titulo,
-    infogeral.titulo_dado,
-    infogeral.periodico,
-    infogeral.linkart,
-    infogeral.funding,
-    infogeral.data1,
-    infogeral.keywords,
-    caractDado.caract,
-    caractDado.metut,
-    caractDado.area_est,
+    
+    caractDado.red_dado,
+    
     arquivos.nome_arquivo,
     arquivos.uploaded_at,
-    proxys.isot,
-    proxys.PP,
-    proxys.circulacao,
-    proxys.org,
-    proxys.inorg,
-    proxys.foramplan,
-    proxys.forambent,
-    proxys.seaLev,
-    proxys.co2atm,
-    proxys.cobveg,
-    proxys.rainfall,
-    proxys.stratg,
-    proxys.outroprox,
-    equipcoleta.multcorer,
+    ferramentas.tipoamst,
+    ferramentas.assos,
+    ferramentas.batmet,
+    ferramentas.bioOrg,
+    ferramentas.cocolit,
+    ferramentas.estrat,
+    ferramentas.foramplan,
+    ferramentas.forambent,
+    ferramentas.granl,
+    ferramentas.hidrod,
+    ferramentas.hidrog,
+    ferramentas.matorg,
+    ferramentas.metais,
+    ferramentas.microps,
+    ferramentas.ageMod,
+    ferramentas.proFisi,
+    ferramentas.radioist,
+    ferramentas.razIsot,
+    ferramentas.smodNum,
+    ferramentas.teorAg,
+    ferramentas.outroFerr,
+
     equipcoleta.piston,
     equipcoleta.gravcorer,
     equipcoleta.drilli,
     equipcoleta.gboxcorer,
-    equipcoleta.compcorer,
     equipcoleta.boxcorer,
-    equipcoleta.corer,
+    equipcoleta.ADCP,
+    equipcoleta.corrt,
+    equipcoleta.CTD,
+    equipcoleta.modNum,
+    equipcoleta.multcor,
+    equipcoleta.multB,
+    equipcoleta.stl,
+    equipcoleta.senscbio,
+    equipcoleta.sidSc,
+    equipcoleta.vanv,
     equipcoleta.outroequi,
-    autores_agregados.autores,
+
+    CASE 
+        WHEN tipoPonto.areaP THEN areaP.ID_AMSTAREA
+        ELSE NULL
+    END AS ID_AMSTAREA,
+    
+    CASE 
+        WHEN tipoPonto.areaP THEN areaP.latitudeAREA
+        ELSE NULL
+    END AS latitudeAREA,
+    
+    CASE 
+        WHEN tipoPonto.areaP THEN areaP.longitudeAREA
+        ELSE NULL
+    END AS longitudeAREA,
+    
+    CASE 
+        WHEN tipoPonto.areaP THEN areaP.dataAREA
+        ELSE NULL
+    END AS dataAREA,
+
+    tipoPonto.pontoPon,
+    tipoPonto.areaP,
+
+    -- Subconsulta para agregar autores e afiliações de forma ordenada
+    (SELECT STRING_AGG(CONCAT(autores.autor, ' (', filiacao.filiacao, ')'), ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+     FROM trabalhos_autores_filiacao
+     LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+     LEFT JOIN filiacao ON trabalhos_autores_filiacao.filiacaoID = filiacao.filiacaoID
+     WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores,
+    
     STRING_AGG(DISTINCT CONCAT_WS(', ', 
-        'ID: ' || pontos_coleta.id_amst, 
+        'ID: ' || pontos_coleta.ID_amst, 
         'Latitude: ' || pontos_coleta.latitude, 
         'Longitude: ' || pontos_coleta.longitude, 
-        'Profundidade: ' || pontos_coleta.prof, 
-        'Recuperação sedimentar: ' || pontos_coleta.recuperacao, 
         'Data de coleta: ' || pontos_coleta.data2), ' | ') AS pontos_coleta
 FROM infogeral
 LEFT JOIN caractDado ON infogeral.geralID = caractDado.trabalhoId
 LEFT JOIN arquivos ON infogeral.geralID = arquivos.trabalhoID
-LEFT JOIN proxys ON infogeral.geralID = proxys.trabalhoID
+LEFT JOIN ferramentas ON infogeral.geralID = ferramentas.trabalhoID
 LEFT JOIN equipcoleta ON infogeral.geralID = equipcoleta.trabalhoID
 LEFT JOIN pontos_coleta ON infogeral.geralID = pontos_coleta.trabalhoID
-LEFT JOIN autores_agregados ON infogeral.geralID = autores_agregados.geralID
+LEFT JOIN tipoPonto ON infogeral.geralID = tipoPonto.trabalhoID
+LEFT JOIN areaP ON infogeral.geralID = areaP.trabalhoID AND tipoPonto.areaP = true
 WHERE infogeral.geralID = :id
 GROUP BY infogeral.geralID, 
          infogeral.correspondente,
          infogeral.email,
-         infogeral.tipotrabalho,
+         infogeral.tipoTrabalho,
          infogeral.armazenamento,
          infogeral.termo,
-         infogeral.titulo,
-         infogeral.titulo_dado,
-         infogeral.periodico,
-         infogeral.linkart,
-         infogeral.funding,
-         infogeral.data1,
-         infogeral.keywords,
-         caractDado.caract,
-         caractDado.metut,
-         caractDado.area_est,
+         infogeral.tituloPrinc,
+         infogeral.tituloDado,
+         infogeral.referencia,
+         caractDado.red_dado,
          arquivos.nome_arquivo,
          arquivos.uploaded_at,
-         proxys.isot,
-         proxys.PP,
-         proxys.circulacao,
-         proxys.org,
-         proxys.inorg,
-         proxys.foramplan,
-         proxys.forambent,
-         proxys.seaLev,
-         proxys.co2atm,
-         proxys.cobveg,
-         proxys.rainfall,
-         proxys.stratg,
-         proxys.outroprox,
-         equipcoleta.multcorer,
+         ferramentas.tipoamst,
+         ferramentas.assos,
+         ferramentas.batmet,
+         ferramentas.bioOrg,
+         ferramentas.cocolit,
+         ferramentas.estrat,
+         ferramentas.foramplan,
+         ferramentas.forambent,
+         ferramentas.granl,
+         ferramentas.hidrod,
+         ferramentas.hidrog,
+         ferramentas.matorg,
+         ferramentas.metais,
+         ferramentas.microps,
+         ferramentas.ageMod,
+         ferramentas.proFisi,
+         ferramentas.radioist,
+         ferramentas.razIsot,
+         ferramentas.smodNum,
+         ferramentas.teorAg,
+         ferramentas.outroFerr,
          equipcoleta.piston,
          equipcoleta.gravcorer,
          equipcoleta.drilli,
          equipcoleta.gboxcorer,
-         equipcoleta.compcorer,
          equipcoleta.boxcorer,
-         equipcoleta.corer,
+         equipcoleta.ADCP,
+         equipcoleta.corrt,
+         equipcoleta.CTD,
+         equipcoleta.modNum,
+         equipcoleta.multcor,
+         equipcoleta.multB,
+         equipcoleta.stl,
+         equipcoleta.senscbio,
+         equipcoleta.sidSc,
+         equipcoleta.vanv,
          equipcoleta.outroequi,
-         autores_agregados.autores
-ORDER BY infogeral.geralID";
+         tipoPonto.pontoPon,
+         tipoPonto.areaP,
+         areaP.ID_AMSTAREA,
+         areaP.latitudeAREA,
+         areaP.longitudeAREA,
+         areaP.dataAREA
+ORDER BY infogeral.geralID;
+"
+;
+
         
         
         $stmt = $pdo->prepare($sql);
@@ -223,97 +275,97 @@ ORDER BY infogeral.geralID";
         if (!empty($infogeral)) {
             foreach ($infogeral as $row) {
                 // Exibe os detalhes na página resultados.html
-                echo "<div id='principal1'>
-                    <span id='principal1'> RESULTADO DA PESQUISA </span>
+                echo "<div id='principal1' class='bg-primary'>
+                    <span id='principal1'> RESULTADO </span>
                 </div>"; // DIV PRINCIPAL
         
                 echo "<div class='principal2'>"; // DIV SECUNDÁRIA
                 echo "<a href='consulta.php' id='voltar' class='voltar'> &laquo; Voltar</a></br>";
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // div corr
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Correspondente:</span></div>";
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Correspondente:</span></div>";
                 echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['correspondente']) . "&nbsp;&nbsp; <i>(" . htmlspecialchars($row['email']) . ")</i></div>";
                 echo "</div>"; // div corr
         
-                echo "<div class='linha' id='coluna-esq-dir'>"; // div tit
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Título do trabalho:</span></div>";
-                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['titulo']) . "</div>";
-                echo "</div>"; // div tit
+                
+                    echo "<div class='linha' id='coluna-esq-dir'>"; // div tit
+                    echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Título do projeto principal:</span></div>";
+                    echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['tituloprinc']) . "</div>";
+                    echo "</div>";
+                 // div tit
 
                 echo "<div class='linha' id='coluna-esq-dir'>"; // div tit
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Título atribuido para os Dados:</span></div>";
-                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['titulo_dado']) . "</div>";
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Título atribuido para os Dados:</span></div>";
+                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['titulodado']) . "</div>";
                 echo "</div>";
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // autores
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Autores:</span></div>";
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Autores:</span></div>";
                 echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['autores']) . "</div>";
                 echo "</div>"; // autores
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // tipo
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Tipo de trabalho/ Armazenamento:</span></div>";
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Tipo de Armazenamento:</span></div>";
                 echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['tipotrabalho']) . "&nbsp;&nbsp; (" . htmlspecialchars($row['armazenamento']) . ")</div>";
                 echo "</div>"; // tipo
         
-                echo "<div class='linha' id='coluna-esq-dir'>"; // periódico
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Periódico:</span></div>";
-                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['periodico']) . "&nbsp;&nbsp; <a href='" . htmlspecialchars($row['linkart']) . "'> Link para o artigo </a></div>";
-                echo "</div>"; // periódico
+                                   
         
-                echo "<div class='linha' id='coluna-esq-dir'>"; // doi
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Funding/Financiamento:</span></div>";
-                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['funding']) . "</div>";
-                echo "</div>"; // doi
-                        
-        
-                echo "<div class='linha' id='coluna-esq-dir'>"; // data
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Data da publicação: </span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . date_format(date_create($row['data1']), 'd F Y') . "</div>";
-                echo "</div>"; // data
-        
-                echo "<div class='linha' id='coluna-esq-dir'>"; // keywords
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Palavras-chave:</span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['keywords']) . "</div>";
-                echo "</div>"; // keywords
-        
+                    
                 echo "<div class='linha' id='coluna-esq-dir'>"; // caracteristicas
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Característica dos dados inseridos:</span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['caract']) . "</div>";
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Resumo para os dados:</span></div>";
+                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['red_dado']) . "</div>";
                 echo "</div>"; // caracteristicas
-        
-                echo "<div class='linha' id='coluna-esq-dir'>"; // método
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Métodos de análises utilizados:</span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['metut']) . "</div>";
-                echo "</div>"; // método
-        
-                $proxys = [];
-                if ($row['isot']) $proxys[] = "Isótopos";
-                if ($row['pp']) $proxys[] = "Produção Primária";
-                if ($row['circulacao']) $proxys[] = "Circulação";
-                if ($row['org']) $proxys[] = "Orgânico";
-                if ($row['inorg']) $proxys[] = "Inorgânico";
+
+                echo "<div class='linha' id='coluna-esq-dir'>"; // Tipo de amostra
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Tipo de amostra:</span></div>";
+                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['tipoamst']) . "</div>";
+                echo "</div>"; // tipo e amostra
+
+               
+                     
+                $ferramentas = [];
+                if ($row['assos']) $proxys[] = "Associação";
+                if ($row['batmet']) $proxys[] = "Batimetria";
+                if ($row['bioorg']) $proxys[] = "Biomarcadores Orgânicos";
+                if ($row['cocolit']) $proxys[] = "Cocolitoforídeos";
+                if ($row['estrat']) $proxys[] = "Estraigrafia";
                 if ($row['foramplan']) $proxys[] = "Foraminífero Planctônico";
                 if ($row['forambent']) $proxys[] = "Foraminífero Bentônico";
-                if ($row['sealev']) $proxys[] = "Nível do Mar";
-                if ($row['co2atm']) $proxys[] = "CO2 Atmosférico";
-                if ($row['cobveg']) $proxys[] = "Cobertura Vegetal";
-                if ($row['rainfall']) $proxys[] = "Precipitação";
-                if ($row['stratg']) $proxys[] = "Estratigrafia";
-                if ($row['outroprox']) $proxys[] = htmlspecialchars($row['outroprox']);
+                if ($row['granl']) $proxys[] = "Granulometria";
+                if ($row['hidrod']) $proxys[] = "Hidrodinâmica";
+                if ($row['hidrog']) $proxys[] = "Hidrografia";
+                if ($row['matorg']) $proxys[] = "Matéria Orgânica";
+                if ($row['metais']) $proxys[] = "Metais";
+                if ($row['microps']) $proxys[] = "Microplásticos";
+                if ($row['agemod']) $proxys[] = "Modelos de Idade";
+                if ($row['profisi']) $proxys[] = "Propriedades Físicas";
+                if ($row['radioist']) $proxys[] = "Radioisótopos";
+                if ($row['razisot']) $proxys[] = "Razões Isotópicas";
+                if ($row['smodnum']) $proxys[] = "Saída de modelo numérico";
+                if ($row['teorag']) $proxys[] = "Teor e água";
+                if ($row['outroferr']) $proxys[] = htmlspecialchars($row['outroferr']);
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // prox
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Proxies utilizados: </span></div>";
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Ferrmenta(s) Utilizada(s): </span></div>";
                 echo "<div class='coluna' id='colun-dir'>" . implode(", ", $proxys) . "</div>"; // Exibe os proxies em uma linha
                 echo "</div>"; // prox
         
                 $equipcoleta = [];
-                if ($row['multcorer']) $equipcoleta[] = "Multicorer";
+                
                 if ($row['piston']) $equipcoleta[] = "Piston";
-                if ($row['gravcorer']) $equipcoleta[] = "Gravity Corer";
-                if ($row['drilli']) $equipcoleta[] = "Drilling";
-                if ($row['gboxcorer']) $equipcoleta[] = "Giant Boxcorer";
-                if ($row['compcorer']) $equipcoleta[] = "Composite Corer";
-                if ($row['boxcorer']) $equipcoleta[] = "Boxcorer";
+                if ($row['gravcorer']) $equipcoleta[] = "Gravity corer";
+                if ($row['drilli']) $equipcoleta[] = "Drilling devide";
+                if ($row['gboxcorer']) $equipcoleta[] = "Giant box corer";
+                if ($row['boxcorer']) $equipcoleta[] = "Box corer";
+                if ($row['adcp']) $equipcoleta[] = "ADCP";
+                if ($row['corrt']) $equipcoleta[] = "Correntômetro";
+                if ($row['modnum']) $equipcoleta[] = "Modelo númerico";
+                if ($row['multcor']) $equipcoleta[] = "Multiple corer";
+                if ($row['multb']) $equipcoleta[] = "Multibean";
+                if ($row['stl']) $equipcoleta[] = "Satélite";
+                if ($row['senscbio']) $equipcoleta[] = "Sensores bio-ópticos";
+                if ($row['sidsc']) $equipcoleta[] = "Side-scan sonar";
                 if ($row['outroequi']) $equipcoleta[] = htmlspecialchars($row['outroequi']);
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // equi
@@ -321,61 +373,76 @@ ORDER BY infogeral.geralID";
                 echo "<div class='coluna' id='colun-dir'>" . implode(", ", $equipcoleta) . "</div>"; // Exibe os proxies em uma linha
                 echo "</div>"; // equi
         
-                echo "<div class='linha' id='coluna-esq-dir'>"; // método
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Descrição da Área de Estudo:</span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['area_est']) . "</div>";
-                echo "</div>";
 
-                echo "<div class='linha' id='coluna-esq-dir'>"; // pontos
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Pontos de Coleta:</span></div>";
-                echo "<div class='coluna' id='colun-dir'>";
                 
         
                 $pontos_coleta = explode(' | ', $row['pontos_coleta']);
-                foreach ($pontos_coleta as $ponto) {
-                    // Separar os detalhes do ponto de coleta
-                    $detalhes = explode(', ', $ponto);
-        
-                    // Inicializar uma string para armazenar o HTML formatado
-                    $html_ponto = '';
-        
-                    // Iterar sobre os detalhes e aplicar os estilos conforme necessário
-                    foreach ($detalhes as $detalhe) {
-                        if (strpos($detalhe, 'ID: ') !== false) {
-                            $valor = str_replace('ID: ', '', $detalhe);
-                            $html_ponto .= "<span class='label'>ID: </span><span class='id-value'>" . htmlspecialchars($valor) . "</span>, ";
-                        } elseif (strpos($detalhe, 'Latitude: ') !== false) {
-                            $valor = str_replace('Latitude: ', '', $detalhe);
-                            $html_ponto .= "<span class='label'>Latitude: </span><span class='latitude-value'>" . htmlspecialchars($valor) . "</span>, ";
-                        } elseif (strpos($detalhe, 'Longitude: ') !== false) {
-                            $valor = str_replace('Longitude: ', '', $detalhe);
-                            $html_ponto .= "<span class='label'>Longitude: </span><span class='longitude-value'>" . htmlspecialchars($valor) . "</span>, ";
-                        } elseif (strpos($detalhe, 'Profundidade: ') !== false) {
-                            $valor = str_replace('Profundidade: ', '', $detalhe);
-                            $html_ponto .= "<span class='label'>Profundidade(m): </span><span class='profundidade-value'>" . htmlspecialchars($valor) . "</span>, ";
-                        } elseif (strpos($detalhe, 'Recuperação sedimentar: ') !== false) {
-                            $valor = str_replace('Recuperação sedimentar: ', '', $detalhe);
-                            $html_ponto .= "<span class='label'>Recuperação sedimentar(m): </span> <span class='recuperacao-value'>" . htmlspecialchars($valor) . "</span>, ";
-                        } elseif (strpos($detalhe, 'Data de coleta: ') !== false) {
-                            // Formatar a data
-                            $data_original = str_replace('Data de coleta: ', '', $detalhe);
-                            $data_formatada = date('d/m/Y', strtotime($data_original));
-                            $html_ponto .= "<span class='label'>Data de coleta: </span><span class='data-value'>" . htmlspecialchars($data_formatada) . "</span>, ";
-                        }
-                    }
-        
-                    // Remover a última vírgula e espaço
-                    $html_ponto = rtrim($html_ponto, ', ');
-        
-                    // Exibir o ponto de coleta formatado
-                    echo "<div>" . $html_ponto . "</div></br>";
-                }
-        
-                echo "</div>"; // pontos
-                echo "</div>"; // linha
-        
+$html_coleta = ''; // Inicializa uma string para armazenar todo o HTML de pontos de coleta
+
+foreach ($pontos_coleta as $ponto) {
+    // Separar os detalhes do ponto de coleta
+    $detalhes = explode(', ', $ponto);
+
+    // Inicializar uma string para armazenar o HTML formatado de um único ponto
+    $html_ponto = '';
+
+    // Iterar sobre os detalhes e aplicar os estilos conforme necessário
+    foreach ($detalhes as $detalhe) {
+        if (strpos($detalhe, 'ID: ') !== false) {
+            $valor = str_replace('ID: ', '', $detalhe);
+            if (!empty($valor)) {
+                $html_ponto .= "<span class='label'>ID: </span><span class='id-value'>" . htmlspecialchars($valor) . "</span>, ";
+            }
+        } elseif (strpos($detalhe, 'Latitude: ') !== false) {
+            $valor = str_replace('Latitude: ', '', $detalhe);
+            if (!empty($valor)) {
+                $html_ponto .= "<span class='label'>Latitude: </span><span class='latitude-value'>" . htmlspecialchars($valor) . "</span>, ";
+            }
+        } elseif (strpos($detalhe, 'Longitude: ') !== false) {
+            $valor = str_replace('Longitude: ', '', $detalhe);
+            if (!empty($valor)) {
+                $html_ponto .= "<span class='label'>Longitude: </span><span class='longitude-value'>" . htmlspecialchars($valor) . "</span>, ";
+            }
+        } elseif (strpos($detalhe, 'Data de coleta: ') !== false) {
+            $data_original = str_replace('Data de coleta: ', '', $detalhe);
+            if (!empty($data_original)) {
+                $data_formatada = date('d/m/Y', strtotime($data_original));
+                $html_ponto .= "<span class='label'>Data de coleta: </span><span class='data-value'>" . htmlspecialchars($data_formatada) . "</span>, ";
+            }
+        }
+    }
+    
+    // Remover a vírgula extra no final, se necessário
+    $html_ponto = rtrim($html_ponto, ', ');
+
+    // Adicionar o HTML do ponto ao HTML total, apenas se não estiver vazio
+    if (!empty($html_ponto)) {
+        $html_coleta .= "<div class='ponto-coleta'>{$html_ponto}</div><br>";
+    }
+}
+
+// Só exibir a estrutura "Pontos de Coleta" se houver conteúdo
+if (!empty($html_coleta)) {
+    echo "<div class='linha' id='coluna-esq-dir'>"; // pontos
+    echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Ponto(s) de coleta:</span></div>";
+    echo "<div class='coluna' id='colun-dir'>";
+    echo $html_coleta; // Exibe todos os pontos de coleta formatados
+    echo "</div>"; // fecha coluna
+    echo "</div>"; // fecha linha
+}
+
+
+
+    echo "<div class='linha' id='coluna-esq-dir'>"; // div tit
+    echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Área de coleta:</span></div>";
+    echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['']);
+    
+    echo "</div>";
+
+    echo "</div>";
+                
                 echo "<div class='linha' id='coluna-esq-dir'>"; // arquivo
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Tabela de dado: </span></div>";
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Tabela: </span></div>";
         
                 // Ensure $row['nome_arquivo'] is a string before using htmlspecialchars
                 $nome_arquivo = is_string($row['nome_arquivo']) ? htmlspecialchars($row['nome_arquivo']) : '';

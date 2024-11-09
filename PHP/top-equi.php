@@ -6,8 +6,6 @@ try {
 
     // Seleciona as colunas booleanas e conta quantos registros existem para cada coluna onde o valor é TRUE
     $sql = "
-     SELECT 'multcorer' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE multcorer = TRUE
-UNION ALL
 SELECT 'piston' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE piston = TRUE
 UNION ALL
 SELECT 'gravcorer' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE gravcorer = TRUE
@@ -16,11 +14,28 @@ SELECT 'drilli' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE drilli 
 UNION ALL
 SELECT 'gboxcorer' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE gboxcorer = TRUE
 UNION ALL
-SELECT 'compcorer' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE compcorer = TRUE
-UNION ALL
 SELECT 'boxcorer' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE boxcorer = TRUE
 UNION ALL
-SELECT 'corer' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE corer = TRUE
+SELECT 'ADCP' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE ADCP = TRUE
+UNION ALL
+SELECT 'corrt' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE corrt = TRUE
+UNION ALL
+SELECT 'CTD' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE CTD = TRUE
+UNION ALL
+SELECT 'modNum' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE modNum = TRUE
+UNION ALL
+SELECT 'multcor' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE multcor = TRUE
+UNION ALL
+SELECT 'multB' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE multB = TRUE
+UNION ALL
+
+SELECT 'stl' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE stl = TRUE
+UNION ALL
+SELECT 'senscbio' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE senscbio = TRUE
+UNION ALL
+SELECT 'sidSc' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE sidSc = TRUE
+UNION ALL
+SELECT 'vanv' AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE vanv = TRUE
 UNION ALL
 
 SELECT outroequi AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE outroequi IS NOT NULL AND outroequi <> '' GROUP BY outroequi
@@ -33,13 +48,21 @@ SELECT outroequi AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE outroe
 
     // Mapeia os nomes das colunas para os nomes desejados
     $nomesColunas = [
-        'multcorer' => 'MultiCorer',
         'piston' => 'Piston',
         'gravcorer' => 'Gravity Corer',
-        'drilli' => 'Drilling',
+        'drilli' => 'Drilling device',
         'gboxcorer' => 'Giant box corer',
-        'compcorer' => 'Composite Corer',
-        'boxcorer' => 'Box Corer',
+        'boxcorer' => 'Box corer',
+        'ADCP' => 'ADCP',
+        'corrt' => 'Correntômetro',
+        'modNum' => 'Modelo numérico',
+        'multcor' => 'Multipre Corer',
+        'multB' => 'Multibean',
+        'stl' => 'Satélite',
+        'senscbio' => 'Sensores bio-óptcos',
+        'sidSc' => 'Side-scan Sonar',
+        'vanv' => 'Van-Veen'
+
         
         ];
 

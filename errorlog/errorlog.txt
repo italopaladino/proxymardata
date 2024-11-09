@@ -1,0 +1,69 @@
+Tentativa de inserir na tabela areaP com valores: Array
+(
+    [0] => 99
+    [1] => 99
+    [2] => 99
+    [3] => 2021-09-09
+    [4] => 23
+)
+Erro ao inserir na tabela equipamentos: ERRO:  coluna "sidsc" especificada mais de uma vez
+LINE 1: ...DCP,corrt,CTD, modNum, multcor,stl,senscbio,sidSc,sidSc,vanv...
+                                                             ^Tentativa de inserir na tabela areaP com valores: Array
+(
+    [0] => 77
+    [1] => 77
+    [2] => 77
+    [3] => 2012-07-07
+    [4] => 24
+)
+Erro ao inserir na tabela equipamentos: ERRO:  INSERT tem mais expressões do que colunas alvo
+LINE 2: ... $6, $7, $8,$9,$10,$11,$12,$13,$14,$15,NULLIF($16, ''), $17)
+                                                                   ^Tentativa de inserir na tabela areaP com valores: Array
+(
+    [0] => 99
+    [1] => 99
+    [2] => 9
+    [3] => 2021-09-09
+    [4] => 25
+)
+Erro ao inserir na tabela equipamentos: ERRO:  a mensagem de vinculação forneceu 17 parâmetros, mas a instrução preparada "" requer 16Tentativa de inserir na tabela areaP com valores: Array
+(
+    [0] => 77
+    [1] => 77
+    [2] => 77
+    [3] => 2021-07-07
+    [4] => 26
+)
+Erro ao inserir na tabela equipamentos: ERRO:  a mensagem de vinculação forneceu 17 parâmetros, mas a instrução preparada "" requer 16Tentativa de inserir na tabela areaP com valores: Array
+(
+    [0] => 77
+    [1] => 77
+    [2] => 77
+    [3] => 2021-07-07
+    [4] => 27
+)
+Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Tentativa de inserir na tabela areaP com valores: Array
+(
+    [0] => 88
+    [1] => 88
+    [2] => 88
+    [3] => 2021-08-08
+    [4] => 27
+)
+Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Tentativa de inserir na tabela areaP com valores: Array
+(
+    [0] => 99
+    [1] => 99
+    [2] => 99
+    [3] => 2021-09-09
+    [4] => 27
+)
+Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Tentativa de inserir na tabela areaP com valores: Array
+(
+    [0] => 66
+    [1] => 66
+    [2] => 66
+    [3] => 2021-06-06
+    [4] => 27
+)
+Arquivo CSV carregado e inserido na tabela arquivos com sucesso.

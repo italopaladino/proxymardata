@@ -4,23 +4,31 @@ require_once 'config.php';
 try {
     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
-    // Seleciona o ano e conta quantos registros existem para cada ano, considerando apenas um ponto de coleta por trabalhoid
+    // Consulta combinada usando UNION para unir os anos das duas tabelas
     $sql = "
-        SELECT EXTRACT(YEAR FROM data2) AS ano, COUNT(DISTINCT trabalhoid) AS quantidade 
-        FROM pontos_coleta 
-        GROUP BY ano 
+        SELECT ano, SUM(quantidade) AS quantidade_total
+        FROM (
+            SELECT EXTRACT(YEAR FROM data2) AS ano, COUNT(DISTINCT trabalhoid) AS quantidade
+            FROM pontos_coleta
+            GROUP BY ano
+            UNION ALL
+            SELECT EXTRACT(YEAR FROM dataAREA) AS ano, COUNT(DISTINCT trabalhoid) AS quantidade
+            FROM areaP
+            GROUP BY ano
+        ) AS anos_combinados
+        GROUP BY ano
         ORDER BY ano DESC
     ";
+
     $stm = $pdo->query($sql);
-    $anoColetas = $stm->fetchAll(PDO::FETCH_ASSOC);
+    $anos = $stm->fetchAll(PDO::FETCH_ASSOC);
 
     // Monta a lista para o filtro
     $filtroHTML = "<ul>";
-    foreach ($anoColetas as $anoColeta) {
-        $ano = htmlspecialchars($anoColeta['ano']);
-        $quantidade = htmlspecialchars($anoColeta['quantidade']);
-        $filtroHTML .= "<li><a title='Filtrar pelo ano de Coleta' class='top-filtro' href='#' onclick='showAlert(); return false;'>" . $ano . " ($quantidade)</a></li>";
- // adicionar link para pesquisa dos anos
+    foreach ($anos as $ano) {
+        $ano_valor = htmlspecialchars($ano['ano']);
+        $quantidade = htmlspecialchars($ano['quantidade_total']);
+        $filtroHTML .= "<li><a title='Filtrar pelo ano' class='top-filtro' href='#' onclick='showAlert(); return false;'>" . $ano_valor . " ($quantidade)</a></li>";
     }
     $filtroHTML .= "</ul>";
 
@@ -34,4 +42,3 @@ try {
         $pdo = null;
     }
 }
-?>
