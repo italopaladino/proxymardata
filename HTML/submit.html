@@ -126,9 +126,15 @@
 </div>
         </header></br>
 
-<!-- PRIMEIRA PAGINA -->
+        <script>
+            function enviarFormulario() {
+                // Função para enviar o formulário explicitamente
+                document.getElementById("forms").submit();
+            }
+            </script><!-- PRIMEIRA PAGINA -->
 
-<form id="forms" method="post" action="../PHP/submit-DADOS2.php" enctype="multipart/form-data" style="position: relative; margin-bottom: 10px;">
+
+<form id="forms" method="post" action="../PHP/submit-DADOS2.php" onsubmit="return false;" enctype="multipart/form-data" style="position: relative; margin-bottom: 10px;">
     <div id="topo" style="position: absolute; top: 0;"></div>
     <input type="hidden" name="secaoAtual1" value="default_value1">
         
@@ -587,7 +593,7 @@ disponibilizados aqui.</div>
 </br>
 <div id="bttn" style="display: flex; justify-content: space-between; align-items: flex-end;height: 100px;">   
     <button class="button" type="button"  onclick="paginaAnterior()">Anterior</button>
-    <button class="button" type="submit" > Submeter</button>
+    <button class="button" type="submit" onclick="enviarFormulario()" > Submeter</button>
 </div>
 
 
