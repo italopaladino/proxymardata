@@ -1,7 +1,0 @@
-erro ao inserir na tabela ferramenta:  erro ao inserir na tabela ferramenta: ERRO:  não existe a coluna "strat" da relação "ferramentas"
-LINE 1: ...mentas (tipoAmst, assos, batmet, bioOrg, cocolit, strat, for...
-                                                             ^ Erro ao inserir na tabela equipamentosErro ao inserir na tabela equipamentos: ERRO:  não existe a coluna "sensbio" da relação "equipcoleta"
-LINE 1: ...orer,boxcorer,ADCP,corrt,CTD, modNum, multcor,stl,sensbio,si...
-                                                             ^Erro ao inserir na tabela equipamentos: ERRO:  INSERT tem mais expressões do que colunas alvo
-LINE 2: ... $6, $7, $8,$9,$10,$11,$12,$13,$14,$15,NULLIF($16, ''), $17)
-                                                                   ^Erro ao inserir na tabela equipamentos: ERRO:  a mensagem de vinculação forneceu 15 parâmetros, mas a instrução preparada "" requer 17Erro ao inserir na tabela equipamentos: ERRO:  a mensagem de vinculação forneceu 16 parâmetros, mas a instrução preparada "" requer 17Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.
