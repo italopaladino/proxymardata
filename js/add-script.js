@@ -27,24 +27,6 @@ function handleKeyPress(event1, dialogAberto) {
 
 
 
-
-
-document.addEventListener('keydown', keysub);
-    // Verificar se estamos na página "submit.html"
-    function keysub(event){
-    var paginaSubmit = verifPag();
-    if (paginaSubmit) {
-        // Verificar as teclas de avanço específicas para "submit.html"
-        if (event.keyCode === 36) { //home
-            proximaPagina();  
-        } else if (event.keyCode === 35) { //end
-            paginaAnterior();
-        } else if (event.keyCode === 192) { // '
-            exibirResumo();
-            exibirDADOS();
-        }
-    }
-}
 // Função para verificar se a página atual é "submit.html"
 function verifPag() {
     var paginaAtual = window.location.href;

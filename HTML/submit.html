@@ -127,14 +127,24 @@
         </header></br>
 
         <script>
+            // Função para bloquear a tecla Enter
+            function bloquearEnter(event) {
+                if (event.code === "Enter") {
+                    event.preventDefault(); // Bloqueia o Enter
+                    return false;
+                }
+            }
+        
+            // Função para enviar o formulário explicitamente pelo botão
             function enviarFormulario() {
-                // Função para enviar o formulário explicitamente
                 document.getElementById("forms").submit();
             }
-            </script><!-- PRIMEIRA PAGINA -->
+        </script>
+            
+            <!-- PRIMEIRA PAGINA -->
 
 
-<form id="forms" method="post" action="../PHP/submit-DADOS2.php" onsubmit="return false;" enctype="multipart/form-data" style="position: relative; margin-bottom: 10px;">
+<form id="forms" method="post" action="../PHP/submit-DADOS2.php" onkeydown="return bloquearEnter(event)" enctype="multipart/form-data" style="position: relative; margin-bottom: 10px;">
     <div id="topo" style="position: absolute; top: 0;"></div>
     <input type="hidden" name="secaoAtual1" value="default_value1">
         
