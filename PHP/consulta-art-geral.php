@@ -24,7 +24,10 @@ try {
     
     // Cria a frase com os dados do autor, título sublinhado, DOI e data
     $frase = "<div class='citation' >
-                <a class='link-pesq' href='../HTML/resultados.php?id=" . htmlspecialchars($infogera['geralid']) . "'>" . htmlspecialchars($infogera['referencia']) . "</a>
+                <a class='link-pesq' href='../HTML/resultados.php?id=" . htmlspecialchars($infogera['geralid']) . "'>". htmlspecialchars($infogera['correspondente'])
+                 . "(" . htmlspecialchars($infogera['email']) . ")"
+                 . "</br>" ."Titulo Projeto principal associado: " . htmlspecialchars($infogera['tituloprinc']) . 
+                "</br>".  htmlspecialchars($infogera['titulodado']) . "</a>
               </div></br></br>";
 
     // Exibe a frase dentro de uma célula da tabela

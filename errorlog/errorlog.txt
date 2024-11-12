@@ -66,4 +66,4 @@ Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Tentativa de ins
     [3] => 2021-06-06
     [4] => 27
 )
-Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Erro no envio do arquivo CSV.Erro no envio do arquivo CSV.Erro no envio do arquivo CSV.Erro no envio do arquivo CSV.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.
+Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Erro no envio do arquivo CSV.Erro no envio do arquivo CSV.Erro no envio do arquivo CSV.Erro no envio do arquivo CSV.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Erro no envio do arquivo CSV.Erro no envio do arquivo CSV.Erro no envio do arquivo CSV.Erro no envio do arquivo CSV.
