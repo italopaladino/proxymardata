@@ -116,12 +116,13 @@
 
         <header class="bg-primary bg-gradient text-white">
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder"> ProxyMar Data Base</h1>
-                <li> Antes de iniciar o processo de submissão, verifique as diretrizes e toda a documentação
+                <h1 class="fw-bolder"> ProxyMar Data Base</h1></br>
+                
+                <h4><li> Antes de iniciar o processo de submissão, verifique as diretrizes e toda a documentação
                     necessária - Manuais e modelos de planilhas para submissão podem ser encontrados <a target="_blank" rel="noopener noreferrer" class="aqui-sub" href="https://wiki.pangaea.de/wiki/Best_practice_manuals_and_templates">aqui</a>. </li></br>
-
+                    <li> Se você tiver tabelas com dados muito distintos e estruturas diferentes, <span style="text-decoration: underline red;">faça submissões diferentes.</span></li></br>
             <li> Se você encontrou algum erro ou gostaria de fazer alguma sugestão como tornar o processo mais intuitivo, por favor, envie um e-mail e o print da tela para 
-                <a class="aqui-sub" href="mailto:proxymar@usp.br" target="_blank">proxymar@usp.br</a></li>
+                <a class="aqui-sub" href="mailto:proxymar@usp.br" target="_blank">proxymar@usp.br</a></li></h4>
                 
 </div>
         </header></br>
@@ -153,13 +154,73 @@
         
         <h1 style="text-align: center;"> Formulário para Submissão: </h1></br>
         <div id="borda1" class="bordaPg">
+            <div for="respos">
+                <div style="display: flex; align-items: center; width: 100%;">
         <h4><label id="autor" for="autor"> <a style="color: red;" title="Elemento obrigatório">*</a>Identificação do responsável pelo dado:</label></h4>
+        <div class="tooltip-container">
+            <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+            <div class="tooltip">Neste momento, o responsável pelo dado será  sempre o seu orientador ou o coordenador do projeto de pesquisa ao qual o seu trabalho está vinculado.</div>
+            </div>
+                </div>
+            </div>
     </br>
 
         <input autofocus type="text" id="correspondente" name="correspondente" style="width: 49%;" placeholder="Nome Completo"> <!-- REVISAR NOME DOS CAMPOS --  COM OS DO BANCO--> 
         <input type="email" id="email" name="email" style="width: 49%;" placeholder="E-mail do responsável (ex: xxxxx@mail.com)" maxlength="255">
     </br>
 </br>
+<div style="display: flex; align-items: center; width: 100%;">
+    <h4 id="coAutores">Adicionar Autores e Coautores:</h4></br>
+     
+
+<div class="tooltip-container">
+    <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+    <div class="tooltip">Indicar os nomes completos e a filiação (Nome da Instituição - SIGLA) das pessoas envolvidas na aquisição dos dados que serão submetidos.
+
+    </div>
+    </div>
+        </div>
+
+
+
+    <div id="autoresContainer">
+        <div class="autor" id="autorContainer0">
+            <div class="colunaaut">
+                <input type="text" class="autor" name="autor[]" id="autor0" placeholder="Nome Completo" autocomplete="off" style="width: 100%;">
+            </div>
+            <div class="colunafili">
+                <input type="text" class="filiacao" name="filiacao[]" id="filiacao0" placeholder="Filiação (p.e., Nome da Instituição - SIGLA)" autocomplete="off" style="width: 100%;">
+            </div>
+        </div></br>
+        <!-- Aqui serão adicionados os campos de coautores dinamicamente -->
+    </div>
+    <br>
+    <div id="autor-button" style="display: flex; justify-content: space-between; gap: 10px;">
+        
+        <button class="button" type="button" onclick="adicionarAutor()">Adicionar Autor</button>
+        <button type="button" class="button" onclick="deletarAutor()">Remover último Co-autor</button>
+        <button type="button"  class="button" onclick="removerTODOSAutores()">Remover todas as linhas </button>
+    </div>
+    </div>
+      
+    </br>
+    </br>
+
+    <div id="borda2.1" class="bordaPg">  
+        
+        <div for="tit-dd">
+            <div style="display: flex; align-items: center; width: 100%;">
+                <h4 for="tit-dd" style="width: auto; margin: 0;"><a style="color: red;" title="Elemento obrigatório">*</a>Título para os dados inseridos:</h4>
+                <div class="tooltip-container">
+                    <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
+                    <div class="tooltip">Insira um título que descreva de forma clara e objetiva do que se trata o conjunto de dados a serem submetidos. 
+                        Ele não deve ser igual ao título da publicação relacionada, mas deve refletir o que foi <span class="bold">medido, onde e quando</span>.</div>
+                    </div>
+            </div>
+        </div>
+        <input id="tituloDado" type="text" name="tituloDado" style="width: 98.4%;">
+        </br>
+        </br>
 
 <div for="tit">
 <div style="display: flex; align-items: center; width: 100%;">
@@ -168,39 +229,35 @@
 
 <div class="tooltip-container">
     <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
-    <div class="tooltip">Se os dados estiverem relacionados a um projeto de pesquisa, adicione o <span class="bold">título</span> e a <span class="bold">sigla</span> do projeto principal em que o dado foi gerado. Se você não tiver essa informação pergunte a seu/sua orientador/a.</div>
+    <div class="tooltip">Se os dados estiverem relacionados a um projeto de pesquisa, adicione o <span class="bold">título</span> e a <span class="bold">sigla</span> do projeto principal em que o dado foi gerado. Se você não tiver essa informação pergunte a seu/sua orientador/a.
+    </div>
   </div>
 </div>
 </div>
-<input  id="tituloPrinc" type="text" name="tituloPrinc" style="width: 98.4%;" placeholder="Título do trabalho em Inglês OU Português">
+<input  id="tituloPrinc" type="text" name="tituloPrinc" style="width: 98.4%;" >
 </br></br>
-
-
-<div for="tit-dd">
-    <div style="display: flex; align-items: center; width: 100%;">
-        <h4 for="tit-dd" style="width: auto; margin: 0;"><a style="color: red;" title="Elemento obrigatório">*</a>Título para os dados inserido:</h4>
-        <div class="tooltip-container">
-            <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
-            <div class="tooltip">Insira um título que descreva de forma clara e objetiva do que se trata o conjunto de dados a serem submetidos. 
-                Ele não deve ser igual ao título da publicação relacionada, mas deve refletir o que foi <span class="bold">medido, onde e quando</span>.</div>
-            </div>
-    </div>
+ <div id="finan">
+    <div style="display: flex; align-items: center; width: 100%;" id="financiamento">
+        <h4 for="tit-dd" style="width: auto; margin: 0;">Financiamento:</h4>
+    </div><br>
+<input id="financiamento" type="text" name="financiamento" style="width: 98.4%;" placeholder="Agência de Fomento/nºprocesso">
 </div>
-<input id="tituloDado" type="text" name="tituloDado" style="width: 98.4%;">
 </br>
 </br>
+
 
 
 <div id="trab-asso">
     <h4><a style="color: red;" title="Elemento obrigatório">*</a>Existe algum trabalho associado a este conjunto de dados</h4>
 
     <h5>
-        <input type="radio" id="trab-sim" name="trab_associado" value="sim" onclick="mostrarDivInfo()">
+        <input type="radio" id="trab-sim" name="trab_associado" value="sim" onclick="mostrarDivInfo()" checked>
         <label for="trab-sim">Sim</label>
-
+    
         <input type="radio" id="trab-nao" name="trab_associado" value="nao" onclick="ocultarDivInfo()">
         <label for="trab-nao">Não</label>
-    </h5> </br>
+    </h5>
+    <br>
 
     <!-- Div com mais informações -->
     <div id="info-adicional" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
@@ -233,29 +290,7 @@
 
 
 <!-- coAutores -->
- <div id="borda2" class="bordaPg">
-<h4 id="coAutores">Adicionar Autores e Coatores:</h4></br>      
-<div id="autoresContainer">
-    <div class="autor" id="autorContainer0">
-        <div class="colunaaut">
-            <input type="text" class="autor" name="autor[]" id="autor0" placeholder="Nome Completo" autocomplete="off" style="width: 100%;">
-        </div>
-        <div class="colunafili">
-            <input type="text" class="filiacao" name="filiacao[]" id="filiacao0" placeholder="Filiação" autocomplete="off" style="width: 100%;">
-        </div>
-    </div></br>
-    <!-- Aqui serão adicionados os campos de coautores dinamicamente -->
-</div>
-<br>
-<div id="autor-button" style="display: flex; justify-content: space-between; gap: 10px;">
-    
-    <button class="button" type="button" onclick="adicionarAutor()">Adicionar Autor</button>
-    <button type="button" class="button" onclick="deletarAutor()">Remover último Co-autor</button>
-    <button type="button"  class="button" onclick="removerTODOSAutores()">Remover todas as linhas </button>
-</div>
-</div>
-</br>
-</br>
+
 
 
 <div id="borda3" class="bordaPg">
@@ -396,11 +431,12 @@
 
 <div id="proxys-container">
     <div style="display: flex;">
-        <h4 style="width: auto; margin: 0;">Ferramenta utilizada:</h4>
+        <h4 style="width: auto; margin: 0;">Parâmetro Medido:</h4>
 
         <div class="tooltip-container">
             <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
-            <div class="tooltip">Indique quantas forem necessárias</div>
+            <div class="tooltip">Indique quantas forem necessárias. </br><span style="color: red;">*</span> Mas lembre-se que se você tiver tabelas com dados muito distintos (p.e, granulometria e associação de foraminíferos) ou dados que 
+                precisam de tabelas com estruturas diferentes, você deve fazer submissões diferentes.</div>
         </div>
     </div>
 
@@ -545,7 +581,8 @@
 </br>
 </br>
 <div id="borda8" class="bordaPg">
-<h4> Adicione o arquivo CSV (separado por virgula): </h4>
+    <div>
+<h4> Adicione o arquivo .TXT (TAB-delimited text files UTF-8) </h4>
 <a title="VER MODELO" href="javascript:abrirCSV()"  style="color: green; margin-right: 2%; font-size: 45px;" class="bi bi-filetype-csv"></a>
 <input id="refef" type="file" name="tabelaDado" style="width: 30%;" unique><br><br><br>
     
@@ -570,7 +607,14 @@ disponibilizados aqui.</div>
         <option value="Público"> Público</option>
         <option value="Privado"> Privado </option>
     </select></br><br>
-
+  </div>
+  <div>
+    <div id="text-infor">
+        <span><a href="https://wiki.pangaea.de/wiki/Best_practice_manuals_and_templates"> Aqui</a> você encontra o manual e modelos de tabelas para dados <a href="https://wiki.pangaea.de/wiki/Biology">biológicos</a>, 
+        <a href="https://wiki.pangaea.de/wiki/Chemical_data">químicos</a>, <a href="https://wiki.pangaea.de/wiki/Vertical_sediment_profile">gelógicos</a>, geofísicos(<a href="https://wiki.pangaea.de/wiki/Bathymetry">batimetria</a> ou <a href="https://wiki.pangaea.de/wiki/Sediment_echosounder">dados de ecossonda</a>),
+    <a href="https://wiki.pangaea.de/wiki/Meteorological_data">metereológicos</a> e oceanográficos ( <a href="https://wiki.pangaea.de/wiki/ADCP_Underway_Data">ADCP</a>, <a href="https://wiki.pangaea.de/wiki/CTD">CTD</a>, <a href="https://wiki.pangaea.de/wiki/Bio-optical_Sensors_Underway_Data">sensores bio-ópticos</a>).</span>
+    </div>
+  </div>
 </div>
 </div>
 <div class="termo">

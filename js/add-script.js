@@ -44,16 +44,25 @@ function closeNavbar() {
     }
 
     //ABRIR NOVOS CAMPOS e modelar automático o tamanho da caixa de texto
-
+    document.addEventListener("DOMContentLoaded", () => {
+        const div = document.getElementById("info-adicional");
+        const radioSim = document.getElementById("trab-sim");
+    
+        // Exibe a div caso "Sim" esteja selecionado
+        if (radioSim.checked) {
+            div.style.maxHeight = "500px";
+        }
+    });
+    
     function mostrarDivInfo() {
         const div = document.getElementById("info-adicional");
-        div.style.maxHeight = "500px"; // Define a altura máxima para exibir a <div> com transição
+        div.style.maxHeight = "500px"; // Define a altura máxima para exibir a <div>
     }
     
     function ocultarDivInfo() {
-        document.getElementById("info-adicional").style.maxHeight = "0"; // Oculta a <div> com transição
+        const div = document.getElementById("info-adicional");
+        div.style.maxHeight = "0"; // Oculta a <div>
     }
-
 
 
     /// campos ponto ou area
@@ -425,6 +434,7 @@ function proximaPagina() {
             document.getElementById('section2').style.display = 'none';
             document.getElementById('section3').style.display = 'block';
             currentSection = 3; // Atualiza para a próxima seção
+            window.alert('Obs: Certifique que todos os dados estejam corretos - Não é possível mudar a planilha de dados, se houver modificações é necessário fazer uma nova sumissão');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }

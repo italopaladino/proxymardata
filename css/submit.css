@@ -126,6 +126,7 @@
 .aqui-sub{
   color: white;
   cursor: pointer;
+text-decoration: underline red;
 }
 
 li a.aqui-sub:hover{
@@ -11352,10 +11353,10 @@ section {
   cursor: pointer;
 }
 
-.tooltip-container .tooltip {
+.tooltip {
   position: absolute;
-  top: -70px; /* Ajuste de posição vertical */
-  left: 700%;
+  top: -50px; /* Ajuste de posição vertical */
+  left: 500%;
   transform: translateX(-50%);
   opacity: 0;
   background: #f2f2f2;
@@ -11373,12 +11374,13 @@ section {
   width: 500px; /* Largura máxima para ajustar a caixa */
   height: auto;
   white-space: normal; /* Permite que o texto quebre em várias linhas */
+  pointer-events: none;
 }
 
 .tooltip-container:hover 
 .tooltip {
-  top: -70px;
-  left: 700%;
+  top: -50px;
+  left: 500%;
   opacity: 1;
   transition-duration: 0.1s;
   pointer-events: auto;
