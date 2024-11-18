@@ -126,26 +126,20 @@
                 
 </div>
         </header></br>
-
         <script>
-            // Função para bloquear a tecla Enter
+            // Função para bloquear o Enter
             function bloquearEnter(event) {
-                if (event.code === "Enter") {
+                if (event.key === "Enter") {
                     event.preventDefault(); // Bloqueia o Enter
                     return false;
                 }
-            }
-        
-            // Função para enviar o formulário explicitamente pelo botão
-            function enviarFormulario() {
-                document.getElementById("forms").submit();
             }
         </script>
             
             <!-- PRIMEIRA PAGINA -->
 
 
-<form id="forms" method="post" action="../PHP/submit-DADOS2.php" onkeydown="return bloquearEnter(event)" enctype="multipart/form-data" style="position: relative; margin-bottom: 10px;">
+<form id="forms" method="post" action="../PHP/submit-DADOS2.php"  enctype="multipart/form-data" style="position: relative; margin-bottom: 10px;">
     <div id="topo" style="position: absolute; top: 0;"></div>
     <input type="hidden" name="secaoAtual1" value="default_value1">
         
@@ -165,8 +159,8 @@
             </div>
     </br>
 
-        <input autofocus type="text" id="correspondente" name="correspondente" style="width: 49%;" placeholder="Nome Completo"> <!-- REVISAR NOME DOS CAMPOS --  COM OS DO BANCO--> 
-        <input type="email" id="email" name="email" style="width: 49%;" placeholder="E-mail do responsável (ex: xxxxx@mail.com)" maxlength="255">
+        <input autofocus type="text" id="correspondente" name="correspondente" style="width: 49%;" placeholder="Nome Completo" onkeydown="bloquearEnter(event)" > <!-- REVISAR NOME DOS CAMPOS --  COM OS DO BANCO--> 
+        <input type="email" id="email" name="email" style="width: 49%;" placeholder="E-mail do responsável (ex: xxxxx@mail.com)" maxlength="255" onkeydown="bloquearEnter(event)" >
     </br>
 </br>
 <div style="display: flex; align-items: center; width: 100%;">
@@ -234,7 +228,11 @@
   </div>
 </div>
 </div>
+<<<<<<< HEAD
 <input  id="tituloPrinc" type="text" name="tituloPrinc" style="width: 98.4%;" >
+=======
+<input  id="tituloPrinc" type="text" name="tituloPrinc" style="width: 98.4%;" onkeydown="bloquearEnter(event)" >
+>>>>>>> 46481ebe131b1430dc3ad8c145eba46ae3d40117
 </br></br>
  <div id="finan">
     <div style="display: flex; align-items: center; width: 100%;" id="financiamento">
@@ -242,6 +240,10 @@
     </div><br>
 <input id="financiamento" type="text" name="financiamento" style="width: 98.4%;" placeholder="Agência de Fomento/nºprocesso">
 </div>
+<<<<<<< HEAD
+=======
+<input id="tituloDado" type="text" name="tituloDado" style="width: 98.4%;" onkeydown="bloquearEnter(event)">
+>>>>>>> 46481ebe131b1430dc3ad8c145eba46ae3d40117
 </br>
 </br>
 
@@ -251,10 +253,17 @@
     <h4><a style="color: red;" title="Elemento obrigatório">*</a>Existe algum trabalho associado a este conjunto de dados</h4>
 
     <h5>
+<<<<<<< HEAD
         <input type="radio" id="trab-sim" name="trab_associado" value="sim" onclick="mostrarDivInfo()" checked>
         <label for="trab-sim">Sim</label>
     
         <input type="radio" id="trab-nao" name="trab_associado" value="nao" onclick="ocultarDivInfo()">
+=======
+        <input type="radio" id="trab-sim" name="trab_associado" value="sim" onclick="mostrarDivInfo()" onkeydown="bloquearEnter(event)" >
+        <label for="trab-sim">Sim</label>
+
+        <input type="radio" id="trab-nao" name="trab_associado" value="nao" onclick="ocultarDivInfo()" onkeydown="bloquearEnter(event)" >
+>>>>>>> 46481ebe131b1430dc3ad8c145eba46ae3d40117
         <label for="trab-nao">Não</label>
     </h5>
     <br>
@@ -264,7 +273,7 @@
         <div id="tipoTrabalho" class="coluna">
             <div>
                 <label for="tipoTrabalho"> Tipo de trabalho:</label><br>
-                <select id="tipoTrabalhoSelecao" name="tipoTrabalho"  style="height: 30px;">
+                <select id="tipoTrabalhoSelecao" name="tipoTrabalho"  style="height: 30px;" onkeydown="bloquearEnter(event)" >
                     <option value=""> --- </option>
                     <option value="Artigo"> Artigo </option>
                     <option value="Tese de Doutorado"> Tese de Doutorado </option>
@@ -279,7 +288,7 @@
 <div class="coluna">
     <div id="titulo-trab">
         <label for="tit-trab" id="tit-trab">Título do Trabalho:</label></br>
-        <textarea style="width: 100%; resize:vertical;" type="text" id="titTrab" name="titTrab" maxlength="1500" rows="3" ></textarea> <!-- att no SQL -->
+        <textarea style="width: 100%; resize:vertical;" type="text" id="titTrab" name="titTrab" maxlength="1500" rows="3" onkeydown="bloquearEnter(event)" ></textarea> <!-- att no SQL -->
     </div>
 </div>
 </div>
@@ -290,13 +299,39 @@
 
 
 <!-- coAutores -->
+<<<<<<< HEAD
 
+=======
+ <div id="borda2" class="bordaPg">
+<h4 id="coAutores">Adicionar Autores e Coatores:</h4></br>      
+<div id="autoresContainer">
+    <div class="autor" id="autorContainer0">
+        <div class="colunaaut">
+            <input type="text" class="autor" name="autor[]" id="autor0" placeholder="Nome Completo" autocomplete="off" style="width: 100%;" onkeydown="bloquearEnter(event)" >
+        </div>
+        <div class="colunafili">
+            <input type="text" class="filiacao" name="filiacao[]" id="filiacao0" placeholder="Filiação" autocomplete="off" style="width: 100%;" onkeydown="bloquearEnter(event)" >
+        </div>
+    </div></br>
+    <!-- Aqui serão adicionados os campos de coautores dinamicamente -->
+</div>
+<br>
+<div id="autor-button" style="display: flex; justify-content: space-between; gap: 10px;">
+    
+    <button class="button" type="button" onclick="adicionarAutor()">Adicionar Autor</button>
+    <button type="button" class="button" onclick="deletarAutor()">Remover último Co-autor</button>
+    <button type="button"  class="button" onclick="removerTODOSAutores()">Remover todas as linhas </button>
+</div>
+</div>
+</br>
+</br>
+>>>>>>> 46481ebe131b1430dc3ad8c145eba46ae3d40117
 
 
 <div id="borda3" class="bordaPg">
 <div>
     <h4 for="referencia" ><a style="color: red;" title="Elemento obrigatório">*</a>Referência:</h4></br>
-    <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" style="width: 98.4%;" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
+    <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" style="width: 98.4%;" onkeydown="bloquearEnter(event)" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
 </div>
 
 </div>
@@ -334,7 +369,7 @@
         </div>
     </div>
         </br>
-        <textarea autofocus type="text" id="resDado" name="res_dado"  maxlength="2500" rows="4" cols="1000" style="width: 98.4%;"></textarea>
+        <textarea autofocus type="text" id="resDado" name="res_dado"  maxlength="2500" rows="4" cols="1000" style="width: 98.4%;" onkeydown="bloquearEnter(event)"></textarea>
     </div>    
 
 </br></br>
@@ -356,10 +391,10 @@
    
 <div id="trab-asso">
     <h5>
-        <input type="radio" id="pontoPon" name="ponto" value="pontoPon" onclick="mostrarDiv1()">
+        <input type="radio" id="pontoPon" name="ponto" value="pontoPon" onclick="mostrarDiv1()" onkeydown="bloquearEnter(event)">
         <label for="pontoPron">Ponto a Ponto </label>
 
-        <input type="radio" id="areaP" name="ponto" value="areaP" onclick="mostrarDiv2()">
+        <input type="radio" id="areaP" name="ponto" value="areaP" onclick="mostrarDiv2()" onkeydown="bloquearEnter(event)">
         <label for="areaP">Área<a style="font-size: 15px;"> (Utilize apenas para modelos)</a></label>
 
     </h5> </br>  
@@ -380,30 +415,30 @@
 <div id="area"style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
     <h5>Adicione 4 pontos:</h5>
     <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
-        <input type="text" class="ID_amst" id="ID_amstAREA1" name="ID_amstAREA1" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
-    <input type="text" class="latitude" id="latitudeAREA1" name="latitudeAREA1" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
-    <input type="text" class="longitude" id="longitudeAREA1" name="longitudeAREA1" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+        <input type="text" class="ID_amst" id="ID_amstAREA1" name="ID_amstAREA1" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10"onkeydown="bloquearEnter(event)">
+    <input type="text" class="latitude" id="latitudeAREA1" name="latitudeAREA1" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off"onkeydown="bloquearEnter(event)">
+    <input type="text" class="longitude" id="longitudeAREA1" name="longitudeAREA1" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off"onkeydown="bloquearEnter(event)">
     <input type="date" class="dat" id="dataAREA1" name="dataAREA1" style="width: 20%;" maxlength="10" autocomplete="off">
     </div>
 </br>
     <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
-        <input type="text" class="ID_amst" id="ID_amstAREA2" name="ID_amstAREA2" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
-    <input type="text" class="latitude" id="latitudeAREA2" name="latitudeAREA2" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
-    <input type="text" class="longitude" id="longitudeAREA2" name="longitudeAREA2" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+        <input type="text" class="ID_amst" id="ID_amstAREA2" name="ID_amstAREA2" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10"onkeydown="bloquearEnter(event)">
+    <input type="text" class="latitude" id="latitudeAREA2" name="latitudeAREA2" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off"onkeydown="bloquearEnter(event)">
+    <input type="text" class="longitude" id="longitudeAREA2" name="longitudeAREA2" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off"onkeydown="bloquearEnter(event)">
     <input type="date" class="dat" id="dataAREA2" name="dataAREA2" style="width: 20%;" maxlength="10" autocomplete="off">
     </div>
 </br>
     <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
-        <input type="text" class="ID_amst" id="ID_amstAREA3" name="ID_amstAREA3" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
-    <input type="text" class="latitude" id="latitudeAREA3" name="latitudeAREA3" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
-    <input type="text" class="longitude" id="longitudeAREA3" name="longitudeAREA3" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+        <input type="text" class="ID_amst" id="ID_amstAREA3" name="ID_amstAREA3" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10"onkeydown="bloquearEnter(event)">
+    <input type="text" class="latitude" id="latitudeAREA3" name="latitudeAREA3" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off"onkeydown="bloquearEnter(event)">
+    <input type="text" class="longitude" id="longitudeAREA3" name="longitudeAREA3" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off"onkeydown="bloquearEnter(event)">
     <input type="date" class="dat" id="dataAREA3" name="dataAREA3" style="width: 20%;" maxlength="10" autocomplete="off">
     </div>
 </br>
     <div class="coordenadas-campo" id="area" style="display: flex; flex-wrap: wrap; width: 100%; gap: 4.8px;">
-        <input type="text" class="ID_amst" id="ID_amstAREA4" name="ID_amstAREA4" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10">
-    <input type="text" class="latitude" id="latitudeAREA4" name="latitudeAREA4" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off">
-    <input type="text" class="longitude" id="longitudeAREA4" name="longitudeAREA4" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off">
+        <input type="text" class="ID_amst" id="ID_amstAREA4" name="ID_amstAREA4" placeholder="ID" style="width: 20%;" autocomplete="off" maxlength="10"onkeydown="bloquearEnter(event)">
+    <input type="text" class="latitude" id="latitudeAREA4" name="latitudeAREA4" placeholder="-YY.YYYYY" style="width: 25%;" maxlength="15" autocomplete="off"onkeydown="bloquearEnter(event)">
+    <input type="text" class="longitude" id="longitudeAREA4" name="longitudeAREA4" placeholder="-XX.XXXX" step="width:25% " maxlength="25" autocomplete="off"onkeydown="bloquearEnter(event)">
     <input type="date" class="dat" id="dataAREA4" name="dataAREA4" style="width: 20%;" maxlength="10" autocomplete="off">
     </div>
 </br>
@@ -417,7 +452,7 @@
 <div id="tipFerr">
 <div id="amostras" class="tipAmostra">
     <h4>Tipo de Amostra</h4>
-    <select id="tipAmst" name="tipAmst" style="height: 30px; width: 70%;">
+    <select id="tipAmst" name="tipAmst" style="height: 30px; width: 70%;" onkeydown="bloquearEnter(event)">
         <option value=""> --- </option>
         <option value="Água">Água</option>
         <option value="Sedimento">Sedimento</option>
@@ -442,68 +477,68 @@
 
     <div id="checkbox-columns" style="display: flex; width: 100%; justify-content: space-between;">
         <div id="proxys" class="tipAmostra2">
-            <input type="checkbox" id="associ" name="associ" value="Associação">
+            <input type="checkbox" id="associ" name="associ" value="Associação" onkeydown="bloquearEnter(event)">
             <label for="associ">Associação</label><br>
 
-            <input type="checkbox" id="batmet" name="batmet" value="Batimetria">
+            <input type="checkbox" id="batmet" name="batmet" value="Batimetria" onkeydown="bloquearEnter(event)">
             <label for="batmet">Batimetria</label><br>
 
-            <input  type="checkbox" id="bioOrg" name="bioOrg" value="Biormacadores Orgânicos">
+            <input  type="checkbox" id="bioOrg" name="bioOrg" value="Biormacadores Orgânicos" onkeydown="bloquearEnter(event)">
             <label for="bioOrg" style="white-space: normal;">Biomarcadores Orgânicos</label><br>
 
-            <input type="checkbox" id="cocolit" name="cocolit" value="Cocolitoforídeos">
+            <input type="checkbox" id="cocolit" name="cocolit" value="Cocolitoforídeos" onkeydown="bloquearEnter(event)">
             <label for="cocolit">Cocolitoforídeos</label><br>
 
-            <input type="checkbox" id="estrat" name="estrat" value="Estratigrafia">
+            <input type="checkbox" id="estrat" name="estrat" value="Estratigrafia" onkeydown="bloquearEnter(event)">
             <label for="estrat">Estratigrafia</label><br>
 
-            <input type="checkbox" id="foramplan" name="foramplan" value="foramplan">
+            <input type="checkbox" id="foramplan" name="foramplan" value="foramplan" onkeydown="bloquearEnter(event)">
             <label style="white-space: normal;" for="foramplan">Foraminíferos Planctônicos</label><br>
 
-            <input type="checkbox" id="forambent" name="forambent" value="forambent">
+            <input type="checkbox" id="forambent" name="forambent" value="forambent" onkeydown="bloquearEnter(event)">
             <label for="forambent">Foraminíferos Bentônicos</label><br>
 
-            <input type="checkbox" id="granl" name="granl" value="Granulometria">
+            <input type="checkbox" id="granl" name="granl" value="Granulometria" onkeydown="bloquearEnter(event)">
             <label for="granl">Granulometria</label><br>
 
-            <input type="checkbox" id="hidrod" name="hidrod" value="Hidrodinâmica">
+            <input type="checkbox" id="hidrod" name="hidrod" value="Hidrodinâmica" onkeydown="bloquearEnter(event)">
             <label for="hidrod">Hidrodinâmica</label><br>
 
-            <input type="checkbox" id="hidrog" name="hidrog" value="Hidrografia">
+            <input type="checkbox" id="hidrog" name="hidrog" value="Hidrografia" onkeydown="bloquearEnter(event)">
             <label for="hidrog">Hidrografia</label><br>
                       
         </div>
 
         <div id="proxys2" class="tipAmostra3">
-            <input type="checkbox" id="matorg" name="matorg" value="Matéria Orgânica">
+            <input type="checkbox" id="matorg" name="matorg" value="Matéria Orgânica"onkeydown="bloquearEnter(event)">
             <label for="matorg">Matéria Orgânica</label><br>
 
-            <input type="checkbox" id="metais" name="metais" value="Metais">
+            <input type="checkbox" id="metais" name="metais" value="Metais" onkeydown="bloquearEnter(event)">
             <label for="metais">Metais e Semi-metais</label><br>
 
-            <input type="checkbox" id="microps" name="microps" value="Microplásticos">
+            <input type="checkbox" id="microps" name="microps" value="Microplásticos" onkeydown="bloquearEnter(event)">
             <label for="microps">Microplásticos</label><br>
 
-            <input type="checkbox" id="ageMod" name="ageMod" value="Modelos de idade">
+            <input type="checkbox" id="ageMod" name="ageMod" value="Modelos de idade" onkeydown="bloquearEnter(event)">
             <label for="ageMod">Modelos de idade</label><br>
 
-            <input type="checkbox" id="proFisi" name="proFisi" value="Propriedades físicas">
+            <input type="checkbox" id="proFisi" name="proFisi" value="Propriedades físicas" onkeydown="bloquearEnter(event)">
             <label for="proFisi">Propriedades físicas</label><br>
             
-            <input type="checkbox" id="radioist" name="radioist" value="Radioisótopos">
+            <input type="checkbox" id="radioist" name="radioist" value="Radioisótopos" onkeydown="bloquearEnter(event)">
             <label for="radioist">Radioisótopos</label><br>
             
-            <input type="checkbox" id="razIsot" name="razIsot" value="Razões Isotópicas">
+            <input type="checkbox" id="razIsot" name="razIsot" value="Razões Isotópicas" onkeydown="bloquearEnter(event)">
             <label for="razIsot">Razões Isotópicas</label><br>
             
-            <input type="checkbox" id="SmodNum" name="SmodNum" value="Saída de modelo numérico">
+            <input type="checkbox" id="SmodNum" name="SmodNum" value="Saída de modelo numérico" onkeydown="bloquearEnter(event)">
             <label for="SmodNum">Saída de modelo numérico</label><br>
 
-            <input type="checkbox" id="teorAg" name="teorAg" value="Teor de Água">
+            <input type="checkbox" id="teorAg" name="teorAg" value="Teor de Água" onkeydown="bloquearEnter(event)">
             <label for="teorAg">Teor de Água</label><br>
 
 
-            <input type="text" id="outroFerr" name="outroFerr" placeholder="Outra Ferramenta" style="width: 90%;">
+            <input type="text" id="outroFerr" name="outroFerr" placeholder="Outra Ferramenta" style="width: 90%;" onkeydown="bloquearEnter(event)">
         </div>
     </div>
 </div>
@@ -520,58 +555,58 @@
 </br>
     <div id="checkbox-columns" style="display: inline-flex; width: 100%;">
         <div id="equip1" class="equipColet1">
-            <input type="checkbox" id="pstCor" name="pstCor" value="Piston Corer">
+            <input type="checkbox" id="pstCor" name="pstCor" value="Piston Corer" onkeydown="bloquearEnter(event)">
             <label for="pstCor">Piston Corer</label><br>
 
-            <input type="checkbox" id="gravt" name="gravt" value="Gravity Corer">
+            <input type="checkbox" id="gravt" name="gravt" value="Gravity Corer" onkeydown="bloquearEnter(event)">
             <label for="gravt">Gravity Corer</label><br>
 
-            <input  type="checkbox" id="drill" name="drill" value="Drilling device">
+            <input  type="checkbox" id="drill" name="drill" value="Drilling device" onkeydown="bloquearEnter(event)">
             <label for="drill">Drilling device</label><br>
 
-            <input type="checkbox" id="gbox" name="gbox" value="Giant box corer">
+            <input type="checkbox" id="gbox" name="gbox" value="Giant box corer" onkeydown="bloquearEnter(event)">
             <label for="gbox">Giant box corer</label><br>
 
-            <input type="checkbox" id="boxcr" name="boxcr" value="Box Corer">
+            <input type="checkbox" id="boxcr" name="boxcr" value="Box Corer" onkeydown="bloquearEnter(event)">
             <label for="boxcr">Box Corer</label><br>
 
-            <input type="checkbox" id="ADCP" name="ADCP" value="ADCP">
+            <input type="checkbox" id="ADCP" name="ADCP" value="ADCP" onkeydown="bloquearEnter(event)">
             <label for="ADCP">ADCP</label><br>
         </div>
 
         <div id="equip2" class="equipColet2">
-            <input type="checkbox" id="corrt" name="corrt" value="Correntômetro">
+            <input type="checkbox" id="corrt" name="corrt" value="Correntômetro" onkeydown="bloquearEnter(event)">
             <label for="corrt">Correntômetro</label><br>
 
-            <input type="checkbox" id="CTD" name="CTD" value="CTD">
+            <input type="checkbox" id="CTD" name="CTD" value="CTD" onkeydown="bloquearEnter(event)">
             <label for="CTD">CTD</label><br>
 
-            <input type="checkbox" id="modNum" name="modNum" value="Modelo numérico">
+            <input type="checkbox" id="modNum" name="modNum" value="Modelo numérico" onkeydown="bloquearEnter(event)">
             <label for="modNum">Modelo numérico</label><br>
 
-            <input type="checkbox" id="multb" name="multb" value="Multibean">
+            <input type="checkbox" id="multb" name="multb" value="Multibean" onkeydown="bloquearEnter(event)">
             <label for="multb">Multibean</label><br>
                       
           
-            <input type="checkbox" id="multCor" name="multCor" value="Multiple Corer">
+            <input type="checkbox" id="multCor" name="multCor" value="Multiple Corer" onkeydown="bloquearEnter(event)">
             <label for="multCor">Multiple Corer</label><br>
 
-           <input type="checkbox" id="satl" name="satl" value="Satélite">
+           <input type="checkbox" id="satl" name="satl" value="Satélite" onkeydown="bloquearEnter(event)">
             <label for="satl">Satélite</label><br>
             
         </div>
         <div id="equip3" class="equipColet3">
             
-            <input type="checkbox" id="sensBio" name="sensBio" value="Sensores bio-ópticos">
+            <input type="checkbox" id="sensBio" name="sensBio" value="Sensores bio-ópticos" onkeydown="bloquearEnter(event)">
             <label for="sensBio">Sensores bio-ópticos</label><br>
 
-            <input type="checkbox" id="sidSc" name="sidSc" value="Side-sacn sonar">
+            <input type="checkbox" id="sidSc" name="sidSc" value="Side-sacn sonar" onkeydown="bloquearEnter(event)">
             <label for="sidSc">Side-scan sonar</label><br>
             
-            <input type="checkbox" id="vanv" name="vanv" value="Van-veen">
+            <input type="checkbox" id="vanv" name="vanv" value="Van-veen" onkeydown="bloquearEnter(event)">
             <label for="vanv">Van-veen</label><br>
             
-            <input type="text" id="outroEqui" name="outroEqui" placeholder="Outro" style="width:100%;">
+            <input type="text" id="outroEqui" name="outroEqui" placeholder="Outro" style="width:100%;" onkeydown="bloquearEnter(event)">
         </div>
     </div>
 
@@ -584,7 +619,7 @@
     <div>
 <h4> Adicione o arquivo .TXT (TAB-delimited text files UTF-8) </h4>
 <a title="VER MODELO" href="javascript:abrirCSV()"  style="color: green; margin-right: 2%; font-size: 45px;" class="bi bi-filetype-csv"></a>
-<input id="refef" type="file" name="tabelaDado" style="width: 30%;" unique><br><br><br>
+<input id="refef" type="file" name="tabelaDado" style="width: 30%;" unique onkeydown="bloquearEnter(event)"> <br><br><br>
     
   <div id="armazenamento">
     <div style="display: flex; align-items: center; width: 100%;">
@@ -619,7 +654,7 @@ disponibilizados aqui.</div>
 </div>
 <div class="termo">
 
-<input type="checkbox" id="termo" name="termo" value="term">
+<input type="checkbox" id="termo" name="termo" value="term" onkeydown="bloquearEnter(event)">
 <label><h5 for="termo"> Li e concordo com os termos sobre o uso dos dados <a href="javascript:abrirTermo()"> Clique aqui para ler</a></h5></label>
 
 </div> 
@@ -647,7 +682,7 @@ disponibilizados aqui.</div>
 </br>
 <div id="bttn" style="display: flex; justify-content: space-between; align-items: flex-end;height: 100px;">   
     <button class="button" type="button"  onclick="paginaAnterior()">Anterior</button>
-    <button class="button" type="submit" onclick="enviarFormulario()" > Submeter</button>
+    <button class="button" type="submit"> Submeter</button>
 </div>
 
 

@@ -179,6 +179,8 @@ function adicionarAutor() {
    novoCampoNome.style.width = "100%";
    novoCampoNome.style.right= "2px";    
    novoCampoNome.autocomplete="off";
+   novoCampoNome.onkeydown = bloquearEnter; ; 
+
     novoCampoNome.addEventListener("input", function() {
         autocomplete(this, "../PHP/busca_autor.php");
     });
@@ -199,6 +201,7 @@ function adicionarAutor() {
     novoCampoFiliacao.placeholder = "Filiação";
     novoCampoFiliacao.style.width="100%"
     novoCampoFiliacao.autocomplete="off";
+    novoCampoFiliacao.onkeydown = bloquearEnter;
    
     
     novoCampoFiliacao.addEventListener("input", function() {
@@ -272,7 +275,7 @@ function adicionarCoordenadas() {
     novoCoordenadas.style.display = "flex";
     novoCoordenadas.style.flexWrap = "wrap"; // To ensure the elements wrap if there's not enough space
     novoCoordenadas.style.width = "100%";
-    novoCoordenadas.style.gap = "4.8px"; // Consistent gap between elements
+    novoCoordenadas.style.gap = "4.8px"// Consistent gap between elements
 
     // Create new input elements
     var novoID = document.createElement("input");
@@ -282,7 +285,8 @@ function adicionarCoordenadas() {
     novoID.name = "ID_amst[]"; // Use an array to collect multiple values
     novoID.placeholder = "ID";
     novoID.style.width ="20%";
-    novoID.style.autocomplete ="off";   
+    novoID.style.autocomplete ="off"; 
+    novoID.onkeydown=bloquearEnter;
     
     novoID.maxLength = 10;
 
@@ -295,6 +299,7 @@ function adicionarCoordenadas() {
     novolatitude.style.width="25%"   
     novolatitude.maxLength = 10;
     novolatitude.style.autocomplete="off";
+    novolatitude.onkeydown=bloquearEnter;
 
     var novolongitude = document.createElement("input");
     novolongitude.type = "text";
@@ -305,6 +310,7 @@ function adicionarCoordenadas() {
     novolongitude.style.width="25%";
     novolongitude.maxLength = 10;
     novolongitude.style.autocomplete ="off";
+    novolongitude.onkeydown=bloquearEnter
 
     var novoAnoCol = document.createElement("input");
     novoAnoCol.type = "date";
@@ -314,6 +320,7 @@ function adicionarCoordenadas() {
     novoAnoCol.placeholder = "Data da coleta";
     novoAnoCol.style.width="20%";
     novoAnoCol.maxLength = 10;
+    novoAnoCol.onkeydown-bloquearEnter;
     
      
     // Add the new fields to the container
