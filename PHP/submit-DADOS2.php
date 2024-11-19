@@ -220,7 +220,7 @@ for ($i = 1; $i <= count($ID_amstAREA); $i++) {
     $outroFerr = trim($_POST['outroFerr']);
 
     $sql_ferram = "INSERT INTO ferramentas (tipoAmst, assos, batmet, bioOrg, cocolit, estrat, foramplan,forambent, granl, hidrod, hidrog, matorg, metais, microps, ageMod, proFisi, radioist, razIsot,smodNum, teorAg, outroFerr, trabalhoid)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12,$13,$14,$15,$16,$17,$18,$19,$20,NULLIF($21, ''), $22)";
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12,$13,$14,$15,$16,$17,$18,$19,$20,NULLIF($21, ''), $22) ON CONFLIT (trabalhoid) DO NOTHING";
     $result_prox = pg_query_params($conn, $sql_ferram,[$tipAmst,$associ,$batmet,$bioOrg,$cocolit,$strat,$foramplan,$forambent,$granl,$hidrod,$hidrog,$matorg,$metais,$microps,$ageMod,$proFisi,$radioist,$razIsot,$smodnum,$teorAg,$outroFerr,$trabalhoID]);
 
     if (!$result_prox){
@@ -249,7 +249,7 @@ for ($i = 1; $i <= count($ID_amstAREA); $i++) {
     $outroEqui = trim($_POST['outroEqui']);
 
     $sql_equipamentos = "INSERT INTO equipcoleta (piston,gravcorer,drilli,gboxcorer,boxcorer,ADCP,corrt,CTD, modNum, multb, multcor,stl,senscbio,sidSc,vanv, outroEQui, trabalhoid)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9,$10,$11,$12,$13,$14,$15,NULLIF($16, ''), $17)";
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9,$10,$11,$12,$13,$14,$15,NULLIF($16, ''), $17) ON CONFLIT (trabalhoid) DO NOTHING";
 
     $result_equi = pg_query_params($conn, $sql_equipamentos,[$piston,$gravcorer,$drilli,$gboxcorer,$boxcr,$ADCP,$corrt,$CTD,$modNum,$multb,$multCorr,$satl,$sensBio,$sidSc,$vanv,$outroEqui,$trabalhoID]);
 
@@ -264,9 +264,31 @@ for ($i = 1; $i <= count($ID_amstAREA); $i++) {
 
 $resDad = $_POST['res_dado'];
 
-$sql_caract = "INSERT INTO caractDado (red_dado, trabalhoid) VALUES ($1, $2)";
+$sql_caract = "INSERT INTO caractDado (red_dado, trabalhoid) VALUES ($1, $2) ON CONFLIT (trabalhoid) DO NOTHING";
 $result_caract = pg_query_params($conn, $sql_caract,[$resDad, $trabalhoID]);
 
+
+// Capturar o valor do ponto selecionado
+$pontoSelecionado = $_POST['ponto'];
+
+
+
+if ($pontoSelecionado == "pontoPon") {
+    // SQL para "Ponto a Ponto"
+    $sqlpont = "INSERT INTO tipoponto (descricao, trabalhoid) VALUES ($1, $2) ON CONFLICT (trabalhoid) DO NOTHING";
+    $params = ['Malha de Pontos', $trabalhoID];
+    $result_pont = pg_query_params($conn, $sqlpont, $params);
+
+
+} elseif ($pontoSelecionado == "areaP") {
+    // SQL para "Área de coleta"
+    $sqlare = "INSERT INTO tipoponto (descricao, trabalhoid) VALUES ($1, $2) ON CONFLICT (trabalhoid) DO NOTHING";
+    $params = ['Área de coleta', $trabalhoID];
+    $result_are = pg_query_params($conn, $sqlare, $params);
+} else {
+    // Caso nenhum ponto seja selecionado
+    echo "Nenhuma opção válida foi selecionada.";
+}
 
 
 
@@ -283,7 +305,7 @@ if (isset($_FILES['tabelaDado']) && $_FILES['tabelaDado']['error'] === UPLOAD_ER
     $nomeArquivo = $_FILES['tabelaDado']['name'];
 
     // Prepara a consulta SQL para inserir na tabela arquivos
-    $sql_insert = "INSERT INTO arquivos (nome_arquivo, conteudo, trabalhoid) VALUES ($1, $2, $3)";
+    $sql_insert = "INSERT INTO arquivos (nome_arquivo, conteudo, trabalhoid) VALUES ($1, $2, $3) ON CONFLIT (trabalhoid) DO NOTHING";
     $result = pg_query_params($conn, $sql_insert, [$nomeArquivo, pg_escape_bytea($conteudo), $trabalhoID]);
 
     if ($result) {
