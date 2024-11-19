@@ -182,8 +182,7 @@
                 ELSE NULL
             END AS dataAREA,
         
-            tipoPonto.pontoPon,
-            tipoPonto.areaP,
+            tipoPonto.descricao
         
             -- Subconsulta para agregar autores e afiliações de forma ordenada
             (SELECT STRING_AGG(CONCAT(autores.autor, ' (', filiacao.filiacao, ')'), ', ' ORDER BY trabalhos_autores_filiacao.ordem)
@@ -262,8 +261,7 @@
                  equipcoleta.sidSc,
                  equipcoleta.vanv,
                  equipcoleta.outroequi,
-                 tipoPonto.pontoPon,
-                 tipoPonto.areaP,
+                 tipoPonto.descrcao
                  areaP.ID_AMSTAREA,
                  areaP.latitudeAREA,
                  areaP.longitudeAREA,

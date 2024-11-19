@@ -180,10 +180,10 @@
     <div id="autoresContainer">
         <div class="autor" id="autorContainer0">
             <div class="colunaaut">
-                <input type="text" class="autor" name="autor[]" id="autor0" placeholder="Nome Completo" autocomplete="off" style="width: 100%;">
+                <input type="text" class="autor" name="autor[]" id="autor0" placeholder="Nome Completo" style="width: 100%;" onkeydown="bloquearEnter(event)" spellcheck="false" autocomplete="off">
             </div>
             <div class="colunafili">
-                <input type="text" class="filiacao" name="filiacao[]" id="filiacao0" placeholder="Filiação (p.e., Nome da Instituição - SIGLA)" autocomplete="off" style="width: 100%;">
+                <input type="text" class="filiacao" name="filiacao[]" id="filiacao0" placeholder="Filiação (p.e., Nome da Instituição - SIGLA)" autocomplete="off" style="width: 100%;" onkeydown="bloquearEnter(event)" spellcheck="false" >
             </div>
         </div></br>
         <!-- Aqui serão adicionados os campos de coautores dinamicamente -->
