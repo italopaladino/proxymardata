@@ -161,28 +161,8 @@
             equipcoleta.sidSc,
             equipcoleta.vanv,
             equipcoleta.outroequi,
-        
-            CASE 
-                WHEN tipoPonto.areaP THEN areaP.ID_AMSTAREA
-                ELSE NULL
-            END AS ID_AMSTAREA,
-            
-            CASE 
-                WHEN tipoPonto.areaP THEN areaP.latitudeAREA
-                ELSE NULL
-            END AS latitudeAREA,
-            
-            CASE 
-                WHEN tipoPonto.areaP THEN areaP.longitudeAREA
-                ELSE NULL
-            END AS longitudeAREA,
-            
-            CASE 
-                WHEN tipoPonto.areaP THEN areaP.dataAREA
-                ELSE NULL
-            END AS dataAREA,
-        
-            tipoPonto.descricao
+                
+            tipoPonto.descricao,
         
             -- Subconsulta para agregar autores e afiliações de forma ordenada
             (SELECT STRING_AGG(CONCAT(autores.autor, ' (', filiacao.filiacao, ')'), ', ' ORDER BY trabalhos_autores_filiacao.ordem)
@@ -210,7 +190,7 @@
         LEFT JOIN equipcoleta ON infogeral.geralID = equipcoleta.trabalhoID
         LEFT JOIN pontos_coleta ON infogeral.geralID = pontos_coleta.trabalhoID
         LEFT JOIN tipoPonto ON infogeral.geralID = tipoPonto.trabalhoID
-        LEFT JOIN areaP ON infogeral.geralID = areaP.trabalhoID AND tipoPonto.areaP = true
+        LEFT JOIN areaP ON infogeral.geralID = areaP.trabalhoID AND tipoPonto = true
         WHERE infogeral.geralID = :id
         GROUP BY infogeral.geralID, 
                  infogeral.correspondente,
@@ -261,7 +241,7 @@
                  equipcoleta.sidSc,
                  equipcoleta.vanv,
                  equipcoleta.outroequi,
-                 tipoPonto.descrcao
+                 tipoPonto.descricao,
                  areaP.ID_AMSTAREA,
                  areaP.latitudeAREA,
                  areaP.longitudeAREA,
