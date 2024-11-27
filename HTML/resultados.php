@@ -109,144 +109,140 @@
     
            // Prepara e executa a consulta SQL com o ID fornecido
            $sql = "SELECT 
-           infogeral.correspondente,
-           infogeral.email,
-           infogeral.tituloPrinc,
-           infogeral.tituloDado,
-           infogeral.tipoTrabalho,
-           infogeral.tituloTrabalho,
-           infogeral.referencia,
-           infogeral.armazenamento,
-           infogeral.termo,
-           
-           caractDado.red_dado,
-           
-           arquivos.nome_arquivo,
-           arquivos.uploaded_at,
-           ferramentas.tipoamst,
-           ferramentas.assos,
-           ferramentas.batmet,
-           ferramentas.bioOrg,
-           ferramentas.cocolit,
-           ferramentas.estrat,
-           ferramentas.foramplan,
-           ferramentas.forambent,
-           ferramentas.granl,
-           ferramentas.hidrod,
-           ferramentas.hidrog,
-           ferramentas.matorg,
-           ferramentas.metais,
-           ferramentas.microps,
-           ferramentas.ageMod,
-           ferramentas.proFisi,
-           ferramentas.radioist,
-           ferramentas.razIsot,
-           ferramentas.smodNum,
-           ferramentas.teorAg,
-           ferramentas.outroFerr,
-       
-           equipcoleta.piston,
-           equipcoleta.gravcorer,
-           equipcoleta.drilli,
-           equipcoleta.gboxcorer,
-           equipcoleta.boxcorer,
-           equipcoleta.ADCP,
-           equipcoleta.corrt,
-           equipcoleta.CTD,
-           equipcoleta.modNum,
-           equipcoleta.multcor,
-           equipcoleta.multB,
-           equipcoleta.stl,
-           equipcoleta.senscbio,
-           equipcoleta.sidSc,
-           equipcoleta.vanv,
-           equipcoleta.outroequi,
-               
-           tipoPonto.descricao AS tipo_ponto_descricao,
-       
-           -- Subconsulta para agregar autores e afiliações de forma ordenada
-           (SELECT STRING_AGG(CONCAT(autores.autor, ' (', filiacao.filiacao, ')'), ', ' ORDER BY trabalhos_autores_filiacao.ordem)
-            FROM trabalhos_autores_filiacao
-            LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
-            LEFT JOIN filiacao ON trabalhos_autores_filiacao.filiacaoID = filiacao.filiacaoID
-            WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores,
-           
-           STRING_AGG(DISTINCT CONCAT_WS(', ', 
-               'ID: ' || pontos_coleta.ID_amst, 
-               'Latitude: ' || pontos_coleta.latitude, 
-               'Longitude: ' || pontos_coleta.longitude, 
-               'Data de coleta: ' || pontos_coleta.data2), ' | ') AS pontos_coleta,
-       
-           STRING_AGG(DISTINCT CONCAT_WS(', ',
-               'ID: ' || areap.ID_amstAREA,
-               'Latitude: ' || areap.latitudeAREA,
-               'Longitude: ' || areap.longitudeAREA,
-               'Data de coleta: ' || areap.dataAREA), ' | ') AS area_coleta
-       
-       FROM infogeral
-       LEFT JOIN caractDado ON infogeral.geralID = caractDado.trabalhoId
-       LEFT JOIN arquivos ON infogeral.geralID = arquivos.trabalhoID
-       LEFT JOIN ferramentas ON infogeral.geralID = ferramentas.trabalhoID
-       LEFT JOIN equipcoleta ON infogeral.geralID = equipcoleta.trabalhoID
-       LEFT JOIN pontos_coleta ON infogeral.geralID = pontos_coleta.trabalhoID
-       LEFT JOIN tipoPonto ON infogeral.geralID = tipoPonto.trabalhoID
-       LEFT JOIN areap ON infogeral.geralID = areap.trabalhoID
-       WHERE infogeral.geralID = :id
-       GROUP BY infogeral.geralID, 
-                infogeral.correspondente,
-                infogeral.email,
-                infogeral.tipoTrabalho,
-                infogeral.armazenamento,
-                infogeral.termo,
-                infogeral.tituloPrinc,
-                infogeral.tituloDado,
-                infogeral.referencia,
-                caractDado.red_dado,
-                arquivos.nome_arquivo,
-                arquivos.uploaded_at,
-                ferramentas.tipoamst,
-                ferramentas.assos,
-                ferramentas.batmet,
-                ferramentas.bioOrg,
-                ferramentas.cocolit,
-                ferramentas.estrat,
-                ferramentas.foramplan,
-                ferramentas.forambent,
-                ferramentas.granl,
-                ferramentas.hidrod,
-                ferramentas.hidrog,
-                ferramentas.matorg,
-                ferramentas.metais,
-                ferramentas.microps,
-                ferramentas.ageMod,
-                ferramentas.proFisi,
-                ferramentas.radioist,
-                ferramentas.razIsot,
-                ferramentas.smodNum,
-                ferramentas.teorAg,
-                ferramentas.outroFerr,
-                equipcoleta.piston,
-                equipcoleta.gravcorer,
-                equipcoleta.drilli,
-                equipcoleta.gboxcorer,
-                equipcoleta.boxcorer,
-                equipcoleta.ADCP,
-                equipcoleta.corrt,
-                equipcoleta.CTD,
-                equipcoleta.modNum,
-                equipcoleta.multcor,
-                equipcoleta.multB,
-                equipcoleta.stl,
-                equipcoleta.senscbio,
-                equipcoleta.sidSc,
-                equipcoleta.vanv,
-                equipcoleta.outroequi,
-                tipoPonto.descricao,
-                areap.ID_AMSTAREA,
-                areap.latitudeAREA,
-                areap.longitudeAREA,
-                areap.dataAREA
-       ORDER BY infogeral.geralID;";
+    infogeral.correspondente,
+    infogeral.email,
+    infogeral.tituloPrinc,
+    infogeral.tituloDado,
+    infogeral.tipoTrabalho,
+    infogeral.tituloTrabalho,
+    infogeral.referencia,
+    infogeral.armazenamento,
+    infogeral.termo,
+    caractDado.red_dado,
+    arquivos.nome_arquivo,
+    arquivos.uploaded_at,
+    ferramentas.tipoamst,
+    ferramentas.assos,
+    ferramentas.batmet,
+    ferramentas.bioOrg,
+    ferramentas.cocolit,
+    ferramentas.estrat,
+    ferramentas.foramplan,
+    ferramentas.forambent,
+    ferramentas.granl,
+    ferramentas.hidrod,
+    ferramentas.hidrog,
+    ferramentas.matorg,
+    ferramentas.metais,
+    ferramentas.microps,
+    ferramentas.ageMod,
+    ferramentas.proFisi,
+    ferramentas.radioist,
+    ferramentas.razIsot,
+    ferramentas.smodNum,
+    ferramentas.teorAg,
+    ferramentas.outroFerr,
+    equipcoleta.piston,
+    equipcoleta.gravcorer,
+    equipcoleta.drilli,
+    equipcoleta.gboxcorer,
+    equipcoleta.boxcorer,
+    equipcoleta.ADCP,
+    equipcoleta.corrt,
+    equipcoleta.CTD,
+    equipcoleta.modNum,
+    equipcoleta.multcor,
+    equipcoleta.multB,
+    equipcoleta.stl,
+    equipcoleta.senscbio,
+    equipcoleta.sidSc,
+    equipcoleta.vanv,
+    equipcoleta.outroequi,
+    tipoPonto.descricao AS tipo_ponto_descricao,
+
+    -- Subconsulta para agregar autores
+    (SELECT STRING_AGG(CONCAT(autores.autor, ' (', filiacao.filiacao, ')'), ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+     FROM trabalhos_autores_filiacao
+     LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+     LEFT JOIN filiacao ON trabalhos_autores_filiacao.filiacaoID = filiacao.filiacaoID
+     WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores,
+
+    -- Subconsulta para pontos de coleta
+    (SELECT STRING_AGG(CONCAT_WS(', ',
+            'ID: ' || pontos_coleta.ID_amst,
+            'Latitude: ' || pontos_coleta.latitude,
+            'Longitude: ' || pontos_coleta.longitude,
+            'Data de coleta: ' || pontos_coleta.data2), ' | ')
+     FROM pontos_coleta
+     WHERE pontos_coleta.trabalhoID = infogeral.geralID) AS pontos_coleta,
+
+    -- Subconsulta para área de coleta
+    (SELECT STRING_AGG(CONCAT_WS(', ',
+            'ID: ' || areap.ID_amstAREA,
+            'Latitude: ' || areap.latitudeAREA,
+            'Longitude: ' || areap.longitudeAREA,
+            'Data de coleta: ' || areap.dataAREA), ' | ')
+     FROM areap
+     WHERE areap.trabalhoID = infogeral.geralID) AS area_coleta
+
+FROM infogeral
+LEFT JOIN caractDado ON infogeral.geralID = caractDado.trabalhoId
+LEFT JOIN arquivos ON infogeral.geralID = arquivos.trabalhoID
+LEFT JOIN ferramentas ON infogeral.geralID = ferramentas.trabalhoID
+LEFT JOIN equipcoleta ON infogeral.geralID = equipcoleta.trabalhoID
+LEFT JOIN tipoPonto ON infogeral.geralID = tipoPonto.trabalhoID
+
+WHERE infogeral.geralID = :id
+GROUP BY infogeral.geralID,
+         infogeral.correspondente,
+         infogeral.email,
+         infogeral.tipoTrabalho,
+         infogeral.armazenamento,
+         infogeral.termo,
+         infogeral.tituloPrinc,
+         infogeral.tituloDado,
+         infogeral.referencia,
+         caractDado.red_dado,
+         arquivos.nome_arquivo,
+         arquivos.uploaded_at,
+         ferramentas.tipoamst,
+         ferramentas.assos,
+         ferramentas.batmet,
+         ferramentas.bioOrg,
+         ferramentas.cocolit,
+         ferramentas.estrat,
+         ferramentas.foramplan,
+         ferramentas.forambent,
+         ferramentas.granl,
+         ferramentas.hidrod,
+         ferramentas.hidrog,
+         ferramentas.matorg,
+         ferramentas.metais,
+         ferramentas.microps,
+         ferramentas.ageMod,
+         ferramentas.proFisi,
+         ferramentas.radioist,
+         ferramentas.razIsot,
+         ferramentas.smodNum,
+         ferramentas.teorAg,
+         ferramentas.outroFerr,
+         equipcoleta.piston,
+         equipcoleta.gravcorer,
+         equipcoleta.drilli,
+         equipcoleta.gboxcorer,
+         equipcoleta.boxcorer,
+         equipcoleta.ADCP,
+         equipcoleta.corrt,
+         equipcoleta.CTD,
+         equipcoleta.modNum,
+         equipcoleta.multcor,
+         equipcoleta.multB,
+         equipcoleta.stl,
+         equipcoleta.senscbio,
+         equipcoleta.sidSc,
+         equipcoleta.vanv,
+         equipcoleta.outroequi,
+         tipoPonto.descricao;";
 
         
 
@@ -397,6 +393,7 @@ foreach ($pontos_coleta as $ponto) {
         }
     }
     
+    
     // Remover a vírgula extra no final, se necessário
     $html_ponto = rtrim($html_ponto, ', ');
 
@@ -418,53 +415,60 @@ if (!empty($html_coleta)) {
 
 
 $area_coleta = explode(' | ', $row['area_coleta']);
-$html_ar = ''; // Inicializa uma string para armazenar todo o HTML formatado
+$area_html = ''; // Inicializa uma string para armazenar todo o HTML formatado
+$areas_processadas = []; // Array para armazenar as áreas já processadas
 
 foreach ($area_coleta as $area) {
-    // Separar os detalhes do ponto de coleta
+    if (in_array($area, $areas_processadas)) {
+        continue; // Pule áreas duplicadas
+    }
+
+    $areas_processadas[] = $area; // Marque esta área como processada
+
     $detal = explode(', ', $area);
+
+    $html_area = ''; // Resetar o HTML da área para cada iteração
 
     foreach ($detal as $detals) {
         if (strpos($detals, 'ID: ') !== false) {
             $valor = str_replace('ID: ', '', $detals);
             if (!empty($valor)) {
-                $html_ar .= "<span class='label'>ID: </span><span class='id-value'>" . htmlspecialchars($valor) . "</span>, ";
+                $html_area .= "<span class='label'>ID: </span><span class='id-value'>" . htmlspecialchars($valor) . "</span>, ";
             }
         } elseif (strpos($detals, 'Latitude: ') !== false) {
             $valor = str_replace('Latitude: ', '', $detals);
             if (!empty($valor)) {
-                $html_ar .= "<span class='label'>Latitude: </span><span class='latitude-value'>" . htmlspecialchars($valor) . "</span>, ";
+                $html_area .= "<span class='label'>Latitude: </span><span class='latitude-value'>" . htmlspecialchars($valor) . "</span>, ";
             }
         } elseif (strpos($detals, 'Longitude: ') !== false) {
             $valor = str_replace('Longitude: ', '', $detals);
             if (!empty($valor)) {
-                $html_ar .= "<span class='label'>Longitude: </span><span class='longitude-value'>" . htmlspecialchars($valor) . "</span>, ";
+                $html_area .= "<span class='label'>Longitude: </span><span class='longitude-value'>" . htmlspecialchars($valor) . "</span>, ";
             }
         } elseif (strpos($detals, 'Data de coleta: ') !== false) {
             $data_original = str_replace('Data de coleta: ', '', $detals);
             if (!empty($data_original) && strtotime($data_original) !== false) {
                 $data_formatada = date('d/m/Y', strtotime($data_original));
-                $html_ar .= "<span class='label'>Data de coleta: </span><span class='data-value'>" . htmlspecialchars($data_formatada) . "</span>, ";
-            } else {
-                $html_ar .= "<span class='label'>Data de coleta: </span><span class='data-value'>Data inválida</span>, ";
+                $html_area .= "<span class='label'>Data de coleta: </span><span class='data-value'>" . htmlspecialchars($data_formatada) . "</span>, ";
             }
         }
     }
 
-    // Adicionar um separador entre as áreas, se necessário
-    $html_ar = rtrim($html_ar, ', ') . " | ";
+    $html_area = rtrim($html_area, ', '); // Remove a vírgula extra no final
+
+    if (!empty($html_area)) {
+        $area_html .= "<div class='ponto-coleta'>{$html_area}</div><br>";
+    }
 }
 
-// Remover o separador extra no final, se necessário
-$html_ar = rtrim($html_ar, ' | ');
 
-// Exibir todas as áreas de coleta dentro de uma única div
-if (!empty($html_ar)) {
+if (!empty($area_html)) {
     echo "<div class='linha' id='coluna-esq-dir'>"; // Linha principal
     echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Área de coleta:</span></div>";
     echo "<div class='coluna' id='colun-dir'>";
-    echo "<div class='ponto-coleta'>{$html_ar}</div>"; // Todas as áreas em uma única div
-    echo "</div></div>";
+    echo $area_html; // Todas as áreas em uma única div
+    echo "</div>";
+    echo " </div>";
 }
 
                 
