@@ -118,6 +118,7 @@
     infogeral.referencia,
     infogeral.armazenamento,
     infogeral.termo,
+    infogeral.funding,
     caractDado.red_dado,
     arquivos.nome_arquivo,
     arquivos.uploaded_at,
@@ -202,6 +203,7 @@ GROUP BY infogeral.geralID,
          infogeral.tituloPrinc,
          infogeral.tituloDado,
          infogeral.referencia,
+         infogeral.funding,
          caractDado.red_dado,
          arquivos.nome_arquivo,
          arquivos.uploaded_at,
@@ -284,6 +286,11 @@ GROUP BY infogeral.geralID,
                 echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Autores:</span></div>";
                 echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['autores']) . "</div>";
                 echo "</div>"; // autores
+
+                echo "<div class='linha' id='coluna-esq-dir'>"; // funding
+                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Financiamento:</span></div>";
+                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['funding']) . "</div>";
+                echo "</div>"; // funding
         
                 echo "<div class='linha' id='coluna-esq-dir'>"; // tipo
                 echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Tipo de Armazenamento:</span></div>";

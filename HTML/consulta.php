@@ -163,6 +163,14 @@
                 <div id="top-armaz" class="top-armaz">
                 </div>
 
+                <h2 class="form-tip">Projeto:</h1>
+                <div id="projeto" class="projeto">
+                </div>
+
+                <h2 class="form-tip">IDs:</h1>
+                <div id="ID_amst" class="ID_amst">
+                </div>
+
             </div>
       
 
@@ -277,6 +285,31 @@ $(document).ready(function() {
                 console.error("Erro ao consultar ano de coleta:", status, error);
             }
         });
+
+        
+        $.ajax({
+            url: "../PHP/projeto.php",
+            type: "GET",
+            success: function(response) {
+                $("#projeto").html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar ano de coleta:", status, error);
+            }
+        });
+
+
+        $.ajax({
+            url: "../PHP/ID_amst.php",
+            type: "GET",
+            success: function(response) {
+                $("#ID_amst").html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar ano de coleta:", status, error);
+            }
+        });
+
 
         $.ajax({
             url: "../PHP/top-ferra.php",
