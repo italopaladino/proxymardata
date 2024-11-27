@@ -276,6 +276,11 @@
         <textarea style="width: 100%; resize:vertical;" type="text" id="titTrab" name="titTrab" maxlength="1500" rows="3" onkeydown="bloquearEnter(event)" ></textarea> <!-- att no SQL -->
     </div>
 </div>
+<div>
+    <h4 for="referencia" ><a style="color: red;" title="Elemento obrigatório">*</a>Referência:</h4></br>
+    <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" style="width: 98.4%;" onkeydown="bloquearEnter(event)" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
+</div>
+
 </div>
 </div> 
 </div> <!-- borda 1-->
@@ -286,13 +291,10 @@
 <!-- coAutores -->
 
 
-<div id="borda3" class="bordaPg">
-<div>
-    <h4 for="referencia" ><a style="color: red;" title="Elemento obrigatório">*</a>Referência:</h4></br>
-    <textarea type="text" id="referencia" name="referencia" maxlength="1500" rows="5" cols="10" style="width: 98.4%;" onkeydown="bloquearEnter(event)" placeholder="SOBRENOME, nome abreviado. Título do artigo. Título da Revista, (abreviado ou não) Local de Publicação, Número do Volume, Número do Fascículo, Páginas inicial-final, mês e ano."></textarea></br></br>
-</div>
 
-</div>
+
+
+
 
 
 <div style="display: flex; justify-content: flex-end; align-items: flex-end; height: 100px;">
@@ -583,7 +585,7 @@
     <div style="display: flex; align-items: center; width: 100%;">
 
     <h4 style="width:auto; margin: 0;" for='armazenamento'> Como deseja armazenar os dados?</h4>
-    
+
     <div class="tooltip-container" style="margin-left: 8px;">
         <i class="bi bi-info-circle-fill info-icon"></i> <!-- Ícone de informação do Bootstrap -->
         <div class="tooltip">
