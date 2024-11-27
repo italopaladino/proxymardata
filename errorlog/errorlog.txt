@@ -48,4 +48,6 @@ Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Tentativa de ins
     [3] => 2021-04-04
     [4] => 19
 )
-Arquivo CSV carregado e inserido na tabela arquivos com sucesso.
+Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Erro ao inserir na tabela infogeralERRO:  não existe a coluna "financiamento" da relação "infogeral"
+LINE 1: ...tituloTrabalho, referencia, armazenamento, termo, financiame...
+                                                             ^Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.Arquivo CSV carregado e inserido na tabela arquivos com sucesso.

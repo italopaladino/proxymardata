@@ -33,21 +33,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tipotrabalho = $_POST['tipoTrabalho'];
             $tituloTrabalho = $_POST['titTrab'];
             $referencia = trim($_POST['referencia']);
-           
+                       
            
             $armazenamento = $_POST['armazenamento'];
 
             $termo = isset($_POST['termo']) ? 'TRUE' : 'FALSE';
+
+            $financiamento =$_POST['financiamento'];
             
             
            
 
             // Preparando e executando a consulta SQL para inserir na tabela infogeral
-            $sql1 = "INSERT INTO infogeral (correspondente, email, tituloPrinc, tituloDado, trabAssoc, tipoTrabalho, tituloTrabalho, referencia, armazenamento, termo) 
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            $sql1 = "INSERT INTO infogeral (correspondente, email, tituloPrinc, tituloDado, trabAssoc, tipoTrabalho, tituloTrabalho, referencia, armazenamento, termo, funding) 
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10,$11)
                      RETURNING geralID";
             
-            $result1 = pg_query_params($conn, $sql1, [$corr, $email, $tituloPrinc, $tituloDado, $trabAssoc ,$tipotrabalho,$tipotrabalho,$referencia,$armazenamento,$termo]);
+            $result1 = pg_query_params($conn, $sql1, [$corr, $email, $tituloPrinc, $tituloDado, $trabAssoc ,$tipotrabalho,$tipotrabalho,$referencia,$armazenamento,$termo,$financiamento]);
 
             // Verifica se a consulta foi bem-sucedida e obtém o ID do trabalho inserido
             if ($result1) {
@@ -58,11 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<script> window.alert('Erro ao inserir a primeira Página do Formulário'); </script>";
                 error_log("Erro ao inserir na tabela infogeral". pg_last_error($conn), 3, "../errorlog/errorlog.txt");
                 throw new Exception("Erro ao inserir na tabela infogeral: " . pg_last_error($conn));
+                exit();
             }
         } else {
             echo "<script> window.alert('erro: secaoAtual1 não definido'); </script>";
             error_log("erro: secaoAtual1 não definido", 3, "../errorlog/errorlog.txt");
             throw new Exception("Erro: secaoAtual1 não definido.");
+            exit();
         }
 
         // Loop através dos dados de autores e filiações enviados
@@ -112,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<script> window.alert('Erro ao inserir associação na tabela trabalho_autores_filiacao $key'); </script>";
                 error_log("Erro ao inserir associação na tabela trabalho_autores_filiacao",3, "../errorlog/errorlog.txt");
                 throw new Exception("Erro ao inserir associação na tabela trabalhos_autores_filiacao.");
+                exit();
             }
      }
 
@@ -134,6 +139,7 @@ if ($secaoAtual2 && isset($_POST['ID_amst'])) {
                 echo "<script> window.alert('Erro ao inserir na tabela de pontos $key: $pg_error'); </script>";
                 error_log("Erro ao inserir na tabela de pontos $key: $pg_error", 3, "../errorlog/errorlog.txt");
                 throw new Exception("Erro ao inserir na tabela de pontos: $pg_error");
+                exit();
             }
         }
     }
@@ -181,6 +187,7 @@ for ($i = 1; $i <= count($ID_amstAREA); $i++) {
 
         // Depuração: exibir os dados que estão sendo passados
         error_log("Tentativa de inserir na tabela areaP com valores: " . print_r($params, true), 3, "../errorlog/errorlog.txt");
+        exit();
 
         $result_prox = pg_query_params($conn, $sql_areaP, $params);
 
@@ -190,6 +197,7 @@ for ($i = 1; $i <= count($ID_amstAREA); $i++) {
             echo "<script> window.alert('Erro ao inserir na tabela areaP: $pg_error'); </script>";
             error_log("Erro ao inserir na tabela areaP: $pg_error", 3, "../errorlog/errorlog.txt");
             throw new Exception("Erro ao inserir na tabela areaP: $pg_error");
+            exit();
         }
     }
 
@@ -228,6 +236,7 @@ for ($i = 1; $i <= count($ID_amstAREA); $i++) {
         echo "<script> window.alert(' Erro ao inserir na tabela ferramentas : $pg_error''); </script>";
         error_log("erro ao inserir na tabela ferramenta: $pg_error ", 3, "../errorlog/errorlog.txt");
         throw new Exception("Erro ao inserir na tabela ferramenta");
+        exit();
     }
 
     
@@ -259,6 +268,7 @@ for ($i = 1; $i <= count($ID_amstAREA); $i++) {
         echo "<script> window.alert('Erro ao inserir na tabela equipamentos: $pg_error'); </script>";
         error_log("Erro ao inserir na tabela equipamentos: $pg_error", 3, "../errorlog/errorlog.txt");
         throw new Exception("Erro ao inserir na tabela equipamentos: $pg_error");
+        exit();
     }
 
 
@@ -288,6 +298,7 @@ if ($pontoSelecionado == "pontoPon") {
 } else {
     // Caso nenhum ponto seja selecionado
     echo "Nenhuma opção válida foi selecionada.";
+    exit();
 }
 
 
@@ -313,10 +324,12 @@ if (isset($_FILES['tabelaDado']) && $_FILES['tabelaDado']['error'] === UPLOAD_ER
     } else {
         echo "<script> window.alert('erro no arquivo'); </script>";
         error_log("Erro ao inserir arquivo na tabela arquivos: " . pg_last_error($conn), 3, "../errorlog/errorlog.txt");
+        exit();
     }
 } else {
     echo "<script> window.alert('erro no arquivo'); </script>";
     error_log("Erro no envio do arquivo CSV.", 3, "../errorlog/errorlog.txt");
+    exit();
 }
 
      }
