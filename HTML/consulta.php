@@ -132,6 +132,18 @@
       <div id="segundaPart" class="bordaPag" style="background-color:ghostwhite;">
 
         <div id="todos os filtros" class="bordaDentro">
+
+      <div id="filtros-ativos">
+        <?php
+        if (isset($_GET['tipo']) && !empty($_GET['tipo'])) {
+            $tipoSelecionado = htmlspecialchars($_GET['tipo']);
+            echo "<span class='filtro-ativo'>Tipo selecionado: $tipoSelecionado</span>";
+        } else {
+            echo "<span class='filtro-ativo'>Nenhum filtro selecionado</span>";
+        }
+        ?>
+    </div>
+
                 <h2 class="form-tip">Tipo de trabalho:</h2>
                 <div class="top-tipo" id="top-tipo">
                     <!-- deixar fixado -->
@@ -448,6 +460,31 @@ if (tipo) {
       }, PRELOADER_TIMEOUT);
     });
 
+    document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.top-filtro').forEach(link => {
+        link.addEventListener('click', function () {
+            const isActive = this.classList.contains('active');
+            
+            // Remove a classe "active" de todos os filtros
+            document.querySelectorAll('.top-filtro').forEach(f => f.classList.remove('active'));
+            
+            // Ativa ou desativa o filtro atual
+            if (!isActive) {
+                this.classList.add('active');
+            }
+        });
+    });
+});
+
+function desativarFiltro(span) {
+    const parentLi = span.closest('li');
+    const filtro = parentLi.querySelector('.top-filtro');
+
+    // Remove a classe "active" do filtro
+    filtro.classList.remove('active');
+}
     </script>   
+
+    
 </body>
 </html>
