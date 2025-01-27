@@ -132,32 +132,16 @@
       <div id="segundaPart" class="bordaPag" style="background-color:ghostwhite;">
 
         <div id="todos os filtros" class="bordaDentro">
-
-      <div id="filtros-ativos">
-        <?php
-        if (isset($_GET['tipo']) && !empty($_GET['tipo'])) {
-            $tipoSelecionado = htmlspecialchars($_GET['tipo']);
-            echo "<span class='filtro-ativo'>Tipo selecionado: $tipoSelecionado</span>";
-        } else {
-            echo "<span class='filtro-ativo'>Nenhum filtro selecionado</span>";
-        }
-        ?>
-    </div>
+      <div id="filtro-ativo"> </div>
 
                 <h2 class="form-tip">Tipo de trabalho:</h2>
-                <div class="top-tipo" id="top-tipo">
-                    <!-- deixar fixado -->
-                </div>
+                <div class="top-tipo" id="top-tipo"> </div>
+                   
+                
 
-                <!-- Lista de anos de publicação será carregada aqui -->
                 <h2 class="form-tip">Ano de Coleta:</h2>
-                <!-- linkar com os anos que tem no banco deixar últimos 5 -->
                 <div id="top-ano-coleta">    
                 </div>
-
-                <!--<h2 class="form-tip">Autores:</h2>
-                <div class="top-autores" id="top-autores">
-                </div>-->
 
                 <h2 class="form-tip">Tipo de amostra:</h2>
                 <div class="top-tipAmost" id="top-tipAmost">
@@ -206,7 +190,7 @@
                         <div id="ultimosartigos" class="table-responsive bordaDentro">
                             <!-- Os resultados da consulta serão exibidos aqui -->
                         </div>
-                                               
+                        
                     </div>
                 </div>
             </div>
@@ -263,40 +247,77 @@ $(document).ready(function() {
         });
     }
 
-    // Função para carregar filtros
-    function carregarFiltros() {
-        $.ajax({
-            url: "../PHP/top-tipo.php",
-            type: "GET",
-            success: function(response) {
-                $("#top-tipo").html(response);
-            
 
-            //adicionar evento ao de clique no botão tipo
-            $(".tipo-button").click(function(){
-                var tipo =$(this).tipo("tipo");
-                console.log("tipo selecionado:", tipo);
-                carregarTipoTrabalho(tipo);
+    // Função tópicos 
 
+        function carregarTopicos() {
+    $.ajax({
+        url: "../PHP/top-tipo.php",
+        type: "GET",
+        success: function(response) {
+            $("#top-tipo").html(response);
+
+            // Adiciona listener aos links de filtro
+            $(".top-filtro").on("click", function(event) {
+                event.preventDefault();
+                const tipo = $(this).data("tipo-trabalho");
+
+                // Atualiza os filtros ativos
+                $("#filtros-ativos").html(`
+                    <span class="filtro-ativo">
+                        Filtro ativo: ${tipo}
+                        <button class="remover-filtro" title="Remover filtro">X</button>
+                    </span>
+                `);
+
+               // Adiciona listener ao botão de remover filtro
+                $(".remover-filtro").on("click", function() {
+                    removerFiltro();
+                });
             });
-        },
-            error: function(xhr, status, error) {
-                console.error("Erro ao consultar tipos:", status, error);
-            }
-                
-        });
+        }
+    });
 
 
+
+
+
+
+    
          $.ajax({
             url: "../PHP/top-ano-coleta.php",
             type: "GET",
             success: function(response) {
                 $("#top-ano-coleta").html(response);
+
+                //adicionar listener aos links
+                $(".top-filtro").on("click",function(event){
+                    event.preventDefault();
+                    const ano =$(this).data("ano-coleta");
+
+                //atualiza os filtros ativos
+                $("#filtros-ativos").html(`
+                <span class="filtro-ativo">
+                Filtro ativo: ${ano}
+                <button class="remover-filtro" title ="Remover filtro">X</button>
+                </span >
+                `);
+
+// adiciona listener no botão de remover
+                    $(".remover-filtro").on("click", function(){
+                        removerFiltro();
+                    });
+
+                });
             },
             error: function(xhr, status, error) {
                 console.error("Erro ao consultar ano de coleta:", status, error);
             }
         });
+
+
+
+
 
         
         $.ajax({
@@ -373,6 +394,8 @@ $(document).ready(function() {
 
         
 
+
+
 // Filtro para ano de publicação
 function carregarResultadosano(ano) {
     $.ajax({
@@ -390,6 +413,7 @@ function carregarResultadosano(ano) {
     });
 }
 
+
 // filtro para Tipo de Trabalho
 function carregarTipoTrabalho(tipo) {
     $.ajax({
@@ -406,6 +430,8 @@ function carregarTipoTrabalho(tipo) {
         }
     });
 }
+
+
 
 // Evento de clique para remover o filtro
 $(document).on('click', '#remove-filtro', function() {
@@ -431,7 +457,7 @@ $(document).on('click', '.filtro-tipo-trabalho a', function(event) {
 });
 
 // Carregar filtros e artigos ao iniciar a página
-carregarFiltros();
+carregarTopicos();
 
 // Carregar todos os artigos inicialmente, pode ser removido se não for necessário
 carregarTodosArtigos();

@@ -1,48 +1,113 @@
- <?php
+<?php
+require_once 'config.php';
 
- require_once 'config.php';
- 
-    try {
-        $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+function formatarNome($nomeCompleto) {
+    // Converte o nome para minúsculas e capitaliza as primeiras letras
+    return mb_convert_case(mb_strtolower($nomeCompleto, 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
+}
 
-        $resultadosHTML = "";
-        if (isset($_GET['tipo'])) {
-            $tipo = $_GET['tipo'];
+function formatarData($data) {
+    // Remove os microsegundos, se existirem
+    $dataSemMicrosegundos = preg_replace('/\.\d+$/', '', $data);
 
-            if (empty($tipo)) {
-                echo "<p>Parâmetro 'tipo' não especificado.</p>";
-                exit;
+    // Cria o objeto DateTime com o formato sem microsegundos
+    $date = DateTime::createFromFormat('Y-m-d H:i:s', $dataSemMicrosegundos);
+
+    // Retorna a data formatada ou uma mensagem de erro
+    return $date ? $date->format('d/m/Y') : 'Data Inválida';
+}
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+    if (isset($_GET['tipo'])) {
+        $tipo = $_GET['tipo'];
+
+        if (empty($tipo)) {
+            echo "<p>Parâmetro 'tipo' não especificado.</p>";
+            exit;
+        }
+
+        // Prepara a consulta com segurança usando parâmetros
+        $sql = "SELECT 
+                    infogeral.geralid,
+                    infogeral.correspondente,
+                    infogeral.email,
+                    infogeral.tituloPrinc,
+                    infogeral.tituloDado,
+                    infogeral.tipoTrabalho,
+                    infogeral.tituloTrabalho,
+                    infogeral.armazenamento,
+                    arquivos.uploaded_at,
+                    
+                    -- Subconsulta para agregar autores
+                    (SELECT STRING_AGG(autores.autor, ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+                     FROM trabalhos_autores_filiacao
+                     LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+                     WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores
+                FROM infogeral
+                LEFT JOIN caractDado ON infogeral.geralid = caractDado.trabalhoId
+                LEFT JOIN arquivos ON infogeral.geralid = arquivos.trabalhoID
+
+                WHERE infogeral.tipoTrabalho = :tipo
+
+                
+                GROUP BY infogeral.geralid,
+                         infogeral.correspondente,
+                         infogeral.email,
+                         infogeral.armazenamento,
+                         infogeral.tituloPrinc,
+                         infogeral.tituloDado,
+                         arquivos.uploaded_at";
+
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(':tipo', $tipo, PDO::PARAM_STR);
+        $stm->execute();
+
+        $infogeral = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($infogeral) {
+            // Exibe a tabela HTML
+            echo "<table>";
+            echo "<tbody>";
+
+            foreach ($infogeral as $infogera) {
+                // Formatar autores
+                $autoresArray = explode(',', $infogera['autores'] ?? '');
+                $autoresFormatados = array_map('formatarNome', $autoresArray);
+
+                // Agora usa os autores formatados
+                $autoresString = implode(', ', array_map('htmlspecialchars', $autoresFormatados));
+
+                // Formatar data
+                $dataFormatada = formatarData($infogera['uploaded_at']);
+
+                // Exibir resultado
+                echo "<tr>";
+                echo "<td>
+                        <div class='citation'>
+                            <a class='link-pesq' href='../HTML/resultados.php?id=" 
+                    . htmlspecialchars($infogera['geralid']) ."'>". htmlspecialchars($autoresString) ."." // Usa os autores formatados
+                     ."<br>" . htmlspecialchars($infogera['correspondente']) . "&nbsp;(" . htmlspecialchars($infogera['email']) . ").&nbsp;"
+                     . htmlspecialchars($infogera['titulodado']) . "&nbsp;(" . htmlspecialchars($dataFormatada) . ")." . "</a>
+                        </div></br></br>
+                      </td>";
+                echo "</tr>";
             }
 
-            // Prepara e executa a consulta SQL com o tipo fornecido
-            $sql = "SELECT * FROM infogeral WHERE tipotrabalho = :tipo";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':tipo', $tipo, PDO::PARAM_STR);
-            $stmt->execute();
-            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            // Verifica se há resultados
-            if ($resultados) {
-                $resultadosHTML = "<div class='resultados'>";
-                foreach ($resultados as $resultado) {
-                    $resultadosHTML .= "<a class='link-pesq' href='../HTML/resultados.php?id=" . htmlspecialchars($resultado['geralid']) . "'>" . htmlspecialchars($resultado['referencia']) . "</a><br><br>";
-                }
-                $resultadosHTML .= "</div>";
-            } else {
-                $resultadosHTML = "<p>Não foram encontrados registros para o tipo de trabalho: " . htmlspecialchars($tipo) . "</p>";
-            }
+            echo "</tbody>";
+            echo "</table>";
         } else {
-            $resultadosHTML = "<p>Parâmetro 'tipo' não especificado.</p>";
+            echo "<p>Nenhum resultado encontrado para o tipo especificado.</p>";
         }
-
-        echo $resultadosHTML;
-
-    } catch (PDOException $e) {
-        echo "<p>Erro: " . htmlspecialchars($e->getMessage()) . "</p>";
-    } finally {
-        if (isset($pdo)) {
-            $pdo = null;
-        }
+    } else {
+        echo "<p>Parâmetro 'tipo' não especificado.</p>";
     }
-    ?>
-</div>
+} catch (PDOException $e) {
+    echo "Erro: " . $e->getMessage();
+} finally {
+    if (isset($pdo)) {
+        $pdo = null;
+    }
+}
+?>

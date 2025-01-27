@@ -13,7 +13,7 @@ try {
     foreach ($anosPublicacao as $anoPublicacao) {
         $ano = htmlspecialchars($anoPublicacao['ano']);
         $quantidade = htmlspecialchars($anoPublicacao['quantidade']);
-        $filtroHTML .= "<li><a title='Filtrar pelo ano de Publicação' class='top-filtro' href='#' data-ano='" . $ano . "'>" . $ano . " ($quantidade)</a></li>";
+        $filtroHTML .= "<li><a title='Filtrar pelo ano de Publicação' class='top-filtro' href='?ano=" . urlencode($ano) . "' data-ano='" . $ano . "'>" . $ano . " ($quantidade)</a></li>";
     }
     $filtroHTML .= "</ul>";
 

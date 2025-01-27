@@ -22,6 +22,11 @@ a.link-pesq:hover{
     margin-left: 5px;
 }
 
+.filtro-ativo {
+    font-weight: bold;
+    color: #007bff; /* Exemplo: azul */
+    margin-left: 10px;
+}
 
 
 .bordaPag{
