@@ -1,3 +1,27 @@
+function fetchResults(tipo) {
+    const loader = document.getElementById('loader');
+    const resultsContainer = document.getElementById('results'); // Div onde os resultados serão exibidos
+
+    // Mostrar o loader
+    loader.style.display = 'block';
+
+    // Fazer a requisição AJAX
+    fetch(`consulta.php?tipo=${tipo}`)
+        .then(response => response.text())
+        .then(data => {
+            // Esconde o loader
+            loader.style.display = 'none';
+
+            // Atualiza o conteúdo da página
+            resultsContainer.innerHTML = data;
+        })
+        .catch(error => {
+            loader.style.display = 'none';
+            console.error('Erro:', error);
+            resultsContainer.innerHTML = "<p>Ocorreu um erro ao carregar os dados.</p>";
+        });
+}
+
 function abrirTermo() {
     var url = "../assets/termo-confia.pdf";
     window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=600,height=600");

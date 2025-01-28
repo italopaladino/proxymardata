@@ -17,6 +17,7 @@
     <script src="../js/add-script.js"></script>
     <script src="../js/scripts.js"></script>
 
+    
     <style>
     /* Estilo do preloader */
     #preloader {
@@ -51,7 +52,7 @@
     #content {
       display: none; /* Esconde o conteúdo até que o carregamento seja concluído */
     }
-    
+        
   </style>
 
 
@@ -192,7 +193,7 @@
                         </div>
 
 
-                        <div class="loader"></div> <!-- fazer aparecer em relação ao tempo de resposta do banco e quando tiver vazio a pag -->
+                        <div class="loader" id="loader" style="display: none;"></div><!-- fazer aparecer em relação ao tempo de resposta do banco e quando tiver vazio a pag -->
 
 
                     </div>
