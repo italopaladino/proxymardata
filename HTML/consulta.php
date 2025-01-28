@@ -190,7 +190,11 @@
                         <div id="ultimosartigos" class="table-responsive bordaDentro">
                             <!-- Os resultados da consulta serão exibidos aqui -->
                         </div>
-                        
+
+
+                        <div class="loader"></div> <!-- fazer aparecer em relação ao tempo de resposta do banco e quando tiver vazio a pag -->
+
+
                     </div>
                 </div>
             </div>
