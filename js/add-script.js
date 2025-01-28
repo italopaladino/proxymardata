@@ -1,26 +1,24 @@
-function fetchResults(tipo) {
+function mostrarLoader() {
     const loader = document.getElementById('loader');
-    const resultsContainer = document.getElementById('results'); // Div onde os resultados serão exibidos
+    const overlay = document.getElementById('overlay');
 
-    // Mostrar o loader
-    loader.style.display = 'block';
+    // Verifique se os elementos existem
+    if (loader && overlay) {
+        // Mostrar o overlay e o loader
+        overlay.style.display = 'block';
+        loader.style.display = 'block';
 
-    // Fazer a requisição AJAX
-    fetch(`consulta.php?tipo=${tipo}`)
-        .then(response => response.text())
-        .then(data => {
-            // Esconde o loader
+        // Simula um carregamento (substitua pelo seu código de consulta)
+        setTimeout(function() {
             loader.style.display = 'none';
-
-            // Atualiza o conteúdo da página
-            resultsContainer.innerHTML = data;
-        })
-        .catch(error => {
-            loader.style.display = 'none';
-            console.error('Erro:', error);
-            resultsContainer.innerHTML = "<p>Ocorreu um erro ao carregar os dados.</p>";
-        });
+            overlay.style.display = 'none';
+        }, 2000);  // 2 segundos de simulação de carregamento
+    } else {
+        console.error('Loader ou overlay não encontrados!');
+    }
 }
+
+
 
 function abrirTermo() {
     var url = "../assets/termo-confia.pdf";

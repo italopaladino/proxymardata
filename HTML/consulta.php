@@ -14,8 +14,8 @@
     <link href="../css/consulta.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
-    <script src="../js/add-script.js"></script>
-    <script src="../js/scripts.js"></script>
+    <script src="../js/add-script.js" defer></script>
+    <script src="../js/scripts.js" defer></script>
 
     
     <style>
@@ -58,11 +58,17 @@
 
 </head>
 <body id="page1">
+
     
-<!-- Preloader com a logo -->
+ <!--Preloader com a logo--> 
+
+ 
+
+
 <div id="preloader">
-    <img src="../assets/avatar.jpeg" alt="Logo" class="logo"> <!-- Substitua 'logo.png' pelo caminho da sua logo -->
+    <img src="../assets/avatar.jpeg" alt="Logo" class="logo"> <!--Substitua 'logo.png' pelo caminho da sua logo -->
   </div>
+
 
    <!-- Navigation -->
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -191,11 +197,9 @@
                         <div id="ultimosartigos" class="table-responsive bordaDentro">
                             <!-- Os resultados da consulta serão exibidos aqui -->
                         </div>
-
-
-                        <div class="loader" id="loader" style="display: none;"></div><!-- fazer aparecer em relação ao tempo de resposta do banco e quando tiver vazio a pag -->
-
-
+                        
+                        <div id="loader" class="hidden"></div>
+                        <div id="overlay" class="hidden"></div>
                     </div>
                 </div>
             </div>
@@ -235,6 +239,7 @@
 
     <!-- Bootstrap core JS -->
     <script>
+
 $(document).ready(function() {
     console.log("jQuery está funcionando.");
 
@@ -440,19 +445,12 @@ function carregarTipoTrabalho(tipo) {
 
 // Evento de clique para remover o filtro
 $(document).on('click', '#remove-filtro', function() {
-    localStorage.removeItem('anoSelecionado');  // Remove o filtro de ano armazenado
-    localStorage.removeItem('tipoTrabalho');  // Remove o filtro de tipo de trabalho armazenado
+    mostrarLoader();
     $("#filtro-ativo").html('');  // Limpa o conteúdo do filtro ativo
-    $("#ultimosartigos").html('');  // Opcional: Limpa os resultados exibidos
+    
     carregarTodosArtigos();  // Recarrega todos os artigos
 });
 
-// Adiciona um listener de clique para cada link de ano
-$(document).on('click', '.filtro-ano-pub a', function(event) {
-    event.preventDefault();  // Evita o comportamento padrão do link
-    var ano = $(this).data('ano');  // Obtém o valor do ano
-    carregarResultadosano(ano);  // Carrega os resultados via AJAX
-});
 
 // Adiciona um listener de clique para cada link de tipo de trabalho
 $(document).on('click', '.filtro-tipo-trabalho a', function(event) {
@@ -480,16 +478,22 @@ if (tipo) {
 
 });
 
-    // Tempo fixo para o preloader
-    const PRELOADER_TIMEOUT = 2500; // 3000ms = 3 segundos
 
-    // Remove o preloader e exibe o conteúdo após o tempo fixo
-    window.addEventListener('load', () => {
-      setTimeout(() => {
+
+ // Tempo fixo para o preloader
+const PRELOADER_TIMEOUT = 2500; // 2.5 segundos
+
+// Remove o preloader da página inicial
+window.addEventListener('load', () => {
+    setTimeout(() => {
         document.getElementById('preloader').style.display = 'none';
         document.getElementById('page1').style.display = 'block';
-      }, PRELOADER_TIMEOUT);
-    });
+    }, PRELOADER_TIMEOUT);
+});
+
+
+
+
 
     document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.top-filtro').forEach(link => {
@@ -514,6 +518,8 @@ function desativarFiltro(span) {
     // Remove a classe "active" do filtro
     filtro.classList.remove('active');
 }
+
+
     </script>   
 
     
