@@ -260,38 +260,14 @@ $(document).ready(function() {
 
     // Função tópicos 
 
-        function carregarTopicos() {
+    function carregarTopicos() {
     $.ajax({
         url: "../PHP/top-tipo.php",
         type: "GET",
         success: function(response) {
             $("#top-tipo").html(response);
-
-            // Adiciona listener aos links de filtro
-            $(".top-filtro").on("click", function(event) {
-                event.preventDefault();
-                const tipo = $(this).data("tipo-trabalho");
-
-                // Atualiza os filtros ativos
-                $("#filtros-ativos").html(`
-                    <span class="filtro-ativo">
-                        Filtro ativo: ${tipo}
-                        <button class="remover-filtro" title="Remover filtro">X</button>
-                    </span>
-                `);
-
-               // Adiciona listener ao botão de remover filtro
-                $(".remover-filtro").on("click", function() {
-                    removerFiltro();
-                });
-            });
         }
     });
-
-
-
-
-
 
     
          $.ajax({
@@ -300,36 +276,10 @@ $(document).ready(function() {
             success: function(response) {
                 $("#top-ano-coleta").html(response);
 
-                //adicionar listener aos links
-                $(".top-filtro").on("click",function(event){
-                    event.preventDefault();
-                    const ano =$(this).data("ano-coleta");
-
-                //atualiza os filtros ativos
-                $("#filtros-ativos").html(`
-                <span class="filtro-ativo">
-                Filtro ativo: ${ano}
-                <button class="remover-filtro" title ="Remover filtro">X</button>
-                </span >
-                `);
-
-// adiciona listener no botão de remover
-                    $(".remover-filtro").on("click", function(){
-                        removerFiltro();
-                    });
-
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error("Erro ao consultar ano de coleta:", status, error);
             }
         });
-
-
-
-
-
-        
+    
+      
         $.ajax({
             url: "../PHP/projeto.php",
             type: "GET",
@@ -441,6 +391,22 @@ function carregarTipoTrabalho(tipo) {
     });
 }
 
+function carregarAnoColeta(ano_valor){
+    $.ajax({
+        url: "../PHP/filtro-ano-coleta.php",
+        type: "GET",
+        data: { ano_valor: ano_valor },
+        success: function(response) {
+            $("#ultimosartigos").html(response);  // Atualiza a div com o id 'ultimosartigos'
+            $("#filtro-ativo").html('<ul><li><u><span>' + ano_valor + '</span></u> <button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>');
+            localStorage.setItem('anoColeta', ano_valor);  // Armazena o tipo de trabalho selecionado
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro ao consultar artigos:", status, error);
+        }
+    });
+}
+
 
 
 // Evento de clique para remover o filtro
@@ -459,23 +425,18 @@ $(document).on('click', '.filtro-tipo-trabalho a', function(event) {
     carregarTipoTrabalho(tipo);  // Carrega os resultados via AJAX
 });
 
+
+$(document).on('click', '.filtro-ano-coleta a', function(event) {
+    event.preventDefault();  // Evita o comportamento padrão do link
+    var ano = $(this).data('ano');  // Obtém o valor do tipo de trabalho
+    carregarAnoColeta(ano);  // Carrega os resultados via AJAX
+});
+
 // Carregar filtros e artigos ao iniciar a página
 carregarTopicos();
 
 // Carregar todos os artigos inicialmente, pode ser removido se não for necessário
 carregarTodosArtigos();
-
-// Verifica se há um filtro armazenado e carrega os resultados filtrados
-var ano = localStorage.getItem('anoSelecionado');
-if (ano) {
-    carregarResultadosano(ano);  // Carrega os resultados do ano armazenado
-}
-
-var tipo = localStorage.getItem('tipoTrabalho');
-if (tipo) {
-    carregarTipoTrabalho(tipo);  // Carrega os resultados do tipo de trabalho armazenado
-}
-
 });
 
 

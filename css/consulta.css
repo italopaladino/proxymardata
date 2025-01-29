@@ -52,7 +52,7 @@
 
 
 a.link-pesq{
-    color: #000000a1;
+    color: #000000;
     font-size: large;
     text-decoration: none;
 }
@@ -110,6 +110,7 @@ a.link-pesq:hover{
 
 .bordaDentro{
     margin: 10px;
+   color: #000;
 }
 
 
