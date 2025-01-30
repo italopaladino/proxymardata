@@ -41,7 +41,7 @@ GROUP BY
         $quantidade = htmlspecialchars($tipoAmostra['quantidade']);
         
         if (!empty($tipo)) { // Verifica se $tipo não está vazio
-            $filtroHTMLTIPO .= "<li><a title='filtrar pelo Projeto' class='top-filtro' href='#' onclick='showAlert(); return false;' data-tipo-trabalho='" . $tipo . "'>" . $tipo . " (" . $quantidade . ")</a></li>";
+            $filtroHTMLTIPO .= "<li><a title='filtrar pelo ID da amostra' class='top-filtro' href='#' onclick='showAlert(); return false;' data-tipo-trabalho='" . $tipo . "'>" . $tipo . " (" . $quantidade . ")</a></li>";
         }
     }
     $filtroHTMLTIPO .= "</ul>";
