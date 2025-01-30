@@ -76,7 +76,7 @@ try {
         // Exibe a frase dentro de uma célula da tabela
         echo "<tr><td>" . $frase . "</td></tr>";
     }
-    
+
 
     // Fecha a tabela
     echo "</tbody></table>";

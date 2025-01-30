@@ -359,7 +359,7 @@ $(document).ready(function() {
 // Filtro para ano de publicação
 function carregarResultadosano(ano) {
     $.ajax({
-        url: "../PHP/filtros-ano-pub.php",
+        url: "../PHP/filtro.php",
         type: "GET",
         data: { ano: ano },
         success: function(response) {
@@ -377,7 +377,7 @@ function carregarResultadosano(ano) {
 // filtro para Tipo de Trabalho
 function carregarTipoTrabalho(tipo) {
     $.ajax({
-        url: "../PHP/filtro-tipo-trabalho.php",
+        url: "../PHP/filtro.php",
         type: "GET",
         data: { tipo: tipo },
         success: function(response) {
@@ -393,7 +393,7 @@ function carregarTipoTrabalho(tipo) {
 
 function carregarAnoColeta(ano_valor){
     $.ajax({
-        url: "../PHP/filtro-ano-coleta.php",
+        url: "../PHP/filtro.php",
         type: "GET",
         data: { ano_valor: ano_valor },
         success: function(response) {
