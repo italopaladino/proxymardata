@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Avançada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #111;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            color: #ddd;
+            text-decoration: none;
+            margin-left: 1rem;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .sidebar {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            flex: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .content {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            flex: 3;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            color: #0056b3;
+        }
+
+        .search-box {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            padding: 0.5rem 0;
+        }
+
+        ul li span {
+            color: #555;
+        }
+
+        .data {
+            margin-bottom: 1.5rem;
+        }
+
+        .data-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-left: 4px solid #0056b3;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .data-item strong {
+            color: #333;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #111;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div>LOGO</div>
+            <div>
+                <a href="#">Home</a>
+                <a href="#">Últimos Artigos</a>
+                <a href="#">Contatos</a>
+                <a href="#">Consulta</a>
+                <a href="#">Submissão de dados</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Busca Avançada</h2>
+            <div class="search-box">
+                <input type="text" placeholder="Filtragem (em construção...)" disabled>
+            </div>
+            <h3>Tipo de trabalho:</h3>
+            <ul>
+                <li>Relatório <span>(1)</span></li>
+                <li>Artigo <span>(5)</span></li>
+                <li>Resumo <span>(1)</span></li>
+                <li>Tese de doutorado <span>(1)</span></li>
+            </ul>
+
+            <h3>Ano de Coleta:</h3>
+            <ul>
+                <li>2025 <span>(1)</span></li>
+                <li>2022 <span>(1)</span></li>
+                <li>2021 <span>(1)</span></li>
+                <li>2018 <span>(1)</span></li>
+                <li>2014 <span>(2)</span></li>
+                <li>2013 <span>(1)</span></li>
+            </ul>
+
+            <h3>Tipo de amostra:</h3>
+            <ul>
+                <li>Organismos <span>(1)</span></li>
+                <li>Modelagem <span>(1)</span></li>
+                <li>Sedimento <span>(6)</span></li>
+            </ul>
+        </aside>
+
+        <section class="content">
+            <h2>Disponíveis no banco de dados</h2>
+
+            <div class="data">
+                <div class="data-item">
+                    <strong>Renata Hanae Nagai, Amanda Gerotto.</strong>
+                    <p>Renata Nagai (nagai@usp.br). datação com foraminíferos planctônicos</p>
+                    <p>Ano(s) de coleta(s): 2014</p>
+                    <p>Inseridos no banco em: 2024.</p>
+                </div>
+
+                <div class="data-item">
+                    <strong>Jhulia Mulato, Ítalo Martins Paladino.</strong>
+                    <p>Jhulia Mulato (jhlia@usp.br). dados de paleomagnetismo</p>
+                    <p>Ano(s) de coleta(s): 2011</p>
+                    <p>Inseridos no banco em: 2024.</p>
+                </div>
+
+                <div class="data-item">
+                    <strong>Ítalo Martins Paladino.</strong>
+                    <p>paladino (paladino@usp.br). dados de granulometria</p>
+                    <p>Ano(s) de coleta(s): 1988, 2021, 2022, 2025</p>
+                    <p>Inseridos no banco em: 2024.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2025 ProxyMar. Todos os direitos reservados.
+    </footer>
+</body>
+</html>
+

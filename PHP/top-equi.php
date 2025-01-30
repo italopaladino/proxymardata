@@ -67,13 +67,13 @@ SELECT outroequi AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE outroe
         ];
 
     // Monta a lista
-    $filtroHTML = "<ul>";
+    $filtroHTML = "<ul class='filtro-equipamento'>";
     foreach ($resultados as $resultado) {
         $coluna = htmlspecialchars($resultado['coluna']);
         $quantidade = htmlspecialchars($resultado['quantidade']);
         if ($quantidade > 0) {
             $nome = isset($nomesColunas[$coluna]) ? htmlspecialchars($nomesColunas[$coluna]) : htmlspecialchars($coluna);
-            $filtroHTML .= "<li><a title='Filtrar pelo tipo de equipamento utilizado para coleta' class='top-filtro' href='#' onclick='showAlert(); return false;'>" . $nome . "($quantidade)</a></li>";
+            $filtroHTML .= "<li><a title='Filtrar pelo tipo de equipamento utilizado para coleta' class='top-filtro' href='#' onclick='mostrarLoader()' data-equip-coleta ='". $coluna ."'>" . $nome . "($quantidade)</a></li>";
         }
     }
     $filtroHTML .= "</ul>";

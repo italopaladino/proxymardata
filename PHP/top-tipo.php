@@ -5,18 +5,18 @@
         $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
         // Seleciona o tipo de trabalho e conta quantos registros existem para cada tipo
-        $sql = "SELECT tipoTrabalho AS tipo, COUNT(*) AS quantidade FROM infogeral GROUP BY tipo";
+        $sql = "SELECT tipoTrabalho AS tipot, COUNT(*) AS quantidade FROM infogeral GROUP BY tipot";
         $stm = $pdo->query($sql);
         $tipostrabalho = $stm->fetchAll(PDO::FETCH_ASSOC);
 
         // Monta a lista HTML para os tipos de trabalho
         $filtroHTMLTIPO = "<ul class='filtro-tipo-trabalho'>";
         foreach ($tipostrabalho as $tipotrabalho) {
-            $tipo = htmlspecialchars($tipotrabalho['tipo']);
+            $tipot = htmlspecialchars($tipotrabalho['tipot']);
             $quantidade = htmlspecialchars($tipotrabalho['quantidade']);
-            if (!empty($tipo)) {
+            if (!empty($tipot)) {
                 $filtroHTMLTIPO .= "<li><a id='top-tipo' title='Filtrar pelo tipo de trabalho' class='top-filtro' href='#' data-tipo-trabalho='" 
-                . $tipo . "' onclick='mostrarLoader()'>" . $tipo . " (" . $quantidade . ")</a></li>";
+                . $tipot . "' onclick='mostrarLoader()'>" . $tipot . " (" . $quantidade . ")</a></li>";
 
 
             }

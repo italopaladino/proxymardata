@@ -14,15 +14,36 @@ function formatarData($data) {
 try {
     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
-    if (isset($_GET['ano_valor']) || isset($_GET['tipo'])) {
+    if (isset($_GET['ano_valor']) || isset($_GET['tipot']) || isset($_GET['tipoa']) || isset($_GET['equip_coleta'])) {
+
         if (isset($_GET['ano_valor'])) {
             $ano = $_GET['ano_valor'];
             $filtro = 'ano';
             $parametro = $ano;
-        } elseif (isset($_GET['tipo'])) {
-            $tipo = $_GET['tipo'];
-            $filtro = 'tipo';
-            $parametro = $tipo;
+
+        } elseif (isset($_GET['tipot'])) {
+            $tipot = $_GET['tipot'];
+            $filtro = 'tipot';
+            $parametro = $tipot;
+
+        } elseif (isset($_GET['tipoa'])) {
+            $tipoa = $_GET['tipoa'];
+            $filtro = 'tipoa';
+            $parametro = $tipoa;
+
+        } elseif (isset($_GET['equip_coleta'])) {
+            $equip_coleta = $_GET['equip_coleta'];
+            $filtro = 'equip_coleta';
+            $parametro = $equip_coleta;
+
+            // Lista de colunas permitidas para o filtro equip_coleta
+            $colunasPermitidas = ['piston', 'gravcorer', 'drilli', 'gboxcorer', 'boxcorer', 'ADCP', 'corrt', 'CTD', 'modNum', 'multcor', 'multB', 'stl', 'senscbio', 'sidSc', 'vanv', 'outroequi'];
+
+            // Verifica se o parâmetro é uma coluna válida
+            if (!in_array($parametro, $colunasPermitidas)) {
+                echo "<p>Parâmetro inválido.</p>";
+                exit;
+            }
         }
 
         if (empty($parametro)) {
@@ -62,7 +83,8 @@ try {
                 infogeral.tituloPrinc,
                 infogeral.tituloDado,
                 arquivos.uploaded_at";
-        } elseif ($filtro == 'tipo') {
+
+        } elseif ($filtro == 'tipot') {
             $sql = "SELECT 
                 infogeral.geralid,
                 infogeral.correspondente,
@@ -92,12 +114,126 @@ try {
                 infogeral.tituloPrinc,
                 infogeral.tituloDado,
                 arquivos.uploaded_at";
+
+        } elseif ($filtro == 'tipoa') {
+            $sql = "SELECT 
+                infogeral.geralid,
+                infogeral.correspondente,
+                infogeral.email,
+                infogeral.tituloPrinc,
+                infogeral.tituloDado,
+                infogeral.tipoTrabalho,
+                infogeral.tituloTrabalho,
+                infogeral.armazenamento,
+                ferramentas.tipoAmst,
+                EXTRACT(YEAR FROM arquivos.uploaded_at) AS ano_insercao,
+                STRING_AGG(DISTINCT EXTRACT(YEAR FROM COALESCE(pontos_coleta.data2, areap.dataarea))::text, ', ') AS anos_coleta,
+                (SELECT STRING_AGG(autores.autor, ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+                 FROM trabalhos_autores_filiacao
+                 LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+                 WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores
+            FROM infogeral
+            LEFT JOIN caractDado ON infogeral.geralid = caractDado.trabalhoId
+            LEFT JOIN pontos_coleta ON infogeral.geralid = pontos_coleta.trabalhoid
+            LEFT JOIN areap ON infogeral.geralid = areap.trabalhoid
+            LEFT JOIN arquivos ON infogeral.geralid = arquivos.trabalhoID
+            LEFT JOIN ferramentas ON infogeral.geralid = ferramentas.trabalhoID
+            WHERE ferramentas.tipoAmst = :parametro
+            GROUP BY 
+                infogeral.geralid,
+                infogeral.correspondente,
+                infogeral.email,
+                infogeral.armazenamento,
+                infogeral.tituloPrinc,
+                infogeral.tituloDado,
+                arquivos.uploaded_at,
+                ferramentas.tipoAmst";
+
+        } elseif ($filtro == 'equip_coleta') {
+            if ($parametro == 'outroequi') {
+                // Filtro para a coluna 'outroequi' (valores variáveis)
+                $sql = "
+                    SELECT 
+                        infogeral.geralid,
+                        infogeral.correspondente,
+                        infogeral.email,
+                        infogeral.tituloPrinc,
+                        infogeral.tituloDado,
+                        infogeral.tipoTrabalho,
+                        infogeral.tituloTrabalho,
+                        infogeral.armazenamento,
+                        ferramentas.tipoAmst,
+                        EXTRACT(YEAR FROM arquivos.uploaded_at) AS ano_insercao,
+                        STRING_AGG(DISTINCT EXTRACT(YEAR FROM COALESCE(pontos_coleta.data2, areap.dataarea))::text, ', ') AS anos_coleta,
+                        (SELECT STRING_AGG(autores.autor, ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+                         FROM trabalhos_autores_filiacao
+                         LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+                         WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores
+                    FROM infogeral
+                    LEFT JOIN caractDado ON infogeral.geralid = caractDado.trabalhoId
+                    LEFT JOIN pontos_coleta ON infogeral.geralid = pontos_coleta.trabalhoid
+                    LEFT JOIN areap ON infogeral.geralid = areap.trabalhoid
+                    LEFT JOIN arquivos ON infogeral.geralid = arquivos.trabalhoID
+                    LEFT JOIN ferramentas ON infogeral.geralid = ferramentas.trabalhoID
+                    LEFT JOIN equipcoleta ON infogeral.geralid = equipcoleta.trabalhoID
+                    WHERE equipcoleta.outroequi = :parametro
+                    GROUP BY 
+                        infogeral.geralid,
+                        infogeral.correspondente,
+                        infogeral.email,
+                        infogeral.armazenamento,
+                        infogeral.tituloPrinc,
+                        infogeral.tituloDado,
+                        arquivos.uploaded_at,
+                        ferramentas.tipoAmst";
+            } else {
+                // Filtro para colunas booleanas (piston, gravcorer, etc.)
+                $sql = "
+                    SELECT 
+                        infogeral.geralid,
+                        infogeral.correspondente,
+                        infogeral.email,
+                        infogeral.tituloPrinc,
+                        infogeral.tituloDado,
+                        infogeral.tipoTrabalho,
+                        infogeral.tituloTrabalho,
+                        infogeral.armazenamento,
+                        ferramentas.tipoAmst,
+                        EXTRACT(YEAR FROM arquivos.uploaded_at) AS ano_insercao,
+                        STRING_AGG(DISTINCT EXTRACT(YEAR FROM COALESCE(pontos_coleta.data2, areap.dataarea))::text, ', ') AS anos_coleta,
+                        (SELECT STRING_AGG(autores.autor, ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+                         FROM trabalhos_autores_filiacao
+                         LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+                         WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores
+                    FROM infogeral
+                    LEFT JOIN caractDado ON infogeral.geralid = caractDado.trabalhoId
+                    LEFT JOIN pontos_coleta ON infogeral.geralid = pontos_coleta.trabalhoid
+                    LEFT JOIN areap ON infogeral.geralid = areap.trabalhoid
+                    LEFT JOIN arquivos ON infogeral.geralid = arquivos.trabalhoID
+                    LEFT JOIN ferramentas ON infogeral.geralid = ferramentas.trabalhoID
+                    LEFT JOIN equipcoleta ON infogeral.geralid = equipcoleta.trabalhoID
+                    WHERE equipcoleta.$parametro = TRUE
+                    GROUP BY 
+                        infogeral.geralid,
+                        infogeral.correspondente,
+                        infogeral.email,
+                        infogeral.armazenamento,
+                        infogeral.tituloPrinc,
+                        infogeral.tituloDado,
+                        arquivos.uploaded_at,
+                        ferramentas.tipoAmst";
+            }
         }
 
+        // Executa a query
         $stm = $pdo->prepare($sql);
-        $stm->bindParam(':parametro', $parametro, $filtro == 'ano' ? PDO::PARAM_INT : PDO::PARAM_STR);
-        $stm->execute();
 
+        // Apenas bindParam se o parâmetro for usado na query
+        if ($filtro == 'ano' || $filtro == 'tipot' || $filtro == 'tipoa' || $parametro == 'outroequi') {
+            $stm->bindParam(':parametro', $parametro, PDO::PARAM_STR);
+        }
+
+        $stm->execute();
         $infogeral = $stm->fetchAll(PDO::FETCH_ASSOC);
 
         if ($infogeral) {
