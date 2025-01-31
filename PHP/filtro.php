@@ -14,7 +14,7 @@ function formatarData($data) {
 try {
     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
-    if (isset($_GET['ano_valor']) || isset($_GET['tipot']) || isset($_GET['tipoa']) || isset($_GET['equip_coleta'])) {
+    if (isset($_GET['ano_valor']) || isset($_GET['tipot']) || isset($_GET['tipoa']) || isset($_GET['equip_coleta']) || isset($_GET['ferram'])) {
 
         if (isset($_GET['ano_valor'])) {
             $ano = $_GET['ano_valor'];
@@ -44,13 +44,25 @@ try {
                 echo "<p>Parâmetro inválido.</p>";
                 exit;
             }
-        }
+        }elseif (isset($_GET['ferram'])) {
+            $ferram = $_GET['ferram'];
+            $filtro = 'ferram';
+            $parametro = $ferram;
+
+            // Lista de colunas permitidas para o filtro equip_coleta
+            $colunasPermitidas = ['assos', 'batmet', 'bioorg', 'cocolit', 'estrat', 'foramplan', 'forambent', 'granl', 'hidrod', 'hidrog', 'matorg', 'metais', 'microps', 'agemod', 'profisi', 'radioist', 'razisot','smodnum','teorag'];
+
+            // Verifica se o parâmetro é uma coluna válida
+            if (!in_array($parametro, $colunasPermitidas)) {
+                echo "<p>Parâmetro inválido.</p>";
+                exit;
+            }
 
         if (empty($parametro)) {
             echo "<p>Parâmetro não especificado.</p>";
             exit;
         }
-
+    }
         if ($filtro == 'ano') {
             $sql = "SELECT 
                 infogeral.geralid,
@@ -213,6 +225,80 @@ try {
                     LEFT JOIN ferramentas ON infogeral.geralid = ferramentas.trabalhoID
                     LEFT JOIN equipcoleta ON infogeral.geralid = equipcoleta.trabalhoID
                     WHERE equipcoleta.$parametro = TRUE
+                    GROUP BY 
+                        infogeral.geralid,
+                        infogeral.correspondente,
+                        infogeral.email,
+                        infogeral.armazenamento,
+                        infogeral.tituloPrinc,
+                        infogeral.tituloDado,
+                        arquivos.uploaded_at,
+                        ferramentas.tipoAmst";
+            }
+        }elseif ($filtro == 'ferram') {
+            if ($parametro == 'outroferr') {
+                // Filtro para a coluna 'outroequi' (valores variáveis)
+                $sql = "
+                    SELECT 
+                        infogeral.geralid,
+                        infogeral.correspondente,
+                        infogeral.email,
+                        infogeral.tituloPrinc,
+                        infogeral.tituloDado,
+                        infogeral.tipoTrabalho,
+                        infogeral.tituloTrabalho,
+                        infogeral.armazenamento,
+                        ferramentas.tipoAmst,
+                        EXTRACT(YEAR FROM arquivos.uploaded_at) AS ano_insercao,
+                        STRING_AGG(DISTINCT EXTRACT(YEAR FROM COALESCE(pontos_coleta.data2, areap.dataarea))::text, ', ') AS anos_coleta,
+                        (SELECT STRING_AGG(autores.autor, ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+                         FROM trabalhos_autores_filiacao
+                         LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+                         WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores
+                    FROM infogeral
+                    LEFT JOIN caractDado ON infogeral.geralid = caractDado.trabalhoId
+                    LEFT JOIN pontos_coleta ON infogeral.geralid = pontos_coleta.trabalhoid
+                    LEFT JOIN areap ON infogeral.geralid = areap.trabalhoid
+                    LEFT JOIN arquivos ON infogeral.geralid = arquivos.trabalhoID
+                    LEFT JOIN ferramentas ON infogeral.geralid = ferramentas.trabalhoID
+                    LEFT JOIN equipcoleta ON infogeral.geralid = equipcoleta.trabalhoID
+                    WHERE ferramentas.outroferr = :parametro
+                    GROUP BY 
+                        infogeral.geralid,
+                        infogeral.correspondente,
+                        infogeral.email,
+                        infogeral.armazenamento,
+                        infogeral.tituloPrinc,
+                        infogeral.tituloDado,
+                        arquivos.uploaded_at,
+                        ferramentas.tipoAmst";
+            } else {
+                // Filtro para colunas booleanas (piston, gravcorer, etc.)
+                $sql = "
+                    SELECT 
+                        infogeral.geralid,
+                        infogeral.correspondente,
+                        infogeral.email,
+                        infogeral.tituloPrinc,
+                        infogeral.tituloDado,
+                        infogeral.tipoTrabalho,
+                        infogeral.tituloTrabalho,
+                        infogeral.armazenamento,
+                        ferramentas.tipoAmst,
+                        EXTRACT(YEAR FROM arquivos.uploaded_at) AS ano_insercao,
+                        STRING_AGG(DISTINCT EXTRACT(YEAR FROM COALESCE(pontos_coleta.data2, areap.dataarea))::text, ', ') AS anos_coleta,
+                        (SELECT STRING_AGG(autores.autor, ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+                         FROM trabalhos_autores_filiacao
+                         LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+                         WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores
+                    FROM infogeral
+                    LEFT JOIN caractDado ON infogeral.geralid = caractDado.trabalhoId
+                    LEFT JOIN pontos_coleta ON infogeral.geralid = pontos_coleta.trabalhoid
+                    LEFT JOIN areap ON infogeral.geralid = areap.trabalhoid
+                    LEFT JOIN arquivos ON infogeral.geralid = arquivos.trabalhoID
+                    LEFT JOIN ferramentas ON infogeral.geralid = ferramentas.trabalhoID
+                    LEFT JOIN equipcoleta ON infogeral.geralid = equipcoleta.trabalhoID
+                    WHERE ferramentas.$parametro = TRUE
                     GROUP BY 
                         infogeral.geralid,
                         infogeral.correspondente,

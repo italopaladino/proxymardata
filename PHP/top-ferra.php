@@ -74,13 +74,13 @@ try {
     ];
 
     // Monta a lista
-    $filtroHTML = "<ul>";
+    $filtroHTML = "<ul class='filtro-ferra'>";
     foreach ($resultados as $resultado) {
         $coluna = htmlspecialchars($resultado['coluna']);
         $quantidade = htmlspecialchars($resultado['quantidade']);
         if ($quantidade > 0) {
             $nome = isset($nomesColunas[$coluna]) ? htmlspecialchars($nomesColunas[$coluna]) : htmlspecialchars($coluna);
-            $filtroHTML .= "<li><a title='filtrar pela ferramenta escolhido' class='top-filtro' href='#' onclick='showAlert(); return false;' >" . $nome . "($quantidade)</a></li>";
+            $filtroHTML .= "<li><a title='filtrar pela ferramenta escolhido' class='top-filtro' href='#' onclick='mostrarLoader()' data-ferram ='". $coluna ."' >" . $nome . "($quantidade)</a></li>";
         }
     }
     $filtroHTML .= "</ul>";

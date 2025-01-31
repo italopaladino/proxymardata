@@ -368,6 +368,11 @@ $(document).on('click', '.filtro-equipamento a', function(event) {
     carregarEquipColeta(equip_coleta); // Chama a função para enviar o filtro via AJAX
 });
 
+$(document).on('click', '.filtro-ferra a', function(event) {
+    event.preventDefault(); // Evita o comportamento padrão do link
+    var ferram = $(this).data('ferram'); // Obtém o valor do equipamento
+    carregarferra(ferram); // Chama a função para enviar o filtro via AJAX
+});
 
 
 
@@ -452,6 +457,34 @@ function carregarEquipColeta(equip_coleta) {
         }
     });
 }
+
+
+function carregarferra(ferram) {
+    $.ajax({
+        url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
+        type: "GET",
+        data: { ferram: ferram }, // Envia o equipamento para o PHP
+        success: function(response) {
+            // Atualiza a div #ultimosartigos com a resposta do PHP
+            $("#ultimosartigos").html(response);
+
+            // Exibe o filtro ativo na página
+            $("#filtro-ativo").html(
+                '<ul><li><u><span>' + ferram + '</span></u> ' +
+                '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
+            );
+
+            // Armazena o filtro no localStorage (opcional)
+            localStorage.setItem('ferram', ferram);
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro ao consultar a ferramenta:", status, error);
+        }
+    });
+}
+
+
+
 
 
 // Evento de clique para remover o filtro
