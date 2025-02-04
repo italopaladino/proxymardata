@@ -10,13 +10,13 @@ try {
     $tipostrabalho = $stm->fetchAll(PDO::FETCH_ASSOC);
 
     // Monta a lista HTML para os tipos de armazenamento
-    $filtroHTMLTIPO = "<ul class='armazenamento'>";
+    $filtroHTMLTIPO = "<ul class='filtro-armazenamento'>";
     foreach ($tipostrabalho as $tipoAmostra) {
         $tipo = htmlspecialchars($tipoAmostra['tipo']);
         $quantidade = htmlspecialchars($tipoAmostra['quantidade']);
         
         if (!empty($tipo)) { // Verifica se $tipo não está vazio
-            $filtroHTMLTIPO .= "<li><a title='filtrar pelo tipo de armazenamento' class='top-filtro' href='#' onclick='showAlert(); return false;' data-tipo-trabalho='" . $tipo . "'>" . $tipo . " (" . $quantidade . ")</a></li>";
+            $filtroHTMLTIPO .= "<li><a title='filtrar pelo tipo de armazenamento' class='top-filtro' href='#' onclick='mostrarLoader()' data-armazenamento='" . $tipo . "'>" . $tipo . " (" . $quantidade . ")</a></li>";
         }
     }
     $filtroHTMLTIPO .= "</ul>";

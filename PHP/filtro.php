@@ -14,7 +14,8 @@ function formatarData($data) {
 try {
     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
-    if (isset($_GET['ano_valor']) || isset($_GET['tipot']) || isset($_GET['tipoa']) || isset($_GET['equip_coleta']) || isset($_GET['ferram'])) {
+    if (isset($_GET['ano_valor']) || isset($_GET['tipot']) || isset($_GET['tipoa']) || isset($_GET['equip_coleta']) || isset($_GET['ferram'])
+    || isset($_GET['armazenamento']) || isset($_GET['projeto']) || isset($_GET['id'])) {
 
         if (isset($_GET['ano_valor'])) {
             $ano = $_GET['ano_valor'];
@@ -58,11 +59,30 @@ try {
                 exit;
             }
 
+        }elseif (isset($_GET['armazenamento'])) {
+            $armazenamento = $_GET['armazenamento'];
+            $filtro = 'armazenamento';
+            $parametro = $armazenamento;
+
+
+
+        }elseif (isset($_GET['projeto'])) {
+            $projeto = $_GET['projeto'];
+            $filtro = 'projeto';
+            $parametro = $projeto;
+
+        }elseif (isset($_GET['id'])) {
+            $ID = $_GET['id'];
+            $filtro = 'id';
+            $parametro = $ID;
+        }
+
         if (empty($parametro)) {
             echo "<p>Parâmetro não especificado.</p>";
             exit;
         }
-    }
+    
+
         if ($filtro == 'ano') {
             $sql = "SELECT 
                 infogeral.geralid,
@@ -235,7 +255,8 @@ try {
                         arquivos.uploaded_at,
                         ferramentas.tipoAmst";
             }
-        }elseif ($filtro == 'ferram') {
+
+        } elseif ($filtro == 'ferram') {
             if ($parametro == 'outroferr') {
                 // Filtro para a coluna 'outroequi' (valores variáveis)
                 $sql = "
@@ -308,14 +329,106 @@ try {
                         infogeral.tituloDado,
                         arquivos.uploaded_at,
                         ferramentas.tipoAmst";
-            }
-        }
+            }         
+            } elseif ($filtro == 'armazenamento') {
+                $sql = "SELECT 
+                    infogeral.geralid,
+                    infogeral.correspondente,
+                    infogeral.email,
+                    infogeral.tituloPrinc,
+                    infogeral.tituloDado,
+                    infogeral.tipoTrabalho,
+                    infogeral.tituloTrabalho,
+                    infogeral.armazenamento,
+                    EXTRACT(YEAR FROM arquivos.uploaded_at) AS ano_insercao,
+                    STRING_AGG(DISTINCT EXTRACT(YEAR FROM COALESCE(pontos_coleta.data2, areap.dataarea))::text, ', ') AS anos_coleta,
+                    (SELECT STRING_AGG(autores.autor, ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+                     FROM trabalhos_autores_filiacao
+                     LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+                     WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores
+                FROM infogeral
+                LEFT JOIN caractDado ON infogeral.geralid = caractDado.trabalhoId
+                LEFT JOIN pontos_coleta ON infogeral.geralid = pontos_coleta.trabalhoid
+                LEFT JOIN areap ON infogeral.geralid = areap.trabalhoid
+                LEFT JOIN arquivos ON infogeral.geralid = arquivos.trabalhoID
+                WHERE infogeral.armazenamento = :parametro
+                GROUP BY 
+                    infogeral.geralid,
+                    infogeral.correspondente,
+                    infogeral.email,
+                    infogeral.armazenamento,
+                    infogeral.tituloPrinc,
+                    infogeral.tituloDado,
+                    arquivos.uploaded_at";
+        }elseif ($filtro == 'projeto') {
+            $sql = "SELECT 
+                infogeral.geralid,
+                infogeral.correspondente,
+                infogeral.email,
+                infogeral.tituloPrinc,
+                infogeral.tituloDado,
+                infogeral.tipoTrabalho,
+                infogeral.tituloTrabalho,
+                infogeral.armazenamento,
+                EXTRACT(YEAR FROM arquivos.uploaded_at) AS ano_insercao,
+                STRING_AGG(DISTINCT EXTRACT(YEAR FROM COALESCE(pontos_coleta.data2, areap.dataarea))::text, ', ') AS anos_coleta,
+                (SELECT STRING_AGG(autores.autor, ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+                 FROM trabalhos_autores_filiacao
+                 LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+                 WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores
+            FROM infogeral
+            LEFT JOIN caractDado ON infogeral.geralid = caractDado.trabalhoId
+            LEFT JOIN pontos_coleta ON infogeral.geralid = pontos_coleta.trabalhoid
+            LEFT JOIN areap ON infogeral.geralid = areap.trabalhoid
+            LEFT JOIN arquivos ON infogeral.geralid = arquivos.trabalhoID
+            WHERE infogeral.tituloPrinc = :parametro
+            GROUP BY 
+                infogeral.geralid,
+                infogeral.correspondente,
+                infogeral.email,
+                infogeral.armazenamento,
+                infogeral.tituloPrinc,
+                infogeral.tituloDado,
+                arquivos.uploaded_at";
 
+
+    }elseif ($filtro == 'id') {
+        $sql = "SELECT 
+            infogeral.geralid,
+            infogeral.correspondente,
+            infogeral.email,
+            infogeral.tituloPrinc,
+            infogeral.tituloDado,
+            infogeral.tipoTrabalho,
+            infogeral.tituloTrabalho,
+            infogeral.armazenamento,
+            EXTRACT(YEAR FROM arquivos.uploaded_at) AS ano_insercao,
+            STRING_AGG(DISTINCT EXTRACT(YEAR FROM COALESCE(pontos_coleta.data2, areap.dataarea))::text, ', ') AS anos_coleta,
+            (SELECT STRING_AGG(autores.autor, ', ' ORDER BY trabalhos_autores_filiacao.ordem)
+             FROM trabalhos_autores_filiacao
+             LEFT JOIN autores ON trabalhos_autores_filiacao.autorID = autores.autID
+             WHERE trabalhos_autores_filiacao.trabalhoID = infogeral.geralID) AS autores
+        FROM infogeral
+        LEFT JOIN caractDado ON infogeral.geralid = caractDado.trabalhoId
+        LEFT JOIN pontos_coleta ON infogeral.geralid = pontos_coleta.trabalhoid
+        LEFT JOIN areap ON infogeral.geralid = areap.trabalhoid
+        LEFT JOIN arquivos ON infogeral.geralid = arquivos.trabalhoID
+        WHERE (pontos_coleta.id_amst = :parametro OR areap.id_amstAREA = :parametro)
+        GROUP BY 
+            infogeral.geralid,
+            infogeral.correspondente,
+            infogeral.email,
+            infogeral.armazenamento,
+            infogeral.tituloPrinc,
+            infogeral.tituloDado,
+            arquivos.uploaded_at";
+    }
+    
         // Executa a query
         $stm = $pdo->prepare($sql);
 
         // Apenas bindParam se o parâmetro for usado na query
-        if ($filtro == 'ano' || $filtro == 'tipot' || $filtro == 'tipoa' || $parametro == 'outroequi') {
+        if ($filtro == 'ano' || $filtro == 'tipot' || $filtro == 'tipoa' || $parametro == 'outroequi'|| $filtro == 'armazenamento' || $filtro =='projeto' || $filtro == 'id') {
             $stm->bindParam(':parametro', $parametro, PDO::PARAM_STR);
         }
 

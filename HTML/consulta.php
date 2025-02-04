@@ -167,7 +167,7 @@
                 </div>
 
                 <h2 class="form-tip">Projeto:</h1>
-                <div id="projeto" class="projeto">
+                <div id="top-proje" class="projeto">
                 </div>
 
                 <h2 class="form-tip">IDs:</h1>
@@ -239,7 +239,6 @@
 
     <!-- Bootstrap core JS -->
     <script>
-
 $(document).ready(function() {
     console.log("jQuery está funcionando.");
 
@@ -257,29 +256,23 @@ $(document).ready(function() {
         });
     }
 
-
-    // Função tópicos 
-
+    // Função para carregar tópicos
     function carregarTopicos() {
-    $.ajax({
-        url: "../PHP/top-tipo.php",
-        type: "GET",
-        success: function(response) {
-            $("#top-tipo").html(response);
-        }
-    });
+        $.ajax({
+            url: "../PHP/top-tipo.php",
+            type: "GET",
+            success: function(response) {
+                $("#top-tipo").html(response);
+            }
+        });
 
-    
-         $.ajax({
+        $.ajax({
             url: "../PHP/top-ano-coleta.php",
             type: "GET",
             success: function(response) {
                 $("#top-ano-coleta").html(response);
-
             }
         });
-    
-      
 
         $.ajax({
             url: "../PHP/top-ID_amst.php",
@@ -288,10 +281,9 @@ $(document).ready(function() {
                 $("#ID_amst").html(response);
             },
             error: function(xhr, status, error) {
-                console.error("Erro ao consultar ano de coleta:", status, error);
+                console.error("Erro ao consultar ID:", status, error);
             }
         });
-
 
         $.ajax({
             url: "../PHP/top-ferra.php",
@@ -300,10 +292,9 @@ $(document).ready(function() {
                 $("#top-ferra").html(response);
             },
             error: function(xhr, status, error) {
-                console.error("Erro ao consultar proxies:", status, error);
+                console.error("Erro ao consultar tipo de ferramenta:", status, error);
             }
         });
-
 
         $.ajax({
             url: "../PHP/top-tipAmost.php",
@@ -312,11 +303,9 @@ $(document).ready(function() {
                 $("#top-tipAmost").html(response);
             },
             error: function(xhr, status, error) {
-                console.error("Erro ao consultar proxies:", status, error);
+                console.error("Erro ao consultar o tipo de amostra:", status, error);
             }
         });
-
-
 
         $.ajax({
             url: "../PHP/top-equi.php",
@@ -328,192 +317,273 @@ $(document).ready(function() {
                 console.error("Erro ao consultar equipamentos:", status, error);
             }
         });
-    }
 
- $.ajax({
+        $.ajax({
             url: "../PHP/top-armaz.php",
             type: "GET",
             success: function(response) {
                 $("#top-armaz").html(response);
             },
             error: function(xhr, status, error) {
-                console.error("Erro ao consultar proxies:", status, error);
+                console.error("Erro ao consultar o tipo de armazenamento:", status, error);
             }
         });
 
-        
-// Adiciona um listener de clique para cada link de tipo de trabalho
-$(document).on('click', '.filtro-tipo-trabalho a', function(event) {
-    event.preventDefault();  // Evita o comportamento padrão do link
-    var tipot = $(this).data('tipo-trabalho');  // Obtém o valor do tipo de trabalho
-    carregarTipoTrabalho(tipot);  // Carrega os resultados via AJAX
-});
+        $.ajax({
+            url: "../PHP/top-proje.php",
+            type: "GET",
+            success: function(response) {
+                $("#top-proje").html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar o título dos projetos:", status, error);
+            }
+        });
+    }
 
-
-$(document).on('click', '.filtro-ano-coleta a', function(event) {
-    event.preventDefault();  // Evita o comportamento padrão do link
-    var ano = $(this).data('ano');  // Obtém o valor do tipo de trabalho
-    carregarAnoColeta(ano);  // Carrega os resultados via AJAX
-});
-
-$(document).on('click', '.filtro-tipo-amostra a', function(event) {
-    event.preventDefault();  // Evita que o link recarregue a página
-    var tipoa = $(this).data('tipo-amostra');  // Obtém o valor do tipo de amostra
-    carregarTipoAmst(tipoa);  // Chama a função para enviar o filtro via AJAX
-});
-
-$(document).on('click', '.filtro-equipamento a', function(event) {
-    event.preventDefault(); // Evita o comportamento padrão do link
-    var equip_coleta = $(this).data('equip-coleta'); // Obtém o valor do equipamento
-    carregarEquipColeta(equip_coleta); // Chama a função para enviar o filtro via AJAX
-});
-
-$(document).on('click', '.filtro-ferra a', function(event) {
-    event.preventDefault(); // Evita o comportamento padrão do link
-    var ferram = $(this).data('ferram'); // Obtém o valor do equipamento
-    carregarferra(ferram); // Chama a função para enviar o filtro via AJAX
-});
-
-
-
-
-// filtro para Tipo de Trabalho
-function carregarTipoTrabalho(tipot) {
-    $.ajax({
-        url: "../PHP/filtro.php",
-        type: "GET",
-        data: { tipot: tipot },
-        success: function(response) {
-            $("#ultimosartigos").html(response);  // Atualiza a div com o id 'ultimosartigos'
-            $("#filtro-ativo").html('<ul><li><u><span>' + tipot + '</span></u> <button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>');
-            localStorage.setItem('tipoTrabalho', tipot);  // Armazena o tipo de trabalho selecionado
-        },
-        error: function(xhr, status, error) {
-            console.error("Erro ao consultar artigos:", status, error);
-        }
+    // Adiciona um listener de clique para cada link de tipo de trabalho
+    $(document).on('click', '.filtro-tipo-trabalho a', function(event) {
+        event.preventDefault();  // Evita o comportamento padrão do link
+        var tipot = $(this).data('tipo-trabalho');  // Obtém o valor do tipo de trabalho
+        carregarTipoTrabalho(tipot);  // Carrega os resultados via AJAX
     });
-}
 
-function carregarAnoColeta(ano_valor){
-    $.ajax({
-        url: "../PHP/filtro.php",
-        type: "GET",
-        data: { ano_valor: ano_valor },
-        success: function(response) {
-            $("#ultimosartigos").html(response);  // Atualiza a div com o id 'ultimosartigos'
-            $("#filtro-ativo").html('<ul><li><u><span>' + ano_valor + '</span></u> <button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>');
-            localStorage.setItem('anoColeta', ano_valor);  // Armazena o tipo de trabalho selecionado
-        },
-        error: function(xhr, status, error) {
-            console.error("Erro ao consultar o ano de coleta:", status, error);
-        }
+    $(document).on('click', '.filtro-ano-coleta a', function(event) {
+        event.preventDefault();  // Evita o comportamento padrão do link
+        var ano = $(this).data('ano');  // Obtém o valor do tipo de trabalho
+        carregarAnoColeta(ano);  // Carrega os resultados via AJAX
     });
-}
 
-function carregarTipoAmst(tipoa) {
-    $.ajax({
-        url: "../PHP/filtro.php",  // Arquivo PHP que processa o filtro
-        type: "GET",
-        data: { tipoa: tipoa },  // Envia o tipo de amostra para o PHP
-        success: function(response) {
-            // Atualiza a div #ultimosartigos com a resposta do PHP
-            $("#ultimosartigos").html(response);
-
-            // Exibe o filtro ativo na página
-            $("#filtro-ativo").html(
-                '<ul><li><u><span>' + tipoa + '</span></u> ' +
-                '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
-            );
-
-            // Armazena o filtro no localStorage (opcional)
-            localStorage.setItem('tipoAmst', tipoa);
-        },
-        error: function(xhr, status, error) {
-            console.error("Erro ao consultar o tipo de amostra:", status, error);
-        }
+    $(document).on('click', '.filtro-tipo-amostra a', function(event) {
+        event.preventDefault();  // Evita que o link recarregue a página
+        var tipoa = $(this).data('tipo-amostra');  // Obtém o valor do tipo de amostra
+        carregarTipoAmst(tipoa);  // Chama a função para enviar o filtro via AJAX
     });
-}
 
-function carregarEquipColeta(equip_coleta) {
-    $.ajax({
-        url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
-        type: "GET",
-        data: { equip_coleta: equip_coleta }, // Envia o equipamento para o PHP
-        success: function(response) {
-            // Atualiza a div #ultimosartigos com a resposta do PHP
-            $("#ultimosartigos").html(response);
-
-            // Exibe o filtro ativo na página
-            $("#filtro-ativo").html(
-                '<ul><li><u><span>' + equip_coleta + '</span></u> ' +
-                '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
-            );
-
-            // Armazena o filtro no localStorage (opcional)
-            localStorage.setItem('equip_coleta', equip_coleta);
-        },
-        error: function(xhr, status, error) {
-            console.error("Erro ao consultar o equipamento de coleta:", status, error);
-        }
+    $(document).on('click', '.filtro-equipamento a', function(event) {
+        event.preventDefault(); // Evita o comportamento padrão do link
+        var equip_coleta = $(this).data('equip-coleta'); // Obtém o valor do equipamento
+        carregarEquipColeta(equip_coleta); // Chama a função para enviar o filtro via AJAX
     });
-}
 
-
-function carregarferra(ferram) {
-    $.ajax({
-        url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
-        type: "GET",
-        data: { ferram: ferram }, // Envia o equipamento para o PHP
-        success: function(response) {
-            // Atualiza a div #ultimosartigos com a resposta do PHP
-            $("#ultimosartigos").html(response);
-
-            // Exibe o filtro ativo na página
-            $("#filtro-ativo").html(
-                '<ul><li><u><span>' + ferram + '</span></u> ' +
-                '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
-            );
-
-            // Armazena o filtro no localStorage (opcional)
-            localStorage.setItem('ferram', ferram);
-        },
-        error: function(xhr, status, error) {
-            console.error("Erro ao consultar a ferramenta:", status, error);
-        }
+    $(document).on('click', '.filtro-ferra a', function(event) {
+        event.preventDefault(); // Evita o comportamento padrão do link
+        var ferram = $(this).data('ferram'); // Obtém o valor do equipamento
+        carregarferra(ferram); // Chama a função para enviar o filtro via AJAX
     });
-}
+
+    $(document).on('click', '.filtro-armazenamento a', function(event) {
+        event.preventDefault(); // Evita o comportamento padrão do link
+        var armazenamento = $(this).data('armazenamento'); // Obtém o valor do equipamento
+        carregarArmaze(armazenamento); // Chama a função para enviar o filtro via AJAX
+    });
+
+    $(document).on('click', '.filtro-projeto a', function(event) {
+        event.preventDefault(); // Evita o comportamento padrão do link
+        var projeto = $(this).data('projeto'); // Obtém o valor do equipamento
+        carregarProjeto(projeto); // Chama a função para enviar o filtro via AJAX
+    });
+
+
+    $(document).on('click', '.filtro-ID a', function(event) {
+        event.preventDefault(); // Evita o comportamento padrão do link
+        var id = $(this).data('id'); // Obtém o valor do equipamento
+        carregarID(id); // Chama a função para enviar o filtro via AJAX
+    });
 
 
 
+        // Filtro para Tipo de Trabalho
+    function carregarTipoTrabalho(tipot) {
+        $.ajax({
+            url: "../PHP/filtro.php",
+            type: "GET",
+            data: { tipot: tipot },
+            success: function(response) {
+                $("#ultimosartigos").html(response);  // Atualiza a div com o id 'ultimosartigos'
+                $("#filtro-ativo").html('<ul><li><u><span>' + tipot + '</span></u> <button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>');
+                localStorage.setItem('tipoTrabalho', tipot);  // Armazena o tipo de trabalho selecionado
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar artigos:", status, error);
+            }
+        });
+    }
+
+    function carregarAnoColeta(ano_valor) {
+        $.ajax({
+            url: "../PHP/filtro.php",
+            type: "GET",
+            data: { ano_valor: ano_valor },
+            success: function(response) {
+                $("#ultimosartigos").html(response);  // Atualiza a div com o id 'ultimosartigos'
+                $("#filtro-ativo").html('<ul><li><u><span>' + ano_valor + '</span></u> <button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>');
+                localStorage.setItem('anoColeta', ano_valor);  // Armazena o tipo de trabalho selecionado
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar o ano de coleta:", status, error);
+            }
+        });
+    }
+
+    function carregarTipoAmst(tipoa) {
+        $.ajax({
+            url: "../PHP/filtro.php",  // Arquivo PHP que processa o filtro
+            type: "GET",
+            data: { tipoa: tipoa },  // Envia o tipo de amostra para o PHP
+            success: function(response) {
+                // Atualiza a div #ultimosartigos com a resposta do PHP
+                $("#ultimosartigos").html(response);
+
+                // Exibe o filtro ativo na página
+                $("#filtro-ativo").html(
+                    '<ul><li><u><span>' + tipoa + '</span></u> ' +
+                    '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
+                );
+
+                // Armazena o filtro no localStorage (opcional)
+                localStorage.setItem('tipoAmst', tipoa);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar o tipo de amostra:", status, error);
+            }
+        });
+    }
+
+    function carregarEquipColeta(equip_coleta) {
+        $.ajax({
+            url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
+            type: "GET",
+            data: { equip_coleta: equip_coleta }, // Envia o equipamento para o PHP
+            success: function(response) {
+                // Atualiza a div #ultimosartigos com a resposta do PHP
+                $("#ultimosartigos").html(response);
+
+                // Exibe o filtro ativo na página
+                $("#filtro-ativo").html(
+                    '<ul><li><u><span>' + equip_coleta + '</span></u> ' +
+                    '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
+                );
+
+                // Armazena o filtro no localStorage (opcional)
+                localStorage.setItem('equip_coleta', equip_coleta);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar o equipamento de coleta:", status, error);
+            }
+        });
+    }
+
+    function carregarferra(ferram) {
+        $.ajax({
+            url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
+            type: "GET",
+            data: { ferram: ferram }, // Envia o equipamento para o PHP
+            success: function(response) {
+                // Atualiza a div #ultimosartigos com a resposta do PHP
+                $("#ultimosartigos").html(response);
+
+                // Exibe o filtro ativo na página
+                $("#filtro-ativo").html(
+                    '<ul><li><u><span>' + ferram + '</span></u> ' +
+                    '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
+                );
+
+                // Armazena o filtro no localStorage (opcional)
+                localStorage.setItem('ferram', ferram);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar a ferramenta:", status, error);
+            }
+        });
+    }
+
+    function carregarArmaze(armazenamento) {
+        $.ajax({
+            url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
+            type: "GET",
+            data: { armazenamento: armazenamento }, // Envia o equipamento para o PHP
+            success: function(response) {
+                // Atualiza a div #ultimosartigos com a resposta do PHP
+                $("#ultimosartigos").html(response);
+
+                // Exibe o filtro ativo na página
+                $("#filtro-ativo").html(
+                    '<ul><li><u><span>' + armazenamento + '</span></u> ' +
+                    '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
+                );
+
+                // Armazena o filtro no localStorage (opcional)
+                localStorage.setItem('armazenamento', armazenamento);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar o tipo de armazenamento:", status, error);
+            }
+        });
+    }
+
+    function carregarProjeto(projeto) {
+        $.ajax({
+            url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
+            type: "GET",
+            data: { projeto: projeto }, // Envia o equipamento para o PHP
+            success: function(response) {
+                // Atualiza a div #ultimosartigos com a resposta do PHP
+                $("#ultimosartigos").html(response);
+
+                // Exibe o filtro ativo na página
+                $("#filtro-ativo").html(
+                    '<ul><li><u><span>' + projeto + '</span></u> ' +
+                    '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
+                );
+
+                // Armazena o filtro no localStorage (opcional)
+                localStorage.setItem('projeto', projeto);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar o Título do projeto:", status, error);
+            }
+        });
+    }
+
+    function carregarID(id) {
+        $.ajax({
+            url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
+            type: "GET",
+            data: { id: id }, // Envia o equipamento para o PHP
+            success: function(response) {
+                // Atualiza a div #ultimosartigos com a resposta do PHP
+                $("#ultimosartigos").html(response);
+
+                // Exibe o filtro ativo na página
+                $("#filtro-ativo").html(
+                    '<ul><li><u><span>' + id + '</span></u> ' +
+                    '<button style="background-color: transparent; color: red; border: none;" id="remove-filtro">X</button></li></ul>'
+                );
+
+                // Armazena o filtro no localStorage (opcional)
+                localStorage.setItem('ID', ID);
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao consultar o Título do projeto:", status, error);
+            }
+        });
+    }
 
 
-// Evento de clique para remover o filtro
-$(document).on('click', '#remove-filtro', function() {
-    mostrarLoader();
-    $("#filtro-ativo").html('');  // Limpa o conteúdo do filtro ativo
-    
-    carregarTodosArtigos();  // Recarrega todos os artigos
+    // Evento de clique para remover o filtro
+    $(document).on('click', '#remove-filtro', function() {
+        mostrarLoader();
+        $("#filtro-ativo").html('');  // Limpa o conteúdo do filtro ativo
+        carregarTodosArtigos();  // Recarrega todos os artigos
+    });
+
+    // Carregar filtros e artigos ao iniciar a página
+    carregarTopicos();
+    carregarTodosArtigos(); // Carregar todos os artigos inicialmente
 });
 
-
-
-
-
-
-
-
-
-
-// Carregar filtros e artigos ao iniciar a página
-carregarTopicos();
-
-// Carregar todos os artigos inicialmente, pode ser removido se não for necessário
-carregarTodosArtigos();
-});
-
-
-
- // Tempo fixo para o preloader
+// Tempo fixo para o preloader
 const PRELOADER_TIMEOUT = 2500; // 2.5 segundos
 
 // Remove o preloader da página inicial
@@ -524,11 +594,7 @@ window.addEventListener('load', () => {
     }, PRELOADER_TIMEOUT);
 });
 
-
-
-
-
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.top-filtro').forEach(link => {
         link.addEventListener('click', function () {
             const isActive = this.classList.contains('active');
@@ -551,9 +617,7 @@ function desativarFiltro(span) {
     // Remove a classe "active" do filtro
     filtro.classList.remove('active');
 }
-
-
-    </script>   
+</script>
 
     
 </body>
