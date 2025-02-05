@@ -28,7 +28,8 @@ try {
     foreach ($anos as $ano) {
         $ano_valor = htmlspecialchars($ano['ano']);
         $quantidade = htmlspecialchars($ano['quantidade_total']);
-        $filtroHTML .= "<li><a title='Filtrar pelo ano' class='top-filtro' href='?ano_valor=" . urldecode($ano_valor) . "' data-ano='" . $ano_valor . "' onclick='mostrarLoader()'>" . $ano_valor. "(" .($quantidade). ") </a></li>";
+        $filtroHTML .= "<li><p class='lead'><a title='Filtrar pelo ano' class='top-filtro' href='?ano_valor=" . 
+        urldecode($ano_valor) . "' data-ano='" . $ano_valor . "' onclick='mostrarLoader()'>" . $ano_valor. "(" .($quantidade). ") </a></p></li>";
     }
     $filtroHTML .= "</ul>";
 

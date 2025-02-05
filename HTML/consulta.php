@@ -8,8 +8,10 @@
     <title>ProxyMar Data Base</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+    
     <link rel="icon" type="image/x-icon" href="../assets/mac.ico" />
 
+    <link href="../css/submit.css" rel="stylesheet" />
 
     <link href="../css/stylesG.css" rel="stylesheet"/> <!-- para pagina no geral -->
     
@@ -18,8 +20,10 @@
     <link href="../css/consulta.css" rel="stylesheet" /> 
 
 
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
+
     <script src="../js/add-script.js" defer></script>
     <script src="../js/scripts.js" defer></script>
 
@@ -77,7 +81,7 @@
 
 
    <!-- Navigation -->
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
         <div class="container px-4">
             <div class="search1">
                 <input style="left: 0%;" id="search1" type="text" name="search" placeholder="Search.." onclick="n()">
@@ -100,36 +104,19 @@
         </div>
     </nav>
 
-    <!-- LOGIN POR CAIXA DE DIALOGO -->
-    <div id="loginDialogOverlay">
-        <div id="loginDialog">
-            <img src="../assets/avatar.jpeg" alt="Avatar" class="avatar">
-            <br><br>
-            <h2>Login</h2><br>
-            <form action="../PHP/login.php" method="post">
-                <label for="username">Nome:</label><br>
-                <input type="text" id="nome" name="nome" required autofocus><br>
-                <label for="password">Senha:</label><br>
-                <input type="password" id="senha" name="senha" required><br>
-                <button class="lgbttn" type="submit">Login</button><br>
-            </form>
-            <button class="lgbttn" onclick="closeLoginDialog()">Fechar</button>
-        </div>
-    </div>
-
-    <!-- Pagina de consulta dos dados -->
+   <!-- Pagina de consulta dos dados -->
 
     <div class="flex-wrapper" style="border:none;">
 
 
-     <div id="primeiraPart" class="filter-forms" >   
+        
 
-    <div class="filter-top-forms bordaPag bg-primary" id="scrollhere">
-                <h4><span id="filter-forms-label">Busca Avançada:</span></h4>
+    <div class="filter-top-forms bordaPag" >
+                <h4><span id="result-fomrs">Busca Avançada:</span></h4>
                 <div class="search3">
     <input id="filtro-geral" class="search3"placeholder="Filtragem (em construção...)" readonly>
 </div>
-</div>  
+ 
 
 
             
@@ -142,62 +129,62 @@
             </div>
 </div>        -->
 
-      <div id="segundaPart" class="bordaPag" style="background-color:ghostwhite;">
+      <div id="segundaPart" >
 
-        <div id="todos-os-filtros" class="bordaDentro">
+        <div id="todos-os-filtros">
       <div id="filtro-ativo"> </div>
 
-                <h2 class="form-tip">Tipo de trabalho:</h2>
+                <h3 class="form-tip">Tipo de trabalho:</h3>
                 <div class="top-tipo" id="top-tipo"> </div>
                    
                 
 
-                <h2 class="form-tip">Ano de Coleta:</h2>
+                <h3 class="form-tip">Ano de Coleta:</h3>
                 <div id="top-ano-coleta">    
                 </div>
 
-                <h2 class="form-tip">Tipo de amostra:</h2>
+                <h3 class="form-tip">Tipo de amostra:</h3>
                 <div class="top-tipAmost" id="top-tipAmost">
                 </div>
 
-                <h2 class="form-tip">Ferramenta(s) utilizada(s):</h2>
+                <h3 class="form-tip">Ferramenta(s) utilizada(s):</h3>
                 <div class="top-ferra" id="top-ferra">
                 </div>
 
-                <h2 class="form-tip">Equipamento(s) utilizado(s):</h2>
+                <h3 class="form-tip">Equipamento(s) utilizado(s):</h3>
                 <div id="top-equi" class="top-equi">
                 </div>
 
-                <h2 class="form-tip">Armazenamento:</h1>
+                <h3 class="form-tip">Armazenamento:</h3>
                 <div id="top-armaz" class="top-armaz">
                 </div>
 
-                <h2 class="form-tip">Projeto:</h1>
+                <h3 class="form-tip">Projeto:</h3>
                 <div id="top-proje" class="projeto">
                 </div>
 
-                <h2 class="form-tip">IDs:</h1>
+                <h3 class="form-tip">IDs:</h3>
                 <div id="ID_amst" class="ID_amst">
                 </div>
 
             </div>
       
-
+            </div> 
 
     <!-- Links de Resultados -->
     <div class="resultados">
         <!-- Os links serão preenchidos aqui -->
     </div>
-    </div>
+   
      </div> 
      
      
 
-        <div class="results-consult" >
-            <div class="filter-top-forms bordaPag bg-primary">
-                <h4><span id="result-fomrs">Disponíveis no banco de dados:</span></h4>
-            </div>
-            <div class="bordaPag" style="background-color:ghostwhite;">
+        <div class="results-consult">
+            
+                <h4><span id="result-fomrs" >Disponíveis no banco de dados:</span></h4>
+            
+            <div >
                 <div>
                     <div class="col">
                         <div id="ultimosartigos" class="table-responsive bordaDentro">
@@ -209,8 +196,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
     </div>
+    </div>
+
 
     <!-- Footer -->
     <footer id="contact" class="py-5 bg-dark" style="position: relative;">

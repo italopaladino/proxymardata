@@ -80,7 +80,8 @@ try {
         $quantidade = htmlspecialchars($resultado['quantidade']);
         if ($quantidade > 0) {
             $nome = isset($nomesColunas[$coluna]) ? htmlspecialchars($nomesColunas[$coluna]) : htmlspecialchars($coluna);
-            $filtroHTML .= "<li><a title='filtrar pela ferramenta escolhido' class='top-filtro' href='#' onclick='mostrarLoader()' data-ferram ='". $coluna ."' >" . $nome . "($quantidade)</a></li>";
+            $filtroHTML .= "<li><p class='lead'><a title='filtrar pela ferramenta escolhido' class='top-filtro' href='#' onclick='mostrarLoader()' data-ferram ='". 
+            $coluna ."' >" . $nome . "($quantidade)</a></p></li>";
         }
     }
     $filtroHTML .= "</ul>";

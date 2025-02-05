@@ -67,11 +67,11 @@ try {
         $frase = "<div class='citation' >
                     <a class='link-pesq' href='../HTML/resultados.php?id=" 
                     . htmlspecialchars($infogera['geralid']) . "'>". htmlspecialchars($autoresString) ."." // Usa os autores formatados
-                     ."<br>" . htmlspecialchars($infogera['correspondente']) . "&nbsp;(" . htmlspecialchars($infogera['email']) . ").&nbsp;"
+                     ."<br><p class='lead'>" . htmlspecialchars($infogera['correspondente']) . "&nbsp;(" . htmlspecialchars($infogera['email']) . ").&nbsp;"
                      . htmlspecialchars($infogera['titulodado'])
                      ."<br>". 'Ano(s) de coleta(s):' . "&nbsp;" . htmlspecialchars($infogera['anos_coleta'])
-             ."<br>". 'Inseridos no banco em:' .  "&nbsp;" . htmlspecialchars($infogera['ano_insercao']) . "."."</a>
-                  </div></br></br>";
+             ."<br>". 'Inseridos no banco em:' .  "&nbsp;" . htmlspecialchars($infogera['ano_insercao']) . "."."</p></a>
+                  </div></br>";
     
         // Exibe a frase dentro de uma célula da tabela
         echo "<tr><td>" . $frase . "</td></tr>";

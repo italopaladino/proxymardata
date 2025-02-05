@@ -2,38 +2,6 @@
 
 /* LOADER PARA QUANDO TIVER FILTRANDO ELE APARECER*/
 
-/* footer layout de tres colunas*/
-.footer-container {
-  display: flex;
-  text-align: center;
-  align-items: flex-start;
-  color: white;
-  margin-left: 10px;
- 
-  width:100%;
-  position: relative;
-  }
-
-.column1 {
-  width: 30%;
-  text-align: justify;
-  align-self: center;
-}
-
-.column2{
-width: 40%;
-text-align: center;
-align-self: center;
-justify-content: center;
-align-items: center;
-}
-.column3{
-    width: 30%;
-    text-align: center;
-    align-self: flex-end;
-    justify-content: center;
-    align-items: center;
-    }
 
 
 
@@ -84,13 +52,12 @@ align-items: center;
 
 
 
-
-
 a.link-pesq{
     color: #000000;
     font-size: large;
     text-decoration: none;
 }
+
 a.link-pesq:hover{
     color: #d4560df3;
     text-decoration:underline;
@@ -98,14 +65,17 @@ a.link-pesq:hover{
 
 
 .flex-wrapper {
-    width: 99%;
+    width: 100%;
     height: auto;
-    border: 1px solid black;
     display: flex;
     flex-wrap: nowrap;
-    margin-top: 70px;
+    margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 5px;
+    gap: 1rem;
+    padding: 1rem;
+    
+
 }
 
 .filtro-ativo {
@@ -116,21 +86,16 @@ a.link-pesq:hover{
 
 
 .bordaPag{
-    border: 1px solid;
-    border-color: #00000067;
-    margin: 0.3px;
+    background-color: #fff;
     border-radius: 8px;
+    padding: 1rem;
+    flex: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   
     
 }
 
-.filter-forms {
-    width: 30%;
-    height: auto; /* Ajustar para auto se o conteúdo interno variar em altura */
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
 
-}
 
 .filter-top-forms {
     padding: 8px;
@@ -138,7 +103,7 @@ a.link-pesq:hover{
            
 }
 
-#filter-forms-label {
+#filter-forms {
     font-weight: bold;
     color: white;
 }
@@ -163,17 +128,18 @@ a.link-pesq:hover{
 
 
 .results-consult {
-    width: 70%;
-    height: auto; /* Ajustar para auto se o conteúdo interno variar em altura */
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    flex: 4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 
 
 #result-fomrs {
     font-weight: bold;
-    color: white;
+    color:#0056b3;
 }
 
 
@@ -236,6 +202,16 @@ a.link-pesq:hover{
 }
 
 .top-filtro{
-    color: #000;
+    color:black;
     text-decoration: none;
+    
+}
+
+.citation{   
+            width: 1200px;
+            padding: 1rem;
+            border-left: 4px solid #0056b3;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+
 }

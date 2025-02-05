@@ -73,7 +73,7 @@ SELECT outroequi AS coluna, COUNT(*) AS quantidade FROM equipcoleta WHERE outroe
         $quantidade = htmlspecialchars($resultado['quantidade']);
         if ($quantidade > 0) {
             $nome = isset($nomesColunas[$coluna]) ? htmlspecialchars($nomesColunas[$coluna]) : htmlspecialchars($coluna);
-            $filtroHTML .= "<li><a title='Filtrar pelo tipo de equipamento utilizado para coleta' class='top-filtro' href='#' onclick='mostrarLoader()' data-equip-coleta ='". $coluna ."'>" . $nome . "($quantidade)</a></li>";
+            $filtroHTML .= "<li><p class='lead'><a title='Filtrar pelo tipo de equipamento utilizado para coleta' class='top-filtro' href='#' onclick='mostrarLoader()' data-equip-coleta ='". $coluna ."'>" . $nome . "($quantidade)</a></p></li>";
         }
     }
     $filtroHTML .= "</ul>";

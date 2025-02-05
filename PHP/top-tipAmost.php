@@ -16,7 +16,8 @@ try {
         $quantidade = htmlspecialchars($tipoAmostra['quantidade']);
         
         if (!empty($tipoAmst)) { // Verifica se $tipo não está vazio
-            $filtroHTMLTIPO .= "<li><a title='filtrar para o tipo de amostra' class='top-filtro' href='#' onclick='mostrarLoader()' data-tipo-amostra='" . $tipoAmst . "'>" . $tipoAmst . " (" . $quantidade . ")</a></li>";
+            $filtroHTMLTIPO .= "<li><p class='lead'><a title='filtrar para o tipo de amostra' class='top-filtro' href='#' onclick='mostrarLoader()' data-tipo-amostra='" . 
+            $tipoAmst . "'>" . $tipoAmst . " (" . $quantidade . ")</a></p></li>";
         }
     }
     $filtroHTMLTIPO .= "</ul>";

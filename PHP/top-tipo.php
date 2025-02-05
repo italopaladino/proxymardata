@@ -15,8 +15,8 @@
             $tipot = htmlspecialchars($tipotrabalho['tipot']);
             $quantidade = htmlspecialchars($tipotrabalho['quantidade']);
             if (!empty($tipot)) {
-                $filtroHTMLTIPO .= "<li><a id='top-tipo' title='Filtrar pelo tipo de trabalho' class='top-filtro' href='#' data-tipo-trabalho='" 
-                . $tipot . "' onclick='mostrarLoader()'>" . $tipot . " (" . $quantidade . ")</a></li>";
+                $filtroHTMLTIPO .= "<li><p class='lead'><a id='top-tipo' title='Filtrar pelo tipo de trabalho' class='top-filtro' href='#' data-tipo-trabalho='" 
+                . $tipot . "' onclick='mostrarLoader()'>" . $tipot . " (" . $quantidade . ")</a></p></li>";
 
 
             }

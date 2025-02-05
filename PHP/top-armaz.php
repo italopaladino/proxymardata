@@ -16,7 +16,8 @@ try {
         $quantidade = htmlspecialchars($tipoAmostra['quantidade']);
         
         if (!empty($tipo)) { // Verifica se $tipo não está vazio
-            $filtroHTMLTIPO .= "<li><a title='filtrar pelo tipo de armazenamento' class='top-filtro' href='#' onclick='mostrarLoader()' data-armazenamento='" . $tipo . "'>" . $tipo . " (" . $quantidade . ")</a></li>";
+            $filtroHTMLTIPO .= "<li><p class='lead'><a title='filtrar pelo tipo de armazenamento' class='top-filtro' href='#' onclick='mostrarLoader()' data-armazenamento='" . 
+            $tipo . "'>" . $tipo . " (" . $quantidade . ")</a></p></li>";
         }
     }
     $filtroHTMLTIPO .= "</ul>";

@@ -13,6 +13,7 @@
    
         <link href="css/stylesG.css" rel="stylesheet"/>
 
+        <link href="css/submit.css" rel="stylesheet" />
 
         <link href="css/footer.css" rel="stylesheet" /> <!-- Css para rodapé da página-->
 
@@ -108,7 +109,7 @@
 
 
 
-                      <!-- LOGIN POR CAIXA DE DIALOGO-->                     
+                      <!-- LOGIN POR CAIXA DE DIALOGO                     
                       <div id="loginDialogOverlay">
 
                         <div id="loginDialog">
@@ -132,7 +133,7 @@
                 <button class="lgbttn" onclick="closeLoginDialog()">Fechar</button>
                   
             </div>
-                    </div> 
+                    </div> -->
 
 
 
@@ -257,7 +258,7 @@
 <script>
 $(document).ready(function(){
     $.ajax({
-        url: "PHP/consulta-art-geral.php", // O arquivo PHP que faz a consulta ao banco de dados
+        url: "PHP/consulta-art-INDEX.php", // O arquivo PHP que faz a consulta ao banco de dados
         type: "GET",
         success: function(response){
             $("#pag-consult").html(response); // Atualiza a div com os resultados da consulta

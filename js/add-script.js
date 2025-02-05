@@ -14,7 +14,7 @@ function mostrarLoader() {
             overlay.style.display = 'none';
         }, 2000);  // 2 segundos de simulação de carregamento
 
-        document.getElementById('scrollhere').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } else {
         console.error('Loader ou overlay não encontrados!');

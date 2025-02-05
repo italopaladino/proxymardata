@@ -17,8 +17,8 @@
             $nomeProjeto = htmlspecialchars($projeto['projeto']);
             $quantidade = htmlspecialchars($projeto['quantidade']);
             if (!empty($nomeProjeto)) {
-                $filtroHTMLTIPO .= "<li><a id='top-tipo' title='Filtrar pelo titulo do projeto' class='top-filtro' href='#' data-projeto='" 
-                . $nomeProjeto . "' onclick='mostrarLoader()'>" . $nomeProjeto . " (" . $quantidade . ")</a></li>";
+                $filtroHTMLTIPO .= "<li><p class='lead'><a id='top-tipo' title='Filtrar pelo titulo do projeto' class='top-filtro' href='#' data-projeto='" 
+                . $nomeProjeto . "' onclick='mostrarLoader()'>" . $nomeProjeto . " (" . $quantidade . ")</a></p></li>";
             }
         }
         $filtroHTMLTIPO .= "</ul>";

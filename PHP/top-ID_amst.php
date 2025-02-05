@@ -40,7 +40,8 @@ try {
         $quantidade = htmlspecialchars($tipoAmostra['quantidade']);
         
         if (!empty($ID)) { // Verifica se $ID não está vazio
-            $filtroHTMLTIPO .= "<li><a title='filtrar pelo ID da amostra' class='top-filtro' href='#' onclick='mostrarLoader()' data-id='" . $ID . "'>" . $ID . " (" . $quantidade . ")</a></li>";
+            $filtroHTMLTIPO .= "<li><p class='lead'><a title='filtrar pelo ID da amostra' class='top-filtro' href='#' onclick='mostrarLoader()' data-id='" . 
+            $ID . "'>" . $ID . " (" . $quantidade . ")</a></p></li>";
         }
     }
     $filtroHTMLTIPO .= "</ul>";
