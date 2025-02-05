@@ -11,8 +11,10 @@
         <link rel="icon" type="image/x-icon" href="assets/mac.ico" />
    
    
-        <link href="css/submit.css" rel="stylesheet"/>
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/stylesG.css" rel="stylesheet"/>
+
+
+        <link href="css/footer.css" rel="stylesheet" /> <!-- Css para rodapé da página-->
 
 
         <script src="js/add-script.js"></script>
@@ -255,7 +257,7 @@
 <script>
 $(document).ready(function(){
     $.ajax({
-        url: "PHP/consulta-art.php", // O arquivo PHP que faz a consulta ao banco de dados
+        url: "PHP/consulta-art-geral.php", // O arquivo PHP que faz a consulta ao banco de dados
         type: "GET",
         success: function(response){
             $("#pag-consult").html(response); // Atualiza a div com os resultados da consulta

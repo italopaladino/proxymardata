@@ -9,9 +9,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
     <link rel="icon" type="image/x-icon" href="../assets/mac.ico" />
-    <link href="../css/submit.css" rel="stylesheet"/>
-    <link href="../css/styles.css" rel="stylesheet" />
-    <link href="../css/consulta.css" rel="stylesheet" />
+
+
+    <link href="../css/stylesG.css" rel="stylesheet"/> <!-- para pagina no geral -->
+    
+    <link href="../css/footer.css" rel="stylesheet" /> <!-- Css para rodapé da página-->
+    
+    <link href="../css/consulta.css" rel="stylesheet" /> 
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <script src="../js/add-script.js" defer></script>
@@ -118,7 +124,7 @@
 
      <div id="primeiraPart" class="filter-forms" >   
 
-    <div class="filter-top-forms bordaPag bg-primary" >
+    <div class="filter-top-forms bordaPag bg-primary" id="scrollhere">
                 <h4><span id="filter-forms-label">Busca Avançada:</span></h4>
                 <div class="search3">
     <input id="filtro-geral" class="search3"placeholder="Filtragem (em construção...)" readonly>
@@ -138,7 +144,7 @@
 
       <div id="segundaPart" class="bordaPag" style="background-color:ghostwhite;">
 
-        <div id="todos os filtros" class="bordaDentro">
+        <div id="todos-os-filtros" class="bordaDentro">
       <div id="filtro-ativo"> </div>
 
                 <h2 class="form-tip">Tipo de trabalho:</h2>

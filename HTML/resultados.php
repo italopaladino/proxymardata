@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="../assets/mac.ico" />
-    <link href="../css/submit.css" rel="stylesheet"/>
-    <link href="../css/styles.css" rel="stylesheet" />
+   
+
+    <link href="../css/stylesG.css" rel="stylesheet" />
     
     <link href="../css/resultado.css" rel="stylesheet" />
+
+
 
     <script src="../js/add-script.js"></script>
 

@@ -2,6 +2,38 @@
 
 /* LOADER PARA QUANDO TIVER FILTRANDO ELE APARECER*/
 
+/* footer layout de tres colunas*/
+.footer-container {
+  display: flex;
+  text-align: center;
+  align-items: flex-start;
+  color: white;
+  margin-left: 10px;
+ 
+  width:100%;
+  position: relative;
+  }
+
+.column1 {
+  width: 30%;
+  text-align: justify;
+  align-self: center;
+}
+
+.column2{
+width: 40%;
+text-align: center;
+align-self: center;
+justify-content: center;
+align-items: center;
+}
+.column3{
+    width: 30%;
+    text-align: center;
+    align-self: flex-end;
+    justify-content: center;
+    align-items: center;
+    }
 
 
 

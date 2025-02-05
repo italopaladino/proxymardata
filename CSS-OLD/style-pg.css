@@ -1,0 +1,33 @@
+body{
+    display:grid;
+
+}
+
+header{
+    border: 30px;
+    background-color: antiquewhite;
+    display: flex;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Altera o layout para flexível */
+    justify-content: flex-end;
+
+    border: 10px;
+    background-color: cyan;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+    font-stretch: narrower;
+}
+  
+  nav li {
+    margin-right: 15px; /* Espaçamento entre os itens da lista (opcional) */
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: black; /* Cor do texto dos links (ajuste conforme necessário) */
+  }

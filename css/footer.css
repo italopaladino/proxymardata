@@ -1,0 +1,65 @@
+/* footer layout de tres colunas*/
+.footer-container {
+  display: flex;
+  text-align: center;
+  align-items: flex-start;
+  color: white;
+  margin-left: 10px;
+ 
+  width:100%;
+  position: relative;
+  }
+
+.column1 {
+  width: 30%;
+  text-align: justify;
+  align-self: center;
+}
+
+.column2{
+width: 40%;
+text-align: center;
+align-self: center;
+justify-content: center;
+align-items: center;
+}
+.column3{
+    width: 30%;
+    text-align: center;
+    align-self: flex-end;
+    justify-content: center;
+    align-items: center;
+    }
+/* ICONES DO RODAPÉ*/
+.bi {
+    display: inline-block;
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-decoration: none;
+    
+    
+    }
+    
+    .bi:hover{
+      opacity: 0.9;
+    }
+    
+    
+    .bi-instagram {
+      color: white;
+    margin-right: 10%;
+    
+    
+      
+    }
+     .bi-envelope{
+      color: white;
+     
+    
+     }
+    
+     .bi-globe2{
+      color: white;
+      margin-right: 10%;
+     }
