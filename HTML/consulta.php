@@ -81,7 +81,7 @@
 
 
    <!-- Navigation -->
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <div class="container px-4">
             <div class="search1">
                 <input style="left: 0%;" id="search1" type="text" name="search" placeholder="Search.." onclick="n()">
@@ -217,13 +217,13 @@
         
         <div class="column3">
             <div>
-                <p> Execução:</p>
+                <p class="text-black"> Execução:</p>
                 <a href="https://www5.usp.br"><img style="background-color: white;" src="https://imagens.usp.br/wp-content/uploads/usp-logo-transp-600x253.png" width="120"></a>
                 <a href="https://www.io.usp.br"><img  src="https://www.io.usp.br/templates/base/img/logo.png" width="120"></a>
                 <a href="https://sites.usp.br/proxymar/"><img style="background-color: white;" src="../assets/ProxyMar-logo.png" width="120"></a>
             </div>
             <div>
-                <p> Financiamento:</p>
+                <p class="text-black"> Financiamento:</p>
                 <a href="https://www.gov.br/cnpq/pt-br"><img src="../assets/CNPq-logo.png" width="120"></a>
                 <a href="https://www.gov.br/mcti/pt-br"><img src="../assets/MCTI.png" width="120"></a>
                 <a href="https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/fndct"><img src="../assets/fndct.png" width="120"></a>
