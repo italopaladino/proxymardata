@@ -65,7 +65,7 @@ a.link-pesq:hover{
 
 
 .flex-wrapper {
-    width: 100%;
+    width: 98%;
     height: auto;
     display: flex;
     flex-wrap: nowrap;
@@ -130,8 +130,8 @@ a.link-pesq:hover{
 .results-consult {
     background-color: #fff;
     border-radius: 8px;
-    padding: 1rem;
-    flex: 4;
+    padding: 8px;
+    flex: 3;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
 }
@@ -172,7 +172,7 @@ a.link-pesq:hover{
 /* Estilo para o botão de busca */
 .search3 button {
     position: absolute;
-    right: 10px; /* Distância à direita do input */
+    right: 1px; /* Distância à direita do input */
     top: 50%;
     transform: translateY(-50%);
     background: none;
@@ -208,7 +208,7 @@ a.link-pesq:hover{
 }
 
 .citation{   
-            width: 1200px;
+            width: 900px;
             padding: 1rem;
             border-left: 4px solid #0056b3;
             background-color: #f9f9f9;

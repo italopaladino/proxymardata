@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
     
-    <link rel="icon" type="image/x-icon" href="../assets/mac.ico" />
+    <link rel="icon" type="image/x-icon" href="../assets/ProxyMar-logo.png"  />
 
     <link href="../css/submit.css" rel="stylesheet" />
 
@@ -114,7 +114,7 @@
     <div class="filter-top-forms bordaPag" >
                 <h4><span id="result-fomrs">Busca Avançada:</span></h4>
                 <div class="search3">
-    <input id="filtro-geral" class="search3"placeholder="Filtragem (em construção...)" readonly>
+    <input id="filtro-geral" class="search3"placeholder="Por enquanto, selecione um dos filtros abaixo.." readonly>
 </div>
  
 

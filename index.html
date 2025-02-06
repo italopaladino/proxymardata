@@ -8,8 +8,9 @@
         <title>ProxyMar Data Base</title>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/> <!-- link para css--> 
-        <link rel="icon" type="image/x-icon" href="assets/mac.ico" />
+        <link rel="icon" type="image/x-icon" href="assets/ProxyMar-logo.png" />
    
+        <link href="css/header.css" rel="stylesheet"/>
    
         <link href="css/stylesG.css" rel="stylesheet"/>
 
@@ -68,7 +69,7 @@
           </div>
         
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
                 
                 <div class="search1">
@@ -97,11 +98,17 @@
             </div>
         </nav>
         <!-- Header-->
-        <header class="bg-primary bg-gradient text-white">
+        <header class="text-black" id="mosaic-header">
+            <!-- Mosaico de imagens -->
+            <div id="image-mosaic">
+                <img src="Himage/image4.jpeg"style="opacity: 0.5;">
+            </div>
+        
+            <!-- Conteúdo centralizado -->
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder"> ProxyMar Data Base</h1>
-                <p class="lead"> . . . </p>
-                <a class="btn btn-lg btn-light" href="#about">Start scrolling!</a>
+                <h1 class="fw-bolder">ProxyMar Data Base</h1>
+                <img src="assets/ProxyMar-logo.png"></br></br>
+                <a class="btn btn-lg btn-light" href="#about" style="border: solid 1px;">Start scrolling!</a>
             </div>
         </header>
 
@@ -171,7 +178,7 @@
                 <!-- <div class="row gx-4 justify-content-center"> deixar no centro -->
                     
                     <div class="col-lg-8">
-                        <h2>Últimas submissões</h2>
+                        <h2>Últimas submissões:</h2>
 
                         <div class="container">
                             <div class="row">
@@ -276,7 +283,6 @@ window.addEventListener('load', () => {
     document.getElementById('page1').style.display = 'block';
   }, PRELOADER_TIMEOUT);
 });
-
 
   </script>
 </script>

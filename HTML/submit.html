@@ -6,11 +6,12 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Submissão de dados</title>
-        <link rel="icon" type="image/x-icon" href="../assets/mac.ico" /> <!-- colocar ícone na pag-->
+        <link rel="icon" type="image/x-icon" href="../assets/ProxyMar-logo.png"  /> <!-- colocar ícone na pag-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <!-- Core theme CSS (includes Bootstrap)-->
         
         <link href="../css/submit.css" rel="stylesheet" />
+        <link href="../css/header.css" rel="stylesheet" />
 
         <link href="../css/stylesG.css" rel="stylesheet" />
 
@@ -121,19 +122,24 @@
 </div>
 </div>
 
-        <header class="bg-primary bg-gradient text-white">
-            <div class="container px-4 text-center">
-                <h1 class="fw-bolder"> ProxyMar Data Base</h1></br>
-                
-                <h4><li> Antes de iniciar o processo de submissão, verifique as diretrizes e toda a documentação
-                    necessária - Manuais e modelos de planilhas para submissão podem ser encontrados <a target="_blank" rel="noopener noreferrer" class="aqui-sub" href="https://wiki.pangaea.de/wiki/Best_practice_manuals_and_templates">aqui</a>. </li></br>
-                    <li> Se você tiver tabelas com dados muito distintos e estruturas diferentes, <span style="text-decoration: underline red;">faça submissões diferentes.</span></li></br>
-            <li> Se você encontrou algum erro ou gostaria de fazer alguma sugestão como tornar o processo mais intuitivo, por favor, envie um e-mail e o print da tela para 
-                <a class="aqui-sub" href="mailto:proxymar@usp.br" target="_blank">proxymar@usp.br</a></li></h4>
-                
-</div>
-        </header></br>
-        <script>
+<header class="text-black" id="mosaic-header">
+    <!-- Mosaico de imagens -->
+    <div id="image-mosaic">
+        <img src="../Himage/image3-1.png" style="opacity: 0.5;">
+    </div>
+
+    <!-- Conteúdo centralizado -->
+    <div class="container px-4 text-center">
+        <h1 class="fw-bolder">ProxyMar Data Base</h1></br>
+        <h4><li> Antes de iniciar o processo de submissão, verifique as diretrizes e toda a documentação
+            necessária - Manuais e modelos de planilhas para submissão podem ser encontrados <a target="_blank" rel="noopener noreferrer" class="aqui-sub" href="https://wiki.pangaea.de/wiki/Best_practice_manuals_and_templates">aqui</a>. </li></br>
+            <li> Se você tiver tabelas com dados muito distintos e estruturas diferentes, <span style="text-decoration: underline red;">faça submissões diferentes.</span></li></br>
+    <li> Se você encontrou algum erro ou gostaria de fazer alguma sugestão como tornar o processo mais intuitivo, por favor, envie um e-mail e o print da tela para 
+        <a class="aqui-sub" href="mailto:proxymar@usp.br" target="_blank">proxymar@usp.br</a></li></h4>
+    </div>
+</header></br>
+
+<script>
             // Função para bloquear o Enter
             function bloquearEnter(event) {
                 if (event.key === "Enter") {
@@ -146,7 +152,7 @@
             <!-- PRIMEIRA PAGINA -->
 
 
-<form id="forms" method="post" action="../PHP/submit-DADOS2.php"  enctype="multipart/form-data" style="position: relative; margin-bottom: 10px;">
+<form id="forms" method="post" action="../PHP/submit-DADOS2.php"  enctype="multipart/form-data" style="position: relative; margin-bottom: 10px; background-color: white; border-radius: 10px;">
     <div id="topo" style="position: absolute; top: 0;"></div>
     <input type="hidden" name="secaoAtual1" value="default_value1">
         
@@ -154,7 +160,7 @@
     <div id="section1" class="form-section active">
         
         <h1 style="text-align: center;"> Formulário para Submissão: </h1></br>
-        <div id="borda1" class="bordaPg">
+        <div id="borda1" class="bordaPg" >
             <div for="respos">
                 <div style="display: flex; align-items: center; width: 100%;">
         <h4><label id="autor" for="autor"> <a style="color: red;" title="Elemento obrigatório">*</a>Identificação do responsável pelo dado:</label></h4>
