@@ -1,69 +1,70 @@
-/* footer layout de tres colunas*/
+/* Footer com layout flexível */
 .footer-container {
-  display:flex;
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens se ajustem em telas menores */
   text-align: center;
   align-items: flex-start;
   color: white;
-  margin-left: 10px;
-  margin-right: 10px;
- 
- 
+  margin: 10px;
+  max-width: 100%;
+  height: auto;
   position: relative;
-  }
+  padding: 20px;
+  justify-content: space-between;
+}
 
+/* Colunas do Footer */
+.column1, .column2, .column3 {
+  flex: 1; /* Faz com que todas as colunas tenham tamanhos iguais */
+  min-width: 250px; /* Evita que fiquem muito pequenas */
+  padding: 10px;
+}
+
+/* Ajuste de alinhamento das colunas */
 .column1 {
-  flex:2;
   text-align: justify;
   align-self: center;
 }
 
-.column2{
-flex:1;
-text-align: center;
-align-self: center;
-justify-content: center;
-align-items: center;
+.column2 {
+  text-align: center;
+  align-self: center;
 }
-.column3{
-    flex:2;
-    text-align: center;
-    align-self: flex-end;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 5px;
-    }
 
-/* ICONES DO RODAPÉ*/
+.column3 {
+  text-align: center;
+  align-self: flex-end;
+  background-color: white;
+  border-radius: 5px;
+}
+
+/* Ajuste para Ícones */
 .bi {
-    display: inline-block;
-    padding: 20px;
-    font-size: 30px;
-    width: 30px;
-    text-decoration: none;
-    
-    
-    }
-    
-    .bi:hover{
-      opacity: 0.9;
-    }
-    
-    
-    .bi-instagram {
-      color: white;
-    margin-right: 10%;
-    
-    
-      
-    }
-     .bi-envelope{
-      color: white;
-     
-    
-     }
-    
-     .bi-globe2{
-      color: white;
-      margin-right: 10%;
-     }
+  display: inline-block;
+  padding: 10px;
+  font-size: 30px;
+  width: 30px;
+  text-decoration: none;
+}
+
+.bi:hover {
+  opacity: 0.9;
+}
+
+.bi-instagram, .bi-envelope, .bi-globe2 {
+  color: white;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .footer-container {
+      flex-direction: column; /* Empilha as colunas em telas pequenas */
+      text-align: center;
+  }
+
+  .column1, .column2, .column3 {
+      flex: 1 1 100%; /* Faz cada coluna ocupar 100% da largura */
+      text-align: center;
+      align-self: center;
+  }
+}
