@@ -12,13 +12,12 @@
     <link rel="icon" type="image/x-icon" href="../assets/ProxyMar-logo.png"  />
    
     <link href="../css/submit.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../CSS-OLD/teste-resultados.css">
 
     <link href="../css/stylesG.css" rel="stylesheet" />
     <link href="../css/footer.css" rel="stylesheet" />
     
     <link href="../css/resultado.css" rel="stylesheet" />
-
-
 
     <script src="../js/add-script.js"></script>
 
@@ -28,11 +27,7 @@
 
    <!-- Navigation -->
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <div class="container px-4">
-            <div class="search1">
-                <input style="left: 0%;" id="search1" type="text" name="search" placeholder="Search..">
-                <button style="left: 0%;"><i class="bi bi-search"></i></button>
-            </div>
+        <div class="container px-4">            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" id="navbarToggleBtn">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -50,9 +45,6 @@
         </div>
     </nav>
 
-    <head>
-
-    </head>
     <!-- LOGIN POR CAIXA DE DIALOGO -->
     <div id="loginDialogOverlay">
         <div id="loginDialog">
@@ -241,17 +233,25 @@ GROUP BY infogeral.geralID,
         if (!empty($infogeral)) {
             foreach ($infogeral as $row) {
                 // Exibe os detalhes na página resultados.html
-                echo "<div id='principal1' class='bg-primary'>
-                    <span id='principal1'> RESULTADO </span>
-                </div>"; // DIV PRINCIPAL
-        
-                echo "<div class='principal2'>"; // DIV SECUNDÁRIA
-                echo "<a href='consulta.php' id='voltar' class='voltar'> &laquo; Voltar</a></br>";
-        
-                echo "<div class='linha' id='coluna-esq-dir'>"; // div corr
+
+
+                echo "<div id='principal1'>
+                <header class='container23'>       
+                    <h1> Detalhes do Projeto e Dados coletados</h1>
+                    </header>"; 
+                
+                echo "<div class='container34'>";
+
+                echo "<div class='linha' id='left-section'>"; // div corr
                 echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Correspondente:</span></div>";
                 echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['correspondente']) . "&nbsp;&nbsp; <i>(" . htmlspecialchars($row['email']) . ")</i></div>";
                 echo "</div>"; // div corr
+
+                    
+
+                echo "</div>"; //DIV DA PRIMEIRA SEÇÃO COM MINI MAPA  
+                
+
         
                 
                     echo "<div class='linha' id='coluna-esq-dir'>"; // div tit
@@ -472,13 +472,15 @@ if (!empty($area_html)) {
                 
                 <a id='btn-visu' class='fa fa-eye' href='#' onclick='n(); return false;'>EM BREVE:</br> Visualizador</a></div>"; 
                 echo "</div>"; // arquivo 
-        
+                
                 
                 echo "<a href='consulta.php' id='voltar' class='voltar'> &laquo; Voltar</a> ";
 
                
 
                 echo "</div>"; // DIV SECUNDÁRIA
+                
+
             }
     
 
