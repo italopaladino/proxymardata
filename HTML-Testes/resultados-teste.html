@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .left-section {
+            flex: 2;
+            padding-right: 20px;
+        }
+        .right-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h2 {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+        .info div {
+            padding: 10px;
+        }
+        .info strong {
+            color: #333;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-download {
+            background: #28a745;
+        }
+        .btn-download:hover {
+            background: #218838;
+        }
+        .btn-view {
+            background: #dc3545;
+        }
+        .btn-view:hover {
+            background: #c82333;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .map-container {
+            width: 100%;
+            height: 250px;
+            background: #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .table-container {
+            width: 85%;
+            height: auto;
+            background: white;
+            border: 1px solid #ccc;
+            overflow: auto;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado</h2>
+        <div class="left-section">
+            <div class="info">
+                <div><strong>Correspondente:</strong> Renata Nagai (<a href="mailto:nagai@usp.br">nagai@usp.br</a>)</div>
+                <div><strong>Título do projeto:</strong> China South-Sea</div>
+                <div><strong>Título dos dados:</strong> Datação com foraminíferos planctônicos</div>
+                <div><strong>Autores:</strong> Renata Hanae Nagai, Amanda Gerotto</div>
+                <div><strong>Financiamento:</strong> FAPESP</div>
+                <div><strong>Tipo de armazenamento:</strong> Resumo (Privado)</div>
+                <div><strong>Resumo:</strong> Foraminíferos Planctônicos</div>
+                <div><strong>Tipo de amostra:</strong> Organismos</div>
+                <div><strong>Ferramenta utilizada:</strong> Foraminífero Planctônico</div>
+                <div><strong>Equipamento:</strong> Piston</div>
+                <div><strong>Ponto de coleta:</strong> <span style="color: red;">NAP631</span>, Latitude: -25.65965, Longitude: -125.64161, Data: 01/02/2014</div>
+                <div><strong>Tabela:</strong> PANGAEA_Template_Sed_Core.xlsx</div>
+            </div>
+        </div>
+    
+        <div class="right-section">
+            <div class="map-container">
+                <p>Mapa será carregado aqui</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+    <div class="table-container">
+        <p>Tabela será carregada aqui</p>
+    </div>
+    <div class="buttons">
+        <a href="#" class="btn btn-download"><i class="fas fa-download"></i> Download</a>
+        <a href="#" class="btn btn-view"><i class="fas fa-eye"></i> EM BREVE: Visualizador</a>
+    </div>
+</div>
+    <a href="#" class="back-link">&laquo; Voltar</a>
+
+</body>
+</html>

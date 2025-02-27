@@ -290,6 +290,13 @@ window.addEventListener('load', () => {
   }, PRELOADER_TIMEOUT);
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+            if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                document.body.innerHTML = "<h2 style='text-align:center; margin-top:20%; color:red;'>Acesso restrito! Use um computador para acessar esta página.</h2>";
+            }
+        });
+
+
 </script>
 </script>
 </html>
