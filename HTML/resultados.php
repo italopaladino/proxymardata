@@ -12,9 +12,11 @@
     <link rel="icon" type="image/x-icon" href="../assets/ProxyMar-logo.png"  />
    
     <link href="../css/submit.css" rel="stylesheet" />
-        <link rel="stylesheet" href="../CSS-OLD/teste-resultados.css">
+
+    
 
     <link href="../css/stylesG.css" rel="stylesheet" />
+
     <link href="../css/footer.css" rel="stylesheet" />
     
     <link href="../css/resultado.css" rel="stylesheet" />
@@ -25,6 +27,8 @@
 
 </head>
 
+
+<body>
    <!-- Navigation -->
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <div class="container px-4">            
@@ -68,6 +72,12 @@
 
     <!-- Pagina de consulta dos dados -->
   <?php
+
+function formatarNome($nomeCompleto) {
+    // Converte o nome para minúsculas e capitaliza as primeiras letras
+    return mb_convert_case(mb_strtolower($nomeCompleto, 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
+}
+
     // Verifica se o parâmetro 'id' foi passado via GET
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
@@ -232,70 +242,82 @@ GROUP BY infogeral.geralID,
     
         if (!empty($infogeral)) {
             foreach ($infogeral as $row) {
+
                 // Exibe os detalhes na página resultados.html
 
 
-                echo "<div id='principal1'>
-                <header class='container23'>       
-                    <h1> Detalhes do Projeto e Dados coletados</h1>
-                    </header>"; 
+        $autoresArray = explode(',', $row['autores']); // Corrigido para $row
+        $autoresFormatados = array_map('formatarNome', $autoresArray);
+        $autoresString = implode(', ', $autoresFormatados);
+
+
+                        // DADOS
+                echo "<div class='resultados'>
+
                 
-                echo "<div class='container34'>";
+                    <h2> Detalhes do Projeto e Dados coletados: </h2>";
+                 
+        
 
-                echo "<div class='linha' id='left-section'>"; // div corr
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Correspondente:</span></div>";
-                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['correspondente']) . "&nbsp;&nbsp; <i>(" . htmlspecialchars($row['email']) . ")</i></div>";
-                echo "</div>"; // div corr
+                echo "<div class='left-section'>";
 
-                    
+                echo "<div class='info'>"; 
 
-                echo "</div>"; //DIV DA PRIMEIRA SEÇÃO COM MINI MAPA  
+                echo "<div><strong>Título do projeto principal: </strong>" . htmlspecialchars($row['tituloprinc']) . "</div>";
+                
+                
+                echo "<div><strong>Autores: </strong>". htmlspecialchars($autoresString). "</div>"; // TIRAR DO MAIÚSCULO
+
+                
+                echo "<div> <strong>Correspondente: </strong>" . htmlspecialchars($row['correspondente']) . "&nbsp;&nbsp; <i>(" . htmlspecialchars($row['email']) . ")</i></div>";
                 
 
-        
                 
-                    echo "<div class='linha' id='coluna-esq-dir'>"; // div tit
-                    echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Título do projeto principal:</span></div>";
-                    echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['tituloprinc']) . "</div>";
-                    echo "</div>";
-                 // div tit
-
-                echo "<div class='linha' id='coluna-esq-dir'>"; // div tit
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Título atribuido para os Dados:</span></div>";
-                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['titulodado']) . "</div>";
-                echo "</div>";
-        
-                echo "<div class='linha' id='coluna-esq-dir'>"; // autores
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Autores:</span></div>";
-                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['autores']) . "</div>";
-                echo "</div>"; // autores
-
-                echo "<div class='linha' id='coluna-esq-dir'>"; // funding
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Financiamento:</span></div>";
-                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['funding']) . "</div>";
-                echo "</div>"; // funding
-        
-                echo "<div class='linha' id='coluna-esq-dir'>"; // tipo
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Tipo de Armazenamento:</span></div>";
-                echo "<div class='coluna' id='colun-med'>" . htmlspecialchars($row['tipotrabalho']) . "&nbsp;&nbsp; (" . htmlspecialchars($row['armazenamento']) . ")</div>";
-                echo "</div>"; // tipo
-        
-                                   
-        
-                    
-                echo "<div class='linha' id='coluna-esq-dir'>"; // caracteristicas
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Resumo para os dados:</span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['red_dado']) . "</div>";
-                echo "</div>"; // caracteristicas
-
-                echo "<div class='linha' id='coluna-esq-dir'>"; // Tipo de amostra
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Tipo de amostra:</span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . htmlspecialchars($row['tipoamst']) . "</div>";
-                echo "</div>"; // tipo e amostra
-
                
-                     
-                $ferramentas = [];
+               
+                
+                echo "<div><strong>Título atribuido para os Dados: </strong>" . htmlspecialchars($row['titulodado']) . "</div>";
+              
+                
+               
+
+                echo "<div><strong>Financiamento: </strong>" . htmlspecialchars($row['funding']) . "</div>";
+
+
+                echo "<div><strong>Tipo de Armazenamento: </strong>" . htmlspecialchars($row['tipotrabalho']) . "&nbsp;&nbsp; (" . htmlspecialchars($row['armazenamento']) . ")</div>";
+               
+            
+                echo "</div>"; //fechar info
+
+                echo "</div>"; // left section
+
+
+                echo "<div class='right-section'>";
+                echo "<div class='map-container'>";
+                echo "<p> Mapa carregada aqui </p>";
+                echo "</div>";
+                echo "</div>";
+                
+                
+
+                    //METODOLOGIA E FERRRAMENTRAS 
+                echo "<div class='metodologia'>
+
+                
+                    <h2>Metodologia e Ferramentas: </h2>";
+
+                    echo "<div class='left-section'>";
+
+                    echo "<div class='info'>";
+
+                    
+                    echo "<div><strong>Resumo para os dados: </strong>" . htmlspecialchars($row['red_dado']) . "</div>";
+                    
+
+                   
+                    echo "<div><strong>Tipo de amostra: </strong>". htmlspecialchars($row['tipoamst']) . "</div>";
+                    
+                    $ferramentas = [];
                 if ($row['assos']) $proxys[] = "Associação";
                 if ($row['batmet']) $proxys[] = "Batimetria";
                 if ($row['bioorg']) $proxys[] = "Biomarcadores Orgânicos";
@@ -317,11 +339,10 @@ GROUP BY infogeral.geralID,
                 if ($row['teorag']) $proxys[] = "Teor e água";
                 if ($row['outroferr']) $proxys[] = htmlspecialchars($row['outroferr']);
         
-                echo "<div class='linha' id='coluna-esq-dir'>"; // prox
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Ferrmenta(s) Utilizada(s): </span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . implode(", ", $proxys) . "</div>"; // Exibe os proxies em uma linha
-                echo "</div>"; // prox
-        
+               
+                echo "<div><strong>Ferrmenta(s) Utilizada(s): </strong>" . implode(", ", $proxys) . "</div>"; // Exibe os proxies em uma linha
+                
+
                 $equipcoleta = [];
                 
                 if ($row['piston']) $equipcoleta[] = "Piston";
@@ -339,146 +360,181 @@ GROUP BY infogeral.geralID,
                 if ($row['sidsc']) $equipcoleta[] = "Side-scan sonar";
                 if ($row['outroequi']) $equipcoleta[] = htmlspecialchars($row['outroequi']);
         
-                echo "<div class='linha' id='coluna-esq-dir'>"; // equi
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Equipamento(s) utilizado(s): </span></div>";
-                echo "<div class='coluna' id='colun-dir'>" . implode(", ", $equipcoleta) . "</div>"; // Exibe os proxies em uma linha
-                echo "</div>"; // equi
-        
-
                 
-        
-            $pontos_coleta = explode(' | ', $row['pontos_coleta']);
-            $html_coleta = ''; // Inicializa uma string para armazenar todo o HTML de pontos de coleta
-
-foreach ($pontos_coleta as $ponto) {
-    // Separar os detalhes do ponto de coleta
-    $detalhes = explode(', ', $ponto);
-
-    // Inicializar uma string para armazenar o HTML formatado de um único ponto
-    $html_ponto = '';
-
-    // Iterar sobre os detalhes e aplicar os estilos conforme necessário
-    foreach ($detalhes as $detalhe) {
-        if (strpos($detalhe, 'ID: ') !== false) {
-            $valor = str_replace('ID: ', '', $detalhe);
-            if (!empty($valor)) {
-                $html_ponto .= "<span class='label'>ID: </span><span class='id-value'>" . htmlspecialchars($valor) . "</span>, ";
-            }
-        } elseif (strpos($detalhe, 'Latitude: ') !== false) {
-            $valor = str_replace('Latitude: ', '', $detalhe);
-            if (!empty($valor)) {
-                $html_ponto .= "<span class='label'>Latitude: </span><span class='latitude-value'>" . htmlspecialchars($valor) . "</span>, ";
-            }
-        } elseif (strpos($detalhe, 'Longitude: ') !== false) {
-            $valor = str_replace('Longitude: ', '', $detalhe);
-            if (!empty($valor)) {
-                $html_ponto .= "<span class='label'>Longitude: </span><span class='longitude-value'>" . htmlspecialchars($valor) . "</span>, ";
-            }
-        } elseif (strpos($detalhe, 'Data de coleta: ') !== false) {
-            $data_original = str_replace('Data de coleta: ', '', $detalhe);
-            if (!empty($data_original)) {
-                $data_formatada = date('d/m/Y', strtotime($data_original));
-                $html_ponto .= "<span class='label'>Data de coleta: </span><span class='data-value'>" . htmlspecialchars($data_formatada) . "</span>, ";
-            }
-        }
-    }
+                echo "<div><strong> Equipamento(s) utilizado(s): </strong>" . implode(", ", $equipcoleta) . "</div>"; // Exibe os proxies em uma linha
+               
+                $pontos_coleta = explode(' | ', $row['pontos_coleta']);
+                $html_coleta = ''; // Inicializa a variável que armazenará todas as linhas da tabela
+                
+                foreach ($pontos_coleta as $ponto) {
+                    // Separar os detalhes do ponto de coleta
+                    $detalhes = explode(', ', $ponto);
+                    $html_ponto = '<tr>'; // Inicializa a linha da tabela
+                    $linha_valida = false; // Flag para verificar se há conteúdo real
+                
+                    foreach ($detalhes as $detalhe) {
+                        if (strpos($detalhe, 'ID: ') !== false) {
+                            $valor = str_replace('ID: ', '', $detalhe);
+                            $html_ponto .= !empty($valor) ? "<td>" . htmlspecialchars($valor) . "</td>" : "<td>-</td>";
+                            if (!empty($valor)) $linha_valida = true;
+                        } elseif (strpos($detalhe, 'Latitude: ') !== false) {
+                            $valor = str_replace('Latitude: ', '', $detalhe);
+                            $html_ponto .= !empty($valor) ? "<td>" . htmlspecialchars($valor) . "</td>" : "<td>-</td>";
+                            if (!empty($valor)) $linha_valida = true;
+                        } elseif (strpos($detalhe, 'Longitude: ') !== false) {
+                            $valor = str_replace('Longitude: ', '', $detalhe);
+                            $html_ponto .= !empty($valor) ? "<td>" . htmlspecialchars($valor) . "</td>" : "<td>-</td>";
+                            if (!empty($valor)) $linha_valida = true;
+                        } elseif (strpos($detalhe, 'Data de coleta: ') !== false) {
+                            $data_original = str_replace('Data de coleta: ', '', $detalhe);
+                            $data_formatada = (!empty($data_original) && strtotime($data_original) !== false) 
+                                ? date('d/m/Y', strtotime($data_original)) 
+                                : '-';
+                            $html_ponto .= "<td>" . htmlspecialchars($data_formatada) . "</td>";
+                            if (!empty($data_original)) $linha_valida = true;
+                        }
+                    }
+                
+                    $html_ponto .= '</tr>'; // Fecha a linha da tabela
+                
+                    // Adiciona a linha à tabela apenas se houver dados válidos
+                    if ($linha_valida) {
+                        $html_coleta .= $html_ponto;
+                    }
+                }
+                
+                // Só exibir a estrutura "Pontos de Coleta" se houver conteúdo útil
+                if (trim(strip_tags($html_coleta)) !== '') {
+                    echo "<div><strong>Ponto(s) de coleta:</strong>";
+                    echo "<table border='1' cellspacing='0' cellpadding='5'>";
+                    echo "<thead>";
+                    echo "<tr>";
+                    echo "<th>ID</th>";
+                    echo "<th>Latitude</th>";
+                    echo "<th>Longitude</th>";
+                    echo "<th>Data de coleta</th>";
+                    echo "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+                    echo $html_coleta; // Exibe todos os pontos de coleta formatados corretamente
+                    echo "</tbody>";
+                    echo "</table>";
+                    echo "</div>"; // Fecha a div
+                }
+                
     
     
-    // Remover a vírgula extra no final, se necessário
-    $html_ponto = rtrim($html_ponto, ', ');
-
-    // Adicionar o HTML do ponto ao HTML total, apenas se não estiver vazio
-    if (!empty($html_ponto)) {
-        $html_coleta .= "<div class='ponto-coleta'>{$html_ponto}</div><br>";
-    }
-}
-
-// Só exibir a estrutura "Pontos de Coleta" se houver conteúdo
-if (!empty($html_coleta)) {
-    echo "<div class='linha' id='coluna-esq-dir'>"; // pontos
-    echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Ponto(s) de coleta:</span></div>";
-    echo "<div class='coluna' id='colun-dir'>";
-    echo $html_coleta; // Exibe todos os pontos de coleta formatados
-    echo "</div>"; // fecha coluna
-    echo "</div>"; // fecha linha
-}
-
-
-$area_coleta = explode(' | ', $row['area_coleta']);
-$area_html = ''; // Inicializa uma string para armazenar todo o HTML formatado
-$areas_processadas = []; // Array para armazenar as áreas já processadas
-
-foreach ($area_coleta as $area) {
-    if (in_array($area, $areas_processadas)) {
-        continue; // Pule áreas duplicadas
-    }
-
-    $areas_processadas[] = $area; // Marque esta área como processada
-
-    $detal = explode(', ', $area);
-
-    $html_area = ''; // Resetar o HTML da área para cada iteração
-
-    foreach ($detal as $detals) {
-        if (strpos($detals, 'ID: ') !== false) {
-            $valor = str_replace('ID: ', '', $detals);
-            if (!empty($valor)) {
-                $html_area .= "<span class='label'>ID: </span><span class='id-value'>" . htmlspecialchars($valor) . "</span>, ";
-            }
-        } elseif (strpos($detals, 'Latitude: ') !== false) {
-            $valor = str_replace('Latitude: ', '', $detals);
-            if (!empty($valor)) {
-                $html_area .= "<span class='label'>Latitude: </span><span class='latitude-value'>" . htmlspecialchars($valor) . "</span>, ";
-            }
-        } elseif (strpos($detals, 'Longitude: ') !== false) {
-            $valor = str_replace('Longitude: ', '', $detals);
-            if (!empty($valor)) {
-                $html_area .= "<span class='label'>Longitude: </span><span class='longitude-value'>" . htmlspecialchars($valor) . "</span>, ";
-            }
-        } elseif (strpos($detals, 'Data de coleta: ') !== false) {
-            $data_original = str_replace('Data de coleta: ', '', $detals);
-            if (!empty($data_original) && strtotime($data_original) !== false) {
-                $data_formatada = date('d/m/Y', strtotime($data_original));
-                $html_area .= "<span class='label'>Data de coleta: </span><span class='data-value'>" . htmlspecialchars($data_formatada) . "</span>, ";
-            }
-        }
-    }
-
-    $html_area = rtrim($html_area, ', '); // Remove a vírgula extra no final
-
-    if (!empty($html_area)) {
-        $area_html .= "<div class='ponto-coleta'>{$html_area}</div><br>";
-    }
-}
-
-
-if (!empty($area_html)) {
-    echo "<div class='linha' id='coluna-esq-dir'>"; // Linha principal
-    echo "<div class='coluna' id='colun-esq'><span class='colun-esq'>Área de coleta:</span></div>";
-    echo "<div class='coluna' id='colun-dir'>";
-    echo $area_html; // Todas as áreas em uma única div
-    echo "</div>";
-    echo " </div>";
-}
+                $area_coleta = explode(' | ', $row['area_coleta']);
+                $area_html = ''; // Inicializa uma string para armazenar todo o HTML formatado
+                $areas_processadas = []; // Array para armazenar as áreas já processadas
+                
+                foreach ($area_coleta as $area) {
+                    if (in_array($area, $areas_processadas) || empty(trim($area))) {
+                        continue; // Pule áreas duplicadas ou vazias
+                    }
+                
+                    $areas_processadas[] = $area; // Marque esta área como processada
+                    $detal = explode(', ', $area);
+                    $html_area = '<tr>'; // Resetar o HTML da área para cada iteração
+                    $linha_valida = false; // Variável para verificar se a linha tem dados
+                
+                    foreach ($detal as $detals) {
+                        if (strpos($detals, 'ID: ') !== false) {
+                            $valor = str_replace('ID: ', '', $detals);
+                            $html_area .= !empty($valor) ? "<td>" . htmlspecialchars($valor) . "</td>" : "<td>-</td>";
+                            if (!empty($valor)) $linha_valida = true;
+                        } elseif (strpos($detals, 'Latitude: ') !== false) {
+                            $valor = str_replace('Latitude: ', '', $detals);
+                            $html_area .= !empty($valor) ? "<td>" . htmlspecialchars($valor) . "</td>" : "<td>-</td>";
+                            if (!empty($valor)) $linha_valida = true;
+                        } elseif (strpos($detals, 'Longitude: ') !== false) {
+                            $valor = str_replace('Longitude: ', '', $detals);
+                            $html_area .= !empty($valor) ? "<td>" . htmlspecialchars($valor) . "</td>" : "<td>-</td>";
+                            if (!empty($valor)) $linha_valida = true;
+                        } elseif (strpos($detals, 'Data de coleta: ') !== false) {
+                            $data_original = str_replace('Data de coleta: ', '', $detals);
+                            $data_formatada = (!empty($data_original) && strtotime($data_original) !== false) 
+                                ? date('d/m/Y', strtotime($data_original)) 
+                                : '-';
+                            $html_area .= "<td>" . htmlspecialchars($data_formatada) . "</td>";
+                            if (!empty($data_original)) $linha_valida = true;
+                        }
+                    }
+                
+                    $html_area .= '</tr>'; // Fecha a linha da tabela
+                
+                    // Adiciona a linha apenas se houver dados válidos
+                    if ($linha_valida) {
+                        $area_html .= $html_area;
+                    }
+                }
+                
+                // Verifica se há realmente conteúdo na tabela antes de exibir
+                if (trim(strip_tags($area_html)) !== '') {
+                    echo "<div><strong>Área de coleta:</strong>";
+                    echo "<table>";
+                    echo "<thead>";
+                    echo "<tr>";
+                    echo "<th>ID</th>";
+                    echo "<th>Latitude</th>";
+                    echo "<th>Longitude</th>";
+                    echo "<th>Data de coleta</th>";
+                    echo "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+                    echo $area_html; // Exibe todas as áreas formatadas corretamente
+                    echo "</tbody>";
+                    echo "</table>";
+                    echo "</div>"; // Fecha a div
+                }
+                
+                echo "</div>"; //fechar info
+                echo "</div>"; // left section
+                echo "</div>";// METODOLOFIA E FERRAMENTAS
+                
+               
+               
+                echo "<div class='tabela'>
 
                 
-                echo "<div class='linha' id='coluna-esq-dir'>"; // arquivo
-                echo "<div class='coluna' id='colun-esq'><span class='colun-esq'> Tabela: </span></div>";
-        
-                // Ensure $row['nome_arquivo'] is a string before using htmlspecialchars
+                <h2>Visualizaçao e Download: </h2>";
+
+                echo "<div class='visualizacao'> ";
+
+                              
+                echo "<iframe src='../PHP/visualizar.php?id=" . $id .  "'width='100%' height='500Va'></iframe>";
+
+                echo "</div >"; 
+
+                echo "<div class='download'>"; // Download
+
                 $nome_arquivo = is_string($row['nome_arquivo']) ? htmlspecialchars($row['nome_arquivo']) : '';
         
-                echo "<div class='coluna' id='colun-dir'>" . $nome_arquivo . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id='btn'  class='fa fa-download' id='download' href='../PHP/download.php?id=". htmlspecialchars($id) . "'> Download </a>
+                echo "<div class='nome_arquivo'>" . $nome_arquivo . "</div></br>";
+
+                echo "<a id='btn'  class='fa fa-download' id='download' href='../PHP/download.php?id=". htmlspecialchars($id) . "'> Download </a>";
                 
-                <a id='btn-visu' class='fa fa-eye' href='#' onclick='n(); return false;'>EM BREVE:</br> Visualizador</a></div>"; 
-                echo "</div>"; // arquivo 
+                echo "</div>"; 
+                echo "</div> </br></br>"; // arquivo 
                 
                 
                 echo "<a href='consulta.php' id='voltar' class='voltar'> &laquo; Voltar</a> ";
 
-               
 
-                echo "</div>"; // DIV SECUNDÁRIA
+
+
+
+
+
+
+                    echo "</div>"; //fechar info
+                    echo "</div>"; // left section
+                    echo "</div>";// Tabela Arquivos
+
+
+
+
+                    echo "</div>";// DADOs
                 
 
             }
@@ -499,14 +555,14 @@ if (!empty($area_html)) {
     } else {
         echo "<p>ID não especificado.</p>";
     }
-    ?>
-                           
-            
+    
+           
+    ?>        
  
 
 
     <!-- Footer -->
-    <footer id="contact" class="py-5 bg-dark" style="position: relative;">
+    <footer  class="py-5 bg-dark" style="position: relative;">
     <div class="footer-container">
         <div class="column1">
             <p style="text-align: justify;" class="text-white">Este banco de dados é produto do projeto “Um banco de dados de registros proxy do Atlântico Sudoeste nos últimos 2 mil anos para projeções climáticas mais robustas no passado e futuro (2023 - atual)” CNPq processo n° - Chamada CNPq/MCTI/FNDCT Nº 59/2022 (Linha 5).</p>

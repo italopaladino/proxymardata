@@ -1,3 +1,133 @@
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+  .resultados {
+   width: 80%;
+   margin: 30px auto;
+ background: white;
+padding: 20px;
+  border-radius: 10px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ display: flex;
+  margin-top: 60px;
+  flex-wrap:wrap;
+  gap: 2px;
+
+}
+
+.metodologia{
+  margin-top: 2%;
+  width: 100%;
+}
+
+
+.tabela{
+  margin-top: 2%;
+  width: 100%;
+  
+}
+
+.left-section {
+            flex: 2;
+            padding-right: 20px;
+        }
+  .right-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+
+
+
+
+
+        h2 {
+          color: #34495e;
+          margin-bottom: 10px;
+          border-bottom: 2px solid #3498db;
+          padding-bottom: 5px;
+          text-align: center;
+          width: 100%;
+          border-radius: 5px;
+      }
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+        .info div {
+            padding: 10px;
+        }
+        .info strong {
+            color: #333;
+        }
+      
+       
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 250px;
+            background: #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .table-container {
+            width: 75%;
+            height: auto;
+            background: white;
+            border: 1px solid #ccc;
+            overflow: auto;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+          width: 75%;
+          border-collapse: collapse;
+          
+          
+      }
+      
+      
+      table th, table td {
+          padding: 10px;
+          text-align: left;
+          border: 1px solid #ddd;
+      }
+      
+      table th {
+          background-color: #3498db;
+          color: #fff;
+      }
+      
+      table tr:nth-child(even) {
+          background-color: #f9f9f9;
+      }
+      
+
+
+
+
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 #principal1 {
     display: flex;
     flex-direction: column;
@@ -73,21 +203,26 @@ a.voltar {
   background-color: rgb(255, 255, 255);
   border: none;
 }
+*/
 
+
+/*
 .coluna {
-  border: 1px solid #000; /* Apenas para visualização */
+  border: 1px solid #000;  Apenas para visualização 
   padding: 10px;
   margin: 1px;
   background-color: #f0f0f0;
 }
 
+
+
 .mapa {
   width: 100%;
-  display: flex; /* Garantir que a div do mapa seja um bloco separado */
-  margin-top: 20px; /* Adiciona espaço entre o mapa e os outros elementos */
+  display: flex;
+  margin-top: 20px; 
 }
 
-/* Responsivo */
+
 @media (max-width: 600px) {
   .linha {
     flex-direction: column;
@@ -125,27 +260,27 @@ a.voltar {
     color: black;
     padding: 12px 30px;
     cursor: pointer;
-    font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
+    font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário 
     border-radius: 2%;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     text-align: center;
-    justify-content: center; /* Centraliza o texto horizontalmente */
-    width: 160px; /* Defina uma largura fixa para ambos */
-    height: 70px; /* Defina uma altura fixa para ambos */
-    box-sizing: border-box; /* Inclui o padding e border na largura e altura */
+    justify-content: center; /* Centraliza o texto horizontalmente 
+    width: 160px; /* Defina uma largura fixa para ambos 
+    height: 70px; /* Defina uma altura fixa para ambos 
+    box-sizing: border-box; /* Inclui o padding e border na largura e altura 
   }
   
   #btn-visu {
-    background-color: brown; /* Cor específica para este botão */
+    background-color: brown; /* Cor específica para este botão 
   }
   
   #btn:hover, #btn-visu:hover {
     background-color: RoyalBlue;
   }
 
-
+*/
 
 
 
