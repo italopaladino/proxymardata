@@ -210,27 +210,28 @@
 
         <div class="column2">
             <p class="text-white">Copyright &copy; ProxyMar 2024</p>
-            <a href="https://www.instagram.com/proxymar_iousp/" target="_blank" class="bi bi-instagram"></a>
-            <a href="https://sites.usp.br/proxymar/sobre/" target="_blank" class="bi bi-globe2"></a>
+            <a href="https://www.instagram.com/proxymar_iousp/" target="_blank" class="bi bi-instagram" style="margin-right: 20px;" ></a>
+            <a href="https://sites.usp.br/proxymar/sobre/" target="_blank" class="bi bi-globe2" style="margin-right: 20px;"></a>
             <a href="mailto:proxymar@usp.br" target="_blank" class="bi bi-envelope"></a>
         </div>
         
         <div class="column3">
-            <div>
+        <div>
                 <p class="text-black"> Execução:</p>
-                <a href="https://www5.usp.br"><img style="background-color: white;" src="https://imagens.usp.br/wp-content/uploads/usp-logo-transp-600x253.png" width="120"></a>
-                <a href="https://www.io.usp.br"><img  src="https://www.io.usp.br/templates/base/img/logo.png" width="120"></a>
-                <a href="https://sites.usp.br/proxymar/"><img style="background-color: white;" src="../assets/ProxyMar-logo.png" width="120"></a>
+                <a href="https://www5.usp.br"><img  white; src="https://imagens.usp.br/wp-content/uploads/usp-logo-transp-600x253.png" width="110"></a>
+                <a href="https://www.io.usp.br"><img  src="https://www.io.usp.br/templates/base/img/logo.png" width="110"></a>
+                <a href="https://sites.usp.br/proxymar/"><img  src="../assets/ProxyMar-logo.png" width="110"></a>
             </div>
             <div>
                 <p class="text-black"> Financiamento:</p>
-                <a href="https://www.gov.br/cnpq/pt-br"><img src="../assets/CNPq-logo.png" width="120"></a>
-                <a href="https://www.gov.br/mcti/pt-br"><img src="../assets/MCTI.png" width="120"></a>
-                <a href="https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/fndct"><img src="../assets/fndct.png" width="120"></a>
+                <a href="https://www.gov.br/cnpq/pt-br"><img src="../assets/CNPq_v2017_rgb.jpg" width="110"></a>
+                <a href="https://www.gov.br/mcti/pt-br"><img src="../assets/MCTI.png" width="110"></a>
+                <a href="https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/fndct"><img src="../assets/fndct.png" width="110"></a>
 
             </div>
         </div>
-    </footer>
+        </footer>
+
 
     <!-- Bootstrap core JS -->
     <script>
@@ -473,7 +474,7 @@ $(document).ready(function() {
         $.ajax({
             url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
             type: "GET",
-            data: { ferram: ferram }, // Envia o equipamento para o PHP
+            data: { ferram: ferram }, // Envia o ferramenta para o PHP
             success: function(response) {
                 // Atualiza a div #ultimosartigos com a resposta do PHP
                 $("#ultimosartigos").html(response);
@@ -497,7 +498,7 @@ $(document).ready(function() {
         $.ajax({
             url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
             type: "GET",
-            data: { armazenamento: armazenamento }, // Envia o equipamento para o PHP
+            data: { armazenamento: armazenamento }, // Envia o armazenamento para o PHP
             success: function(response) {
                 // Atualiza a div #ultimosartigos com a resposta do PHP
                 $("#ultimosartigos").html(response);
@@ -521,7 +522,7 @@ $(document).ready(function() {
         $.ajax({
             url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
             type: "GET",
-            data: { projeto: projeto }, // Envia o equipamento para o PHP
+            data: { projeto: projeto }, // Envia o projeto para o PHP
             success: function(response) {
                 // Atualiza a div #ultimosartigos com a resposta do PHP
                 $("#ultimosartigos").html(response);
@@ -545,7 +546,7 @@ $(document).ready(function() {
         $.ajax({
             url: "../PHP/filtro.php", // Arquivo PHP que processa o filtro
             type: "GET",
-            data: { id: id }, // Envia o equipamento para o PHP
+            data: { id: id }, // Envia o ID para o PHP
             success: function(response) {
                 // Atualiza a div #ultimosartigos com a resposta do PHP
                 $("#ultimosartigos").html(response);

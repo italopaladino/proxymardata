@@ -65,7 +65,7 @@ try {
         
         // Cria a frase com os dados do autor, título sublinhado, DOI e data
         $frase = "<div class='citation' >
-                    <a class='link-pesq' href='../HTML/resultados.php?id=" 
+                    <a class='link-pesq' onclick='mostrarLoader()' href='../HTML/resultados.php?id=" 
                     . htmlspecialchars($infogera['geralid']) . "'>". htmlspecialchars($autoresString) ."." // Usa os autores formatados
                      ."<br><p class='lead'>" . htmlspecialchars($infogera['correspondente']) . "&nbsp;(" . htmlspecialchars($infogera['email']) . ").&nbsp;"
                      . htmlspecialchars($infogera['titulodado'])
